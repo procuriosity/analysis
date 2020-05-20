@@ -1,0 +1,153 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Find CAN Ids",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9151"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_extended_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "findCANIds"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "properties": {
+                          "states": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "properties": {
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "pending",
+                                        "unsuccessful",
+                                        "active",
+                                        "cancelled"
+                                      ]
+                                    },
+                                    "statusDetails": {
+                                      "type": "string",
+                                      "enum": [
+                                        "contractProject",
+                                        "unsuccessful",
+                                        "empty",
+                                        "active"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "status",
+                                    "statusDetails"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "pending",
+                                        "unsuccessful",
+                                        "active",
+                                        "cancelled"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "status"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "statusDetails": {
+                                      "type": "string",
+                                      "enum": [
+                                        "contractProject",
+                                        "unsuccessful",
+                                        "empty",
+                                        "active"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "statusDetails"
+                                  ]
+                                }
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "lotIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

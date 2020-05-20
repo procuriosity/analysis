@@ -1,0 +1,176 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "getOrganization",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "parameters": [],
+      "post": {
+        "summary": "Get Organization",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "$ref": "../models/organization.v1.json"
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "getOrganization"
+                        ]
+                      },
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "role"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "role": {
+                            "type": "string",
+                            "description": "роль организации\n",
+                            "enum": [
+                              "procuringEntity"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "action",
+                      "params"
+                    ]
+                  }
+                ]
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "text/html": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  }
+                ]
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/EDI-X12": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/EDIFACT": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/atom+xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/font-woff": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/gzip": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/javascript": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/octet-stream": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": ""
+      }
+    }
+  }
+}

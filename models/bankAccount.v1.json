@@ -1,0 +1,73 @@
+{
+  "title": "bankAccount",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "bankName": {
+      "type": "string"
+    },
+    "address": {
+      "$ref": "./addressRequest.v1.json"
+    },
+    "identifier": {
+      "type": "object",
+      "required": [
+        "scheme",
+        "id"
+      ],
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "example": "UA-MFO"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "accountIdentification": {
+      "type": "object",
+      "required": [
+        "scheme",
+        "id"
+      ],
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "example": "IBAN"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "additionalAccountIdentifiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scheme": {
+            "type": "string",
+            "example": "fiscal"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "scheme",
+          "id"
+        ]
+      }
+    }
+  },
+  "required": [
+    "description",
+    "bankName",
+    "address",
+    "identifier",
+    "accountIdentification"
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "setStateForTender",
+    "version": "1.01"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Set state for tender",
+        "operationId": "post-command-setStateForTender",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "status",
+                            "statusDetails"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "active",
+                                "complete",
+                                "cancelled",
+                                "unsuccessful"
+                              ]
+                            },
+                            "statusDetails": {
+                              "type": "string",
+                              "enum": [
+                                "empty",
+                                "qualification",
+                                "lackOfSubmissions"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "status",
+                              "statusDetails"
+                            ],
+                            "properties": {
+                              "status": {
+                                "type": "string",
+                                "enum": [
+                                  "active",
+                                  "cancelled",
+                                  "complete",
+                                  "unsuccessful"
+                                ]
+                              },
+                              "statusDetails": {
+                                "type": "string",
+                                "enum": [
+                                  "empty",
+                                  "qualification",
+                                  "lackOfSubmissions"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "setStateForTender"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  }
+                ]
+              },
+              "examples": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

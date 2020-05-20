@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Data Validation",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9351",
+      "description": "Revision"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "parameters": [],
+      "post": {
+        "summary": "",
+        "operationId": "post-command-dataValidation",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "amendment"
+                        ],
+                        "properties": {
+                          "amendment": {
+                            "$ref": "../models/amendment_object.json"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "dataValidation"
+                        ]
+                      },
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "amendment",
+                          "cpid",
+                          "ocid",
+                          "operationType"
+                        ],
+                        "properties": {
+                          "amendment": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "rationale"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "временный id amendment",
+                                "format": "uuid"
+                              },
+                              "rationale": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "cpid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-[0-9]{13}$"
+                          },
+                          "ocid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-([0-9]{13})\\-([A-Z]{2})\\-([0-9]{13})$"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "tenderCancellation",
+                              "lotCancellation"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "action",
+                      "params"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

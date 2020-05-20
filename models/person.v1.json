@@ -1,0 +1,93 @@
+{
+  "title": "person",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "identifier": {
+      "$ref": "./identifierPerson.v1.json"
+    },
+    "businessFunctions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "chairman",
+              "procurmentOfficer",
+              "contactPoint",
+              "technicalOpener",
+              "priceOpener",
+              "priceEvaluator",
+              "technicalEvaluator"
+            ]
+          },
+          "jobTitle": {
+            "type": "string"
+          },
+          "period": {
+            "type": "object",
+            "required": [
+              "startDate"
+            ],
+            "properties": {
+              "startDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "documentType": {
+                  "type": "string",
+                  "enum": [
+                    "regulatoryDocument"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "documentType",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "jobTitle",
+          "period"
+        ]
+      }
+    }
+  },
+  "required": [
+    "title",
+    "name",
+    "identifier",
+    "businessFunctions"
+  ]
+}

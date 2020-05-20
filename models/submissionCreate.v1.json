@@ -1,0 +1,128 @@
+{
+  "title": "submission_model",
+  "allOf": [
+    {
+      "properties": {
+        "submission": {
+          "type": "object",
+          "required": [
+            "id",
+            "candidates"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "requirementResponses": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": [
+                      "string",
+                      "number",
+                      "integer",
+                      "boolean"
+                    ]
+                  },
+                  "requirement": {
+                    "type": "object",
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "relatedCandidate": {
+                    "type": "object",
+                    "required": [
+                      "name",
+                      "identifier"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "identifier": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "sheme"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "sheme": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "id",
+                  "value",
+                  "requirement",
+                  "relatedCandidate"
+                ]
+              }
+            },
+            "candidates": {
+              "type": "array",
+              "description": "тип Organization",
+              "items": {
+                "$ref": "./organizationSupplier.v1.json"
+              }
+            },
+            "documents": {
+              "type": "array",
+              "items": {
+                "$ref": "./documents_object.v1.json"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "submission"
+      ]
+    },
+    {
+      "properties": {
+        "submission": {
+          "type": "object",
+          "properties": {
+            "documents": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "documentType": {
+                    "type": "string",
+                    "enum": [
+                      "illustration",
+                      "submissionDocuments",
+                      "x_qualificationDocuments",
+                      "x_eligibilityDocuments",
+                      "x_technicalDocuments"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "type": "object"
+}

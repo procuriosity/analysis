@@ -1,0 +1,209 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "verifyRequirementResponse",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Verify Requirement Response",
+        "operationId": "post-command-checkPersonesStructure",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "verifyRequirementResponse"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "requirementResponseId",
+                          "value",
+                          "responder",
+                          "requirementId"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "requirementResponseId": {
+                            "type": "string",
+                            "description": "temporal"
+                          },
+                          "value": {
+                            "type": [
+                              "string",
+                              "number",
+                              "integer",
+                              "boolean"
+                            ]
+                          },
+                          "responder": {
+                            "$ref": "../models/person.v1.json"
+                          },
+                          "requirementId": {
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "permanent"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "properties": {
+                          "responder": {
+                            "type": "object",
+                            "properties": {
+                              "businessFunctions": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "enum": [
+                                        "chairman",
+                                        "procurmentOfficer",
+                                        "contactPoint",
+                                        "technicalEvaluator",
+                                        "technicalOpener",
+                                        "priceOpener",
+                                        "priceEvaluator"
+                                      ]
+                                    },
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "documentType": {
+                                            "type": "string",
+                                            "enum": [
+                                              "regulatoryDocument"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "examples": {
+                "validExample": {
+                  "value": {
+                    "version": "2.0.0",
+                    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "action": "verifyRequirementResponse",
+                    "params": {
+                      "cpid": "ocds-b3wdp1-MD-1580458690892",
+                      "ocid": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896",
+                      "requirementResponseId": "string",
+                      "value": true,
+                      "responder": {
+                        "title": "string",
+                        "name": "string",
+                        "identifier": {
+                          "scheme": "string",
+                          "id": "string",
+                          "uri": "string"
+                        },
+                        "businessFunctions": [
+                          {
+                            "id": "string",
+                            "type": "chairman",
+                            "jobTitle": "string",
+                            "period": {
+                              "startDate": "2020-05-14T11:59:16Z"
+                            },
+                            "documents": [
+                              {
+                                "id": "string",
+                                "documentType": "regulatoryDocument",
+                                "title": "string",
+                                "description": "string"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "requirementId": "3fa85f65-5717-4562-b3fc-2c963f66afa6"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": ""
+      }
+    }
+  }
+}

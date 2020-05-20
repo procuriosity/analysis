@@ -1,0 +1,59 @@
+{
+  "title": "amendmentForCancel",
+  "type": "object",
+  "description": "",
+  "properties": {
+    "amendments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rationale": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "documentType": {
+                  "type": "string",
+                  "enum": [
+                    "cancellationDetails"
+                  ]
+                },
+                "id": {
+                  "type": "string",
+                  "example": "835b8d03-80dc-4d1b-8b1c-fe2b1a23366c-1573211196021"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "documentType",
+                "id",
+                "title"
+              ]
+            }
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Временный id amendment"
+          }
+        },
+        "required": [
+          "rationale",
+          "id"
+        ]
+      }
+    }
+  }
+}

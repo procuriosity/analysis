@@ -1,0 +1,182 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Find Amendment Ids",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9351"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "parameters": [],
+      "post": {
+        "summary": "Find Amendment Ids",
+        "operationId": "post-command-getAmendmentsByIds",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "array",
+                          "example": "5407df26-9305-4f1b-b438-8e16d2ab2201",
+                          "uniqueItems": true,
+                          "description": "id поправок",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "successfulExample": {
+                    "value": {
+                      "version": "2.0.0",
+                      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                      "status": "success",
+                      "result": [
+                        "5407df26-9305-4f1b-b438-8e16d2ab2201",
+                        "5407df26-9305-4f1b-b438-8e16d2ab2201"
+                      ]
+                    }
+                  },
+                  "errorExample": {
+                    "value": {
+                      "version": "2.0.0",
+                      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                      "status": "fail",
+                      "errors": [
+                        {
+                          "code": "Bussinnes/Validation rules number",
+                          "description": "Something went wrong"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid"
+                        ],
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "pending",
+                              "active",
+                              "cancelled"
+                            ]
+                          },
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "cancellation"
+                            ]
+                          },
+                          "relatesTo": {
+                            "type": "string",
+                            "enum": [
+                              "lot",
+                              "tender"
+                            ]
+                          },
+                          "relatedItems": {
+                            "type": "array",
+                            "description": "Если не передается - нужно вытащить все поправки, а не для конкретного лот",
+                            "example": "5407df26-9305-4f1b-b438-8e16d2ab2201",
+                            "minItems": 1,
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "cpid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-[0-9]{13}$"
+                          },
+                          "ocid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-([0-9]{13})\\-([A-Z]{2})\\-([0-9]{13})$"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "findAmendmentIds"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "action"
+                    ]
+                  }
+                ]
+              },
+              "examples": {
+                "validExample": {
+                  "value": {
+                    "version": "2.0.0",
+                    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "action": "findAmendmentIds",
+                    "params": {
+                      "status": "pending",
+                      "type": "cancellation",
+                      "relatesTo": "lot",
+                      "relatedItems": [
+                        "5407df26-9305-4f1b-b438-8e16d2ab2201"
+                      ],
+                      "cpid": "ocds-b3wdp1-MD-1580458690892",
+                      "ocid": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    }
+  }
+}

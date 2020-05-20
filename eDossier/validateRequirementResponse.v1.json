@@ -1,0 +1,133 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Validate Requirement Response",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9251"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "requirementResponse"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-[0-9]{13}$"
+                          },
+                          "requirementResponse": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "value",
+                              "requirement"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": [
+                                  "string",
+                                  "number",
+                                  "integer",
+                                  "boolean"
+                                ]
+                              },
+                              "requirement": {
+                                "type": "object",
+                                "required": [
+                                  "id"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validateRequirementResponse"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "action"
+                    ]
+                  }
+                ]
+              },
+              "examples": {
+                "validExample": {
+                  "value": {
+                    "version": "2.0.0",
+                    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "action": "validateRequirementResponse",
+                    "params": {
+                      "cpid": "ocds-b3wdp1-MD-1580458690892",
+                      "requirementResponse": {
+                        "id": "2a969a8f-ea14-45df-b773-def05a76b2ef",
+                        "value": true,
+                        "requirement": {
+                          "id": "6ae12896-d555-4cdb-b35a-ef2b493c5451"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    }
+  }
+}

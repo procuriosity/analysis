@@ -1,0 +1,160 @@
+{
+  "title": "requirementResponse_object",
+  "type": "object",
+  "description": "",
+  "properties": {
+    "id": {
+      "type": "string",
+      "example": "401651e3-c6d2-4080-a199-d4fefeab0a89",
+      "description": "временный id"
+    },
+    "value": {
+      "type": [
+        "boolean",
+        "string",
+        "number",
+        "integer"
+      ],
+      "example": "true"
+    },
+    "relatedTenderer": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "MD-IDNO-1003600152673"
+        }
+      }
+    },
+    "responder": {
+      "type": "object",
+      "required": [
+        "title",
+        "name",
+        "identifier",
+        "businessFunctions"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "name": {
+          "type": "string",
+          "example": "string"
+        },
+        "identifier": {
+          "type": "object",
+          "required": [
+            "scheme",
+            "id"
+          ],
+          "properties": {
+            "scheme": {
+              "type": "string",
+              "example": "string"
+            },
+            "id": {
+              "type": "string",
+              "example": "string"
+            },
+            "uri": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        },
+        "businessFunctions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "jobTitle": {
+                "type": "string",
+                "example": "string"
+              },
+              "period": {
+                "type": "object",
+                "required": [
+                  "startDate"
+                ],
+                "properties": {
+                  "startDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              },
+              "documents": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "string"
+                    },
+                    "documentType": {
+                      "type": "string",
+                      "enum": [
+                        "regulatoryDocument"
+                      ]
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "string"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "documentType",
+                    "title"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "jobTitle",
+              "period"
+            ]
+          }
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "value",
+    "relatedTenderer",
+    "responder",
+    "requirement"
+  ]
+}

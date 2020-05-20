@@ -1,0 +1,42 @@
+{
+  "title": "request_extended_command",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "example": "2.0.0"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "action": {
+      "type": "string"
+    },
+    "params": {
+      "type": "object",
+      "required": [
+        "cpid",
+        "ocid"
+      ],
+      "properties": {
+        "cpid": {
+          "type": "string",
+          "example": "ocds-b3wdp1-MD-1580458690892",
+          "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}$"
+        },
+        "ocid": {
+          "type": "string",
+          "example": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896",
+          "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}-(AC|EI|EV|FS|NP|PN)-[0-9]{13}$"
+        }
+      }
+    }
+  },
+  "required": [
+    "version",
+    "id",
+    "action",
+    "params"
+  ]
+}

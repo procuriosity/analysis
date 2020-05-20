@@ -1,0 +1,163 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Add Requirement Response",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9081"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "addRequirementResponse",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_extended_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "award"
+                        ],
+                        "properties": {
+                          "award": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "requirementResponse"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid"
+                              },
+                              "requirementResponse": {
+                                "type": "object",
+                                "required": [
+                                  "id",
+                                  "value",
+                                  "relatedTenderer",
+                                  "requirement",
+                                  "responder"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                  },
+                                  "value": {
+                                    "type": [
+                                      "boolean",
+                                      "integer",
+                                      "number",
+                                      "string"
+                                    ],
+                                    "example": "true"
+                                  },
+                                  "relatedTenderer": {
+                                    "type": "object",
+                                    "required": [
+                                      "id"
+                                    ],
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "example": "MD-IDNO-4214231235"
+                                      }
+                                    }
+                                  },
+                                  "requirement": {
+                                    "type": "object",
+                                    "required": [
+                                      "id"
+                                    ],
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "format": "uuid"
+                                      }
+                                    }
+                                  },
+                                  "responder": {
+                                    "type": "object",
+                                    "required": [
+                                      "name",
+                                      "identifier"
+                                    ],
+                                    "properties": {
+                                      "name": {
+                                        "type": "string",
+                                        "example": "IMSP SCM nr.1"
+                                      },
+                                      "identifier": {
+                                        "type": "object",
+                                        "required": [
+                                          "scheme",
+                                          "id"
+                                        ],
+                                        "properties": {
+                                          "scheme": {
+                                            "type": "string"
+                                          },
+                                          "id": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "addRequirementResponse"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "params",
+                      "action"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "description": ""
+      }
+    }
+  }
+}

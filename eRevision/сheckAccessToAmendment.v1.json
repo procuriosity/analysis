@@ -1,0 +1,107 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Сheck Access To Amendment",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9351",
+      "description": "Revision"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "parameters": [],
+      "post": {
+        "summary": "Check Access to Amendment",
+        "operationId": "post-command-check access to amendment",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "checkAccessToAmendment"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "action"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "token",
+                          "owner",
+                          "amendmentId"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-[0-9]{13}$"
+                          },
+                          "ocid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-([0-9]{13})\\-([A-Z]{2})\\-([0-9]{13})$"
+                          },
+                          "token": {
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "amendment token"
+                          },
+                          "owner": {
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "id владельца (площадки) amendment"
+                          },
+                          "amendmentId": {
+                            "type": "string",
+                            "format": "uuid",
+                            "description": ""
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

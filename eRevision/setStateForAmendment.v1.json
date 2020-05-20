@@ -1,0 +1,132 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Set State For Amendment",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9351"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Set State For Amendment",
+        "operationId": "post-command-setAmendmentStatusActive",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "status"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "active"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "amendment"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1581509539187",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-[0-9]{13}$"
+                          },
+                          "ocid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1581509539187-EV-1581509653044",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-([0-9]{13})\\-([A-Z]{2})\\-([0-9]{13})$"
+                          },
+                          "amendment": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "status"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid"
+                              },
+                              "status": {
+                                "type": "string",
+                                "enum": [
+                                  "active",
+                                  "cancelled"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "setStateForAmendment"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "params",
+                      "action"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

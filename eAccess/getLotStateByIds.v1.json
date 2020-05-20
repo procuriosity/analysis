@@ -1,0 +1,166 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Get Lot State By Ids",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031",
+      "description": "Access"
+    }
+  ],
+  "paths": {
+    "/command/": {
+      "parameters": [],
+      "post": {
+        "summary": "",
+        "operationId": "post-command-getLotStateByIds",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid"
+                              },
+                              "status": {
+                                "type": "string"
+                              },
+                              "statusDetails": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "status",
+                              "statusDetails"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "version": "2.0.0",
+                      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                      "status": "success",
+                      "result": [
+                        {
+                          "id": "ocds-b3wdp1-MD-1580458690892",
+                          "status": "active",
+                          "statusDetails": "empty"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "getLotStateByIds"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "action"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "lotIds",
+                          "cpid",
+                          "ocid"
+                        ],
+                        "properties": {
+                          "lotIds": {
+                            "type": "array",
+                            "description": "",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "cpid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-[0-9]{13}$"
+                          },
+                          "ocid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-([0-9]{13})\\-([A-Z]{2})\\-([0-9]{13})$",
+                            "description": "временно не используем в обработке"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  }
+                ]
+              },
+              "examples": {
+                "validExample": {
+                  "value": {
+                    "version": "2.0.0",
+                    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "action": "getLotStateByIds",
+                    "params": {
+                      "lotIds": [
+                        "b5536f2e-78bb-485d-955a-d860229deb45",
+                        "2eb2d92a-fefa-42fc-8201-479f1b21f275"
+                      ],
+                      "cpid": "ocds-b3wdp1-MD-1580458690892",
+                      "ocid": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

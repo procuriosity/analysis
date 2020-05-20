@@ -1,0 +1,136 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Cancel Lot",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/",
+      "description": "Gateway"
+    }
+  ],
+  "paths": {
+    "/cancel/lot/{cpid}/{ocid}/{lotId}": {
+      "post": {
+        "summary": "",
+        "operationId": "post-api-v1-cancel-cn-cpid-ocid-tenderId",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "ID транзакции",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "токен тендера",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "application/json",
+              "enum": [
+                "application/json"
+              ]
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "тип данных в теле запроса",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/amendmentForCancel.v1.json"
+                  }
+                ]
+              },
+              "examples": {
+                "successExample": {
+                  "value": {
+                    "amendments": [
+                      {
+                        "rationale": "string",
+                        "description": "string",
+                        "documents": [
+                          {
+                            "documentType": "cancellationDetails",
+                            "id": "835b8d03-80dc-4d1b-8b1c-fe2b1a23366c-1573211196021",
+                            "title": "string",
+                            "description": "string"
+                          }
+                        ],
+                        "id": "a00f8fe5-98cc-40e1-9b12-c0f3eaf112cf"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-[0-9]{13}$"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор тендерного процесса"
+        },
+        {
+          "schema": {
+            "type": "string",
+            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-([0-9]{13})\\-([A-Z]{2})\\-([0-9]{13})$"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор стадии тендерного процесса"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "lotId",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор лота"
+        }
+      ]
+    }
+  }
+}

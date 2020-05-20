@@ -1,0 +1,216 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Find Lot Ids",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031",
+      "description": "Access"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "parameters": [],
+      "post": {
+        "summary": "Find Lot Ids",
+        "operationId": "post-command-getLotByStates",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "array",
+                          "uniqueItems": true,
+                          "description": "id лотов",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "findLotIds"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "action"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid"
+                        ],
+                        "properties": {
+                          "states": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "properties": {
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "active",
+                                        "complete",
+                                        "unsuccessful",
+                                        "cancelled",
+                                        "planning"
+                                      ]
+                                    },
+                                    "statusDetails": {
+                                      "type": "string",
+                                      "enum": [
+                                        "empty",
+                                        "awarded"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "status",
+                                    "statusDetails"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "active",
+                                        "complete",
+                                        "unsuccessful",
+                                        "cancelled",
+                                        "planning"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "status"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "statusDetails": {
+                                      "type": "string",
+                                      "enum": [
+                                        "empty",
+                                        "awarded"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "statusDetails"
+                                  ]
+                                }
+                              ],
+                              "type": "object"
+                            }
+                          },
+                          "cpid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-[0-9]{13}$"
+                          },
+                          "ocid": {
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-([0-9]{13})\\-([A-Z]{2})\\-([0-9]{13})$",
+                            "description": "временно не используем в обработке"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  }
+                ]
+              },
+              "examples": {
+                "validExample": {
+                  "value": {
+                    "version": "2.0.0",
+                    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "action": "findLotIds",
+                    "params": {
+                      "states": [
+                        {
+                          "status": "active",
+                          "statusDetails": "empty"
+                        },
+                        {
+                          "status": "complete"
+                        },
+                        {
+                          "statusDetails": "awarded"
+                        }
+                      ],
+                      "cpid": "ocds-b3wdp1-MD-1580458690892",
+                      "ocid": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": []
+      }
+    }
+  }
+}

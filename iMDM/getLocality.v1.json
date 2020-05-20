@@ -1,0 +1,110 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "get locality",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9161"
+    }
+  ],
+  "paths": {
+    "/addresses/countries/{countyId}/regions/{regionId}/localities/{localityId}": {
+      "get": {
+        "summary": "get locality",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "locality"
+                      ],
+                      "properties": {
+                        "locality": {
+                          "type": "object",
+                          "required": [
+                            "scheme",
+                            "id",
+                            "description",
+                            "uri"
+                          ],
+                          "properties": {
+                            "scheme": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "uri": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-request",
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lang",
+            "description": "language",
+            "required": true
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "countyId",
+          "in": "path",
+          "required": true,
+          "description": "country code from ISO-ALPHA2\n"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "regionId",
+          "in": "path",
+          "required": true,
+          "description": "region code from scheme CUATM"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "localityId",
+          "in": "path",
+          "required": true,
+          "description": "locality code from scheme CUATM"
+        }
+      ]
+    }
+  }
+}
