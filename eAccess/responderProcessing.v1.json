@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "",
+        "summary": "Responder Processing",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -31,26 +31,14 @@
                           "type": "object",
                           "required": [
                             "name",
-                            "identifier"
+                            "id"
                           ],
                           "properties": {
                             "name": {
                               "type": "string"
                             },
-                            "identifier": {
-                              "type": "object",
-                              "required": [
-                                "scheme",
-                                "id"
-                              ],
-                              "properties": {
-                                "scheme": {
-                                  "type": "string"
-                                },
-                                "id": {
-                                  "type": "string"
-                                }
-                              }
+                            "id": {
+                              "type": "string"
                             }
                           }
                         }
@@ -124,6 +112,27 @@
                     "required": [
                       "params"
                     ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "properties": {
+                          "responder": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id"
+                            ]
+                          }
+                        }
+                      }
+                    }
                   }
                 ]
               }
