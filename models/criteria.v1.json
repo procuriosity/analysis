@@ -1,0 +1,125 @@
+{
+  "title": "criteria",
+  "type": "object",
+  "description": "",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "tenderer",
+        "buyer",
+        "procuringEntity"
+      ]
+    },
+    "relatedItem": {
+      "type": "string"
+    },
+    "relatesTo": {
+      "type": "string",
+      "enum": [
+        "tenderer",
+        "item",
+        "lot",
+        "award"
+      ]
+    },
+    "requirementGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "requirements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "period": {
+                  "type": "object",
+                  "properties": {
+                    "startDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "endDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "startDate",
+                    "endDate"
+                  ]
+                },
+                "dataType": {
+                  "type": [
+                    "string",
+                    "number",
+                    "integer",
+                    "boolean"
+                  ]
+                },
+                "expectedValue": {
+                  "type": [
+                    "string",
+                    "number",
+                    "integer",
+                    "boolean"
+                  ]
+                },
+                "minValue": {
+                  "type": [
+                    "number",
+                    "integer"
+                  ]
+                },
+                "maxValue": {
+                  "type": [
+                    "number",
+                    "integer"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "title"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "requirements"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "requirementGroups"
+  ]
+}

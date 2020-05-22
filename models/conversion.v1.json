@@ -1,0 +1,60 @@
+{
+  "title": "conversion",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "relatedItem": {
+      "type": "string"
+    },
+    "relatesTo": {
+      "type": "string",
+      "enum": [
+        "requirement"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "coefficients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": [
+              "string",
+              "number",
+              "boolean",
+              "integer"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "coefficient": {
+            "type": "string",
+            "minLength": 0.01,
+            "maxLength": 1
+          }
+        },
+        "required": [
+          "value",
+          "id",
+          "coefficient"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "relatedItem",
+    "relatesTo",
+    "rationale",
+    "coefficients"
+  ]
+}

@@ -37,6 +37,9 @@
                       "required": [
                         "result"
                       ]
+                    },
+                    {
+                      "type": "object"
                     }
                   ]
                 }
@@ -71,7 +74,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "submissionIds",
+                          "submissions",
                           "date"
                         ],
                         "properties": {
@@ -81,16 +84,43 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "submissionIds": {
+                          "submissions": {
                             "type": "array",
                             "items": {
-                              "type": "string"
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "requirementResponses": {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "../models/requirementResponseShortRelatedCandidate.v1.json"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "requirementResponses"
+                              ]
                             }
                           },
                           "date": {
                             "type": "string",
                             "format": "date-time",
                             "description": "дата запроса"
+                          },
+                          "criteria": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "../models/criteria.v1.json"
+                            }
+                          },
+                          "conversions": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "../models/conversion.v1.json"
+                            }
                           }
                         }
                       }
