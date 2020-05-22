@@ -63,6 +63,8 @@
 				"url": "string"
 			},
 			"persones": [{
+                "id": "string",  /* concatenate  request.payload.submission.candidates[*].persones[*].identifier.scheme 
+                                + request.payload.submission.candidates[*].persones[*].identifier.id  */
 				"title": "string",
 				"name": "string",
 				"identifier": {
