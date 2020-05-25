@@ -1,0 +1,155 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "getNextsForQualification",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9091"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "get Next For Qualification",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "qualifications": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "statusDetails": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "qualifications",
+                          "cpid",
+                          "ocid"
+                        ],
+                        "properties": {
+                          "qualifications": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "date": {
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "description": "дата создания qualification"
+                                },
+                                "scoring": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "date"
+                              ]
+                            }
+                          },
+                          "reductionCriteria": {
+                            "type": "string",
+                            "enum": [
+                              "scoring",
+                              "none"
+                            ]
+                          },
+                          "qualificationSystemMethods": {
+                            "type": "array",
+                            "maxItems": 1,
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "automated",
+                                "manual"
+                              ]
+                            }
+                          },
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "getNextForQualification"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
