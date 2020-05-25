@@ -1,0 +1,80 @@
+{
+  "title": "organizationSupplier",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "identifier": {
+      "$ref": "./identifier.v1.json"
+    },
+    "additionalIdentifiers": {
+      "type": "array",
+      "items": {
+        "$ref": "./identifier.v1.json"
+      }
+    },
+    "address": {
+      "$ref": "./addressRequest.v1.json"
+    },
+    "contactPoint": {
+      "$ref": "./contact_point.v1.json"
+    },
+    "persones": {
+      "type": "array",
+      "items": {
+        "$ref": "./personSupplier.v1.json"
+      }
+    },
+    "details": {
+      "type": "object",
+      "required": [
+        "scale"
+      ],
+      "properties": {
+        "typeOfSupplier": {
+          "type": "string",
+          "enum": [
+            "company",
+            "individual"
+          ]
+        },
+        "mainEconomicActivities": {
+          "type": "array",
+          "items": {
+            "$ref": "./mainEconomicActivity.v1.json"
+          }
+        },
+        "scale": {
+          "type": "string",
+          "enum": [
+            "micro",
+            "sme",
+            "large"
+          ],
+          "description": "классификация категории организации"
+        },
+        "bankAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "./bankAccount.v1.json"
+          }
+        },
+        "legalForm": {
+          "$ref": "./legalForm.v1.json"
+        }
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "identifier",
+    "address",
+    "contactPoint",
+    "details"
+  ]
+}
