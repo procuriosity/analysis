@@ -1,8 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getEnquiries",
-    "version": "1.0"
+    "title": "getEnquiryByIds",
+    "version": "1.0",
+    "description": ""
   },
   "servers": [
     {
@@ -12,7 +13,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Get Enquiries",
+        "summary": "Get Enquiry By Ids",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -56,7 +57,8 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "enquiryIds"
                         ],
                         "properties": {
                           "cpid": {
@@ -64,6 +66,13 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
+                          },
+                          "enquiryIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "format": "uuid"
+                            }
                           }
                         }
                       }
@@ -78,7 +87,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getEnquiries"
+                          "getEnquiryByIds"
                         ]
                       }
                     }

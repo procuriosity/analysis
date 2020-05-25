@@ -50,7 +50,7 @@
                               },
                               "scoring": {
                                 "type": "number",
-                                "description": "приведенный вес"
+                                "description": "приведенный коэффициент"
                               },
                               "token": {
                                 "type": "string"
@@ -104,7 +104,9 @@
                           "cpid",
                           "ocid",
                           "submissions",
-                          "date"
+                          "date",
+                          "reductionCriteria",
+                          "qualificationSystemMethods"
                         ],
                         "properties": {
                           "cpid": {
@@ -149,6 +151,24 @@
                             "type": "array",
                             "items": {
                               "$ref": "../models/conversion.v1.json"
+                            }
+                          },
+                          "reductionCriteria": {
+                            "type": "string",
+                            "enum": [
+                              "scoring",
+                              "none"
+                            ]
+                          },
+                          "qualificationSystemMethods": {
+                            "type": "array",
+                            "maxItems": 1,
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "automated",
+                                "manual"
+                              ]
                             }
                           }
                         }
