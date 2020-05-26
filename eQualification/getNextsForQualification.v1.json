@@ -74,13 +74,37 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "qualifications",
+                          "cpid",
+                          "ocid",
                           "reductionCriteria",
                           "qualificationSystemMethods",
-                          "cpid",
-                          "ocid"
+                          "qualifications"
                         ],
                         "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "reductionCriteria": {
+                            "type": "string",
+                            "enum": [
+                              "scoring",
+                              "none"
+                            ]
+                          },
+                          "qualificationSystemMethods": {
+                            "type": "array",
+                            "maxItems": 1,
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "automated",
+                                "manual"
+                              ]
+                            }
+                          },
                           "qualifications": {
                             "type": "array",
                             "items": {
@@ -104,30 +128,6 @@
                                 "date"
                               ]
                             }
-                          },
-                          "reductionCriteria": {
-                            "type": "string",
-                            "enum": [
-                              "scoring",
-                              "none"
-                            ]
-                          },
-                          "qualificationSystemMethods": {
-                            "type": "array",
-                            "maxItems": 1,
-                            "items": {
-                              "type": "string",
-                              "enum": [
-                                "automated",
-                                "manual"
-                              ]
-                            }
-                          },
-                          "cpid": {
-                            "$ref": "../models/cpid.v1.json"
-                          },
-                          "ocid": {
-                            "$ref": "../models/ocid.v1.json"
                           }
                         }
                       }
