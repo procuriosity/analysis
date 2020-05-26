@@ -74,18 +74,38 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "cpid",
-                          "ocid",
+                          "qualifications",
                           "reductionCriteria",
                           "qualificationSystemMethods",
-                          "qualifications"
+                          "cpid",
+                          "ocid"
                         ],
                         "properties": {
-                          "cpid": {
-                            "$ref": "../models/cpid.v1.json"
-                          },
-                          "ocid": {
-                            "$ref": "../models/ocid.v1.json"
+                          "qualifications": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "format": "uuid"
+                                },
+                                "date": {
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "description": "дата создания qualification"
+                                },
+                                "scoring": {
+                                  "type": "number",
+                                  "minimum": 0.001,
+                                  "maximum": 1
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "date"
+                              ]
+                            }
                           },
                           "reductionCriteria": {
                             "type": "string",
@@ -105,29 +125,11 @@
                               ]
                             }
                           },
-                          "qualifications": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string",
-                                  "format": "uuid"
-                                },
-                                "date": {
-                                  "type": "string",
-                                  "format": "date-time",
-                                  "description": "дата создания qualification"
-                                },
-                                "scoring": {
-                                  "type": "number"
-                                }
-                              },
-                              "required": [
-                                "id",
-                                "date"
-                              ]
-                            }
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
                           }
                         }
                       }
