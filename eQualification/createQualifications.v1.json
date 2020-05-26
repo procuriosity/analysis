@@ -104,9 +104,7 @@
                           "cpid",
                           "ocid",
                           "submissions",
-                          "date",
-                          "reductionCriteria",
-                          "qualificationSystemMethods"
+                          "date"
                         ],
                         "properties": {
                           "cpid": {
@@ -141,35 +139,52 @@
                             "format": "date-time",
                             "description": "дата запроса"
                           },
-                          "criteria": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "../models/criteria.v1.json"
-                            }
-                          },
-                          "conversions": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "../models/conversion.v1.json"
-                            }
-                          },
-                          "reductionCriteria": {
-                            "type": "string",
-                            "enum": [
-                              "scoring",
-                              "none"
+                          "tender": {
+                            "type": "object",
+                            "properties": {
+                              "criteria": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "../models/criteria.v1.json"
+                                }
+                              },
+                              "conversions": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "../models/conversion.v1.json"
+                                }
+                              },
+                              "otherCriteria": {
+                                "type": "object",
+                                "required": [
+                                  "reductionCriteria",
+                                  "qualificationSystemMethods"
+                                ],
+                                "properties": {
+                                  "reductionCriteria": {
+                                    "type": "string",
+                                    "enum": [
+                                      "scoring",
+                                      "none"
+                                    ]
+                                  },
+                                  "qualificationSystemMethods": {
+                                    "type": "array",
+                                    "maxItems": 1,
+                                    "items": {
+                                      "type": "string",
+                                      "enum": [
+                                        "automated",
+                                        "manual"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "required": [
+                              "otherCriteria"
                             ]
-                          },
-                          "qualificationSystemMethods": {
-                            "type": "array",
-                            "maxItems": 1,
-                            "items": {
-                              "type": "string",
-                              "enum": [
-                                "automated",
-                                "manual"
-                              ]
-                            }
                           }
                         }
                       }
@@ -184,22 +199,27 @@
                       "params": {
                         "type": "object",
                         "properties": {
-                          "criteria": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "relatesTo": {
-                                  "type": "string",
-                                  "enum": [
-                                    "tenderer"
-                                  ]
-                                },
-                                "source": {
-                                  "type": "string",
-                                  "enum": [
-                                    "tenderer"
-                                  ]
+                          "tender": {
+                            "type": "object",
+                            "properties": {
+                              "criteria": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "relatesTo": {
+                                      "type": "string",
+                                      "enum": [
+                                        "tenderer"
+                                      ]
+                                    },
+                                    "source": {
+                                      "type": "string",
+                                      "enum": [
+                                        "tenderer"
+                                      ]
+                                    }
+                                  }
                                 }
                               }
                             }
