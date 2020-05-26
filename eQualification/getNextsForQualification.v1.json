@@ -28,32 +28,25 @@
                       "type": "object",
                       "properties": {
                         "result": {
-                          "type": "object",
-                          "required": [
-                            "qualifications"
-                          ],
-                          "properties": {
-                            "qualifications": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "statusDetails": {
-                                    "type": "string",
-                                    "enum": [
-                                      "awaiting"
-                                    ]
-                                  }
-                                },
-                                "required": [
-                                  "id",
-                                  "statusDetails"
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid"
+                              },
+                              "statusDetails": {
+                                "type": "string",
+                                "enum": [
+                                  "awaiting"
                                 ]
                               }
-                            }
+                            },
+                            "required": [
+                              "id",
+                              "statusDetails"
+                            ]
                           }
                         }
                       },
@@ -82,6 +75,8 @@
                         "type": "object",
                         "required": [
                           "qualifications",
+                          "reductionCriteria",
+                          "qualificationSystemMethods",
                           "cpid",
                           "ocid"
                         ],
@@ -92,7 +87,8 @@
                               "type": "object",
                               "properties": {
                                 "id": {
-                                  "type": "string"
+                                  "type": "string",
+                                  "format": "uuid"
                                 },
                                 "date": {
                                   "type": "string",
