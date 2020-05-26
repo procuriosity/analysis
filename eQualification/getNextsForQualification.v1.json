@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "get Next For Qualification",
+        "summary": "get Nexts For Qualification",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -28,32 +28,25 @@
                       "type": "object",
                       "properties": {
                         "result": {
-                          "type": "object",
-                          "required": [
-                            "qualifications"
-                          ],
-                          "properties": {
-                            "qualifications": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "statusDetails": {
-                                    "type": "string",
-                                    "enum": [
-                                      "awaiting"
-                                    ]
-                                  }
-                                },
-                                "required": [
-                                  "id",
-                                  "statusDetails"
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid"
+                              },
+                              "statusDetails": {
+                                "type": "string",
+                                "enum": [
+                                  "awaiting"
                                 ]
                               }
-                            }
+                            },
+                            "required": [
+                              "id",
+                              "statusDetails"
+                            ]
                           }
                         }
                       },
@@ -81,33 +74,18 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "qualifications",
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "reductionCriteria",
+                          "qualificationSystemMethods",
+                          "qualifications"
                         ],
                         "properties": {
-                          "qualifications": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "date": {
-                                  "type": "string",
-                                  "format": "date-time",
-                                  "description": "дата создания qualification"
-                                },
-                                "scoring": {
-                                  "type": "number"
-                                }
-                              },
-                              "required": [
-                                "id",
-                                "date"
-                              ]
-                            }
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
                           },
                           "reductionCriteria": {
                             "type": "string",
@@ -127,11 +105,29 @@
                               ]
                             }
                           },
-                          "cpid": {
-                            "$ref": "../models/cpid.v1.json"
-                          },
-                          "ocid": {
-                            "$ref": "../models/ocid.v1.json"
+                          "qualifications": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "format": "uuid"
+                                },
+                                "date": {
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "description": "дата создания qualification"
+                                },
+                                "scoring": {
+                                  "type": "number"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "date"
+                              ]
+                            }
                           }
                         }
                       }
@@ -146,7 +142,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getNextForQualification"
+                          "getNextsForQualification"
                         ]
                       }
                     }
