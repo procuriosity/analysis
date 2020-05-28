@@ -1,0 +1,91 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "get country",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9161"
+    }
+  ],
+  "paths": {
+    "/requirementGroups": {
+      "get": {
+        "summary": "GET country",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "country"
+                      ],
+                      "properties": {
+                        "country": {
+                          "type": "object",
+                          "required": [
+                            "scheme",
+                            "id",
+                            "description",
+                            "uri"
+                          ],
+                          "properties": {
+                            "scheme": {
+                              "type": "string",
+                              "example": "ISO-ALPHA2"
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "MD"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "MOLDOVA"
+                            },
+                            "uri": {
+                              "type": "string",
+                              "example": "http://reference.iatistandard.org"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-request",
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "RO"
+            },
+            "in": "query",
+            "name": "lang",
+            "description": "language",
+            "required": true
+          }
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
