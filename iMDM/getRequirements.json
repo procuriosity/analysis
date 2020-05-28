@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "get country",
+    "title": "Get Requirements",
     "version": "1.0",
     "description": ""
   },
@@ -11,9 +11,9 @@
     }
   ],
   "paths": {
-    "/addresses/countries/{countyId}": {
+    "/requirements": {
       "get": {
-        "summary": "GET country",
+        "summary": "Get Requirements",
         "tags": [],
         "responses": {
           "200": {
@@ -26,34 +26,29 @@
                     "data": {
                       "type": "object",
                       "required": [
-                        "country"
+                        "requiremnts"
                       ],
                       "properties": {
-                        "country": {
-                          "type": "object",
-                          "required": [
-                            "scheme",
-                            "id",
-                            "description",
-                            "uri"
-                          ],
-                          "properties": {
-                            "scheme": {
-                              "type": "string",
-                              "example": "ISO-ALPHA2"
+                        "requiremnts": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "example": "MD_GPA_1_1_1"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              }
                             },
-                            "id": {
-                              "type": "string",
-                              "example": "MD"
-                            },
-                            "description": {
-                              "type": "string",
-                              "example": "MOLDOVA"
-                            },
-                            "uri": {
-                              "type": "string",
-                              "example": "http://reference.iatistandard.org"
-                            }
+                            "required": [
+                              "id",
+                              "title"
+                            ]
                           }
                         }
                       }
@@ -79,21 +74,19 @@
             "name": "lang",
             "description": "language",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "countryId",
+            "description": "country code from ISO-ALPHA2",
+            "required": true
           }
         ]
       },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "example": "MD"
-          },
-          "name": "countyId",
-          "in": "path",
-          "required": true,
-          "description": "country code from ISO-ALPHA2"
-        }
-      ]
+      "parameters": []
     }
   },
   "components": {
