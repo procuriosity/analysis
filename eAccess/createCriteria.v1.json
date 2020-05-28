@@ -30,38 +30,83 @@
                         "result": {
                           "type": "array",
                           "items": {
-                            "$ref": "../models/criteria.v1.json"
-                          }
-                        }
-                      },
-                      "required": [
-                        "result"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "result": {
-                          "type": "array",
-                          "items": {
                             "type": "object",
                             "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
                               "source": {
                                 "type": "string",
                                 "enum": [
                                   "tenderer"
                                 ]
                               },
-                              "relatesTo": {
-                                "type": "string",
-                                "enum": [
-                                  "tenderer"
-                                ]
+                              "requirementGroups": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "requirements": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "title": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "dataType": {
+                                            "type": [
+                                              "string",
+                                              "number",
+                                              "integer",
+                                              "boolean"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "title",
+                                          "dataType"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "requirements"
+                                  ]
+                                }
                               }
-                            }
+                            },
+                            "required": [
+                              "id",
+                              "title",
+                              "source"
+                            ]
                           }
                         }
-                      }
+                      },
+                      "required": [
+                        "result"
+                      ]
                     }
                   ]
                 }
