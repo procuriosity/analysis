@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Get Locality",
-    "version": "1.0",
+    "version": "1.01",
     "description": ""
   },
   "servers": [
@@ -73,41 +73,44 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
-                    {
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "description": "response 1"
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "oneOf": [
+                        {
+                          "properties": {
+                            "code": {
+                              "type": "string",
+                              "description": "error 1"
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "code",
+                            "description"
+                          ]
                         },
-                        "description": {
-                          "type": "string",
-                          "description": "запрашиваемая scheme не найдена"
+                        {
+                          "properties": {
+                            "code": {
+                              "type": "string",
+                              "description": "error 2"
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "code",
+                            "description"
+                          ]
                         }
-                      },
-                      "required": [
-                        "id",
-                        "description"
-                      ]
-                    },
-                    {
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "description": "response 2"
-                        },
-                        "description": {
-                          "type": "string",
-                          "description": "запрашиваемый id scheme не найден"
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "description"
-                      ]
+                      ],
+                      "type": "object"
                     }
-                  ],
-                  "type": "object"
+                  }
                 }
               }
             }
