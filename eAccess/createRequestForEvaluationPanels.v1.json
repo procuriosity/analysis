@@ -1,0 +1,168 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Create Request For Evaluation Panels (v1)",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Create Request For Evaluation Panels (v1)",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "version": {
+                      "type": "string",
+                      "example": "0.0.1"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "criteria"
+                      ],
+                      "properties": {
+                        "criteria": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "title",
+                            "source",
+                            "relatesTo",
+                            "description",
+                            "requirementGroups"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "source": {
+                              "type": "string",
+                              "default": "procuringEntity"
+                            },
+                            "relatesTo": {
+                              "type": "string",
+                              "default": "award"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "requirementGroups": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                  },
+                                  "requirements": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "format": "uuid"
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        },
+                                        "dataType": {
+                                          "type": "string",
+                                          "default": "boolean"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "title",
+                                        "dataType"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "requirements"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "version",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "command": {
+                    "type": "string",
+                    "enum": [
+                      "createRequestsForEvPanels"
+                    ]
+                  },
+                  "context": {
+                    "$ref": "../models/oldRequestContext.v1.json"
+                  },
+                  "data": {
+                    "type": "object"
+                  },
+                  "version": {
+                    "type": "string",
+                    "example": "0.0.1"
+                  }
+                },
+                "required": [
+                  "id",
+                  "command",
+                  "context",
+                  "data",
+                  "version"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
