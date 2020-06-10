@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getRequirementGroups",
+    "title": "getRequirements",
     "version": "1.0"
   },
   "servers": [
@@ -10,9 +10,9 @@
     }
   ],
   "paths": {
-    "/getRequirementGroups/criteria/{criterionId}": {
+    "/getRequirements/requirementGroups/{requirementGroupId}": {
       "get": {
-        "summary": "Get Requirement Groups",
+        "summary": "Get Requirements",
         "tags": [],
         "responses": {
           "200": {
@@ -30,12 +30,16 @@
                           "id": {
                             "type": "string"
                           },
+                          "title": {
+                            "type": "string"
+                          },
                           "description": {
                             "type": "string"
                           }
                         },
                         "required": [
-                          "id"
+                          "id",
+                          "title"
                         ]
                       }
                     }
@@ -45,11 +49,12 @@
             }
           }
         },
-        "operationId": "get-getRequirementGroups",
+        "operationId": "get-getRequirements",
         "parameters": [
           {
             "schema": {
               "type": "string",
+              "enum": [],
               "example": "RO"
             },
             "in": "query",
@@ -80,16 +85,16 @@
           {
             "schema": {
               "type": "string",
+              "example": "submission",
               "enum": [
                 "submission",
                 "awarding"
-              ],
-              "example": "submission"
+              ]
             },
             "in": "query",
             "name": "phase",
-            "required": true,
-            "description": "tender process phase"
+            "description": "tender process phase",
+            "required": true
           }
         ]
       },
@@ -98,7 +103,7 @@
           "schema": {
             "type": "string"
           },
-          "name": "criterionId",
+          "name": "requirementGroupId",
           "in": "path",
           "required": true
         }
