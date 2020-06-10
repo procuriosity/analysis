@@ -1,9 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Get Criteria",
-    "version": "1.0",
-    "description": ""
+    "title": "getRequirements",
+    "version": "1.0"
   },
   "servers": [
     {
@@ -11,13 +10,13 @@
     }
   ],
   "paths": {
-    "/criteria": {
+    "/requirements": {
       "get": {
-        "summary": "Get Criteria",
+        "summary": "Get Requirements",
         "tags": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -50,12 +49,12 @@
             }
           }
         },
-        "operationId": "get-request",
-        "description": "",
+        "operationId": "get-getRequirements",
         "parameters": [
           {
             "schema": {
               "type": "string",
+              "enum": [],
               "example": "RO"
             },
             "in": "query",
@@ -69,9 +68,9 @@
               "example": "MD"
             },
             "in": "query",
-            "required": true,
             "name": "country",
-            "description": "country code from ISO-ALPHA2"
+            "description": "country code from ISO-ALPHA2",
+            "required": true
           },
           {
             "schema": {
@@ -86,16 +85,25 @@
           {
             "schema": {
               "type": "string",
+              "example": "submission",
               "enum": [
                 "submission",
                 "awarding"
-              ],
-              "example": "submission"
+              ]
             },
             "in": "query",
             "name": "phase",
+            "description": "tender process phase",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "requirementGroupId",
             "required": true,
-            "description": "tender process phase"
+            "description": "requirement group id"
           }
         ]
       },
