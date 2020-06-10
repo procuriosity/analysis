@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "findCriteriaForProcuringEntity",
+    "title": "findCriteria",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Find Criteria For Procuring Entity",
+        "summary": "Find Criteria",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -44,7 +44,8 @@
                               "source": {
                                 "type": "string",
                                 "enum": [
-                                  "procuringEntity"
+                                  "procuringEntity",
+                                  "tenderer"
                                 ]
                               },
                               "requirementGroups": {
@@ -73,7 +74,12 @@
                                             "type": "string"
                                           },
                                           "dataType": {
-                                            "type": "boolean"
+                                            "type": [
+                                              "boolean",
+                                              "string",
+                                              "number",
+                                              "integer"
+                                            ]
                                           }
                                         },
                                         "required": [
@@ -122,7 +128,8 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "source"
                         ],
                         "properties": {
                           "cpid": {
@@ -130,6 +137,13 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
+                          },
+                          "source": {
+                            "type": "string",
+                            "enum": [
+                              "tenderer",
+                              "procuringEntity"
+                            ]
                           }
                         }
                       }
@@ -144,7 +158,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "findCriteriaForProcuringEntity"
+                          "findCriteria"
                         ]
                       }
                     }
