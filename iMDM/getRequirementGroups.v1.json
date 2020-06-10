@@ -1,9 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Get Criteria",
-    "version": "1.0",
-    "description": ""
+    "title": "getRequirementGroups",
+    "version": "1.0"
   },
   "servers": [
     {
@@ -11,13 +10,13 @@
     }
   ],
   "paths": {
-    "/criteria": {
+    "/getRequirementGroups/criterion/{criterionId}": {
       "get": {
-        "summary": "Get Criteria",
+        "summary": "Get Requirement Groups",
         "tags": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -31,16 +30,12 @@
                           "id": {
                             "type": "string"
                           },
-                          "title": {
-                            "type": "string"
-                          },
                           "description": {
                             "type": "string"
                           }
                         },
                         "required": [
-                          "id",
-                          "title"
+                          "id"
                         ]
                       }
                     }
@@ -50,8 +45,7 @@
             }
           }
         },
-        "operationId": "get-request",
-        "description": "",
+        "operationId": "get-getRequirementGroups",
         "parameters": [
           {
             "schema": {
@@ -69,9 +63,9 @@
               "example": "MD"
             },
             "in": "query",
-            "required": true,
             "name": "country",
-            "description": "country code from ISO-ALPHA2"
+            "description": "country code from ISO-ALPHA2",
+            "required": true
           },
           {
             "schema": {
@@ -99,7 +93,16 @@
           }
         ]
       },
-      "parameters": []
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "criterionId",
+          "in": "path",
+          "required": true
+        }
+      ]
     }
   },
   "components": {
