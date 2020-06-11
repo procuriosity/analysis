@@ -76,9 +76,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "reductionCriteria",
-                          "qualificationSystemMethods",
-                          "submissions"
+                          "submissions",
+                          "otherCriteria"
                         ],
                         "properties": {
                           "cpid": {
@@ -86,24 +85,6 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
-                          },
-                          "reductionCriteria": {
-                            "type": "string",
-                            "enum": [
-                              "scoring",
-                              "none"
-                            ]
-                          },
-                          "qualificationSystemMethods": {
-                            "type": "array",
-                            "maxItems": 1,
-                            "items": {
-                              "type": "string",
-                              "enum": [
-                                "automated",
-                                "manual"
-                              ]
-                            }
                           },
                           "submissions": {
                             "type": "array",
@@ -123,6 +104,33 @@
                                 "id",
                                 "date"
                               ]
+                            }
+                          },
+                          "otherCriteria": {
+                            "type": "object",
+                            "required": [
+                              "qualificationSystemMethods",
+                              "reductionCriteria"
+                            ],
+                            "properties": {
+                              "qualificationSystemMethods": {
+                                "type": "array",
+                                "maxItems": 1,
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "automated",
+                                    "manual"
+                                  ]
+                                }
+                              },
+                              "reductionCriteria": {
+                                "type": "string",
+                                "enum": [
+                                  "scoring",
+                                  "none"
+                                ]
+                              }
                             }
                           }
                         }
@@ -146,7 +154,8 @@
                 ]
               }
             }
-          }
+          },
+          "description": ""
         }
       }
     }
