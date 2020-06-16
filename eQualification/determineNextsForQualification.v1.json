@@ -39,7 +39,8 @@
                               "statusDetails": {
                                 "type": "string",
                                 "enum": [
-                                  "awaiting"
+                                  "awaiting",
+                                  "consideration"
                                 ]
                               }
                             },
@@ -77,7 +78,7 @@
                           "cpid",
                           "ocid",
                           "submissions",
-                          "otherCriteria"
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -106,30 +107,129 @@
                               ]
                             }
                           },
-                          "otherCriteria": {
+                          "tender": {
                             "type": "object",
                             "required": [
-                              "qualificationSystemMethods",
-                              "reductionCriteria"
+                              "otherCriteria"
                             ],
                             "properties": {
-                              "qualificationSystemMethods": {
-                                "type": "array",
-                                "maxItems": 1,
-                                "items": {
-                                  "type": "string",
-                                  "enum": [
-                                    "automated",
-                                    "manual"
-                                  ]
+                              "otherCriteria": {
+                                "type": "object",
+                                "required": [
+                                  "qualificationSystemMethods",
+                                  "reductionCriteria"
+                                ],
+                                "properties": {
+                                  "qualificationSystemMethods": {
+                                    "type": "array",
+                                    "maxItems": 1,
+                                    "items": {
+                                      "type": "string",
+                                      "enum": [
+                                        "automated",
+                                        "manual"
+                                      ]
+                                    }
+                                  },
+                                  "reductionCriteria": {
+                                    "type": "string",
+                                    "enum": [
+                                      "scoring",
+                                      "none"
+                                    ]
+                                  }
                                 }
                               },
-                              "reductionCriteria": {
-                                "type": "string",
-                                "enum": [
-                                  "scoring",
-                                  "none"
-                                ]
+                              "criteria": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "title": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "source": {
+                                      "type": "string",
+                                      "enum": [
+                                        "tenderer",
+                                        "ProcuringEntity"
+                                      ]
+                                    },
+                                    "relatesTo": {
+                                      "type": "string",
+                                      "enum": [
+                                        "tenderer",
+                                        "item",
+                                        "lot",
+                                        "award"
+                                      ]
+                                    },
+                                    "relatedItem": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    },
+                                    "requirementGroups": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "requirements": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "title": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "dataType": {
+                                                  "type": [
+                                                    "string",
+                                                    "number",
+                                                    "integer",
+                                                    "boolean"
+                                                  ]
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "title",
+                                                "dataType"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "requirements"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "title",
+                                    "source",
+                                    "requirementGroups"
+                                  ]
+                                }
                               }
                             }
                           }
