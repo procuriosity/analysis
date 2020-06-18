@@ -33,7 +33,7 @@
 				}]
 			},
 			"requirement": {
-				"id": "uuid" 
+				"id": "string" 
 			}]
 		}
 	}]
