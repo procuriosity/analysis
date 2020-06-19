@@ -1,0 +1,172 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "checkDeclaration",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9091"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Check Declaration",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "qualificationId",
+                          "requirementResponse",
+                          "criteria"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "qualificationId": {
+                            "type": "string"
+                          },
+                          "requirementResponse": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "value",
+                              "relatedTendererId",
+                              "responderId",
+                              "requirementId"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              },
+                              "relatedTendererId": {
+                                "type": "string",
+                                "description": "участник, в отношении которого подается декларация"
+                              },
+                              "responderId": {
+                                "type": "string",
+                                "description": "персона, подающая декларацию"
+                              },
+                              "requirementId": {
+                                "type": "string",
+                                "description": "требование, на которое подается декларация"
+                              }
+                            }
+                          },
+                          "criteria": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "requirementGroups": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "requirements": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "dataType": {
+                                              "type": "string",
+                                              "enum": [
+                                                "number",
+                                                "boolean",
+                                                "integer",
+                                                "string"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "dataType"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "requirements"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "requirementGroups"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "checkDeclaration"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
