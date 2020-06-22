@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "findRequirementResponseByIds",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9091"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Find Requirement Response By Ids",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "qualification": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "requirementResponses"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "requirementResponses": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "value": {
+                                        "type": [
+                                          "string",
+                                          "number",
+                                          "boolean",
+                                          "integer"
+                                        ]
+                                      },
+                                      "relatedTenderer": {
+                                        "type": "object",
+                                        "required": [
+                                          "id"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "requirement": {
+                                        "type": "object",
+                                        "required": [
+                                          "id"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "responder": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "name"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "value",
+                                      "relatedTenderer",
+                                      "requirement",
+                                      "responder"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "required": [
+                            "qualification"
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "requirementReaponseIds",
+                          "qualificationIds",
+                          "cpid",
+                          "ocid"
+                        ],
+                        "properties": {
+                          "requirementReaponseIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "qualificationIds": {
+                            "type": "string"
+                          },
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "findRequirementResponseByIds"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
