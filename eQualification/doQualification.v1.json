@@ -1,0 +1,283 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "doQualification",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9091"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Do Qualification",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "internalid": {
+                                "type": "string"
+                              },
+                              "date": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "status": {
+                                "type": "string",
+                                "enum": [
+                                  "active",
+                                  "unsuccessful",
+                                  "pending"
+                                ]
+                              },
+                              "statusDetails": {
+                                "type": "string",
+                                "enum": [
+                                  "consideration",
+                                  "awaiting"
+                                ]
+                              },
+                              "documents": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "documentType": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "documentType",
+                                  "title"
+                                ]
+                              },
+                              "candidates": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object"
+                                }
+                              },
+                              "relatedSubmission": {
+                                "type": "string"
+                              },
+                              "requirementResponses": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    },
+                                    "relatedTenderer": {
+                                      "type": "object",
+                                      "required": [
+                                        "id"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "requirement": {
+                                      "type": "object",
+                                      "required": [
+                                        "id"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "responder": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "name"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "value",
+                                    "relatedTenderer",
+                                    "requirement",
+                                    "responder"
+                                  ]
+                                }
+                              },
+                              "scoring": {
+                                "type": "number",
+                                "maximum": 1,
+                                "minimum": 0.001,
+                                "description": "приведенный коэффициент\n"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "date",
+                              "status",
+                              "statusDetails",
+                              "relatedSubmission"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "qualifications"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "qualifications": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "statusDetails": {
+                                  "type": "string",
+                                  "enum": [
+                                    "awaiting",
+                                    "consideration"
+                                  ]
+                                },
+                                "internalId": {
+                                  "type": "string",
+                                  "description": "внутренний идентификатор qualification"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "documents": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "documentType": {
+                                        "type": "string"
+                                      },
+                                      "title": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "documentType"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "statusDetails"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "doQualification"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
