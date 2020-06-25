@@ -45,16 +45,14 @@
                               "status": {
                                 "type": "string",
                                 "enum": [
-                                  "active",
-                                  "unsuccessful",
                                   "pending"
                                 ]
                               },
                               "statusDetails": {
                                 "type": "string",
                                 "enum": [
-                                  "consideration",
-                                  "awaiting"
+                                  "active",
+                                  "unsuccessful"
                                 ]
                               },
                               "documents": {
@@ -91,7 +89,12 @@
                                       "type": "string"
                                     },
                                     "value": {
-                                      "type": "string"
+                                      "type": [
+                                        "string",
+                                        "number",
+                                        "integer",
+                                        "boolean"
+                                      ]
                                     },
                                     "relatedTenderer": {
                                       "type": "object",
@@ -142,9 +145,9 @@
                               },
                               "scoring": {
                                 "type": "number",
-                                "maximum": 1,
                                 "minimum": 0.001,
-                                "description": "приведенный коэффициент\n"
+                                "description": "приведенный коэффициент\n",
+                                "maximum": 1
                               }
                             },
                             "required": [
@@ -204,7 +207,9 @@
                                   "type": "string",
                                   "enum": [
                                     "awaiting",
-                                    "consideration"
+                                    "consideration",
+                                    "active",
+                                    "unsuccessful"
                                   ]
                                 },
                                 "internalId": {
@@ -234,7 +239,8 @@
                                     },
                                     "required": [
                                       "id",
-                                      "documentType"
+                                      "documentType",
+                                      "title"
                                     ]
                                   }
                                 }
