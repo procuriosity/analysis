@@ -1,19 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Get Award Criteria And Conversions (v1)",
-    "version": "1.0",
-    "description": ""
+    "title": "createSubmissionPeriod",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9251"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "getAwardCriteriaAndConversions(v1)",
+        "summary": "Create Submission Period",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -33,27 +32,25 @@
                     },
                     "data": {
                       "type": "object",
+                      "required": [
+                        "period"
+                      ],
                       "properties": {
-                        "awardCriteria": {
-                          "type": "string",
-                          "enum": [
-                            "priceOnly",
-                            "ratedCriteria",
-                            "qualityOnly",
-                            "costOnly"
-                          ]
-                        },
-                        "awardCriteriaDetails": {
-                          "type": "string",
-                          "enum": [
-                            "automated",
-                            "manual"
-                          ]
-                        },
-                        "conversions": {
-                          "type": "array",
-                          "items": {
-                            "$ref": "../models/conversion.v1.json"
+                        "period": {
+                          "type": "object",
+                          "required": [
+                            "startDate",
+                            "endDate"
+                          ],
+                          "properties": {
+                            "startDate": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "endDate": {
+                              "type": "string",
+                              "format": "date-time"
+                            }
                           }
                         }
                       }
@@ -69,6 +66,7 @@
             }
           }
         },
+        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -82,7 +80,7 @@
                   "command": {
                     "type": "string",
                     "enum": [
-                      "getAwardCriteriaAndConversions"
+                      "createSubmissionPeriod"
                     ]
                   },
                   "context": {
@@ -105,8 +103,7 @@
                 ]
               }
             }
-          },
-          "description": ""
+          }
         }
       }
     }
