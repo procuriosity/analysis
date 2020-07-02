@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "doConsideration",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -30,18 +30,29 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "id",
-                            "statusDetails"
+                            "qualifications"
                           ],
                           "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "statusDetails": {
-                              "type": "string",
-                              "enum": [
-                                "consideration"
-                              ]
+                            "qualifications": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "statusDetails": {
+                                    "type": "string",
+                                    "enum": [
+                                      "consideration"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "statusDetails"
+                                ]
+                              }
                             }
                           }
                         }
