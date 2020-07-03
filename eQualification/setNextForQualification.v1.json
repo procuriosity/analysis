@@ -28,144 +28,149 @@
                       "type": "object",
                       "properties": {
                         "result": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "internalId": {
-                                "type": "string"
-                              },
-                              "date": {
-                                "type": "string",
-                                "format": "date-time"
-                              },
-                              "status": {
-                                "type": "string",
-                                "enum": [
-                                  "pending"
-                                ]
-                              },
-                              "statusDetails": {
-                                "type": "string",
-                                "enum": [
-                                  "awaiting",
-                                  "consideration"
-                                ]
-                              },
-                              "relatedSubmission": {
-                                "type": "string"
-                              },
-                              "requirementResponses": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "value": {
-                                      "type": [
-                                        "string",
-                                        "number",
-                                        "integer",
-                                        "boolean"
-                                      ]
-                                    },
-                                    "relatedTenderer": {
+                          "type": "object",
+                          "properties": {
+                            "qualifications": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "internalId": {
+                                    "type": "string"
+                                  },
+                                  "date": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "pending"
+                                    ]
+                                  },
+                                  "statusDetails": {
+                                    "type": "string",
+                                    "enum": [
+                                      "awaiting",
+                                      "consideration"
+                                    ]
+                                  },
+                                  "relatedSubmission": {
+                                    "type": "string"
+                                  },
+                                  "requirementResponses": {
+                                    "type": "array",
+                                    "items": {
                                       "type": "object",
-                                      "required": [
-                                        "id"
-                                      ],
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    },
-                                    "requirement": {
-                                      "type": "object",
-                                      "required": [
-                                        "id"
-                                      ],
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    },
-                                    "responder": {
-                                      "type": "object",
-                                      "required": [
-                                        "id",
-                                        "name"
-                                      ],
                                       "properties": {
                                         "id": {
                                           "type": "string"
                                         },
-                                        "name": {
+                                        "value": {
+                                          "type": [
+                                            "string",
+                                            "number",
+                                            "integer",
+                                            "boolean"
+                                          ]
+                                        },
+                                        "relatedTenderer": {
+                                          "type": "object",
+                                          "required": [
+                                            "id"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "requirement": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "responder": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "name"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "value",
+                                        "relatedTenderer",
+                                        "requirement",
+                                        "responder"
+                                      ]
+                                    }
+                                  },
+                                  "scoring": {
+                                    "type": "number",
+                                    "description": "приведенный коэффициент",
+                                    "minimum": 0.001,
+                                    "maximum": 1
+                                  },
+                                  "documents": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "documentType": {
+                                          "type": "string",
+                                          "enum": [
+                                            "notice",
+                                            "evaluationReports",
+                                            "conflictOfInterest"
+                                          ]
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        },
+                                        "description": {
                                           "type": "string"
                                         }
-                                      }
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "value",
-                                    "relatedTenderer",
-                                    "requirement",
-                                    "responder"
-                                  ]
-                                }
-                              },
-                              "scoring": {
-                                "type": "number",
-                                "description": "приведенный коэффициент",
-                                "minimum": 0.001,
-                                "maximum": 1
-                              },
-                              "documents": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "documentType": {
-                                      "type": "string",
-                                      "enum": [
-                                        "notice",
-                                        "evaluationReports",
-                                        "conflictOfInterest"
+                                      },
+                                      "required": [
+                                        "id",
+                                        "documentType",
+                                        "title"
                                       ]
-                                    },
-                                    "title": {
-                                      "type": "string"
-                                    },
-                                    "description": {
-                                      "type": "string"
                                     }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "documentType",
-                                    "title"
-                                  ]
-                                }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "date",
+                                  "status",
+                                  "statusDetails",
+                                  "relatedSubmission"
+                                ]
                               }
-                            },
-                            "required": [
-                              "id",
-                              "date",
-                              "status",
-                              "statusDetails",
-                              "relatedSubmission"
-                            ]
-                          }
+                            }
+                          },
+                          "required": [
+                            "qualifications"
+                          ]
                         }
                       }
                     }
