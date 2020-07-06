@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "checkDeclaration",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -62,8 +62,8 @@
                               "id",
                               "value",
                               "relatedTendererId",
-                              "responderId",
-                              "requirementId"
+                              "requirementId",
+                              "responder"
                             ],
                             "properties": {
                               "id": {
@@ -81,13 +81,25 @@
                                 "type": "string",
                                 "description": "участник, в отношении которого подается декларация"
                               },
-                              "responderId": {
-                                "type": "string",
-                                "description": "персона, подающая декларацию"
-                              },
                               "requirementId": {
                                 "type": "string",
                                 "description": "требование, на которое подается декларация"
+                              },
+                              "responder": {
+                                "type": "object",
+                                "description": "персона, подающая декларацию",
+                                "required": [
+                                  "id",
+                                  "name"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  }
+                                }
                               }
                             }
                           },
