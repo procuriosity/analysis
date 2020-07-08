@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "completeQualificationPeriod",
-    "version": "1.01"
+    "title": "checkQualificationForProtocol",
+    "version": "1.0"
   },
   "servers": [
     {
@@ -12,21 +12,11 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Complete Qualification Period",
+        "summary": "Check Qualifications For Protocol",
         "operationId": "post-command",
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/response_command.v1.json"
-                }
-              }
-            }
-          },
-          "202": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -51,8 +41,7 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid",
-                          "date"
+                          "ocid"
                         ],
                         "properties": {
                           "cpid": {
@@ -60,10 +49,6 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
-                          },
-                          "date": {
-                            "type": "string",
-                            "format": "date-time"
                           }
                         }
                       }
@@ -78,7 +63,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "completeQualificationPeriod"
+                          "checkQualificationForProtocol"
                         ]
                       }
                     }
