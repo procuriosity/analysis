@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Analize Qualifications For Invitation",
+        "summary": "Analyze Qualifications For Invitation",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -20,7 +20,56 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "qualifications": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "pending"
+                                    ]
+                                  },
+                                  "statusDetails": {
+                                    "type": "string",
+                                    "enum": [
+                                      "active"
+                                    ]
+                                  },
+                                  "relatedSubmission": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "status",
+                                  "statusDetails",
+                                  "relatedSubmission"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "qualifications"
+                          ]
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -77,7 +126,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "analizeQualification"
+                          "analyzeQualificationsForInvitation"
                         ]
                       }
                     }
