@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "qualificationProtocol",
+    "title": "withdrawQualificationProtocol",
     "version": "1.0"
   },
   "servers": [
@@ -10,7 +10,7 @@
     }
   ],
   "paths": {
-    "/do/protocol/qualification/{cpid}/{ocid}": {
+    "/cancel/protocol/{cpid}/{ocid}": {
       "parameters": [
         {
           "schema": {
@@ -18,8 +18,7 @@
           },
           "name": "cpid",
           "in": "path",
-          "required": true,
-          "description": "идентификатор тендерного процесса"
+          "required": true
         },
         {
           "schema": {
@@ -27,18 +26,18 @@
           },
           "name": "ocid",
           "in": "path",
-          "required": true,
-          "description": "идентификатор стадии тендерного процесса"
+          "required": true
         }
       ],
       "post": {
-        "summary": "",
-        "operationId": "post-do-qualidication-protocol-cpid-ocid",
+        "summary": "Withdraw Qualification Protocol",
+        "operationId": "post-do-protocol-qualification-cpid-ocid",
         "responses": {
           "202": {
             "description": "Accepted"
           }
         },
+        "description": "",
         "parameters": [
           {
             "schema": {
@@ -63,8 +62,8 @@
               "type": "string"
             },
             "in": "header",
-            "name": "X-TOKEN",
-            "description": "токен тендера\n",
+            "name": "Content-Type",
+            "description": "тип данных в теле запроса",
             "required": true
           },
           {
@@ -72,8 +71,8 @@
               "type": "string"
             },
             "in": "header",
-            "name": "Content-Type",
-            "description": "тип данных в теле запроса",
+            "name": "X-TOKEN",
+            "description": "token тендера\n",
             "required": true
           }
         ]
