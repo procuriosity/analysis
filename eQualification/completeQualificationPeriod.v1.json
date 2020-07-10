@@ -20,7 +20,47 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "preQualification"
+                          ],
+                          "properties": {
+                            "preQualification": {
+                              "type": "object",
+                              "required": [
+                                "period"
+                              ],
+                              "properties": {
+                                "period": {
+                                  "type": "object",
+                                  "required": [
+                                    "endDate"
+                                  ],
+                                  "properties": {
+                                    "endDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
                 }
               }
             }
