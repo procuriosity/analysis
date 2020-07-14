@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "validateTenderPeriod",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "",
+        "operationId": "post-command",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "date",
+                          "country",
+                          "pmd",
+                          "operationType",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "country": {
+                            "type": "string",
+                            "example": "MD"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "GPA",
+                              "TEST_GPA"
+                            ]
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "startSecondStage"
+                            ]
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "tenderPeriod"
+                            ],
+                            "properties": {
+                              "tenderPeriod": {
+                                "type": "object",
+                                "required": [
+                                  "endDate"
+                                ],
+                                "properties": {
+                                  "endDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validateTenderPeriod"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
