@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "startTenderPeriod",
+    "title": "setAuctionPeriodStart",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "",
+        "summary": "Set Auction Period Start",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -36,21 +36,16 @@
                             "tender": {
                               "type": "object",
                               "required": [
-                                "tenderPeriod"
+                                "auctionPeriod"
                               ],
                               "properties": {
-                                "tenderPeriod": {
+                                "auctionPeriod": {
                                   "type": "object",
                                   "required": [
-                                    "startDate",
-                                    "endDate"
+                                    "startDate"
                                   ],
                                   "properties": {
                                     "startDate": {
-                                      "type": "string",
-                                      "format": "date-time"
-                                    },
-                                    "endDate": {
                                       "type": "string",
                                       "format": "date-time"
                                     }
@@ -82,42 +77,24 @@
                   {
                     "type": "object",
                     "properties": {
-                      "cpid": {
-                        "$ref": "../models/cpid.v1.json"
-                      },
-                      "ocid": {
-                        "$ref": "../models/ocid.v1.json"
-                      },
-                      "date": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "tender": {
+                      "params": {
                         "type": "object",
                         "required": [
-                          "tenderPeriod"
+                          "cpid",
+                          "ocid"
                         ],
                         "properties": {
-                          "tenderPeriod": {
-                            "type": "object",
-                            "required": [
-                              "endDate"
-                            ],
-                            "properties": {
-                              "endDate": {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            }
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
                           }
                         }
                       }
                     },
                     "required": [
-                      "cpid",
-                      "ocid",
-                      "date",
-                      "tender"
+                      "params"
                     ]
                   },
                   {
@@ -126,7 +103,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "startTenderPeriod"
+                          "setAuctionPeriodStart"
                         ]
                       }
                     }
