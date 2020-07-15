@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "findSubmissionsForOpening",
-    "version": "1.0"
+    "title": "findSubmissions",
+    "version": "1.01"
   },
   "servers": [
     {
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "find Submissions For Opening",
+        "summary": "Find Submissions",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -57,7 +57,8 @@
                               "status": {
                                 "type": "string",
                                 "enum": [
-                                  "pending"
+                                  "pending",
+                                  "active"
                                 ]
                               },
                               "date": {
@@ -126,7 +127,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "findSubmissionsForOpening"
+                          "findSubmissions"
                         ]
                       }
                     }
@@ -140,7 +141,8 @@
                           "cpid",
                           "ocid",
                           "pmd",
-                          "country"
+                          "country",
+                          "operationType"
                         ],
                         "properties": {
                           "cpid": {
@@ -159,6 +161,12 @@
                           "country": {
                             "type": "string",
                             "example": "MD"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "startSecondStage"
+                            ]
                           }
                         }
                       }
