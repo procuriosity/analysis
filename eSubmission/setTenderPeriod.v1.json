@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9061"
     }
   ],
   "paths": {
@@ -82,31 +82,42 @@
                   {
                     "type": "object",
                     "properties": {
-                      "cpid": {
-                        "$ref": "../models/cpid.v1.json"
-                      },
-                      "ocid": {
-                        "$ref": "../models/ocid.v1.json"
-                      },
-                      "date": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "tender": {
+                      "params": {
                         "type": "object",
                         "required": [
-                          "tenderPeriod"
+                          "cpid",
+                          "ocid",
+                          "date",
+                          "tender"
                         ],
                         "properties": {
-                          "tenderPeriod": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": ""
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "tender": {
                             "type": "object",
                             "required": [
-                              "endDate"
+                              "tenderPeriod"
                             ],
                             "properties": {
-                              "endDate": {
-                                "type": "string",
-                                "format": "date-time"
+                              "tenderPeriod": {
+                                "type": "object",
+                                "required": [
+                                  "endDate"
+                                ],
+                                "properties": {
+                                  "endDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                }
                               }
                             }
                           }
@@ -114,10 +125,7 @@
                       }
                     },
                     "required": [
-                      "cpid",
-                      "ocid",
-                      "date",
-                      "tender"
+                      "params"
                     ]
                   },
                   {
@@ -135,8 +143,7 @@
               }
             }
           }
-        },
-        "description": ""
+        }
       }
     }
   },

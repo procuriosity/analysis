@@ -6,14 +6,26 @@
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9061"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "",
+        "summary": "Validate Tender Period",
         "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
         "requestBody": {
           "content": {
             "application/json": {
@@ -103,18 +115,6 @@
                     }
                   }
                 ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/response_command.v1.json"
-                }
               }
             }
           }
