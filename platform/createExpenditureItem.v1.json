@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "createEI",
+    "title": "createExpenditureItem",
     "version": "1.0"
   },
   "servers": [
@@ -65,6 +65,14 @@
             "name": "pmd",
             "description": "procurement method details",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "testMode",
+            "description": "признак создания тестовой сущности"
           }
         ],
         "description": "",
@@ -91,9 +99,7 @@
                           "classification": {
                             "type": "object",
                             "required": [
-                              "id",
-                              "scheme",
-                              "description"
+                              "id"
                             ],
                             "properties": {
                               "id": {
@@ -308,12 +314,7 @@
                               "mainSectoralActivity": {
                                 "type": "string"
                               }
-                            },
-                            "required": [
-                              "typeOfBuyer",
-                              "mainGeneralActivity",
-                              "mainSectoralActivity"
-                            ]
+                            }
                           }
                         }
                       }
