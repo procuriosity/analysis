@@ -1,0 +1,108 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "getClassification",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9161"
+    }
+  ],
+  "paths": {
+    "/classification/{classificationId}": {
+      "get": {
+        "summary": "GET Classification",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "tender"
+                      ],
+                      "properties": {
+                        "tender": {
+                          "type": "object",
+                          "required": [
+                            "classification"
+                          ],
+                          "properties": {
+                            "classification": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "scheme",
+                                "description"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "scheme": {
+                                  "type": "string",
+                                  "example": "CPV"
+                                },
+                                "description": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-classification",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "country",
+            "description": "country code from ISO-ALPHA2",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lang",
+            "description": "language",
+            "required": true
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "classificationId",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор classification"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
