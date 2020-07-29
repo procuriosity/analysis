@@ -1,0 +1,120 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "createPN",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/operations": {
+      "get": {
+        "summary": "Create PN endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-operations",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pn"
+              ]
+            },
+            "in": "query",
+            "name": "form",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ocid",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "buyer",
+                "thirdParty"
+              ]
+            },
+            "in": "query",
+            "name": "procuringEntity",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "buyer",
+                "thirdParty"
+              ]
+            },
+            "in": "query",
+            "name": "responsibleContactPerson",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "MV",
+                "TEST_MV",
+                "SV",
+                "TEST_SV",
+                "OT",
+                "TEST_OT",
+                "NP",
+                "TEST_NP",
+                "DA",
+                "TEST_DA",
+                "OP",
+                "TEST_OP",
+                "GPA",
+                "TEST_GPA"
+              ]
+            },
+            "in": "query",
+            "name": "pmd",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lang"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
