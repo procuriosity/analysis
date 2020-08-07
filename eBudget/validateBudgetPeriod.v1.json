@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "",
+        "summary": "Validate Budget Period",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -37,32 +37,51 @@
                   {
                     "type": "object",
                     "properties": {
-                      "planning": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validateBudgetPeriod"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
                         "type": "object",
                         "required": [
-                          "budget"
+                          "planning"
                         ],
                         "properties": {
-                          "budget": {
+                          "planning": {
                             "type": "object",
                             "required": [
-                              "period"
+                              "budget"
                             ],
                             "properties": {
-                              "period": {
+                              "budget": {
                                 "type": "object",
                                 "required": [
-                                  "startDate",
-                                  "endDate"
+                                  "period"
                                 ],
                                 "properties": {
-                                  "startDate": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
-                                  "endDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                  "period": {
+                                    "type": "object",
+                                    "required": [
+                                      "startDate",
+                                      "endDate"
+                                    ],
+                                    "properties": {
+                                      "startDate": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                      },
+                                      "endDate": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                      }
+                                    }
                                   }
                                 }
                               }
@@ -72,19 +91,8 @@
                       }
                     },
                     "required": [
-                      "planning"
+                      "params"
                     ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "action": {
-                        "type": "string",
-                        "enum": [
-                          "validateBudgetPeriod"
-                        ]
-                      }
-                    }
                   }
                 ]
               }
