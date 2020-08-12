@@ -1,8 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "validateBudgetPeriod",
-    "version": "1.0"
+    "title": "validateExpenditureItem",
+    "version": "1.0",
+    "description": ""
   },
   "servers": [
     {
@@ -12,7 +13,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Validate Budget Period",
+        "summary": "Validate Expenditure Item",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -51,7 +52,8 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "planning"
+                          "planning",
+                          "tender"
                         ],
                         "properties": {
                           "planning": {
@@ -86,6 +88,20 @@
                                 }
                               }
                             }
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "title"
+                            ],
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              }
+                            }
                           }
                         }
                       }
@@ -98,7 +114,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       }
     }
   },
