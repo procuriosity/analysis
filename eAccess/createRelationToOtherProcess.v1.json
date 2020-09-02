@@ -1,0 +1,153 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "createRelationToOtherProcess",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Create Relation To Other Process",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "relatedProcesses"
+                          ],
+                          "properties": {
+                            "relatedProcesses": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "идентификатор relatedProcess"
+                                  },
+                                  "relationship": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "enum": [
+                                        "x_demand",
+                                        "x_scope"
+                                      ]
+                                    }
+                                  },
+                                  "scheme": {
+                                    "type": "string",
+                                    "description": "ocid",
+                                    "example": "ocid"
+                                  },
+                                  "identifier": {
+                                    "type": "string",
+                                    "description": "cpid сущности, на которую создан relatedProcess"
+                                  },
+                                  "uri": {
+                                    "type": "string",
+                                    "description": "путь к сущности, на которую создан relatedProcess"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "relationship",
+                                  "scheme",
+                                  "identifier",
+                                  "uri"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "relatedCpid",
+                          "operationType"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "type": "string",
+                            "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}$",
+                            "description": "cpid объекта в котором создается связь"
+                          },
+                          "ocid": {
+                            "type": "string",
+                            "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}-(AC|EI|EV|FS|NP|PN|TP)-[0-9]{13}$",
+                            "description": "ocid объекта в котором создается связь"
+                          },
+                          "relatedCpid": {
+                            "type": "string",
+                            "description": "cpid объекта на который создается связь",
+                            "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}$"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "relationAP",
+                              "outsourcingPN"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "description": ""
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
