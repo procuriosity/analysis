@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "outsourcingPN",
+    "title": "createRelationToOtherProcess",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Outsourcing PN",
+        "summary": "Create Relation To Other Process",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -48,22 +48,23 @@
                                     "items": {
                                       "type": "string",
                                       "enum": [
-                                        "framework"
+                                        "x_demand",
+                                        "x_scope"
                                       ]
                                     }
                                   },
                                   "scheme": {
                                     "type": "string",
-                                    "example": "ocid",
-                                    "description": "ocid"
+                                    "description": "ocid",
+                                    "example": "ocid"
                                   },
                                   "identifier": {
                                     "type": "string",
-                                    "description": "cpid FA"
+                                    "description": "cpid сущности, на которую создан relatedProcess"
                                   },
                                   "uri": {
                                     "type": "string",
-                                    "description": "путь к cpid FA"
+                                    "description": "путь к сущности, на которую создан relatedProcess"
                                   }
                                 },
                                 "required": [
@@ -104,17 +105,31 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "cpidFA"
+                          "relatedCpid",
+                          "operationType"
                         ],
                         "properties": {
                           "cpid": {
-                            "$ref": "../models/cpid.v1.json"
+                            "type": "string",
+                            "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}$",
+                            "description": "cpid объекта в котором создается связь"
                           },
                           "ocid": {
-                            "$ref": "../models/ocid.v1.json"
+                            "type": "string",
+                            "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}-(AC|EI|EV|FS|NP|PN|TP)-[0-9]{13}$",
+                            "description": "ocid объекта в котором создается связь"
                           },
-                          "cpidFA": {
-                            "type": "string"
+                          "relatedCpid": {
+                            "type": "string",
+                            "description": "cpid объекта на который создается связь",
+                            "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}$"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "relationAP",
+                              "outsourcingPN"
+                            ]
                           }
                         }
                       }
@@ -127,7 +142,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       }
     }
   },
