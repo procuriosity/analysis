@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Relation PN with FA",
+        "summary": "Check Relation",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -40,19 +40,37 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "cpidFA",
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "relatedCpid",
+                          "operationType",
+                          "existenceRelation"
                         ],
                         "properties": {
-                          "cpidFA": {
-                            "$ref": "../models/cpid.v1.json"
-                          },
                           "cpid": {
-                            "$ref": "../models/cpid.v1.json"
+                            "type": "string",
+                            "description": "cpid объекта в котором проверяется связь",
+                            "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}$"
                           },
                           "ocid": {
-                            "$ref": "../models/ocid.v1.json"
+                            "type": "string",
+                            "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}-(AC|EI|EV|FS|NP|PN|TP)-[0-9]{13}$",
+                            "description": "ocid объекта в котором проверяется связь"
+                          },
+                          "relatedCpid": {
+                            "type": "string",
+                            "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}$",
+                            "description": "cpid объекта на который проверятся связь"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "relationAP"
+                            ]
+                          },
+                          "existenceRelation": {
+                            "type": "boolean",
+                            "description": "проверка наличия(true)/отсутствия(false) связи\n"
                           }
                         }
                       }
