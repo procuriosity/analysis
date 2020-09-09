@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createRelationToOtherProcess",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -75,6 +75,26 @@
                                   "uri"
                                 ]
                               }
+                            },
+                            "tender": {
+                              "type": "object",
+                              "properties": {
+                                "procedureOutsourcing": {
+                                  "type": "object",
+                                  "required": [
+                                    "procedureOutsourced"
+                                  ],
+                                  "properties": {
+                                    "procedureOutsourced": {
+                                      "type": "boolean",
+                                      "description": "признак передачи объекта на аутсорсинг"
+                                    }
+                                  }
+                                }
+                              },
+                              "required": [
+                                "procedureOutsourcing"
+                              ]
                             }
                           }
                         }
@@ -87,6 +107,9 @@
                 }
               }
             }
+          },
+          "202": {
+            "description": ""
           }
         },
         "requestBody": {
