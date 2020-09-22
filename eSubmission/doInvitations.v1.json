@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "doInvitations",
-    "version": "1.02"
+    "version": "1.03"
   },
   "servers": [
     {
@@ -89,7 +89,10 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "date"
+                          "date",
+                          "pmd",
+                          "country",
+                          "operationType"
                         ],
                         "properties": {
                           "cpid": {
@@ -126,9 +129,6 @@
                           },
                           "submissions": {
                             "type": "object",
-                            "required": [
-                              "details"
-                            ],
                             "properties": {
                               "details": {
                                 "type": "array",
@@ -163,7 +163,20 @@
                                   ]
                                 }
                               }
-                            }
+                            },
+                            "required": [
+                              "details"
+                            ]
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "description": "procurement method details"
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string"
                           }
                         }
                       }
