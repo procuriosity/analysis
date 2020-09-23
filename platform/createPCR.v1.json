@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "http://{host}:8900/api/v1/"
     }
   ],
   "paths": {
@@ -89,6 +89,7 @@
                         "required": [
                           "title",
                           "description",
+                          "classification",
                           "criteria",
                           "lots"
                         ],
@@ -101,14 +102,14 @@
                           },
                           "classification": {
                             "type": "object",
+                            "required": [
+                              "id"
+                            ],
                             "properties": {
                               "id": {
                                 "type": "string"
                               }
-                            },
-                            "required": [
-                              "id"
-                            ]
+                            }
                           },
                           "targets": {
                             "type": "array",
@@ -210,6 +211,8 @@
                               "required": [
                                 "id",
                                 "title",
+                                "relatesTo",
+                                "relatedItem",
                                 "observations"
                               ]
                             }
@@ -440,6 +443,9 @@
                                 "type": "string"
                               },
                               "description": {
+                                "type": "string"
+                              },
+                              "relatedLot": {
                                 "type": "string"
                               }
                             },
