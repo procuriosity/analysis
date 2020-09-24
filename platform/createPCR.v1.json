@@ -359,6 +359,9 @@
                                       "type": "string"
                                     }
                                   }
+                                },
+                                "internalId": {
+                                  "type": "string"
                                 }
                               },
                               "required": [
@@ -405,6 +408,9 @@
                                   }
                                 },
                                 "relatedLot": {
+                                  "type": "string"
+                                },
+                                "internalId": {
                                   "type": "string"
                                 }
                               },
@@ -454,6 +460,59 @@
                               "title",
                               "documentType"
                             ]
+                          },
+                          "electronicAuctions": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "relatedLot": {
+                                      "type": "string"
+                                    },
+                                    "electronicAuctionModalities": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "elegibleminimumDifference": {
+                                            "type": "object",
+                                            "required": [
+                                              "amount",
+                                              "currency"
+                                            ],
+                                            "properties": {
+                                              "amount": {
+                                                "type": "number"
+                                              },
+                                              "currency": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "elegibleminimumDifference"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "relatedLot",
+                                    "electronicAuctionModalities"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }
