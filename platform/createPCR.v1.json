@@ -90,7 +90,6 @@
                           "title",
                           "description",
                           "classification",
-                          "criteria",
                           "lots"
                         ],
                         "properties": {
@@ -126,7 +125,8 @@
                                   "type": "string",
                                   "example": "lot",
                                   "enum": [
-                                    "lot"
+                                    "lot",
+                                    "item"
                                   ]
                                 },
                                 "relatedItem": {
@@ -159,7 +159,8 @@
                                         "type": [
                                           "number",
                                           "integer",
-                                          "string"
+                                          "string",
+                                          "boolean"
                                         ]
                                       },
                                       "unit": {
@@ -202,8 +203,7 @@
                                       "id",
                                       "measure",
                                       "unit",
-                                      "note",
-                                      "relatedRequirementId"
+                                      "note"
                                     ]
                                   }
                                 }
@@ -315,12 +315,14 @@
                                       "requirements"
                                     ]
                                   }
+                                },
+                                "relatedItem": {
+                                  "type": "string"
                                 }
                               },
                               "required": [
                                 "id",
                                 "title",
-                                "relatesTo",
                                 "requirementGroups"
                               ]
                             }
@@ -456,9 +458,6 @@
                           },
                           "electronicAuctions": {
                             "type": "object",
-                            "required": [
-                              "details"
-                            ],
                             "properties": {
                               "details": {
                                 "type": "array",
@@ -505,6 +504,24 @@
                                   ]
                                 }
                               }
+                            },
+                            "required": [
+                              "details"
+                            ]
+                          },
+                          "procurementMethodModalities": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "requiresElectronicCatalogue"
+                              ]
+                            }
+                          },
+                          "conversions": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "../models/conversion.v1.json"
                             }
                           }
                         }
