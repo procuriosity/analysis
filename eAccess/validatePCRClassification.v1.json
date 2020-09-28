@@ -1,19 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "validateTenderPeriod",
-    "version": "1.01",
-    "description": ""
+    "title": "validatePCRClassification",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9061"
+      "url": "http://{host}:9031"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Validate Tender Period",
+        "summary": "Validate PCR Classification",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -27,6 +26,7 @@
             }
           }
         },
+        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -43,10 +43,6 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "date",
-                          "country",
-                          "pmd",
-                          "operationType",
                           "tender"
                         ],
                         "properties": {
@@ -56,43 +52,20 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "date": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "country": {
-                            "type": "string",
-                            "example": "MD"
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "GPA",
-                              "TEST_GPA"
-                            ]
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "startSecondStage",
-                              "createPcr"
-                            ]
-                          },
                           "tender": {
                             "type": "object",
                             "required": [
-                              "tenderPeriod"
+                              "classification"
                             ],
                             "properties": {
-                              "tenderPeriod": {
+                              "classification": {
                                 "type": "object",
                                 "required": [
-                                  "endDate"
+                                  "id"
                                 ],
                                 "properties": {
-                                  "endDate": {
-                                    "type": "string",
-                                    "format": "date-time"
+                                  "id": {
+                                    "type": "string"
                                   }
                                 }
                               }
@@ -104,17 +77,6 @@
                     "required": [
                       "params"
                     ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "action": {
-                        "type": "string",
-                        "enum": [
-                          "validateTenderPeriod"
-                        ]
-                      }
-                    }
                   }
                 ]
               }
