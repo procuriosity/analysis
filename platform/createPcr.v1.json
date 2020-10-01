@@ -557,7 +557,60 @@
                           "conversions": {
                             "type": "array",
                             "items": {
-                              "$ref": "../models/conversion.v1.json"
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "rationale": {
+                                  "type": "string"
+                                },
+                                "relatesTo": {
+                                  "type": "string",
+                                  "enum": [
+                                    "requirement"
+                                  ]
+                                },
+                                "relatedItem": {
+                                  "type": "string"
+                                },
+                                "coefficients": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "value": {
+                                        "type": [
+                                          "number",
+                                          "integer",
+                                          "boolean"
+                                        ]
+                                      },
+                                      "coefficient": {
+                                        "type": "number"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "value",
+                                      "coefficient"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "rationale",
+                                "relatesTo",
+                                "relatedItem",
+                                "coefficients"
+                              ]
                             }
                           }
                         }
