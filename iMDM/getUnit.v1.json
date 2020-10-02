@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getClassification",
+    "title": "getUnit",
     "version": "1.0"
   },
   "servers": [
@@ -10,9 +10,20 @@
     }
   ],
   "paths": {
-    "/classification/{classificationId}": {
+    "/unit/{unitId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "unitId",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор unit"
+        }
+      ],
       "get": {
-        "summary": "GET Classification",
+        "summary": "GET Unit",
         "tags": [],
         "responses": {
           "200": {
@@ -26,18 +37,13 @@
                       "type": "object",
                       "required": [
                         "id",
-                        "scheme",
-                        "description"
+                        "name"
                       ],
                       "properties": {
                         "id": {
                           "type": "string"
                         },
-                        "scheme": {
-                          "type": "string",
-                          "example": "CPV"
-                        },
-                        "description": {
+                        "name": {
                           "type": "string"
                         }
                       }
@@ -84,7 +90,8 @@
             }
           }
         },
-        "operationId": "get-classification",
+        "operationId": "get-classification-classificationId",
+        "description": "",
         "parameters": [
           {
             "schema": {
@@ -96,18 +103,7 @@
             "required": true
           }
         ]
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "classificationId",
-          "in": "path",
-          "required": true,
-          "description": "идентификатор classification"
-        }
-      ]
+      }
     }
   },
   "components": {
