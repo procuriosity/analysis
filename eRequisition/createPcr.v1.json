@@ -593,7 +593,8 @@
                           "cpid",
                           "ocid",
                           "tender",
-                          "date"
+                          "date",
+                          "stateFE"
                         ],
                         "properties": {
                           "cpid": {
@@ -974,7 +975,8 @@
                                   },
                                   "required": [
                                     "id",
-                                    "title"
+                                    "title",
+                                    "requirementGroups"
                                   ]
                                 }
                               },
@@ -1100,6 +1102,14 @@
                           "date": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "stateFE": {
+                            "type": "string",
+                            "enum": [
+                              "submission",
+                              "evaluation"
+                            ],
+                            "description": "status Details of FE"
                           }
                         }
                       }
@@ -1107,6 +1117,17 @@
                     "required": [
                       "params"
                     ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "createPcr"
+                        ]
+                      }
+                    }
                   }
                 ]
               }
