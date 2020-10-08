@@ -32,7 +32,8 @@
                           "required": [
                             "ocid",
                             "token",
-                            "tender"
+                            "tender",
+                            "relatedProcesses"
                           ],
                           "properties": {
                             "ocid": {
@@ -562,6 +563,48 @@
                                   }
                                 }
                               }
+                            },
+                            "relatedProcesses": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "идентификатор relatedProcess"
+                                  },
+                                  "relationship": {
+                                    "type": "array",
+                                    "description": "тип связи",
+                                    "items": {
+                                      "type": "string",
+                                      "enum": [
+                                        "parent"
+                                      ]
+                                    }
+                                  },
+                                  "scheme": {
+                                    "type": "string",
+                                    "example": "ocid"
+                                  },
+                                  "identifier": {
+                                    "type": "string",
+                                    "description": "ocid MS record, на который создан relatedProcess"
+                                  },
+                                  "uri": {
+                                    "type": "string",
+                                    "description": "путь к MS, на который создан relatedProcess"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "relationship",
+                                  "scheme",
+                                  "identifier",
+                                  "uri"
+                                ]
+                              }
                             }
                           }
                         }
@@ -594,7 +637,8 @@
                           "ocid",
                           "tender",
                           "date",
-                          "stateFE"
+                          "stateFE",
+                          "relatedOcid"
                         ],
                         "properties": {
                           "cpid": {
@@ -1110,6 +1154,9 @@
                               "evaluation"
                             ],
                             "description": "status Details of FE"
+                          },
+                          "relatedOcid": {
+                            "$ref": "../models/ocid.v1.json"
                           }
                         }
                       }
