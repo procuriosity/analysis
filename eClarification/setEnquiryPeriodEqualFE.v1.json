@@ -1,18 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "analizeQualificationsForInvitation.v1",
-    "version": "1.02"
+    "title": "setEnquiryPeriodEqualFE",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9091"
+      "url": "http://{host}:9071"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Analyze Qualifications For Invitation",
+        "summary": "Set Enquiry Period Equal FE",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -29,45 +29,41 @@
                       "properties": {
                         "result": {
                           "type": "object",
+                          "required": [
+                            "tender"
+                          ],
                           "properties": {
-                            "qualifications": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "status": {
-                                    "type": "string",
-                                    "enum": [
-                                      "pending"
-                                    ]
-                                  },
-                                  "statusDetails": {
-                                    "type": "string",
-                                    "enum": [
-                                      "active"
-                                    ]
-                                  },
-                                  "relatedSubmission": {
-                                    "type": "string"
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "enquiryPeriod"
+                              ],
+                              "properties": {
+                                "enquiryPeriod": {
+                                  "type": "object",
+                                  "required": [
+                                    "startDate",
+                                    "endDate"
+                                  ],
+                                  "properties": {
+                                    "startDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "endDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
                                   }
-                                },
-                                "required": [
-                                  "id",
-                                  "status",
-                                  "statusDetails",
-                                  "relatedSubmission"
-                                ]
+                                }
                               }
                             }
-                          },
-                          "required": [
-                            "qualifications"
-                          ]
+                          }
                         }
-                      }
+                      },
+                      "required": [
+                        "result"
+                      ]
                     }
                   ]
                 }
@@ -92,9 +88,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "pmd",
-                          "country",
-                          "operationType"
+                          "ocidFE",
+                          "date"
                         ],
                         "properties": {
                           "cpid": {
@@ -103,24 +98,12 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "GPA",
-                              "TEST_GPA",
-                              "RT",
-                              "TEST_RT"
-                            ]
+                          "ocidFE": {
+                            "$ref": "../models/ocid.v1.json"
                           },
-                          "country": {
+                          "date": {
                             "type": "string",
-                            "example": "MD"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "qualificationProtocol"
-                            ]
+                            "format": "date-time"
                           }
                         }
                       }
@@ -135,7 +118,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "analyzeQualificationsForInvitation"
+                          "setEnquiryPeriodEqualFE"
                         ]
                       }
                     }
