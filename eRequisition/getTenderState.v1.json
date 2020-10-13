@@ -1,18 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkEqualPNAndAPCurrency",
+    "title": "getTenderState",
     "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9271"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Equal PN and AP Currency",
+        "summary": "Get Tender State",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -20,12 +20,46 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "status",
+                            "statusDetails"
+                          ],
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "active"
+                              ]
+                            },
+                            "statusDetails": {
+                              "type": "string",
+                              "enum": [
+                                "tendering"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
                 }
               }
             }
           }
         },
+        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -41,21 +75,13 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid",
-                          "cpidAP",
-                          "ocidAP"
+                          "ocid"
                         ],
                         "properties": {
                           "cpid": {
                             "$ref": "../models/cpid.v1.json"
                           },
                           "ocid": {
-                            "$ref": "../models/ocid.v1.json"
-                          },
-                          "cpidAP": {
-                            "$ref": "../models/cpid.v1.json"
-                          },
-                          "ocidAP": {
                             "$ref": "../models/ocid.v1.json"
                           }
                         }
@@ -71,7 +97,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkEqualPNAndAPCurrency"
+                          "getTenderState"
                         ]
                       }
                     }
