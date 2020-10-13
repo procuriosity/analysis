@@ -1,8 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkEqualPNAndAPCurrency",
-    "version": "1.0"
+    "title": "checkEqualityCurrencies",
+    "version": "1.01",
+    "description": ""
   },
   "servers": [
     {
@@ -12,7 +13,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Equal PN and AP Currency",
+        "summary": "Check Equality Currencies",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -42,8 +43,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "cpidAP",
-                          "ocidAP"
+                          "relatedCpid",
+                          "relatedOcid"
                         ],
                         "properties": {
                           "cpid": {
@@ -52,10 +53,10 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "cpidAP": {
+                          "relatedCpid": {
                             "$ref": "../models/cpid.v1.json"
                           },
-                          "ocidAP": {
+                          "relatedOcid": {
                             "$ref": "../models/ocid.v1.json"
                           }
                         }
@@ -71,7 +72,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkEqualPNAndAPCurrency"
+                          "checkEqualityCurrencies"
                         ]
                       }
                     }
