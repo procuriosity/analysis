@@ -86,6 +86,7 @@
                         "type": "object",
                         "required": [
                           "id",
+                          "tenderers",
                           "relatedLots"
                         ],
                         "properties": {
@@ -193,23 +194,54 @@
                                 "persones": {
                                   "type": "array",
                                   "items": {
-                                    "$ref": "../models/personSupplier.v1.json"
+                                    "$ref": "../models/person_request.v1.json"
                                   }
                                 },
                                 "details": {
                                   "type": "object",
+                                  "required": [
+                                    "scale"
+                                  ],
                                   "properties": {
                                     "typeOfSupplier": {
-                                      "type": "string"
+                                      "type": "string",
+                                      "enum": [
+                                        "company",
+                                        "individual"
+                                      ]
                                     },
                                     "mainEconomicActivities": {
                                       "type": "array",
                                       "items": {
-                                        "type": "string"
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "uri": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "scheme",
+                                          "description"
+                                        ]
                                       }
                                     },
                                     "scale": {
-                                      "type": "string"
+                                      "type": "string",
+                                      "enum": [
+                                        "micro",
+                                        "sme",
+                                        "large"
+                                      ]
                                     },
                                     "permits": {
                                       "type": "array",
@@ -302,7 +334,8 @@
                               "required": [
                                 "name",
                                 "identifier",
-                                "contactPoint"
+                                "contactPoint",
+                                "details"
                               ]
                             }
                           },

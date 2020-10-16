@@ -1,0 +1,95 @@
+{
+  "title": "person_request",
+  "allOf": [
+    {
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "identifier": {
+          "$ref": "./identifierPerson.v1.json"
+        },
+        "businessFunctions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "authority",
+                  "contactPoint"
+                ]
+              },
+              "jobTitle": {
+                "type": "string"
+              },
+              "period": {
+                "type": "object",
+                "required": [
+                  "startDate"
+                ],
+                "properties": {
+                  "startDate": {
+                    "type": "string"
+                  }
+                }
+              },
+              "documents": {
+                "type": "array",
+                "items": {
+                  "$ref": "./documents_object.v1.json"
+                }
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "jobTitle",
+              "period"
+            ]
+          }
+        }
+      },
+      "required": [
+        "title",
+        "name",
+        "identifier",
+        "businessFunctions"
+      ]
+    },
+    {
+      "properties": {
+        "businessFunctions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "documents": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "documentType": {
+                      "type": "string",
+                      "enum": [
+                        "regulatoryDocument"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "type": "object"
+}
