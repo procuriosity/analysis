@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "outsourcingPN",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -12,7 +12,7 @@
   "paths": {
     "/do/outsourcing/{cpid}/{ocid}": {
       "post": {
-        "summary": "",
+        "summary": "Outsorcing PN",
         "operationId": "post-do",
         "responses": {
           "202": {
@@ -25,9 +25,9 @@
               "type": "string"
             },
             "in": "query",
-            "name": "FA",
+            "name": "cpidAP",
             "required": true,
-            "description": "cpid FA"
+            "description": "cpid AP которому передается на аутсорсинг PN"
           },
           {
             "schema": {
@@ -64,8 +64,18 @@
             "name": "Content-Type",
             "required": true,
             "description": "тип данных в теле запроса"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ocidAP",
+            "description": "ocid AP которому передается на аутсорсинг PN",
+            "required": true
           }
-        ]
+        ],
+        "description": ""
       },
       "parameters": [
         {
