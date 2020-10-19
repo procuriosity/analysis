@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "findItemsByLot",
+    "title": "findItemsByLotIds",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Find Items By Lot",
+        "summary": "Find Items By Lot Ids",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -39,7 +39,61 @@
                                 "items": {
                                   "type": "array",
                                   "items": {
-                                    "type": "string"
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "internalId": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "quantity": {
+                                        "type": "number"
+                                      },
+                                      "classification": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "scheme"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string",
+                                            "enum": [
+                                              "CPV"
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "unit": {
+                                        "type": "object",
+                                        "required": [
+                                          "id"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "relatedLot": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "description",
+                                      "quantity",
+                                      "classification",
+                                      "unit",
+                                      "relatedLot"
+                                    ]
                                   }
                                 }
                               }
@@ -74,7 +128,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "bid"
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -83,26 +137,23 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "bid": {
+                          "tender": {
                             "type": "object",
                             "required": [
-                              "details"
+                              "lots"
                             ],
                             "properties": {
-                              "details": {
+                              "lots": {
                                 "type": "array",
                                 "items": {
                                   "type": "object",
                                   "properties": {
-                                    "relatedLots": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "string"
-                                      }
+                                    "id": {
+                                      "type": "string"
                                     }
                                   },
                                   "required": [
-                                    "relatedLots"
+                                    "id"
                                   ]
                                 }
                               }
@@ -121,7 +172,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "findItemsByLot"
+                          "findItemsByLotIds"
                         ]
                       }
                     }
