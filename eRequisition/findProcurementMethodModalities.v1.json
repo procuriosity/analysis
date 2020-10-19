@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Find Electronic Catalog Sign",
+        "summary": "Find Procurement Method Modalities",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -30,18 +30,27 @@
                         "result": {
                           "type": "object",
                           "properties": {
-                            "procurementMethodModalities": {
-                              "type": "array",
-                              "items": {
-                                "type": "string",
-                                "enum": [
-                                  "requiresElectronicCatalogue"
-                                ]
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "procurementMethodModalities"
+                              ],
+                              "properties": {
+                                "procurementMethodModalities": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "enum": [
+                                      "requiresElectronicCatalogue",
+                                      "electronicAuction"
+                                    ]
+                                  }
+                                }
                               }
                             }
                           },
                           "required": [
-                            "procurementMethodModalities"
+                            "tender"
                           ]
                         }
                       }
@@ -56,8 +65,56 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {}
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "procurementMethodModalities"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "procurementMethodModalities": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "requiresElectronicCatalogue",
+                                "electronicAuction"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "findProcurementMethodModalities"
+                        ]
+                      }
+                    }
+                  }
+                ]
               }
             },
             "application/xml": {
