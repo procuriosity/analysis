@@ -42,7 +42,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "tender"
+                          "tender",
+                          "bids"
                         ],
                         "properties": {
                           "cpid": {
@@ -54,8 +55,7 @@
                           "tender": {
                             "type": "object",
                             "required": [
-                              "requirementResponses",
-                              "lots"
+                              "requirementResponses"
                             ],
                             "properties": {
                               "requirementResponses": {
@@ -109,18 +109,33 @@
                                     "requirement"
                                   ]
                                 }
-                              },
-                              "lots": {
+                              }
+                            }
+                          },
+                          "bids": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
                                 "type": "array",
                                 "items": {
                                   "type": "object",
                                   "properties": {
                                     "id": {
                                       "type": "string"
+                                    },
+                                    "relatedLots": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
                                     }
                                   },
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "relatedLots"
                                   ]
                                 }
                               }
