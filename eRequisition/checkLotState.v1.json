@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "validateRequirementResponses",
+    "title": "checkLotState",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Validate Requirement Responses",
+        "summary": "Check Lot State",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -42,6 +42,9 @@
                         "required": [
                           "cpid",
                           "ocid",
+                          "pmd",
+                          "country",
+                          "operationType",
                           "tender"
                         ],
                         "properties": {
@@ -51,65 +54,30 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "OF",
+                              "TEST_OF",
+                              "CF",
+                              "TEST_CF"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "submitBidInPcr"
+                            ]
+                          },
                           "tender": {
                             "type": "object",
                             "required": [
-                              "requirementResponses",
                               "lots"
                             ],
                             "properties": {
-                              "requirementResponses": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "value": {
-                                      "type": [
-                                        "string",
-                                        "number",
-                                        "integer",
-                                        "boolean"
-                                      ]
-                                    },
-                                    "requirement": {
-                                      "type": "object",
-                                      "required": [
-                                        "id"
-                                      ],
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    },
-                                    "period": {
-                                      "type": "object",
-                                      "properties": {
-                                        "startDate": {
-                                          "type": "string",
-                                          "format": "date-time"
-                                        },
-                                        "endDate": {
-                                          "type": "string",
-                                          "format": "date-time"
-                                        }
-                                      },
-                                      "required": [
-                                        "startDate",
-                                        "endDate"
-                                      ]
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "value",
-                                    "requirement"
-                                  ]
-                                }
-                              },
                               "lots": {
                                 "type": "array",
                                 "items": {
@@ -139,7 +107,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "validateRequirementResponses"
+                          "checkLotState"
                         ]
                       }
                     }
