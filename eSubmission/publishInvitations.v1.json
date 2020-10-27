@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "publishInvitations",
-    "version": "1.01"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -109,11 +109,19 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "cpid"
+                          "cpid",
+                          "operationType"
                         ],
                         "properties": {
                           "cpid": {
                             "$ref": "../models/cpid.v1.json"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "startSecondStage",
+                              "createPcr"
+                            ]
                           }
                         }
                       }
