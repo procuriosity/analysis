@@ -2,7 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateBidData",
-    "version": "1.0"
+    "version": "1.01",
+    "description": ""
   },
   "servers": [
     {
@@ -16,7 +17,14 @@
         "operationId": "post-command",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
           }
         },
         "description": "",
@@ -371,10 +379,22 @@
                                   "properties": {
                                     "id": {
                                       "type": "string"
+                                    },
+                                    "unit": {
+                                      "type": "object",
+                                      "required": [
+                                        "id"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        }
+                                      }
                                     }
                                   },
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "unit"
                                   ]
                                 }
                               }
