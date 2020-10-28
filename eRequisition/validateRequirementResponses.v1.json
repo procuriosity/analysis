@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateRequirementResponses",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -53,59 +53,13 @@
                           },
                           "tender": {
                             "type": "object",
-                            "required": [
-                              "requirementResponses"
-                            ],
                             "properties": {
-                              "requirementResponses": {
+                              "procurementMethodModalities": {
                                 "type": "array",
                                 "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "value": {
-                                      "type": [
-                                        "string",
-                                        "number",
-                                        "integer",
-                                        "boolean"
-                                      ]
-                                    },
-                                    "requirement": {
-                                      "type": "object",
-                                      "required": [
-                                        "id"
-                                      ],
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    },
-                                    "period": {
-                                      "type": "object",
-                                      "properties": {
-                                        "startDate": {
-                                          "type": "string",
-                                          "format": "date-time"
-                                        },
-                                        "endDate": {
-                                          "type": "string",
-                                          "format": "date-time"
-                                        }
-                                      },
-                                      "required": [
-                                        "startDate",
-                                        "endDate"
-                                      ]
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "value",
-                                    "requirement"
+                                  "type": "string",
+                                  "enum": [
+                                    "requiresElectronicCatalogue"
                                   ]
                                 }
                               }
@@ -129,6 +83,70 @@
                                       "type": "array",
                                       "items": {
                                         "type": "string"
+                                      }
+                                    },
+                                    "items": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id"
+                                        ]
+                                      }
+                                    },
+                                    "requirementResponses": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "value": {
+                                            "type": [
+                                              "string",
+                                              "number",
+                                              "integer",
+                                              "boolean"
+                                            ]
+                                          },
+                                          "requirement": {
+                                            "type": "object",
+                                            "required": [
+                                              "id"
+                                            ],
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "period": {
+                                            "type": "object",
+                                            "properties": {
+                                              "startDate": {
+                                                "type": "string"
+                                              },
+                                              "endDate": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "startDate",
+                                              "endDate"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "value",
+                                          "requirement"
+                                        ]
                                       }
                                     }
                                   },
