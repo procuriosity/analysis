@@ -1,0 +1,104 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "getAPTitleAndDescription",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Get AP Title and Description",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "version": {
+                      "type": "string",
+                      "example": "0.0.1"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "title",
+                        "description"
+                      ],
+                      "properties": {
+                        "title": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "version",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "command": {
+                    "type": "string",
+                    "enum": [
+                      "getAPTitleAndDescription"
+                    ]
+                  },
+                  "context": {
+                    "$ref": "../models/oldRequestContext.v1.json"
+                  },
+                  "data": {
+                    "type": "object"
+                  },
+                  "version": {
+                    "type": "string",
+                    "example": "0.0.1"
+                  }
+                },
+                "required": [
+                  "id",
+                  "command",
+                  "context",
+                  "data",
+                  "version"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
