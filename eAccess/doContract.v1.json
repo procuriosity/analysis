@@ -1,0 +1,174 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "doContract",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Do Contract",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "contracts"
+                          ],
+                          "properties": {
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "cancelled",
+                                      "pending"
+                                    ]
+                                  },
+                                  "statusDetails": {
+                                    "type": "string",
+                                    "enum": [
+                                      "contractProject"
+                                    ]
+                                  },
+                                  "date": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "isFrameworkOrDynamic": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "status",
+                                  "statusDetails",
+                                  "date",
+                                  "isFrameworkOrDynamic"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "doContract"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "operationType",
+                          "pmd",
+                          "country",
+                          "date"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "qualificationProtocol",
+                              "withdrawQualificationProtocol"
+                            ]
+                          },
+                          "pmd": {
+                            "type": "string"
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  }
+                ]
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
