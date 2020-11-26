@@ -46,7 +46,8 @@
                           "ocid",
                           "pmd",
                           "country",
-                          "operationType"
+                          "operationType",
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -67,6 +68,29 @@
                             "enum": [
                               "createAward"
                             ]
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "lots"
+                            ],
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }
