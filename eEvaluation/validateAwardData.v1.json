@@ -147,7 +147,7 @@
                                       "persones": {
                                         "type": "array",
                                         "items": {
-                                          "$ref": "../models/person_request.v1.json"
+                                          "$ref": "../models/person.v1.json"
                                         }
                                       },
                                       "details": {
@@ -212,6 +212,11 @@
                                                 },
                                                 "permitDetails": {
                                                   "type": "object",
+                                                  "required": [
+                                                    "issuedBy",
+                                                    "issuedThought",
+                                                    "validityPeriod"
+                                                  ],
                                                   "properties": {
                                                     "issuedBy": {
                                                       "type": "object",
@@ -259,17 +264,13 @@
                                                         }
                                                       }
                                                     }
-                                                  },
-                                                  "required": [
-                                                    "issuedBy",
-                                                    "issuedThought",
-                                                    "validityPeriod"
-                                                  ]
+                                                  }
                                                 }
                                               },
                                               "required": [
                                                 "id",
-                                                "scheme"
+                                                "scheme",
+                                                "permitDetails"
                                               ]
                                             }
                                           },
@@ -354,46 +355,6 @@
                     "required": [
                       "params"
                     ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "params": {
-                        "type": "object",
-                        "properties": {
-                          "awards": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "suppliers": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "persones": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "object",
-                                          "properties": {
-                                            "id": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "id"
-                                          ]
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
                   },
                   {
                     "type": "object",
