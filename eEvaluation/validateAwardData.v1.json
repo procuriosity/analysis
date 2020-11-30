@@ -40,6 +40,13 @@
                     "properties": {
                       "params": {
                         "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "tender",
+                          "awards",
+                          "operationType"
+                        ],
                         "properties": {
                           "cpid": {
                             "$ref": "../models/cpid.v1.json"
@@ -333,16 +340,20 @@
                                 "suppliers"
                               ]
                             }
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "createAward",
+                              "updateAward"
+                            ]
                           }
-                        },
-                        "required": [
-                          "cpid",
-                          "ocid",
-                          "tender",
-                          "awards"
-                        ]
+                        }
                       }
-                    }
+                    },
+                    "required": [
+                      "params"
+                    ]
                   },
                   {
                     "type": "object",
