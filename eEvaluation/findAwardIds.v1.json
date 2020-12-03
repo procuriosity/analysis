@@ -84,9 +84,6 @@
                           },
                           "tender": {
                             "type": "object",
-                            "required": [
-                              "lots"
-                            ],
                             "properties": {
                               "lots": {
                                 "type": "array",
@@ -102,6 +99,65 @@
                                   ]
                                 }
                               }
+                            },
+                            "required": [
+                              "lots"
+                            ]
+                          },
+                          "states": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "properties": {
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "pending"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "status"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "statusDetails": {
+                                      "type": "string",
+                                      "enum": [
+                                        "active",
+                                        "unsuccessful"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "statusDetails"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "ststus": {
+                                      "type": "string",
+                                      "enum": [
+                                        "pending"
+                                      ]
+                                    },
+                                    "statusDetails": {
+                                      "type": "string",
+                                      "enum": [
+                                        "active",
+                                        "unsuccessful"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "ststus",
+                                    "statusDetails"
+                                  ]
+                                }
+                              ],
+                              "type": "object"
                             }
                           }
                         }
