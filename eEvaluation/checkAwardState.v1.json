@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "checkAwardsState",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -44,8 +44,7 @@
                           "ocid",
                           "pmd",
                           "country",
-                          "operationType",
-                          "awards"
+                          "operationType"
                         ],
                         "properties": {
                           "cpid": {
@@ -75,7 +74,8 @@
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "updateAward"
+                              "updateAward",
+                              "pcrProtocol"
                             ]
                           },
                           "awards": {
@@ -91,6 +91,28 @@
                                 "id"
                               ]
                             }
+                          },
+                          "tender": {
+                            "type": "object",
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "lots"
+                            ]
                           }
                         }
                       }
