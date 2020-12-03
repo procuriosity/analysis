@@ -1,0 +1,316 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "createPacs",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9151"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Create Pacs",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "token"
+                          ],
+                          "properties": {
+                            "token": {
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "pending"
+                                    ]
+                                  },
+                                  "statusDetails": {
+                                    "type": "string",
+                                    "enum": [
+                                      "contractProject",
+                                      "unsuccessful"
+                                    ]
+                                  },
+                                  "date": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "relatedLots": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "items": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "internalId": {
+                                          "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "quantity": {
+                                          "type": "number"
+                                        },
+                                        "classification": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "scheme",
+                                            "description"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string",
+                                              "enum": [
+                                                "CPV"
+                                              ]
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "unit": {
+                                          "type": "object",
+                                          "required": [
+                                            "name"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "relatedLot": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "description",
+                                        "quantity",
+                                        "classification",
+                                        "unit",
+                                        "relatedLot"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "status",
+                                  "statusDetails",
+                                  "date",
+                                  "relatedLots"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "tender",
+                          "date",
+                          "owner"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "lots"
+                            ],
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              },
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "internalId": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "type": "number"
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme",
+                                        "description"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string",
+                                          "enum": [
+                                            "CPV"
+                                          ]
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "unit": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "name"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "relatedLot": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "description",
+                                    "quantity",
+                                    "classification",
+                                    "unit",
+                                    "relatedLot"
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "owner": {
+                            "type": "string",
+                            "format": "uuid"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "createPACs"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
