@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "findAwardIds",
+    "title": "findAwardsForProtocol",
     "version": "1.0",
     "description": ""
   },
@@ -13,7 +13,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Find Award Ids",
+        "summary": "Find Awards For Protocol",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -38,10 +38,29 @@
                                 "properties": {
                                   "id": {
                                     "type": "string"
+                                  },
+                                  "suppliers": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "name"
+                                      ]
+                                    }
                                   }
                                 },
                                 "required": [
-                                  "id"
+                                  "id",
+                                  "suppliers"
                                 ]
                               }
                             }
@@ -73,7 +92,8 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -84,6 +104,9 @@
                           },
                           "tender": {
                             "type": "object",
+                            "required": [
+                              "lots"
+                            ],
                             "properties": {
                               "lots": {
                                 "type": "array",
@@ -99,65 +122,6 @@
                                   ]
                                 }
                               }
-                            },
-                            "required": [
-                              "lots"
-                            ]
-                          },
-                          "states": {
-                            "type": "array",
-                            "items": {
-                              "oneOf": [
-                                {
-                                  "properties": {
-                                    "status": {
-                                      "type": "string",
-                                      "enum": [
-                                        "pending"
-                                      ]
-                                    }
-                                  },
-                                  "required": [
-                                    "status"
-                                  ]
-                                },
-                                {
-                                  "properties": {
-                                    "statusDetails": {
-                                      "type": "string",
-                                      "enum": [
-                                        "active",
-                                        "unsuccessful"
-                                      ]
-                                    }
-                                  },
-                                  "required": [
-                                    "statusDetails"
-                                  ]
-                                },
-                                {
-                                  "properties": {
-                                    "ststus": {
-                                      "type": "string",
-                                      "enum": [
-                                        "pending"
-                                      ]
-                                    },
-                                    "statusDetails": {
-                                      "type": "string",
-                                      "enum": [
-                                        "active",
-                                        "unsuccessful"
-                                      ]
-                                    }
-                                  },
-                                  "required": [
-                                    "ststus",
-                                    "statusDetails"
-                                  ]
-                                }
-                              ],
-                              "type": "object"
                             }
                           }
                         }
@@ -173,7 +137,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "findAwardIds"
+                          "findAwardsForProtocol"
                         ]
                       }
                     }
