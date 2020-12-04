@@ -29,14 +29,7 @@
                       "properties": {
                         "result": {
                           "type": "object",
-                          "required": [
-                            "token"
-                          ],
                           "properties": {
-                            "token": {
-                              "type": "string",
-                              "format": "uuid"
-                            },
                             "contracts": {
                               "type": "array",
                               "items": {
@@ -135,6 +128,24 @@
                                         "relatedLot"
                                       ]
                                     }
+                                  },
+                                  "suppliers": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "name"
+                                      ]
+                                    }
                                   }
                                 },
                                 "required": [
@@ -176,8 +187,7 @@
                           "cpid",
                           "ocid",
                           "tender",
-                          "date",
-                          "owner"
+                          "date"
                         ],
                         "properties": {
                           "cpid": {
@@ -280,10 +290,6 @@
                             "type": "string",
                             "format": "date-time"
                           },
-                          "owner": {
-                            "type": "string",
-                            "format": "uuid"
-                          },
                           "awards": {
                             "type": "array",
                             "items": {
@@ -291,10 +297,29 @@
                               "properties": {
                                 "id": {
                                   "type": "string"
+                                },
+                                "suppliers": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "name"
+                                    ]
+                                  }
                                 }
                               },
                               "required": [
-                                "id"
+                                "id",
+                                "suppliers"
                               ]
                             }
                           }
