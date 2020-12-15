@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "devisionLot",
+    "title": "divideLot",
     "version": "1.0"
   },
   "servers": [
@@ -10,7 +10,7 @@
     }
   ],
   "paths": {
-    "/do/divide/lot/{cpid}/{ocid}/{lotId}": {
+    "/do/division/lot/{cpid}/{ocid}/{lotId}": {
       "parameters": [
         {
           "schema": {
@@ -41,7 +41,7 @@
         }
       ],
       "post": {
-        "summary": "Division Lot",
+        "summary": "Divide Lot",
         "operationId": "post-users-userId",
         "responses": {
           "200": {
@@ -150,10 +150,10 @@
                                   }
                                 },
                                 "placeOfPerformance": {
+                                  "type": "object",
                                   "required": [
                                     "address"
                                   ],
-                                  "type": "object",
                                   "properties": {
                                     "address": {
                                       "$ref": "../models/addressRequest.v1.json"
@@ -218,7 +218,7 @@
                                   }
                                 },
                                 "quantity": {
-                                  "type": "integer"
+                                  "type": "number"
                                 },
                                 "unit": {
                                   "type": "object",
@@ -240,62 +240,11 @@
                               },
                               "required": [
                                 "id",
+                                "classification",
                                 "quantity",
                                 "unit",
                                 "description",
                                 "relatedLot"
-                              ]
-                            }
-                          },
-                          "documents": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "title": {
-                                  "type": "string"
-                                },
-                                "description": {
-                                  "type": "string"
-                                },
-                                "relatedLots": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "string"
-                                  }
-                                },
-                                "documentType": {
-                                  "type": "string",
-                                  "enum": [
-                                    "tenderNotice",
-                                    "biddingDocuments",
-                                    "technicalSpecifications",
-                                    "evaluationCriteria",
-                                    "clarifications",
-                                    "eligibilityCriteria",
-                                    "riskProvisions",
-                                    "billOfQuantity",
-                                    "conflictOfInterest",
-                                    "procurementPlan",
-                                    "contractDraft",
-                                    "complaints",
-                                    "illustration",
-                                    "cancellationDetails",
-                                    "evaluationReports",
-                                    "shortlistedFirms",
-                                    "contractArrangements",
-                                    "contractGuarantees"
-                                  ]
-                                }
-                              },
-                              "required": [
-                                "id",
-                                "title",
-                                "relatedLots",
-                                "documentType"
                               ]
                             }
                           }
