@@ -1,0 +1,235 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "findCriteriaAndTargetsForPacs",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9271"
+    }
+  ],
+  "paths": {
+    "/commnand": {
+      "post": {
+        "summary": "Find Criteria And Targets For PACs",
+        "operationId": "post-commnand",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "properties": {
+                                "criteria": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "title": {
+                                        "type": "string"
+                                      },
+                                      "relatesTo": {
+                                        "type": "string",
+                                        "enum": [
+                                          "lot",
+                                          "item"
+                                        ]
+                                      },
+                                      "relatedItem": {
+                                        "type": "string"
+                                      },
+                                      "requirementGroups": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "requirements": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "title": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "id",
+                                                  "title"
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "requirements"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "title",
+                                      "requirementGroups"
+                                    ]
+                                  }
+                                },
+                                "targets": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "observations": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "unit": {
+                                              "type": "object",
+                                              "required": [
+                                                "id",
+                                                "name"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "name": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "relatedRequirementId": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "unit"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "observations"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "lots"
+                            ],
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "findCriteriaAndTargetsForPacs"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "description": ""
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

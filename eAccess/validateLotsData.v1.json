@@ -1,0 +1,295 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "validateLotsData",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031"
+    }
+  ],
+  "paths": {
+    "command": {
+      "parameters": [],
+      "post": {
+        "summary": "Validate Lots Data",
+        "operationId": "post-users-userId",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "lots",
+                              "items"
+                            ],
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "internalId": {
+                                      "type": "string"
+                                    },
+                                    "title": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "object",
+                                      "required": [
+                                        "amount",
+                                        "currency"
+                                      ],
+                                      "properties": {
+                                        "amount": {
+                                          "type": "number"
+                                        },
+                                        "currency": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "contractPeriod": {
+                                      "type": "object",
+                                      "required": [
+                                        "startDate",
+                                        "endDate"
+                                      ],
+                                      "properties": {
+                                        "startDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        },
+                                        "endDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        }
+                                      }
+                                    },
+                                    "placeOfPerformance": {
+                                      "type": "object",
+                                      "required": [
+                                        "address"
+                                      ],
+                                      "properties": {
+                                        "address": {
+                                          "$ref": "../models/addressRequest.v1.json"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "title",
+                                    "value",
+                                    "contractPeriod",
+                                    "placeOfPerformance"
+                                  ]
+                                }
+                              },
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "internalId": {
+                                      "type": "string"
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "additionalClassifications": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "scheme"
+                                        ]
+                                      }
+                                    },
+                                    "quantity": {
+                                      "type": "number"
+                                    },
+                                    "unit": {
+                                      "type": "object",
+                                      "required": [
+                                        "id"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "relatedLot": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "classification",
+                                    "quantity",
+                                    "unit",
+                                    "description",
+                                    "relatedLot"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validateLotsData"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "title": "User",
+        "type": "object",
+        "description": "",
+        "x-examples": {
+          "Alice Smith": {
+            "id": 142,
+            "firstName": "Alice",
+            "lastName": "Smith",
+            "email": "alice.smith@gmail.com",
+            "dateOfBirth": "1997-10-31",
+            "emailVerified": true,
+            "signUpDate": "2019-08-24"
+          }
+        },
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the given user."
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date",
+            "example": "1997-10-31"
+          },
+          "emailVerified": {
+            "type": "boolean",
+            "description": "Set to true if the user's email has been verified."
+          },
+          "createDate": {
+            "type": "string",
+            "format": "date",
+            "description": "The date that the user was created."
+          }
+        },
+        "required": [
+          "id",
+          "firstName",
+          "lastName",
+          "email",
+          "emailVerified"
+        ]
+      }
+    }
+  }
+}
