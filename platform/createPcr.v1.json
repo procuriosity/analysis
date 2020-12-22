@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createPcr",
-    "version": "1.01"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -240,7 +240,8 @@
                                   "type": "string",
                                   "enum": [
                                     "lot",
-                                    "item"
+                                    "item",
+                                    "tender"
                                   ]
                                 },
                                 "requirementGroups": {
@@ -310,6 +311,12 @@
                                                 "number",
                                                 "integer"
                                               ]
+                                            },
+                                            "eligibleEvidences": {
+                                              "type": "array",
+                                              "items": {
+                                                "$ref": "../models/eligibleEvidences.v1.json"
+                                              }
                                             }
                                           },
                                           "required": [
@@ -328,12 +335,29 @@
                                 },
                                 "relatedItem": {
                                   "type": "string"
+                                },
+                                "classification": {
+                                  "type": "object",
+                                  "required": [
+                                    "id",
+                                    "scheme"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string"
+                                    }
+                                  }
                                 }
                               },
                               "required": [
                                 "id",
                                 "title",
-                                "requirementGroups"
+                                "relatesTo",
+                                "requirementGroups",
+                                "classification"
                               ]
                             }
                           },
