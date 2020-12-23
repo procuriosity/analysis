@@ -15,9 +15,109 @@
       "get": {
         "summary": "Get Standart Criteria",
         "tags": [],
-        "responses": {},
-        "operationId": "get-users-userId",
-        "description": "Retrieve the information of the user with the matching user ID.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "description": "может быть пустой массив в случае отсутствия criteria, соответствующих параметрам запроса",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "classification": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "scheme"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "scheme": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "requirementGroups": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "requirements": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "title": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "dataType": {
+                                        "type": [
+                                          "string",
+                                          "number",
+                                          "integer",
+                                          "boolean"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "title",
+                                      "dataType"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "requirements"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "title",
+                          "classification",
+                          "requirementGroups"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "",
+        "description": "",
         "parameters": [
           {
             "schema": {
@@ -45,106 +145,7 @@
             "name": "mainProcurementCategory",
             "description": "категория закупаемого товара"
           }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "может быть пустой массив в случае отсутствия criteria, соответствующих параметрам запроса",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "title": {
-                          "type": "string"
-                        },
-                        "classification": {
-                          "type": "object",
-                          "required": [
-                            "id",
-                            "scheme"
-                          ],
-                          "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "scheme": {
-                              "type": "string"
-                            }
-                          }
-                        },
-                        "description": {
-                          "type": "string"
-                        },
-                        "requirementGroups": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "description": {
-                                "type": "string"
-                              },
-                              "requirements": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "title": {
-                                      "type": "string"
-                                    },
-                                    "description": {
-                                      "type": "string"
-                                    },
-                                    "dataType": {
-                                      "type": [
-                                        "string",
-                                        "number",
-                                        "integer",
-                                        "boolean"
-                                      ]
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "title",
-                                    "dataType"
-                                  ]
-                                }
-                              }
-                            },
-                            "required": [
-                              "id",
-                              "requirements"
-                            ]
-                          }
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "title",
-                        "classification",
-                        "requirementGroups"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "description": ""
-        }
+        ]
       }
     }
   },
