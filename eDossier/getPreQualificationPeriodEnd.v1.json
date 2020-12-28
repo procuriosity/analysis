@@ -1,0 +1,106 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "getPreQualificationPeriodEnd",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9251"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Get PreQualification Period End",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "preQualification"
+                      ],
+                      "properties": {
+                        "preQualification": {
+                          "type": "object",
+                          "required": [
+                            "period"
+                          ],
+                          "properties": {
+                            "period": {
+                              "type": "object",
+                              "required": [
+                                "endDate"
+                              ],
+                              "properties": {
+                                "endDate": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "command": {
+                    "type": "string",
+                    "enum": [
+                      "getPreQualificationPeriodEnd"
+                    ]
+                  },
+                  "context": {
+                    "$ref": "../models/oldRequestContext.v1.json"
+                  },
+                  "data": {
+                    "type": "object"
+                  },
+                  "version": {
+                    "type": "string",
+                    "example": "0.0.1"
+                  }
+                },
+                "required": [
+                  "id",
+                  "command",
+                  "context",
+                  "data",
+                  "version"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
