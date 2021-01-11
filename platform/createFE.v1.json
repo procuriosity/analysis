@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createFE",
-    "version": "1.01"
+    "version": "1.03"
   },
   "servers": [
     {
@@ -213,6 +213,12 @@
                                                 "number",
                                                 "integer"
                                               ]
+                                            },
+                                            "eligibleEvidences": {
+                                              "type": "array",
+                                              "items": {
+                                                "$ref": "../models/eligibleEvidences.v1.json"
+                                              }
                                             }
                                           },
                                           "required": [
@@ -228,13 +234,29 @@
                                       "requirements"
                                     ]
                                   }
+                                },
+                                "classification": {
+                                  "type": "object",
+                                  "required": [
+                                    "id",
+                                    "scheme"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string"
+                                    }
+                                  }
                                 }
                               },
                               "required": [
                                 "id",
                                 "title",
                                 "relatesTo",
-                                "requirementGroups"
+                                "requirementGroups",
+                                "classification"
                               ]
                             }
                           },

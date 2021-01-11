@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createPcr",
-    "version": "1.04",
+    "version": "1.06",
     "description": ""
   },
   "servers": [
@@ -360,7 +360,8 @@
                                         "type": "string",
                                         "enum": [
                                           "lot",
-                                          "item"
+                                          "item",
+                                          "tender"
                                         ]
                                       },
                                       "relatedItem": {
@@ -435,12 +436,30 @@
                                                       "number",
                                                       "integer"
                                                     ]
+                                                  },
+                                                  "eligibleEvidences": {
+                                                    "type": "array",
+                                                    "items": {
+                                                      "$ref": "../models/eligibleEvidences.v1.json"
+                                                    }
+                                                  },
+                                                  "status": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "active"
+                                                    ]
+                                                  },
+                                                  "datePublished": {
+                                                    "type": "string",
+                                                    "format": "date-time"
                                                   }
                                                 },
                                                 "required": [
                                                   "id",
                                                   "title",
-                                                  "dataType"
+                                                  "dataType",
+                                                  "status",
+                                                  "datePublished"
                                                 ]
                                               }
                                             }
@@ -456,13 +475,30 @@
                                         "enum": [
                                           "tenderer"
                                         ]
+                                      },
+                                      "classification": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "scheme"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string"
+                                          }
+                                        }
                                       }
                                     },
                                     "required": [
                                       "id",
                                       "title",
+                                      "relatesTo",
                                       "requirementGroups",
-                                      "source"
+                                      "source",
+                                      "classification"
                                     ]
                                   }
                                 },
@@ -1003,7 +1039,8 @@
                                       "type": "string",
                                       "enum": [
                                         "lot",
-                                        "item"
+                                        "item",
+                                        "tender"
                                       ]
                                     },
                                     "relatedItem": {
@@ -1076,6 +1113,12 @@
                                                     "number",
                                                     "integer"
                                                   ]
+                                                },
+                                                "eligibleEvidences": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "$ref": "../models/eligibleEvidences.v1.json"
+                                                  }
                                                 }
                                               },
                                               "required": [
@@ -1091,12 +1134,29 @@
                                           "requirements"
                                         ]
                                       }
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string"
+                                        }
+                                      }
                                     }
                                   },
                                   "required": [
                                     "id",
                                     "title",
-                                    "requirementGroups"
+                                    "relatesTo",
+                                    "requirementGroups",
+                                    "classification"
                                   ]
                                 }
                               },

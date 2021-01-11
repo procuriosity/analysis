@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validatePcrData",
-    "version": "1.03",
+    "version": "1.05",
     "description": ""
   },
   "servers": [
@@ -44,7 +44,8 @@
                           "tender",
                           "pmd",
                           "country",
-                          "operationType"
+                          "operationType",
+                          "mdm"
                         ],
                         "properties": {
                           "tender": {
@@ -313,7 +314,8 @@
                                       "type": "string",
                                       "enum": [
                                         "lot",
-                                        "item"
+                                        "item",
+                                        "tender"
                                       ]
                                     },
                                     "requirementGroups": {
@@ -385,6 +387,12 @@
                                                     "number",
                                                     "integer"
                                                   ]
+                                                },
+                                                "eligibleEvidences": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "$ref": "../models/eligibleEvidences.v1.json"
+                                                  }
                                                 }
                                               },
                                               "required": [
@@ -400,12 +408,29 @@
                                           "requirements"
                                         ]
                                       }
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string"
+                                        }
+                                      }
                                     }
                                   },
                                   "required": [
                                     "id",
                                     "title",
-                                    "requirementGroups"
+                                    "relatesTo",
+                                    "requirementGroups",
+                                    "classification"
                                   ]
                                 }
                               },
@@ -572,6 +597,44 @@
                             "enum": [
                               "createPcr"
                             ]
+                          },
+                          "mdm": {
+                            "type": "object",
+                            "required": [
+                              "criteria"
+                            ],
+                            "properties": {
+                              "criteria": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "classification"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }
