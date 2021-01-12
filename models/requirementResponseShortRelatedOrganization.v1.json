@@ -1,0 +1,72 @@
+{
+  "title": "requirementResponseShortRelatedOrganization",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "value": {
+      "type": [
+        "string",
+        "number",
+        "integer",
+        "boolean"
+      ]
+    },
+    "requirement": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "relatedOrganization": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "evidences": {
+      "type": "array",
+      "items": {
+        "$ref": "./evidences.v1.json"
+      }
+    },
+    "period": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "startDate",
+        "endDate"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "value",
+    "requirement",
+    "relatedOrganization"
+  ]
+}
