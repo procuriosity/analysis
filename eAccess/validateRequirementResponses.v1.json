@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateRequirementResponses",
-    "version": "1.01"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -30,7 +30,7 @@
                         "result": {
                           "type": "array",
                           "items": {
-                            "$ref": "../models/requirementResponseShortRelatedCandidate.v1.json"
+                            "$ref": "../models/requirementResponseShortRelatedOrganization.v1.json"
                           }
                         }
                       }
@@ -59,7 +59,8 @@
                           "ocid",
                           "requirementResponses",
                           "organizationIds",
-                          "operationType"
+                          "operationType",
+                          "date"
                         ],
                         "properties": {
                           "cpid": {
@@ -71,7 +72,7 @@
                           "requirementResponses": {
                             "type": "array",
                             "items": {
-                              "$ref": "../models/requirementResponseShortRelatedCandidate.v1.json"
+                              "$ref": "../models/requirementResponseShortRelatedOrganization.v1.json"
                             }
                           },
                           "organizationIds": {
@@ -83,7 +84,8 @@
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "createSubmission"
+                              "createSubmission",
+                              "submitBid"
                             ]
                           },
                           "documents": {
@@ -99,6 +101,10 @@
                                 "id"
                               ]
                             }
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
                           }
                         }
                       }
