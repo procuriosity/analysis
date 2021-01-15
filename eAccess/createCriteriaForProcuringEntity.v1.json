@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Create Criteria For Procuring Entity",
-    "version": "1.02"
+    "version": "1.03"
   },
   "servers": [
     {
@@ -86,12 +86,24 @@
                                             "type": "string",
                                             "default": "boolean",
                                             "example": "boolean"
+                                          },
+                                          "status": {
+                                            "type": "string",
+                                            "enum": [
+                                              "active"
+                                            ]
+                                          },
+                                          "datePublished": {
+                                            "type": "string",
+                                            "format": "date-time"
                                           }
                                         },
                                         "required": [
                                           "id",
                                           "title",
-                                          "dataType"
+                                          "dataType",
+                                          "status",
+                                          "datePublished"
                                         ]
                                       }
                                     }
@@ -101,6 +113,21 @@
                                     "requirements"
                                   ]
                                 }
+                              },
+                              "classification": {
+                                "type": "object",
+                                "required": [
+                                  "id",
+                                  "scheme"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "scheme": {
+                                    "type": "string"
+                                  }
+                                }
                               }
                             },
                             "required": [
@@ -108,7 +135,8 @@
                               "title",
                               "source",
                               "relatesTo",
-                              "requirementGroups"
+                              "requirementGroups",
+                              "classification"
                             ]
                           }
                         }
@@ -140,7 +168,8 @@
                           "cpid",
                           "ocid",
                           "criteria",
-                          "operationType"
+                          "operationType",
+                          "date"
                         ],
                         "properties": {
                           "cpid": {
@@ -204,12 +233,28 @@
                                       "requirements"
                                     ]
                                   }
+                                },
+                                "classification": {
+                                  "type": "object",
+                                  "required": [
+                                    "id",
+                                    "scheme"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string"
+                                    }
+                                  }
                                 }
                               },
                               "required": [
                                 "id",
                                 "title",
-                                "requirementGroups"
+                                "requirementGroups",
+                                "classification"
                               ]
                             }
                           },
@@ -219,6 +264,10 @@
                               "submissionPeriodEnd",
                               "tenderPeriodEnd"
                             ]
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
                           }
                         }
                       }
