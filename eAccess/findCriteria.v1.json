@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "findCriteria",
-    "version": "1.02"
+    "version": "1.03"
   },
   "servers": [
     {
@@ -95,12 +95,30 @@
                                               "boolean",
                                               "number"
                                             ]
+                                          },
+                                          "status": {
+                                            "type": "string",
+                                            "enum": [
+                                              "active"
+                                            ]
+                                          },
+                                          "datePublished": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          },
+                                          "eligibleEvidences": {
+                                            "type": "array",
+                                            "items": {
+                                              "$ref": "../models/eligibleEvidences.v1.json"
+                                            }
                                           }
                                         },
                                         "required": [
                                           "id",
                                           "title",
-                                          "dataType"
+                                          "dataType",
+                                          "status",
+                                          "datePublished"
                                         ]
                                       }
                                     }
@@ -110,13 +128,29 @@
                                     "requirements"
                                   ]
                                 }
+                              },
+                              "classification": {
+                                "type": "object",
+                                "required": [
+                                  "id",
+                                  "scheme"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "scheme": {
+                                    "type": "string"
+                                  }
+                                }
                               }
                             },
                             "required": [
                               "id",
                               "title",
                               "source",
-                              "requirementGroups"
+                              "requirementGroups",
+                              "classification"
                             ]
                           }
                         }
@@ -154,11 +188,18 @@
                             "$ref": "../models/ocid.v1.json"
                           },
                           "source": {
-                            "type": "string",
+                            "type": "array",
                             "enum": [
                               "tenderer",
                               "procuringEntity"
-                            ]
+                            ],
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "tenderer",
+                                "procuringEntity"
+                              ]
+                            }
                           }
                         }
                       }
