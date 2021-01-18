@@ -141,7 +141,7 @@
                                 "requirementResponses": {
                                   "type": "array",
                                   "items": {
-                                    "$ref": "../models/requirementResponseShortRelatedCandidate.v1.json"
+                                    "$ref": "../models/requirementResponseShortRelCandidateWithoutEvidences.v1.json"
                                   }
                                 }
                               },
@@ -197,12 +197,6 @@
                                     "id": {
                                       "type": "string"
                                     },
-                                    "title": {
-                                      "type": "string"
-                                    },
-                                    "description": {
-                                      "type": "string"
-                                    },
                                     "source": {
                                       "type": "string",
                                       "enum": [
@@ -217,7 +211,8 @@
                                         "item",
                                         "lot",
                                         "award",
-                                        "qualification"
+                                        "qualification",
+                                        "tender"
                                       ]
                                     },
                                     "relatedItem": {
@@ -232,9 +227,6 @@
                                           "id": {
                                             "type": "string"
                                           },
-                                          "description": {
-                                            "type": "string"
-                                          },
                                           "requirements": {
                                             "type": "array",
                                             "items": {
@@ -243,21 +235,11 @@
                                                 "id": {
                                                   "type": "string"
                                                 },
-                                                "title": {
-                                                  "type": "string"
-                                                },
                                                 "status": {
                                                   "type": "string",
                                                   "enum": [
                                                     "active"
                                                   ]
-                                                },
-                                                "datePublished": {
-                                                  "type": "string",
-                                                  "format": "date-time"
-                                                },
-                                                "description": {
-                                                  "type": "string"
                                                 },
                                                 "dataType": {
                                                   "type": [
@@ -266,19 +248,11 @@
                                                     "integer",
                                                     "boolean"
                                                   ]
-                                                },
-                                                "eligibleEvidences": {
-                                                  "type": "array",
-                                                  "items": {
-                                                    "$ref": "../models/eligibleEvidences.v1.json"
-                                                  }
                                                 }
                                               },
                                               "required": [
                                                 "id",
-                                                "title",
                                                 "status",
-                                                "datePublished",
                                                 "dataType"
                                               ]
                                             }
@@ -308,8 +282,8 @@
                                   },
                                   "required": [
                                     "id",
-                                    "title",
                                     "source",
+                                    "relatesTo",
                                     "requirementGroups",
                                     "classification"
                                   ]
