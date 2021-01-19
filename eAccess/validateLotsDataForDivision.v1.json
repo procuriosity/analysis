@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "validateLotsData",
-    "version": "1.0"
+    "title": "validateLotsDataForDivision",
+    "version": "1.01"
   },
   "servers": [
     {
@@ -13,7 +13,7 @@
     "command": {
       "parameters": [],
       "post": {
-        "summary": "Validate Lots Data",
+        "summary": "Validate Lots Data For Division",
         "operationId": "post-users-userId",
         "responses": {
           "200": {
@@ -78,10 +78,6 @@
                                     },
                                     "value": {
                                       "type": "object",
-                                      "required": [
-                                        "amount",
-                                        "currency"
-                                      ],
                                       "properties": {
                                         "amount": {
                                           "type": "number"
@@ -89,14 +85,14 @@
                                         "currency": {
                                           "type": "string"
                                         }
-                                      }
+                                      },
+                                      "required": [
+                                        "amount",
+                                        "currency"
+                                      ]
                                     },
                                     "contractPeriod": {
                                       "type": "object",
-                                      "required": [
-                                        "startDate",
-                                        "endDate"
-                                      ],
                                       "properties": {
                                         "startDate": {
                                           "type": "string",
@@ -106,13 +102,14 @@
                                           "type": "string",
                                           "format": "date-time"
                                         }
-                                      }
+                                      },
+                                      "required": [
+                                        "startDate",
+                                        "endDate"
+                                      ]
                                     },
                                     "placeOfPerformance": {
                                       "type": "object",
-                                      "required": [
-                                        "address"
-                                      ],
                                       "properties": {
                                         "address": {
                                           "$ref": "../models/addressRequest.v1.json"
@@ -120,7 +117,10 @@
                                         "description": {
                                           "type": "string"
                                         }
-                                      }
+                                      },
+                                      "required": [
+                                        "address"
+                                      ]
                                     }
                                   },
                                   "required": [
@@ -161,7 +161,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "validateLotsData"
+                          "validateLotsDataForDivision"
                         ]
                       }
                     }
