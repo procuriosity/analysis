@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateBidData",
-    "version": "1.03",
+    "version": "1.04",
     "description": ""
   },
   "servers": [
@@ -45,7 +45,8 @@
                           "bids",
                           "tender",
                           "cpid",
-                          "pmd"
+                          "pmd",
+                          "mdm"
                         ],
                         "properties": {
                           "bids": {
@@ -500,6 +501,33 @@
                               "OF",
                               "TEST_OF"
                             ]
+                          },
+                          "mdm": {
+                            "type": "object",
+                            "required": [
+                              "registrationSchemes"
+                            ],
+                            "properties": {
+                              "registrationSchemes": {
+                                "type": "array",
+                                "description": "схемы регистрации компаний для стран, где эти компании (tenderers) зарегистрированы",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "country": {
+                                      "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "country",
+                                    "scheme"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }
