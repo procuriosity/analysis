@@ -1,0 +1,183 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "getItemsByLotIds",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9271"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Get Items By Lot Ids",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string",
+                      "example": "0.0.1"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "items"
+                      ],
+                      "properties": {
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid"
+                              },
+                              "internalId": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "number"
+                              },
+                              "classification": {
+                                "type": "object",
+                                "required": [
+                                  "id",
+                                  "scheme",
+                                  "description"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "scheme": {
+                                    "type": "string",
+                                    "enum": [
+                                      "CPV"
+                                    ]
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "unit": {
+                                "type": "object",
+                                "required": [
+                                  "id",
+                                  "name"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "relatedLot": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "description",
+                              "quantity",
+                              "classification",
+                              "unit",
+                              "relatedLot"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "version",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "command": {
+                    "type": "string",
+                    "enum": [
+                      "getItemsByLotIds"
+                    ]
+                  },
+                  "context": {
+                    "$ref": "../models/oldRequestContext.v1.json"
+                  },
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "lots"
+                    ],
+                    "properties": {
+                      "lots": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "version": {
+                    "type": "string",
+                    "example": "0.0.1"
+                  }
+                },
+                "required": [
+                  "id",
+                  "command",
+                  "context",
+                  "data",
+                  "version"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
