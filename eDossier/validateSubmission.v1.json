@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Validate Submission",
-    "version": "1.02"
+    "version": "1.03"
   },
   "servers": [
     {
@@ -16,7 +16,14 @@
         "operationId": "post-command",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
           }
         },
         "requestBody": {
@@ -48,7 +55,8 @@
                         "type": "object",
                         "required": [
                           "id",
-                          "candidates"
+                          "candidates",
+                          "mdm"
                         ],
                         "properties": {
                           "id": {
@@ -122,6 +130,36 @@
                                 "requirement",
                                 "relatedCandidate"
                               ]
+                            }
+                          },
+                          "mdm": {
+                            "type": "object",
+                            "required": [
+                              "registrationSchemes"
+                            ],
+                            "properties": {
+                              "registrationSchemes": {
+                                "type": "array",
+                                "description": "схемы регистрации компаний для стран, где эти компании (candidates) зарегистрированы",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "country": {
+                                      "type": "string"
+                                    },
+                                    "schemes": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "country",
+                                    "schemes"
+                                  ]
+                                }
+                              }
                             }
                           }
                         }
