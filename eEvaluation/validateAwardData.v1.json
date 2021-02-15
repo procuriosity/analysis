@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateAwardData",
-    "version": "1.0",
+    "version": "1.01",
     "description": ""
   },
   "servers": [
@@ -45,7 +45,8 @@
                           "ocid",
                           "tender",
                           "awards",
-                          "operationType"
+                          "operationType",
+                          "mdm"
                         ],
                         "properties": {
                           "cpid": {
@@ -348,6 +349,36 @@
                               "createAward",
                               "updateAward"
                             ]
+                          },
+                          "mdm": {
+                            "type": "object",
+                            "required": [
+                              "registrationSchemes"
+                            ],
+                            "properties": {
+                              "registrationSchemes": {
+                                "type": "array",
+                                "description": "схемы регистрации компаний для стран, где эти компании (suppliers) зарегистрированы",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "country": {
+                                      "type": "string"
+                                    },
+                                    "schemes": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "country",
+                                    "schemes"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }
