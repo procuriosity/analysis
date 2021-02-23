@@ -1,18 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "addGeneratedDocumentToContract",
+    "title": "doConsideration",
     "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9151"
+      "url": "http://{host}:9081"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Add Generated Document To Contract",
+        "summary": "Do Consideration",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -30,10 +30,10 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "contracts"
+                            "awards"
                           ],
                           "properties": {
-                            "contracts": {
+                            "awards": {
                               "type": "array",
                               "items": {
                                 "type": "object",
@@ -50,36 +50,14 @@
                                   "statusDetails": {
                                     "type": "string",
                                     "enum": [
-                                      "issued"
+                                      "consideration"
                                     ]
-                                  },
-                                  "documents": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "documentType": {
-                                          "type": "string",
-                                          "enum": [
-                                            "x_frameworkProject"
-                                          ]
-                                        }
-                                      },
-                                      "required": [
-                                        "id",
-                                        "documentType"
-                                      ]
-                                    }
                                   }
                                 },
                                 "required": [
                                   "id",
                                   "status",
-                                  "statusDetails",
-                                  "documents"
+                                  "statusDetails"
                                 ]
                               }
                             }
@@ -112,8 +90,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "documentInitiator",
-                          "contracts"
+                          "awards"
                         ],
                         "properties": {
                           "cpid": {
@@ -122,34 +99,17 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "documentInitiator": {
-                            "type": "string",
-                            "enum": [
-                              "issuingFrameworkContract"
-                            ]
-                          },
-                          "contracts": {
+                          "awards": {
                             "type": "array",
                             "items": {
                               "type": "object",
                               "properties": {
-                                "documents": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "id": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "required": [
-                                      "id"
-                                    ]
-                                  }
+                                "id": {
+                                  "type": "string"
                                 }
                               },
                               "required": [
-                                "documents"
+                                "id"
                               ]
                             }
                           }
@@ -166,7 +126,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "addGeneratedDocumentToContract"
+                          "doConsideration"
                         ]
                       }
                     }
