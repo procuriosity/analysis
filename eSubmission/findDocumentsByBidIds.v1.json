@@ -1,8 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getBidsForPacs",
-    "version": "1.0"
+    "title": "findDocumentsByBidIds",
+    "version": "1.0",
+    "description": ""
   },
   "servers": [
     {
@@ -12,7 +13,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Get Bids For Pacs",
+        "summary": "Find Documents By Bid Ids",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -29,9 +30,6 @@
                       "properties": {
                         "result": {
                           "type": "object",
-                          "required": [
-                            "bids"
-                          ],
                           "properties": {
                             "bids": {
                               "type": "object",
@@ -47,7 +45,7 @@
                                       "id": {
                                         "type": "string"
                                       },
-                                      "tenderers": {
+                                      "documents": {
                                         "type": "array",
                                         "items": {
                                           "type": "object",
@@ -55,83 +53,51 @@
                                             "id": {
                                               "type": "string"
                                             },
-                                            "name": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "id",
-                                            "name"
-                                          ]
-                                        }
-                                      },
-                                      "requirementResponses": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "object",
-                                          "properties": {
-                                            "id": {
+                                            "title": {
                                               "type": "string"
                                             },
-                                            "value": {
-                                              "type": [
-                                                "string",
-                                                "number",
-                                                "integer",
-                                                "boolean"
-                                              ]
+                                            "description": {
+                                              "type": "string"
                                             },
-                                            "requirement": {
-                                              "type": "object",
-                                              "required": [
-                                                "id"
-                                              ],
-                                              "properties": {
-                                                "id": {
-                                                  "type": "string"
-                                                }
+                                            "relatedLots": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "string"
                                               }
                                             },
-                                            "period": {
-                                              "type": "object",
-                                              "properties": {
-                                                "startDate": {
-                                                  "type": "string",
-                                                  "format": "date-time"
-                                                },
-                                                "endDate": {
-                                                  "type": "string",
-                                                  "format": "date-time"
-                                                }
-                                              },
-                                              "required": [
-                                                "startDate",
-                                                "endDate"
+                                            "documentType": {
+                                              "type": "string",
+                                              "enum": [
+                                                "illustration",
+                                                "submissionDocuments",
+                                                "x_qualificationDocuments",
+                                                "x_eligibilityDocuments",
+                                                "x_technicalDocuments"
                                               ]
                                             }
                                           },
                                           "required": [
                                             "id",
-                                            "value",
-                                            "requirement"
+                                            "title",
+                                            "documentType"
                                           ]
                                         }
                                       }
                                     },
                                     "required": [
                                       "id",
-                                      "tenderers"
+                                      "documents"
                                     ]
                                   }
                                 }
                               }
                             }
-                          }
+                          },
+                          "required": [
+                            "bids"
+                          ]
                         }
-                      },
-                      "required": [
-                        "result"
-                      ]
+                      }
                     }
                   ]
                 }
@@ -155,7 +121,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "tender"
+                          "bids"
                         ],
                         "properties": {
                           "cpid": {
@@ -164,13 +130,10 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "tender": {
+                          "bids": {
                             "type": "object",
-                            "required": [
-                              "lots"
-                            ],
                             "properties": {
-                              "lots": {
+                              "details": {
                                 "type": "array",
                                 "items": {
                                   "type": "object",
@@ -178,10 +141,7 @@
                                     "id": {
                                       "type": "string"
                                     }
-                                  },
-                                  "required": [
-                                    "id"
-                                  ]
+                                  }
                                 }
                               }
                             }
@@ -199,7 +159,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getBidsForPacs"
+                          "findDocumentsByBidIds"
                         ]
                       }
                     }
