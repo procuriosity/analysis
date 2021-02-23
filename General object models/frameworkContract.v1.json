@@ -1,0 +1,106 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "frameworkContract",
+    "version": "1.0"
+  },
+  "servers": [],
+  "paths": {
+    "/model": {
+      "options": {
+        "summary": "Framework Contract",
+        "operationId": "options-model",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "cancelled"
+                    ]
+                  },
+                  "statusDetails": {
+                    "type": "string",
+                    "enum": [
+                      "contractProject",
+                      "withdrawnQualificationProtocol",
+                      "contractProject",
+                      "issuing",
+                      "issued"
+                    ]
+                  },
+                  "date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "isFrameworkOrDynamic": {
+                    "type": "boolean"
+                  },
+                  "suppliers": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name"
+                      ]
+                    }
+                  },
+                  "documents": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "documentType": {
+                          "type": "string",
+                          "enum": [
+                            "x_frameworkProject"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "documentType"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "id",
+                  "status",
+                  "statusDetails",
+                  "date",
+                  "isFrameworkOrDynamic",
+                  "suppliers",
+                  "documents"
+                ]
+              }
+            }
+          }
+        },
+        "description": "Framework Contract is in the Framework Establishment"
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
