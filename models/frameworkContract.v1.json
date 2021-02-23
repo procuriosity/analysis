@@ -1,0 +1,81 @@
+{
+  "title": "frameworkContract",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "cancelled"
+      ]
+    },
+    "statusDetails": {
+      "type": "string",
+      "enum": [
+        "contractProject",
+        "withdrawnQualificationProtocol",
+        "issuing",
+        "issued"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "isFrameworkOrDynamic": {
+      "type": "boolean"
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "documentType": {
+            "type": "string",
+            "enum": [
+              "x_frameworkProject"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "documentType"
+        ]
+      }
+    },
+    "suppliers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "status",
+    "statusDetails",
+    "date",
+    "isFrameworkOrDynamic",
+    "documents",
+    "suppliers"
+  ],
+  "description": "Framework Contract "
+}
