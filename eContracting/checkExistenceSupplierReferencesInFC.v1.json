@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "checkExistenceSupplierReferencesInFC",
-    "version": "1.0",
+    "version": "1.01",
     "description": ""
   },
   "servers": [
@@ -42,7 +42,8 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "contracts"
                         ],
                         "properties": {
                           "cpid": {
@@ -50,6 +51,20 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
+                          },
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id"
+                              ]
+                            }
                           }
                         }
                       }
