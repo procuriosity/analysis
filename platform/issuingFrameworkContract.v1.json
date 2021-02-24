@@ -10,7 +10,7 @@
     }
   ],
   "paths": {
-    "/issue/fc/{cpid}/{ocid}": {
+    "/issue/fc/{cpid}/{ocid}/{contractId}": {
       "post": {
         "summary": "Issuing Framework Contract",
         "operationId": "post-command",
@@ -66,14 +66,14 @@
                     "properties": {
                       "contract": {
                         "type": "object",
+                        "required": [
+                          "internalId"
+                        ],
                         "properties": {
                           "internalId": {
                             "type": "string"
                           }
-                        },
-                        "required": [
-                          "internalId"
-                        ]
+                        }
                       }
                     }
                   }
@@ -104,6 +104,15 @@
           "in": "path",
           "required": true,
           "description": "ocid FE"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "contractId",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор FC"
         }
       ]
     }
