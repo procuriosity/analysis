@@ -1,0 +1,168 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "addOrganizationInfo",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Add Organization Info",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "parties"
+                      ],
+                      "properties": {
+                        "parties": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "identifier": {
+                                "$ref": "../models/identifier.v1.json"
+                              },
+                              "additionalIdentifiers": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "../models/identifier.v1.json"
+                                }
+                              },
+                              "address": {
+                                "$ref": "../models/address.v1.json"
+                              },
+                              "contactPoint": {
+                                "$ref": "../models/contact_point.v1.json"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "name",
+                              "identifier",
+                              "address",
+                              "contactPoint"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "command": {
+                    "type": "string",
+                    "enum": [
+                      "addOrganizationInfo"
+                    ]
+                  },
+                  "context": {
+                    "$ref": "../models/oldRequestContext.v1.json"
+                  },
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "tender"
+                    ],
+                    "properties": {
+                      "tender": {
+                        "type": "object",
+                        "required": [
+                          "procuringEntity\""
+                        ],
+                        "properties": {
+                          "procuringEntity\"": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "name",
+                              "identifier",
+                              "address",
+                              "contactPoint"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "identifier": {
+                                "$ref": "../models/identifier.v1.json"
+                              },
+                              "additionalIdentifiers": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "../models/identifier.v1.json"
+                                }
+                              },
+                              "address": {
+                                "$ref": "../models/address.v1.json"
+                              },
+                              "contactPoint": {
+                                "$ref": "../models/contact_point.v1.json"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "version": {
+                    "type": "string",
+                    "example": "0.0.1"
+                  }
+                },
+                "required": [
+                  "id",
+                  "command",
+                  "context",
+                  "data",
+                  "version"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
