@@ -16,33 +16,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "status": {
-                    "type": "string",
-                    "enum": [
-                      "pending",
-                      "cancelled"
-                    ]
-                  },
-                  "statusDetails": {
-                    "type": "string",
-                    "enum": [
-                      "contractProject",
-                      "withdrawnQualificationProtocol",
-                      "issuing",
-                      "issued"
-                    ]
-                  },
-                  "date": {
-                    "type": "string",
-                    "format": "date-time"
-                  },
-                  "isFrameworkOrDynamic": {
-                    "type": "boolean"
-                  },
-                  "suppliers": {
+                  "contracts": {
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -50,56 +24,93 @@
                         "id": {
                           "type": "string"
                         },
-                        "name": {
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "name"
-                      ]
-                    }
-                  },
-                  "documents": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "documentType": {
+                        "status": {
                           "type": "string",
                           "enum": [
-                            "x_frameworkProject"
+                            "pending",
+                            "cancelled"
                           ]
+                        },
+                        "statusDetails": {
+                          "type": "string",
+                          "enum": [
+                            "contractProject",
+                            "withdrawnQualificationProtocol",
+                            "issuing",
+                            "issued"
+                          ]
+                        },
+                        "date": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "isFrameworkOrDynamic": {
+                          "type": "boolean"
+                        },
+                        "suppliers": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "name"
+                            ]
+                          }
+                        },
+                        "documents": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "documentType": {
+                                "type": "string",
+                                "enum": [
+                                  "x_frameworkProject"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "documentType"
+                            ]
+                          }
                         }
                       },
                       "required": [
                         "id",
-                        "documentType"
+                        "status",
+                        "statusDetails",
+                        "date",
+                        "isFrameworkOrDynamic",
+                        "suppliers",
+                        "documents"
                       ]
                     }
                   }
                 },
                 "required": [
-                  "id",
-                  "status",
-                  "statusDetails",
-                  "date",
-                  "isFrameworkOrDynamic",
-                  "suppliers",
-                  "documents"
+                  "contracts"
                 ]
               }
             }
-          }
-        },
-        "description": "Framework Contract is in the Framework Establishment (for Framework Agreement)"
+          },
+          "description": "Framework Contract is in the Framework Establishment (for Framework Agreement)"
+        }
       }
+    },
+    "components": {
+      "schemas": {}
     }
-  },
-  "components": {
-    "schemas": {}
   }
 }
