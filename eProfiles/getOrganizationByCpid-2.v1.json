@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "addOrganizationInfo",
+    "title": "getOrganizationByCpid-2",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Add Organization Info",
+        "summary": "Get Organization By Cpid",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -105,7 +105,6 @@
                                 "items": {
                                   "type": "string",
                                   "enum": [
-                                    "procuringEntity",
                                     "buyer",
                                     "centralPurchasingBody"
                                   ]
@@ -146,148 +145,21 @@
                   "command": {
                     "type": "string",
                     "enum": [
-                      "addOrganizationInfo"
+                      "getOrganizationByCpid"
                     ]
                   },
                   "context": {
                     "$ref": "../models/oldRequestContext.v1.json"
                   },
                   "data": {
-                    "type": "object",
-                    "required": [
-                      "tender"
-                    ],
-                    "properties": {
-                      "tender": {
-                        "type": "object",
-                        "properties": {
-                          "procuringEntity": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              },
-                              "identifier": {
-                                "$ref": "../models/identifier.v1.json"
-                              },
-                              "additionalIdentifiers": {
-                                "type": "array",
-                                "items": {
-                                  "$ref": "../models/identifier.v1.json"
-                                }
-                              },
-                              "address": {
-                                "$ref": "../models/address.v1.json"
-                              },
-                              "contactPoint": {
-                                "$ref": "../models/contact_point.v1.json"
-                              }
-                            },
-                            "required": [
-                              "id",
-                              "name",
-                              "identifier",
-                              "address",
-                              "contactPoint"
-                            ]
-                          },
-                          "buyer": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              },
-                              "identifier": {
-                                "$ref": "../models/identifier.v1.json"
-                              },
-                              "additionalIdentifiers": {
-                                "type": "array",
-                                "items": {
-                                  "$ref": "../models/identifier.v1.json"
-                                }
-                              },
-                              "address": {
-                                "$ref": "../models/address.v1.json"
-                              },
-                              "contactPoint": {
-                                "$ref": "../models/contact_point.v1.json"
-                              },
-                              "details": {
-                                "type": "object",
-                                "properties": {
-                                  "typeOfBuyer": {
-                                    "type": "string",
-                                    "enum": [
-                                      "BODY_PUBLIC",
-                                      "EU_INSTITUTION",
-                                      "MINISTRY",
-                                      "NATIONAL_AGENCY",
-                                      "REGIONAL_AGENCY",
-                                      "REGIONAL_AUTHORITY"
-                                    ]
-                                  },
-                                  "mainGeneralActivity": {
-                                    "type": "string",
-                                    "enum": [
-                                      "DEFENCE",
-                                      "ECONOMIC_AND_FINANCIAL_AFFAIRS",
-                                      "EDUCATION",
-                                      "ENVIRONMENT",
-                                      "GENERAL_PUBLIC_SERVICES",
-                                      "HEALTH",
-                                      "HOUSING_AND_COMMUNITY_AMENITIES",
-                                      "PUBLIC_ORDER_AND_SAFETY",
-                                      "RECREATION_CULTURE_AND_RELIGION",
-                                      "SOCIAL_PROTECTION"
-                                    ]
-                                  },
-                                  "mainSectoralActivity": {
-                                    "type": "string",
-                                    "enum": [
-                                      "AIRPORT_RELATED_ACTIVITIES",
-                                      "ELECTRICITY",
-                                      "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
-                                      "EXPLORATION_EXTRACTION_GAS_OIL",
-                                      "PORT_RELATED_ACTIVITIES",
-                                      "POSTAL_SERVICES",
-                                      "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
-                                      "RAILWAY_SERVICES",
-                                      "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
-                                      "WATER"
-                                    ]
-                                  }
-                                }
-                              }
-                            },
-                            "required": [
-                              "id",
-                              "name",
-                              "identifier",
-                              "address",
-                              "contactPoint"
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "version": {
-                    "type": "string",
-                    "example": "0.0.1"
+                    "type": "object"
                   }
                 },
                 "required": [
                   "id",
                   "command",
                   "context",
-                  "data",
-                  "version"
+                  "data"
                 ]
               }
             }
