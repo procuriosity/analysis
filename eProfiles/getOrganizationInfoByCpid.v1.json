@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "addOrganizationInfo",
+    "title": "getOrganizationInfoByCpid",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Add Organization Info",
+        "summary": "Get Organization Info By Cpid",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -152,144 +152,11 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "cpid",
-                          "pmd",
-                          "country",
-                          "operationType"
+                          "cpid"
                         ],
                         "properties": {
                           "cpid": {
                             "$ref": "../models/cpid.v1.json"
-                          },
-                          "ocid": {
-                            "$ref": "../models/ocid.v1.json"
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "DCO",
-                              "RFQ",
-                              "MC",
-                              "OT",
-                              "SV",
-                              "MV",
-                              "DA",
-                              "NP",
-                              "CD",
-                              "DC",
-                              "IP",
-                              "GPA",
-                              "RT",
-                              "DCO_TEST",
-                              "RFQ_TEST",
-                              "MC_TEST",
-                              "OT_TEST",
-                              "SV_TEST",
-                              "MV_TEST",
-                              "DA_TEST",
-                              "NP_TEST",
-                              "CD_TEST",
-                              "DC_TEST",
-                              "IP_TEST",
-                              "GPA_TEST",
-                              "RT_TEST"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "createPN"
-                            ]
-                          },
-                          "tender": {
-                            "type": "object",
-                            "properties": {
-                              "buyer": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "name": {
-                                      "type": "string"
-                                    },
-                                    "identifier": {
-                                      "$ref": "../models/identifier.v1.json"
-                                    },
-                                    "additionalIdentifiers": {
-                                      "type": "array",
-                                      "items": {
-                                        "$ref": "../models/identifier.v1.json"
-                                      }
-                                    },
-                                    "address": {
-                                      "$ref": "../models/address.v1.json"
-                                    },
-                                    "contactPoint": {
-                                      "$ref": "../models/contact_point.v1.json"
-                                    },
-                                    "details": {
-                                      "type": "object",
-                                      "properties": {
-                                        "typeOfBuyer": {
-                                          "type": "string",
-                                          "enum": [
-                                            "BODY_PUBLIC",
-                                            "EU_INSTITUTION",
-                                            "MINISTRY",
-                                            "NATIONAL_AGENCY",
-                                            "REGIONAL_AGENCY",
-                                            "REGIONAL_AUTHORITY"
-                                          ]
-                                        },
-                                        "mainGeneralActivity": {
-                                          "type": "string",
-                                          "enum": [
-                                            "DEFENCE",
-                                            "ECONOMIC_AND_FINANCIAL_AFFAIRS",
-                                            "EDUCATION",
-                                            "ENVIRONMENT",
-                                            "GENERAL_PUBLIC_SERVICES",
-                                            "HEALTH",
-                                            "HOUSING_AND_COMMUNITY_AMENITIES",
-                                            "PUBLIC_ORDER_AND_SAFETY",
-                                            "RECREATION_CULTURE_AND_RELIGION",
-                                            "SOCIAL_PROTECTION"
-                                          ]
-                                        },
-                                        "mainSectoralActivity": {
-                                          "type": "string",
-                                          "enum": [
-                                            "AIRPORT_RELATED_ACTIVITIES",
-                                            "ELECTRICITY",
-                                            "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
-                                            "EXPLORATION_EXTRACTION_GAS_OIL",
-                                            "PORT_RELATED_ACTIVITIES",
-                                            "POSTAL_SERVICES",
-                                            "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
-                                            "RAILWAY_SERVICES",
-                                            "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
-                                            "WATER"
-                                          ]
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "name",
-                                    "identifier",
-                                    "address",
-                                    "contactPoint"
-                                  ]
-                                }
-                              }
-                            }
                           }
                         }
                       }
@@ -304,7 +171,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "addOrganizationInfo"
+                          "getOrganizationInfoByCpid"
                         ]
                       }
                     }
