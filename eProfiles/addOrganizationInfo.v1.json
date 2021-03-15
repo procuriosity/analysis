@@ -61,47 +61,136 @@
                                   },
                                   "details": {
                                     "type": "object",
+                                    "required": [
+                                      "scale"
+                                    ],
                                     "properties": {
-                                      "typeOfBuyer": {
+                                      "typeOfSupplier": {
                                         "type": "string",
                                         "enum": [
-                                          "BODY_PUBLIC",
-                                          "EU_INSTITUTION",
-                                          "MINISTRY",
-                                          "NATIONAL_AGENCY",
-                                          "REGIONAL_AGENCY",
-                                          "REGIONAL_AUTHORITY"
+                                          "company",
+                                          "individual"
                                         ]
                                       },
-                                      "mainGeneralActivity": {
+                                      "mainEconomicActivities": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "uri": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "scheme",
+                                            "description"
+                                          ]
+                                        }
+                                      },
+                                      "scale": {
                                         "type": "string",
                                         "enum": [
-                                          "DEFENCE",
-                                          "ECONOMIC_AND_FINANCIAL_AFFAIRS",
-                                          "EDUCATION",
-                                          "ENVIRONMENT",
-                                          "GENERAL_PUBLIC_SERVICES",
-                                          "HEALTH",
-                                          "HOUSING_AND_COMMUNITY_AMENITIES",
-                                          "PUBLIC_ORDER_AND_SAFETY",
-                                          "RECREATION_CULTURE_AND_RELIGION",
-                                          "SOCIAL_PROTECTION"
+                                          "micro",
+                                          "sme",
+                                          "large"
                                         ]
                                       },
-                                      "mainSectoralActivity": {
-                                        "type": "string",
-                                        "enum": [
-                                          "AIRPORT_RELATED_ACTIVITIES",
-                                          "ELECTRICITY",
-                                          "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
-                                          "EXPLORATION_EXTRACTION_GAS_OIL",
-                                          "PORT_RELATED_ACTIVITIES",
-                                          "POSTAL_SERVICES",
-                                          "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
-                                          "RAILWAY_SERVICES",
-                                          "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
-                                          "WATER"
-                                        ]
+                                      "permits": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string"
+                                            },
+                                            "uri": {
+                                              "type": "string"
+                                            },
+                                            "permitDetails": {
+                                              "type": "object",
+                                              "required": [
+                                                "issuedBy",
+                                                "issuedThought",
+                                                "validityPeriod"
+                                              ],
+                                              "properties": {
+                                                "issuedBy": {
+                                                  "type": "object",
+                                                  "required": [
+                                                    "id",
+                                                    "name"
+                                                  ],
+                                                  "properties": {
+                                                    "id": {
+                                                      "type": "string"
+                                                    },
+                                                    "name": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                },
+                                                "issuedThought": {
+                                                  "type": "object",
+                                                  "required": [
+                                                    "id",
+                                                    "name"
+                                                  ],
+                                                  "properties": {
+                                                    "id": {
+                                                      "type": "string"
+                                                    },
+                                                    "name": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                },
+                                                "validityPeriod": {
+                                                  "type": "object",
+                                                  "required": [
+                                                    "startDate"
+                                                  ],
+                                                  "properties": {
+                                                    "startDate": {
+                                                      "type": "string",
+                                                      "format": "date-time"
+                                                    },
+                                                    "endDate": {
+                                                      "type": "string",
+                                                      "format": "date-time"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "scheme",
+                                            "permitDetails"
+                                          ]
+                                        }
+                                      },
+                                      "bankAccounts": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "../models/bankAccountFull.v1.json"
+                                        }
+                                      },
+                                      "legalForm": {
+                                        "$ref": "../models/legalForm.v1.json"
                                       }
                                     }
                                   },
@@ -110,7 +199,6 @@
                                     "items": {
                                       "type": "string",
                                       "enum": [
-                                        "buyer",
                                         "supplier"
                                       ]
                                     }
@@ -122,6 +210,7 @@
                                   "identifier",
                                   "address",
                                   "contactPoint",
+                                  "details",
                                   "roles"
                                 ]
                               }
@@ -168,32 +257,10 @@
                           "pmd": {
                             "type": "string",
                             "enum": [
-                              "DCO",
-                              "RFQ",
-                              "MC",
-                              "OT",
-                              "SV",
-                              "MV",
-                              "DA",
-                              "NP",
-                              "CD",
-                              "DC",
-                              "IP",
-                              "GPA",
-                              "RT",
-                              "DCO_TEST",
-                              "RFQ_TEST",
-                              "MC_TEST",
-                              "OT_TEST",
-                              "SV_TEST",
-                              "MV_TEST",
-                              "DA_TEST",
-                              "NP_TEST",
-                              "CD_TEST",
-                              "DC_TEST",
-                              "IP_TEST",
-                              "GPA_TEST",
-                              "RT_TEST"
+                              "CF",
+                              "TEST_CF",
+                              "OF",
+                              "TEST_OF"
                             ]
                           },
                           "country": {
@@ -202,7 +269,7 @@
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "createPN"
+                              "completeSourcing"
                             ]
                           },
                           "parties": {
@@ -233,47 +300,136 @@
                                 },
                                 "details": {
                                   "type": "object",
+                                  "required": [
+                                    "scale"
+                                  ],
                                   "properties": {
-                                    "typeOfBuyer": {
+                                    "typeOfSupplier": {
                                       "type": "string",
                                       "enum": [
-                                        "BODY_PUBLIC",
-                                        "EU_INSTITUTION",
-                                        "MINISTRY",
-                                        "NATIONAL_AGENCY",
-                                        "REGIONAL_AGENCY",
-                                        "REGIONAL_AUTHORITY"
+                                        "company",
+                                        "individual"
                                       ]
                                     },
-                                    "mainGeneralActivity": {
+                                    "mainEconomicActivities": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "uri": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "scheme",
+                                          "description"
+                                        ]
+                                      }
+                                    },
+                                    "scale": {
                                       "type": "string",
                                       "enum": [
-                                        "DEFENCE",
-                                        "ECONOMIC_AND_FINANCIAL_AFFAIRS",
-                                        "EDUCATION",
-                                        "ENVIRONMENT",
-                                        "GENERAL_PUBLIC_SERVICES",
-                                        "HEALTH",
-                                        "HOUSING_AND_COMMUNITY_AMENITIES",
-                                        "PUBLIC_ORDER_AND_SAFETY",
-                                        "RECREATION_CULTURE_AND_RELIGION",
-                                        "SOCIAL_PROTECTION"
+                                        "micro",
+                                        "sme",
+                                        "large"
                                       ]
                                     },
-                                    "mainSectoralActivity": {
-                                      "type": "string",
-                                      "enum": [
-                                        "AIRPORT_RELATED_ACTIVITIES",
-                                        "ELECTRICITY",
-                                        "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
-                                        "EXPLORATION_EXTRACTION_GAS_OIL",
-                                        "PORT_RELATED_ACTIVITIES",
-                                        "POSTAL_SERVICES",
-                                        "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
-                                        "RAILWAY_SERVICES",
-                                        "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
-                                        "WATER"
-                                      ]
+                                    "permits": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string"
+                                          },
+                                          "uri": {
+                                            "type": "string"
+                                          },
+                                          "permitDetails": {
+                                            "type": "object",
+                                            "required": [
+                                              "issuedBy",
+                                              "issuedThought",
+                                              "validityPeriod"
+                                            ],
+                                            "properties": {
+                                              "issuedBy": {
+                                                "type": "object",
+                                                "required": [
+                                                  "id",
+                                                  "name"
+                                                ],
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "name": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              },
+                                              "issuedThought": {
+                                                "type": "object",
+                                                "required": [
+                                                  "id",
+                                                  "name"
+                                                ],
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "name": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              },
+                                              "validityPeriod": {
+                                                "type": "object",
+                                                "required": [
+                                                  "startDate"
+                                                ],
+                                                "properties": {
+                                                  "startDate": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                  },
+                                                  "endDate": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "scheme",
+                                          "permitDetails"
+                                        ]
+                                      }
+                                    },
+                                    "bankAccounts": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "../models/bankAccountFull.v1.json"
+                                      }
+                                    },
+                                    "legalForm": {
+                                      "$ref": "../models/legalForm.v1.json"
                                     }
                                   }
                                 },
@@ -282,7 +438,8 @@
                                   "items": {
                                     "type": "string",
                                     "enum": [
-                                      "buyer"
+                                      "buyer",
+                                      "tenderer"
                                     ]
                                   }
                                 }
@@ -293,6 +450,7 @@
                                 "identifier",
                                 "addres",
                                 "contactPoint",
+                                "details",
                                 "roles"
                               ]
                             }
