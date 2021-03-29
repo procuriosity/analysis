@@ -53,7 +53,6 @@
                                 "date",
                                 "lots",
                                 "items",
-                                "tenderPeriod",
                                 "awardCriteria",
                                 "awardCriteriaDetails"
                               ],
@@ -228,18 +227,6 @@
                                     ]
                                   }
                                 },
-                                "tenderPeriod": {
-                                  "type": "object",
-                                  "required": [
-                                    "endDate"
-                                  ],
-                                  "properties": {
-                                    "endDate": {
-                                      "type": "string",
-                                      "format": "date-time"
-                                    }
-                                  }
-                                },
                                 "electronicAuctions": {
                                   "type": "object",
                                   "properties": {
@@ -358,19 +345,15 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "cpid",
-                          "ocid",
                           "date",
                           "owner",
-                          "tender"
+                          "tender",
+                          "cpid",
+                          "relatedCpid",
+                          "relatedOcid",
+                          "additionalOcid"
                         ],
                         "properties": {
-                          "cpid": {
-                            "$ref": "../models/cpid.v1.json"
-                          },
-                          "ocid": {
-                            "$ref": "../models/ocid.v1.json"
-                          },
                           "date": {
                             "type": "string",
                             "format": "date-time"
@@ -382,8 +365,7 @@
                             "type": "object",
                             "required": [
                               "lots",
-                              "items",
-                              "tenderPeriod"
+                              "items"
                             ],
                             "properties": {
                               "lots": {
@@ -520,18 +502,6 @@
                                   ]
                                 }
                               },
-                              "tenderPeriod": {
-                                "type": "object",
-                                "required": [
-                                  "endDate"
-                                ],
-                                "properties": {
-                                  "endDate": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                }
-                              },
                               "electronicAuctions": {
                                 "type": "object",
                                 "properties": {
@@ -568,6 +538,18 @@
                                 }
                               }
                             }
+                          },
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "relatedCpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "relatedOcid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "additionalOcid": {
+                            "$ref": "../models/ocid.v1.json"
                           }
                         }
                       }
