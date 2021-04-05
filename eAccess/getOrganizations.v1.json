@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getOrganization",
-    "version": "1.01"
+    "title": "getOrganizations",
+    "version": "1.02"
   },
   "servers": [
     {
@@ -13,7 +13,7 @@
     "/command": {
       "parameters": [],
       "post": {
-        "summary": "Get Organization",
+        "summary": "Get Organizations",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -29,7 +29,85 @@
                       "type": "object",
                       "properties": {
                         "result": {
-                          "$ref": "../models/organization.v1.json"
+                          "type": "object",
+                          "properties": {
+                            "parties": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "../models/organization.v1.json"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "parties"
+                          ],
+                          "properties": {
+                            "parties": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "details": {
+                                    "type": "object",
+                                    "properties": {
+                                      "typeOfBuyer": {
+                                        "type": "string",
+                                        "enum": [
+                                          "BODY_PUBLIC",
+                                          "EU_INSTITUTION",
+                                          "MINISTRY",
+                                          "NATIONAL_AGENCY",
+                                          "REGIONAL_AGENCY",
+                                          "REGIONAL_AUTHORITY"
+                                        ]
+                                      },
+                                      "mainGeneralActivity": {
+                                        "type": "string",
+                                        "enum": [
+                                          "DEFENCE",
+                                          "ECONOMIC_AND_FINANCIAL_AFFAIRS",
+                                          "EDUCATION",
+                                          "ENVIRONMENT",
+                                          "GENERAL_PUBLIC_SERVICES",
+                                          "HEALTH",
+                                          "HOUSING_AND_COMMUNITY_AMENITIES",
+                                          "PUBLIC_ORDER_AND_SAFETY",
+                                          "RECREATION_CULTURE_AND_RELIGION",
+                                          "SOCIAL_PROTECTION"
+                                        ]
+                                      },
+                                      "mainSectoralActivity": {
+                                        "type": "string",
+                                        "enum": [
+                                          "AIRPORT_RELATED_ACTIVITIES",
+                                          "ELECTRICITY",
+                                          "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
+                                          "EXPLORATION_EXTRACTION_GAS_OIL",
+                                          "PORT_RELATED_ACTIVITIES",
+                                          "POSTAL_SERVICES",
+                                          "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
+                                          "RAILWAY_SERVICES",
+                                          "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
+                                          "WATER"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       },
                       "required": [
@@ -56,7 +134,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getOrganization"
+                          "getOrganizations"
                         ]
                       },
                       "params": {
@@ -77,7 +155,8 @@
                             "type": "string",
                             "description": "роль организации\n",
                             "enum": [
-                              "procuringEntity"
+                              "procuringEntity",
+                              "buyer"
                             ]
                           }
                         }
