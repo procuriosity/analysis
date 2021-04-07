@@ -41,7 +41,8 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "submissions"
                         ],
                         "properties": {
                           "cpid": {
@@ -49,6 +50,43 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
+                          },
+                          "submissions": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "candidates": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "candidates"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }
