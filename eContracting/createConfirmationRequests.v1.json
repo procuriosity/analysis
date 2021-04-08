@@ -1,0 +1,360 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "createConfirmationRequests",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9151"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Create Confirmation Requests",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "contracts"
+                          ],
+                          "properties": {
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "confirmationRequests": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "format": "uuid"
+                                        },
+                                        "type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "digitalSignature"
+                                          ]
+                                        },
+                                        "relatesTo": {
+                                          "type": "string",
+                                          "enum": [
+                                            "document"
+                                          ]
+                                        },
+                                        "relatedItem": {
+                                          "type": "string"
+                                        },
+                                        "source": {
+                                          "type": "string",
+                                          "enum": [
+                                            "buyer",
+                                            "supplier",
+                                            "procuringEntity",
+                                            "invitedCandidate"
+                                          ]
+                                        },
+                                        "requestGroups": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string",
+                                                "format": "uuid"
+                                              },
+                                              "relatedOrganization": {
+                                                "type": "object",
+                                                "required": [
+                                                  "id",
+                                                  "name"
+                                                ],
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "name": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              },
+                                              "owner": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "relatedOrganization",
+                                              "owner"
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "type",
+                                        "relatesTo",
+                                        "relatedItem",
+                                        "source",
+                                        "requestGroups"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "confirmationRequests"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "role",
+                          "contracts"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "role": {
+                            "type": "string",
+                            "enum": [
+                              "buyer",
+                              "supplier",
+                              "procuringEntity",
+                              "invitedCandidate"
+                            ]
+                          },
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "documents": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "documents"
+                              ]
+                            }
+                          },
+                          "access": {
+                            "type": "object",
+                            "properties": {
+                              "buyers": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "owner": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "name",
+                                    "owner"
+                                  ]
+                                }
+                              },
+                              "procuringEntity": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "owner": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "name",
+                                  "owner"
+                                ]
+                              }
+                            }
+                          },
+                          "dossier": {
+                            "type": "object",
+                            "properties": {
+                              "candidates": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "owner": {
+                                      "type": "string"
+                                    },
+                                    "organizations": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "name"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "owner",
+                                    "organizations"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "candidates"
+                            ]
+                          },
+                          "submission": {
+                            "type": "object",
+                            "properties": {
+                              "tenderers": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "owner": {
+                                      "type": "string"
+                                    },
+                                    "organizations": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "name"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "owner",
+                                    "organizations"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "tenderers"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "createConfirmationRequests"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
