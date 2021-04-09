@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getBuyersOwners",
+    "title": "getProcuringEntityOwner",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Get Buyers Owners",
+        "summary": "Get Procuring Entity Owner",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -30,29 +30,26 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "buyers"
+                            "procuringEntity"
                           ],
                           "properties": {
-                            "buyers": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "name": {
-                                    "type": "string"
-                                  },
-                                  "owner": {
-                                    "type": "string"
-                                  }
+                            "procuringEntity": {
+                              "type": "object",
+                              "required": [
+                                "owner",
+                                "id",
+                                "name"
+                              ],
+                              "properties": {
+                                "owner": {
+                                  "type": "string"
                                 },
-                                "required": [
-                                  "id",
-                                  "name",
-                                  "owner"
-                                ]
+                                "id": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
                               }
                             }
                           }
@@ -105,7 +102,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getBuyersOwners"
+                          "getProcuringEntityOwner"
                         ]
                       }
                     }
