@@ -1,18 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkTenderState",
-    "version": "1.13"
+    "title": "checkAccessToConfirmationRequest",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9151"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Tender State",
+        "summary": "Check Access To Confirmation Request",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -42,9 +42,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "pmd",
-                          "country",
-                          "operationType"
+                          "token",
+                          "owner"
                         ],
                         "properties": {
                           "cpid": {
@@ -53,37 +52,11 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "pmd": {
-                            "type": "string",
-                            "example": "GPA",
-                            "description": "любое значение pmd"
-                          },
-                          "country": {
+                          "token": {
                             "type": "string"
                           },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "qualification",
-                              "qualificationConsideration",
-                              "qualificationProtocol",
-                              "withdrawQualificationProtocol",
-                              "startSecondStage",
-                              "applyQualificationProtocol",
-                              "outsourcingPN",
-                              "relationAP",
-                              "completeQualification",
-                              "createPcr",
-                              "divideLot",
-                              "createSubmission",
-                              "submitBid",
-                              "issuingFrameworkContract",
-                              "qualificationDeclareNonConflictOfInterest",
-                              "awardConsideration",
-                              "withdrawBid",
-                              "createRfq",
-                              "createConfirmationResponse"
-                            ]
+                          "owner": {
+                            "type": "string"
                           }
                         }
                       }
@@ -98,7 +71,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkTenderState"
+                          "checkAccessToConfirmationRequest"
                         ]
                       }
                     }
@@ -107,8 +80,7 @@
               }
             }
           }
-        },
-        "description": ""
+        }
       }
     }
   },
