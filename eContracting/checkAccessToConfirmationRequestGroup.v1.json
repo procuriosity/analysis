@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkAccessToConfirmationRequest",
+    "title": "checkAccessToConfirmationRequestGroup",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Access To Confirmation Request",
+        "summary": "Check Access To Confirmation Request Group",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -43,7 +43,8 @@
                           "cpid",
                           "ocid",
                           "token",
-                          "owner"
+                          "owner",
+                          "contracts"
                         ],
                         "properties": {
                           "cpid": {
@@ -57,6 +58,39 @@
                           },
                           "owner": {
                             "type": "string"
+                          },
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "confirmationResponses": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "requestGroup": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "requestGroup"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "confirmationResponses"
+                              ]
+                            }
                           }
                         }
                       }
