@@ -1,0 +1,251 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "createConfirmationResponse",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/do/confirmation/entity/{cpid}/{ocid}/{entityId}": {
+      "post": {
+        "summary": "Create Confirmation Response",
+        "operationId": "post-com",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "required": true,
+            "description": "ID транзакции"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "description": "тип данных в теле запроса"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "required": true,
+            "description": "токен confirmation request group"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "confirmationResponse": {
+                        "type": "object",
+                        "required": [
+                          "requestGroup",
+                          "type",
+                          "value",
+                          "relatedPerson"
+                        ],
+                        "properties": {
+                          "requestGroup": {
+                            "type": "string",
+                            "description": "идентификатор запроса на который дается ответ"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "тип подтверждения ответа",
+                            "enum": [
+                              "document",
+                              "hash"
+                            ]
+                          },
+                          "value": {
+                            "type": "string",
+                            "description": " url документа или hash подписи"
+                          },
+                          "relatedPerson": {
+                            "type": "object",
+                            "required": [
+                              "title",
+                              "name",
+                              "identifier",
+                              "businessFunctions"
+                            ],
+                            "properties": {
+                              "title": {
+                                "type": "string",
+                                "enum": [
+                                  "Mr.",
+                                  "Ms.",
+                                  "Mrs."
+                                ]
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "identifier": {
+                                "type": "object",
+                                "required": [
+                                  "scheme",
+                                  "id"
+                                ],
+                                "properties": {
+                                  "scheme": {
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "uri": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "businessFunctions": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "enum": [
+                                        "authority",
+                                        "contactPoint",
+                                        "chairman",
+                                        "procurementOfficer",
+                                        "technicalEvaluator",
+                                        "technicalOpener",
+                                        "priceOpener",
+                                        "priceEvaluator"
+                                      ]
+                                    },
+                                    "jobTitle": {
+                                      "type": "string"
+                                    },
+                                    "period": {
+                                      "type": "object",
+                                      "required": [
+                                        "startDate"
+                                      ],
+                                      "properties": {
+                                        "startDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        }
+                                      }
+                                    },
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "docType": {
+                                            "type": "string",
+                                            "enum": [
+                                              "regulatoryDocument"
+                                            ]
+                                          },
+                                          "url": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "docType",
+                                          "url"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "type",
+                                    "jobTitle",
+                                    "period"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "confirmationResponse"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор тендерного процесса"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор стадии тендерного процесса"
+        },
+        {
+          "schema": {
+            "type": "string",
+            "example": "contract"
+          },
+          "name": "entityId",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор сущности"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

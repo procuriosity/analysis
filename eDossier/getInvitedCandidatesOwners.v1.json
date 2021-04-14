@@ -1,18 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getBuyersOwners",
+    "title": "getInvitedCandidatesOwners",
     "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9251"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Get Buyers Owners",
+        "summary": "Get Invited Candidates Owners",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -30,28 +30,39 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "buyers"
+                            "candidates"
                           ],
                           "properties": {
-                            "buyers": {
+                            "candidates": {
                               "type": "array",
                               "items": {
                                 "type": "object",
                                 "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "name": {
-                                    "type": "string"
-                                  },
                                   "owner": {
                                     "type": "string"
+                                  },
+                                  "organizations": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "name"
+                                      ]
+                                    }
                                   }
                                 },
                                 "required": [
-                                  "id",
-                                  "name",
-                                  "owner"
+                                  "owner",
+                                  "organizations"
                                 ]
                               }
                             }
@@ -105,7 +116,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getBuyersOwners"
+                          "getInvitedCandidatesOwners"
                         ]
                       }
                     }
