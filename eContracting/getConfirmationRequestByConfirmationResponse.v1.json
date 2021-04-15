@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getOrganizationIdAndSourceOfConfirmationRequest",
+    "title": "getConfirmationRequestByConfirmationResponse",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Get Organization Id And Source Of Confirmation Request",
+        "summary": "Get Confirmation Request By Confirmation Response",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -39,9 +39,34 @@
                                 "type": "object",
                                 "properties": {
                                   "id": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "enum": [
+                                      "digitalSignature"
+                                    ]
+                                  },
+                                  "relatesTo": {
+                                    "type": "string",
+                                    "enum": [
+                                      "document"
+                                    ]
+                                  },
+                                  "relatedItem": {
                                     "type": "string"
                                   },
-                                  "confirmationRequests": {
+                                  "source": {
+                                    "type": "string",
+                                    "enum": [
+                                      "buyer",
+                                      "procuringEntity",
+                                      "tenderer",
+                                      "invitedCandidate"
+                                    ]
+                                  },
+                                  "requestGroups": {
                                     "type": "array",
                                     "items": {
                                       "type": "object",
@@ -49,53 +74,45 @@
                                         "id": {
                                           "type": "string"
                                         },
-                                        "source": {
-                                          "type": "string",
-                                          "enum": [
-                                            "buyer",
-                                            "procuringEntity",
-                                            "tenderer",
-                                            "invitedCandidate"
-                                          ]
-                                        },
-                                        "requestGroups": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": "object",
-                                            "properties": {
-                                              "id": {
-                                                "type": "string"
-                                              },
-                                              "relatedOrganization": {
-                                                "type": "object",
-                                                "required": [
-                                                  "id"
-                                                ],
-                                                "properties": {
-                                                  "id": {
-                                                    "type": "string"
-                                                  }
-                                                }
-                                              }
+                                        "relatedOrganization": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "name"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
                                             },
-                                            "required": [
-                                              "id",
-                                              "relatedOrganization"
-                                            ]
+                                            "name": {
+                                              "type": "string"
+                                            }
                                           }
+                                        },
+                                        "owner": {
+                                          "type": "string"
+                                        },
+                                        "token": {
+                                          "type": "string",
+                                          "format": "uuid"
                                         }
                                       },
                                       "required": [
                                         "id",
-                                        "source",
-                                        "requestGroups"
+                                        "relatedOrganization",
+                                        "owner",
+                                        "token"
                                       ]
                                     }
                                   }
                                 },
                                 "required": [
                                   "id",
-                                  "confirmationRequests"
+                                  "type",
+                                  "relatesTo",
+                                  "relatedItem",
+                                  "source",
+                                  "requestGroups"
                                 ]
                               }
                             }
@@ -183,7 +200,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getOrganizationIdAndSourceOfConfirmationRequest"
+                          "getConfirmationRequestByConfirmationResponse"
                         ]
                       }
                     }
