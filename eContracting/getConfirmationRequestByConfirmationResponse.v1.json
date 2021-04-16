@@ -38,81 +38,92 @@
                               "items": {
                                 "type": "object",
                                 "properties": {
-                                  "id": {
-                                    "type": "string",
-                                    "format": "uuid"
-                                  },
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "digitalSignature"
-                                    ]
-                                  },
-                                  "relatesTo": {
-                                    "type": "string",
-                                    "enum": [
-                                      "document"
-                                    ]
-                                  },
-                                  "relatedItem": {
-                                    "type": "string"
-                                  },
-                                  "source": {
-                                    "type": "string",
-                                    "enum": [
-                                      "buyer",
-                                      "procuringEntity",
-                                      "tenderer",
-                                      "invitedCandidate"
-                                    ]
-                                  },
-                                  "requestGroups": {
+                                  "confirmationRequests": {
                                     "type": "array",
                                     "items": {
                                       "type": "object",
                                       "properties": {
                                         "id": {
-                                          "type": "string"
-                                        },
-                                        "relatedOrganization": {
-                                          "type": "object",
-                                          "required": [
-                                            "id",
-                                            "name"
-                                          ],
-                                          "properties": {
-                                            "id": {
-                                              "type": "string"
-                                            },
-                                            "name": {
-                                              "type": "string"
-                                            }
-                                          }
-                                        },
-                                        "owner": {
-                                          "type": "string"
-                                        },
-                                        "token": {
                                           "type": "string",
                                           "format": "uuid"
+                                        },
+                                        "type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "digitalSignature"
+                                          ]
+                                        },
+                                        "relatesTo": {
+                                          "type": "string",
+                                          "enum": [
+                                            "document"
+                                          ]
+                                        },
+                                        "relatedItem": {
+                                          "type": "string"
+                                        },
+                                        "source": {
+                                          "type": "string",
+                                          "enum": [
+                                            "buyer",
+                                            "procuringEntity",
+                                            "tenderer",
+                                            "invitedCandidate"
+                                          ]
+                                        },
+                                        "requestGroups": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "relatedOrganization": {
+                                                "type": "object",
+                                                "required": [
+                                                  "id",
+                                                  "name"
+                                                ],
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "name": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              },
+                                              "owner": {
+                                                "type": "string"
+                                              },
+                                              "token": {
+                                                "type": "string",
+                                                "format": "uuid"
+                                              }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "relatedOrganization",
+                                              "owner",
+                                              "token"
+                                            ]
+                                          }
                                         }
                                       },
                                       "required": [
                                         "id",
-                                        "relatedOrganization",
-                                        "owner",
-                                        "token"
+                                        "type",
+                                        "relatesTo",
+                                        "relatedItem",
+                                        "source",
+                                        "requestGroups"
                                       ]
                                     }
                                   }
                                 },
                                 "required": [
-                                  "id",
-                                  "type",
-                                  "relatesTo",
-                                  "relatedItem",
-                                  "source",
-                                  "requestGroups"
+                                  "confirmationRequests"
                                 ]
                               }
                             }
