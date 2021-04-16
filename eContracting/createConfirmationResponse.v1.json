@@ -1,0 +1,417 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "createConfirmationResponse",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9151"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Create Confirmation Response",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "contracts"
+                          ],
+                          "properties": {
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "confirmationResponses": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "format": "uuid"
+                                        },
+                                        "date": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        },
+                                        "requestGroup": {
+                                          "type": "string",
+                                          "description": "идентификатор запроса на который дается ответ"
+                                        },
+                                        "type": {
+                                          "type": "string",
+                                          "description": "тип подтверждения ответа",
+                                          "enum": [
+                                            "document",
+                                            "hash"
+                                          ]
+                                        },
+                                        "value": {
+                                          "type": "string",
+                                          "description": "url документа или hash подписи"
+                                        },
+                                        "relatedPerson": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "title",
+                                            "name",
+                                            "identifier",
+                                            "businessFunctions"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "title": {
+                                              "type": "string",
+                                              "enum": [
+                                                "Mr.",
+                                                "Ms.",
+                                                "Mrs."
+                                              ]
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            },
+                                            "identifier": {
+                                              "$ref": "../models/identifierPerson.v1.json"
+                                            },
+                                            "businessFunctions": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "type": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "authority",
+                                                      "contactPoint",
+                                                      "chairman",
+                                                      "procurementOfficer",
+                                                      "technicalEvaluator",
+                                                      "technicalOpener",
+                                                      "priceOpener",
+                                                      "priceEvaluator"
+                                                    ]
+                                                  },
+                                                  "jobTitle": {
+                                                    "type": "string"
+                                                  },
+                                                  "period": {
+                                                    "type": "object",
+                                                    "required": [
+                                                      "startDate"
+                                                    ],
+                                                    "properties": {
+                                                      "startDate": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                      }
+                                                    }
+                                                  },
+                                                  "documents": {
+                                                    "type": "array",
+                                                    "items": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "id": {
+                                                          "type": "string"
+                                                        },
+                                                        "documentType": {
+                                                          "type": "string",
+                                                          "enum": [
+                                                            "regulatoryDocument"
+                                                          ]
+                                                        },
+                                                        "title": {
+                                                          "type": "string"
+                                                        },
+                                                        "description": {
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "id",
+                                                        "documentType",
+                                                        "title"
+                                                      ]
+                                                    }
+                                                  }
+                                                },
+                                                "required": [
+                                                  "id",
+                                                  "type",
+                                                  "jobTitle",
+                                                  "period"
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "token": {
+                                          "type": "string",
+                                          "format": "uuid"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "date",
+                                        "requestGroup",
+                                        "type",
+                                        "value",
+                                        "relatedPerson",
+                                        "token"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "confirmationResponses"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "contracts"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "confirmationResponses": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "format": "uuid"
+                                      },
+                                      "requestGroup": {
+                                        "type": "string",
+                                        "description": "идентификатор запроса на который дается ответ"
+                                      },
+                                      "type": {
+                                        "type": "string",
+                                        "enum": [
+                                          "document",
+                                          "hash"
+                                        ],
+                                        "description": "тип подтверждения ответа"
+                                      },
+                                      "value": {
+                                        "type": "string",
+                                        "description": "url документа или hash подписи"
+                                      },
+                                      "relatedPerson": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "title",
+                                          "name",
+                                          "identifier",
+                                          "businessFunctions"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "title": {
+                                            "type": "string",
+                                            "enum": [
+                                              "Mr.",
+                                              "Ms.",
+                                              "Mrs."
+                                            ]
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          },
+                                          "identifier": {
+                                            "$ref": "../models/identifierPerson.v1.json"
+                                          },
+                                          "businessFunctions": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "authority",
+                                                    "contactPoint",
+                                                    "chairman",
+                                                    "procurementOfficer",
+                                                    "technicalEvaluator",
+                                                    "technicalOpener",
+                                                    "priceOpener",
+                                                    "priceEvaluator"
+                                                  ]
+                                                },
+                                                "jobTitle": {
+                                                  "type": "string"
+                                                },
+                                                "period": {
+                                                  "type": "object",
+                                                  "required": [
+                                                    "startDate"
+                                                  ],
+                                                  "properties": {
+                                                    "startDate": {
+                                                      "type": "string",
+                                                      "format": "date-time"
+                                                    }
+                                                  }
+                                                },
+                                                "documents": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "documentType": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                          "regulatoryDocument"
+                                                        ]
+                                                      },
+                                                      "title": {
+                                                        "type": "string"
+                                                      },
+                                                      "description": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "id",
+                                                      "documentType",
+                                                      "title"
+                                                    ]
+                                                  }
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "type",
+                                                "jobTitle",
+                                                "period"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "requestGroup",
+                                      "type",
+                                      "value",
+                                      "relatedPerson"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "confirmationResponses"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "createConfirmationResponse"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
