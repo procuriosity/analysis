@@ -196,7 +196,12 @@
                       "additionalProcurementCategories": {
                         "type": "array",
                         "items": {
-                          "type": "string"
+                          "type": "string",
+                          "enum": [
+                            "goods",
+                            "works",
+                            "services"
+                          ]
                         }
                       },
                       "eligibilityCriteria": {
@@ -476,6 +481,7 @@
                             "classification",
                             "quantity",
                             "unit",
+                            "description",
                             "relatedLot"
                           ]
                         }
@@ -683,6 +689,7 @@
                   },
                   "relatedProcesses": {
                     "type": "array",
+                    "description": "связи в PN",
                     "items": {
                       "type": "object",
                       "properties": {
@@ -693,6 +700,7 @@
                         },
                         "relationship": {
                           "type": "array",
+                          "description": "связь с AP",
                           "items": {
                             "type": "string",
                             "enum": [
@@ -721,12 +729,17 @@
                         "uri"
                       ]
                     }
+                  },
+                  "token": {
+                    "type": "string",
+                    "description": "токен плана"
                   }
                 },
                 "required": [
                   "tender",
                   "planning",
-                  "relatedProcesses"
+                  "relatedProcesses",
+                  "token"
                 ]
               }
             }
