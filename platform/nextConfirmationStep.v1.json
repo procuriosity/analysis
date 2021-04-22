@@ -1,0 +1,79 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "nextConfirmationStep",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/complete/confirmationStage/{entity}/{cpid}/{ocid}/{entityId}": {
+      "post": {
+        "summary": "Next Confirmation Step",
+        "operationId": "post-com",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "buyer"
+            },
+            "in": "query",
+            "name": "role",
+            "required": true,
+            "description": "роль стороны контрактного процесса"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор тендерного процесса"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор стадии тендерного процесса"
+        },
+        {
+          "schema": {
+            "type": "string",
+            "example": "FC"
+          },
+          "name": "entity",
+          "in": "path",
+          "required": true,
+          "description": "сущность, в отношении которой выполняется процесс"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "entityId",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор сущности, в отношении которой выполняется процесс"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
