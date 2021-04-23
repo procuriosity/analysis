@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "setStateForContracts",
-    "version": "1.02"
+    "title": "findContractDocumentId",
+    "version": "1.0"
   },
   "servers": [
     {
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Set State For Contracts",
+        "summary": "Find Contract Document Id",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -29,9 +29,6 @@
                       "properties": {
                         "result": {
                           "type": "object",
-                          "required": [
-                            "contracts"
-                          ],
                           "properties": {
                             "contracts": {
                               "type": "array",
@@ -39,37 +36,35 @@
                                 "type": "object",
                                 "properties": {
                                   "id": {
-                                    "type": "string",
-                                    "format": "uuid"
+                                    "type": "string"
                                   },
-                                  "status": {
-                                    "type": "string",
-                                    "enum": [
-                                      "pending"
-                                    ]
-                                  },
-                                  "statusDetails": {
-                                    "type": "string",
-                                    "enum": [
-                                      "concluded",
-                                      "issuing",
-                                      "approved"
-                                    ]
+                                  "documents": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id"
+                                      ]
+                                    }
                                   }
                                 },
                                 "required": [
                                   "id",
-                                  "status",
-                                  "statusDetails"
+                                  "documents"
                                 ]
                               }
                             }
-                          }
+                          },
+                          "required": [
+                            "contracts"
+                          ]
                         }
-                      },
-                      "required": [
-                        "result"
-                      ]
+                      }
                     }
                   ]
                 }
@@ -93,9 +88,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "pmd",
-                          "country",
-                          "operationType"
+                          "processInitiator",
+                          "contracts"
                         ],
                         "properties": {
                           "cpid": {
@@ -104,46 +98,11 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "tender": {
-                            "type": "object",
-                            "properties": {
-                              "lots": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "id"
-                                  ]
-                                }
-                              }
-                            },
-                            "required": [
-                              "lots"
-                            ]
-                          },
-                          "pmd": {
+                          "processInitiator": {
                             "type": "string",
                             "enum": [
-                              "CF",
-                              "TEST_CF",
-                              "OF",
-                              "TEST_OF"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "completeSourcing",
-                              "issuingFrameworkContract",
-                              "nextStepAfterBuyersConfirmation"
+                              "nextStepAfterBuyersConfirmation",
+                              "issuingFrameworkContract"
                             ]
                           },
                           "contracts": {
@@ -173,7 +132,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "setStateForContracts"
+                          "findContractDocumentId"
                         ]
                       }
                     }
