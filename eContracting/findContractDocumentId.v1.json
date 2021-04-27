@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkContractState",
-    "version": "1.05"
+    "title": "findContractDocumentId",
+    "version": "1.0"
   },
   "servers": [
     {
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Contract State",
+        "summary": "Find Contract Document Id",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -20,7 +20,53 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "documents": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "documents"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "contracts"
+                          ]
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -42,9 +88,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "pmd",
-                          "country",
-                          "operationType",
+                          "processInitiator",
                           "contracts"
                         ],
                         "properties": {
@@ -54,26 +98,11 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "pmd": {
+                          "processInitiator": {
                             "type": "string",
                             "enum": [
-                              "CF",
-                              "TEST_CF",
-                              "OF",
-                              "TEST_OF"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "issuingFrameworkContract",
                               "nextStepAfterBuyersConfirmation",
-                              "createConfirmationResponseByBuyer",
-                              "createConfirmationResponseByInvitedCandidate",
-                              "nextStepAfterInvitedCandidatesConfirmation"
+                              "issuingFrameworkContract"
                             ]
                           },
                           "contracts": {
@@ -103,7 +132,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkContractState"
+                          "findContractDocumentId"
                         ]
                       }
                     }

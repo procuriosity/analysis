@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkContractState",
-    "version": "1.05"
+    "title": "checkAccessToConfirmationRequestGroup",
+    "version": "1.0"
   },
   "servers": [
     {
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Contract State",
+        "summary": "Check Access To Confirmation Request Group",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -42,9 +42,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "pmd",
-                          "country",
-                          "operationType",
+                          "token",
+                          "owner",
                           "contracts"
                         ],
                         "properties": {
@@ -54,27 +53,11 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "CF",
-                              "TEST_CF",
-                              "OF",
-                              "TEST_OF"
-                            ]
-                          },
-                          "country": {
+                          "token": {
                             "type": "string"
                           },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "issuingFrameworkContract",
-                              "nextStepAfterBuyersConfirmation",
-                              "createConfirmationResponseByBuyer",
-                              "createConfirmationResponseByInvitedCandidate",
-                              "nextStepAfterInvitedCandidatesConfirmation"
-                            ]
+                          "owner": {
+                            "type": "string"
                           },
                           "contracts": {
                             "type": "array",
@@ -83,10 +66,29 @@
                               "properties": {
                                 "id": {
                                   "type": "string"
+                                },
+                                "confirmationResponses": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "requestGroup": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "requestGroup"
+                                    ]
+                                  }
                                 }
                               },
                               "required": [
-                                "id"
+                                "id",
+                                "confirmationResponses"
                               ]
                             }
                           }
@@ -103,7 +105,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkContractState"
+                          "checkAccessToConfirmationRequest"
                         ]
                       }
                     }

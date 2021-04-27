@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createConfirmationResponse",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -10,7 +10,7 @@
     }
   ],
   "paths": {
-    "/do/confirmation/entity/{cpid}/{ocid}/{entityId}": {
+    "/do/confirmation/{entity}/{cpid}/{ocid}/{entityId}": {
       "post": {
         "summary": "Create Confirmation Response",
         "operationId": "post-com",
@@ -56,6 +56,19 @@
             "name": "X-TOKEN",
             "required": true,
             "description": "токен confirmation request group"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "buyer",
+                "invitedCandidate"
+              ]
+            },
+            "in": "query",
+            "name": "role",
+            "required": true,
+            "description": "роль стороны контрактного процесса, дающая ответ"
           }
         ],
         "requestBody": {
@@ -169,13 +182,13 @@
                                           "id": {
                                             "type": "string"
                                           },
-                                          "docType": {
+                                          "documentType": {
                                             "type": "string",
                                             "enum": [
                                               "regulatoryDocument"
                                             ]
                                           },
-                                          "url": {
+                                          "title": {
                                             "type": "string"
                                           },
                                           "description": {
@@ -184,16 +197,20 @@
                                         },
                                         "required": [
                                           "id",
-                                          "docType",
-                                          "url"
+                                          "documentType",
+                                          "title"
                                         ]
                                       }
+                                    },
+                                    "id": {
+                                      "type": "string"
                                     }
                                   },
                                   "required": [
                                     "type",
                                     "jobTitle",
-                                    "period"
+                                    "period",
+                                    "id"
                                   ]
                                 }
                               }
@@ -210,7 +227,8 @@
                 "type": "object"
               }
             }
-          }
+          },
+          "description": ""
         }
       },
       "parameters": [
@@ -235,12 +253,25 @@
         {
           "schema": {
             "type": "string",
-            "example": "contract"
+            "example": "contractId"
           },
           "name": "entityId",
           "in": "path",
           "required": true,
           "description": "идентификатор сущности"
+        },
+        {
+          "schema": {
+            "type": "string",
+            "example": "contract",
+            "enum": [
+              "contract"
+            ]
+          },
+          "name": "entity",
+          "in": "path",
+          "required": true,
+          "description": "сущность"
         }
       ]
     }

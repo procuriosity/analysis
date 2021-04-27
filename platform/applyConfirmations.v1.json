@@ -1,0 +1,111 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "applyConfirmations",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/apply/confirmations/{entity}/{cpid}/{ocid}/{entityId}": {
+      "post": {
+        "summary": "Apply Confirmations",
+        "operationId": "post-com",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "description": "Bearer {access_token}"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "ID транзакции",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "токен сущности",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "invitedCandidate"
+              ]
+            },
+            "in": "query",
+            "name": "role",
+            "description": "роль стороны контрактного процесса",
+            "required": true
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "contract",
+            "enum": [
+              "contract"
+            ]
+          },
+          "name": "entity",
+          "in": "path",
+          "required": true,
+          "description": "сущность, в отношении которой выполняется процесс"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор тендерного процесса"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор стадии тендерного процесса"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "entityId",
+          "in": "path",
+          "required": true,
+          "description": "идентификатор сущности, в отношении которой выполняется процесс"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
