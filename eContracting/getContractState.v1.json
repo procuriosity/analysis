@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "getContractState",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -41,13 +41,15 @@
                                   "status": {
                                     "type": "string",
                                     "enum": [
-                                      "pending"
+                                      "pending",
+                                      "cancelled"
                                     ]
                                   },
                                   "statusDetails": {
                                     "type": "string",
                                     "enum": [
-                                      "contractProject"
+                                      "contractProject",
+                                      "approved"
                                     ]
                                   },
                                   "id": {
@@ -56,7 +58,6 @@
                                 },
                                 "required": [
                                   "status",
-                                  "statusDetails",
                                   "id"
                                 ]
                               }
@@ -89,7 +90,8 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "contracts"
                         ],
                         "properties": {
                           "cpid": {
@@ -97,6 +99,20 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
+                          },
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id"
+                              ]
+                            }
                           }
                         }
                       }
