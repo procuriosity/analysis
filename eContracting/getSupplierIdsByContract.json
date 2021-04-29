@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkExistenceOfConfirmationResponses",
+    "title": "getSupplierIdsByContract",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Existence Of Confirmation Responses",
+        "summary": "Get Supplier Ids By Contract",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -20,7 +20,56 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "contracts"
+                          ],
+                          "properties": {
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "suppliers": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "suppliers"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
                 }
               }
             }
@@ -42,9 +91,6 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "pmd",
-                          "country",
-                          "operationType",
                           "contracts"
                         ],
                         "properties": {
@@ -53,25 +99,6 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "CF",
-                              "TEST_CF",
-                              "OF",
-                              "TEST_OF"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "nextStepAfterBuyersConfirmation",
-                              "nextStepAfterInvitedCandidatesConfirmation"
-                            ]
                           },
                           "contracts": {
                             "type": "array",
@@ -100,7 +127,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkExistenceOfConfirmationResponses"
+                          "getSupplierIdsByContract"
                         ]
                       }
                     }
