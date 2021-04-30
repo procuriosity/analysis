@@ -1,0 +1,137 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "confirmationRequest",
+    "version": "1.0"
+  },
+  "servers": [],
+  "paths": {
+    "/model": {
+      "options": {
+        "summary": "Confirmation Requests",
+        "operationId": "options-model",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "contracts": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "confirmationRequests": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "enum": [
+                                      "digitalSignature"
+                                    ]
+                                  },
+                                  "relatesTo": {
+                                    "type": "string",
+                                    "enum": [
+                                      "document",
+                                      "contract"
+                                    ]
+                                  },
+                                  "relatedItem": {
+                                    "type": "string"
+                                  },
+                                  "source": {
+                                    "type": "string",
+                                    "enum": [
+                                      "buyer",
+                                      "procuringEntity",
+                                      "tenderer",
+                                      "invitedCandidate"
+                                    ]
+                                  },
+                                  "requests": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "relatedOrganization": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "name"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "owner": {
+                                          "type": "string"
+                                        },
+                                        "token": {
+                                          "type": "string",
+                                          "format": "uuid"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "relatedOrganization",
+                                        "owner",
+                                        "token"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "type",
+                                  "relatesTo",
+                                  "relatedItem",
+                                  "source",
+                                  "requests"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "confirmationRequests"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "contracts"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
