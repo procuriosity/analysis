@@ -1,0 +1,129 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "submission",
+    "version": "1.0"
+  },
+  "servers": [],
+  "paths": {
+    "/model": {
+      "options": {
+        "summary": "Submission",
+        "operationId": "options-model",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "submissions": {
+                        "type": "object",
+                        "required": [
+                          "details"
+                        ],
+                        "properties": {
+                          "details": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "type": "string",
+                                  "enum": [
+                                    "pending",
+                                    "withdrawn",
+                                    "disqualified",
+                                    "valid"
+                                  ]
+                                },
+                                "date": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "candidates": {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "../../models/organizationSupplierFull.v1.json"
+                                  }
+                                },
+                                "requirementResponses": {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "../../models/requirementResponseShortRelatedCandidate.v1.json"
+                                  }
+                                },
+                                "documents": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "title": {
+                                        "type": "string"
+                                      },
+                                      "documentType": {
+                                        "type": "string",
+                                        "enum": [
+                                          "illustration",
+                                          "submissionDocuments",
+                                          "x_qualificationDocuments",
+                                          "x_eligibilityDocuments",
+                                          "x_technicalDocuments"
+                                        ]
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "title",
+                                      "documentType"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "status",
+                                "date",
+                                "candidates"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "token": {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    },
+                    "required": [
+                      "submissions",
+                      "token"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
