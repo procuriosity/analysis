@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "checkRelation",
-    "version": "1.01"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -42,28 +42,18 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "relatedCpid",
                           "operationType",
                           "existenceRelation"
                         ],
                         "properties": {
                           "cpid": {
-                            "type": "string",
-                            "description": "cpid объекта в котором проверяется связь",
-                            "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}$",
-                            "example": "ocds-b3wdp1-MD-1580458690892"
+                            "$ref": "../models/cpid.v1.json"
                           },
                           "ocid": {
-                            "type": "string",
-                            "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}-(AC|EI|EV|FS|NP|PN|TP)-[0-9]{13}$",
-                            "description": "ocid объекта в котором проверяется связь",
-                            "example": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896"
+                            "$ref": "../models/ocid.v1.json"
                           },
-                          "relatedCpid": {
-                            "type": "string",
-                            "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}$",
-                            "description": "cpid объекта на который проверятся связь",
-                            "example": "ocds-b3wdp1-MD-1580458690892"
+                          "relatedOcid": {
+                            "$ref": "../models/ocid.v1.json"
                           },
                           "operationType": {
                             "type": "string",
@@ -75,6 +65,9 @@
                           "existenceRelation": {
                             "type": "boolean",
                             "description": "проверка наличия(true)/отсутствия(false) связи\n"
+                          },
+                          "relatedCpid": {
+                            "$ref": "../models/cpid.v1.json"
                           }
                         }
                       }
