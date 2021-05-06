@@ -1,0 +1,192 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "pac",
+    "version": "1.0"
+  },
+  "servers": [],
+  "paths": {
+    "/model": {
+      "options": {
+        "summary": "PAC",
+        "operationId": "options-model",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "contracts": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "pending",
+                                "cancelled"
+                              ]
+                            },
+                            "relatedLots": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "suppliers": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "name"
+                                ]
+                              }
+                            },
+                            "awardId": {
+                              "type": "string"
+                            },
+                            "agreedMetrics": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "observations": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "notes": {
+                                          "type": "string"
+                                        },
+                                        "measure": {
+                                          "type": [
+                                            "string",
+                                            "number",
+                                            "integer",
+                                            "boolean"
+                                          ]
+                                        },
+                                        "relatedRequirementId": {
+                                          "type": "string"
+                                        },
+                                        "period": {
+                                          "type": "object",
+                                          "properties": {
+                                            "startDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            },
+                                            "endDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            }
+                                          },
+                                          "required": [
+                                            "startDate",
+                                            "endDate"
+                                          ]
+                                        },
+                                        "unit": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "name"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "notes",
+                                        "measure",
+                                        "relatedRequirementId"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "title",
+                                  "observations"
+                                ]
+                              }
+                            },
+                            "date": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "token": {
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "statusDetails": {
+                              "type": "string",
+                              "enum": [
+                                "concluded"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "status",
+                            "relatedLots",
+                            "suppliers",
+                            "awardId",
+                            "date",
+                            "token"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "contracts"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

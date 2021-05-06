@@ -1,0 +1,89 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "invitation",
+    "version": "1.0"
+  },
+  "servers": [],
+  "paths": {
+    "/model": {
+      "options": {
+        "summary": "Invitation",
+        "operationId": "options-model",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "invitations": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "date": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "cancelled",
+                                "pending"
+                              ]
+                            },
+                            "tenderers": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "name"
+                                ]
+                              }
+                            },
+                            "relatedQualification": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "date",
+                            "status",
+                            "tenderers",
+                            "relatedQualification"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
