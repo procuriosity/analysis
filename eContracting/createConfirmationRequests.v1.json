@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createConfirmationRequests",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -56,7 +56,8 @@
                                         "relatesTo": {
                                           "type": "string",
                                           "enum": [
-                                            "document"
+                                            "document",
+                                            "contract"
                                           ]
                                         },
                                         "relatedItem": {
@@ -71,7 +72,7 @@
                                             "invitedCandidate"
                                           ]
                                         },
-                                        "requestGroups": {
+                                        "requests": {
                                           "type": "array",
                                           "items": {
                                             "type": "object",
@@ -118,13 +119,17 @@
                                         "relatesTo",
                                         "relatedItem",
                                         "source",
-                                        "requestGroups"
+                                        "requests"
                                       ]
                                     }
+                                  },
+                                  "id": {
+                                    "type": "string"
                                   }
                                 },
                                 "required": [
-                                  "confirmationRequests"
+                                  "confirmationRequests",
+                                  "id"
                                 ]
                               }
                             }
@@ -200,8 +205,7 @@
                                 }
                               },
                               "required": [
-                                "id",
-                                "documents"
+                                "id"
                               ]
                             }
                           },

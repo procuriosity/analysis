@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getRequestGroupByConfirmationResponse",
-    "version": "1.0"
+    "title": "getRequestByConfirmationResponse",
+    "version": "1.01"
   },
   "servers": [
     {
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Get Request Group By Confirmation Response",
+        "summary": "Get Request By Confirmation Response",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -71,7 +71,7 @@
                                             "invitedCandidate"
                                           ]
                                         },
-                                        "requestGroups": {
+                                        "requests": {
                                           "type": "array",
                                           "items": {
                                             "type": "object",
@@ -117,13 +117,17 @@
                                         "relatesTo",
                                         "relatedItem",
                                         "source",
-                                        "requestGroups"
+                                        "requests"
                                       ]
                                     }
+                                  },
+                                  "id": {
+                                    "type": "string"
                                   }
                                 },
                                 "required": [
-                                  "confirmationRequests"
+                                  "confirmationRequests",
+                                  "id"
                                 ]
                               }
                             }
@@ -181,13 +185,13 @@
                                       "id": {
                                         "type": "string"
                                       },
-                                      "requestGroup": {
+                                      "requestId": {
                                         "type": "string"
                                       }
                                     },
                                     "required": [
                                       "id",
-                                      "requestGroup"
+                                      "requestId"
                                     ]
                                   }
                                 }
@@ -211,7 +215,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getRequestGroupByConfirmationResponse"
+                          "getRequestByConfirmationResponse"
                         ]
                       }
                     }

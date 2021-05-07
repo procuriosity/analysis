@@ -1,18 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getContractState",
-    "version": "1.01"
+    "title": "getSuppliersOwners",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9151"
+      "url": "http://{host}:9061"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Get Contract State",
+        "summary": "Get Suppliers Owners",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -30,35 +30,39 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "contracts"
+                            "tenderers"
                           ],
                           "properties": {
-                            "contracts": {
+                            "tenderers": {
                               "type": "array",
                               "items": {
                                 "type": "object",
                                 "properties": {
-                                  "status": {
-                                    "type": "string",
-                                    "enum": [
-                                      "pending",
-                                      "cancelled"
-                                    ]
-                                  },
-                                  "statusDetails": {
-                                    "type": "string",
-                                    "enum": [
-                                      "contractProject",
-                                      "approved"
-                                    ]
-                                  },
-                                  "id": {
+                                  "owner": {
                                     "type": "string"
+                                  },
+                                  "organizations": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "name"
+                                      ]
+                                    }
                                   }
                                 },
                                 "required": [
-                                  "status",
-                                  "id"
+                                  "owner",
+                                  "organizations"
                                 ]
                               }
                             }
@@ -107,10 +111,25 @@
                               "properties": {
                                 "id": {
                                   "type": "string"
+                                },
+                                "suppliers": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ]
+                                  }
                                 }
                               },
                               "required": [
-                                "id"
+                                "id",
+                                "suppliers"
                               ]
                             }
                           }
@@ -127,7 +146,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getContractState"
+                          "getSuppliersOwners"
                         ]
                       }
                     }

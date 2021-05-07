@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createConfirmationResponse",
-    "version": "1.01"
+    "version": "1.03"
   },
   "servers": [
     {
@@ -62,13 +62,14 @@
               "type": "string",
               "enum": [
                 "buyer",
-                "invitedCandidate"
+                "invitedCandidate",
+                "supplier"
               ]
             },
             "in": "query",
             "name": "role",
-            "required": true,
-            "description": "роль стороны контрактного процесса, дающая ответ"
+            "description": "роль стороны контрактного процесса, дающая ответ",
+            "required": true
           }
         ],
         "requestBody": {
@@ -81,13 +82,13 @@
                       "confirmationResponse": {
                         "type": "object",
                         "required": [
-                          "requestGroup",
+                          "requestId",
                           "type",
                           "value",
                           "relatedPerson"
                         ],
                         "properties": {
-                          "requestGroup": {
+                          "requestId": {
                             "type": "string",
                             "description": "идентификатор запроса на который дается ответ"
                           },

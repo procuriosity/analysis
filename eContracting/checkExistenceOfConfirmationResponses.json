@@ -1,18 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkRelation",
-    "version": "1.02"
+    "title": "checkExistenceOfConfirmationResponses",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9151"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Relation",
+        "summary": "Check Existence Of Confirmation Responses",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -42,9 +42,10 @@
                         "required": [
                           "cpid",
                           "ocid",
+                          "pmd",
+                          "country",
                           "operationType",
-                          "existenceRelation",
-                          "relatedCpid"
+                          "contracts"
                         ],
                         "properties": {
                           "cpid": {
@@ -53,22 +54,38 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "relatedOcid": {
-                            "$ref": "../models/ocid.v1.json"
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "CF",
+                              "TEST_CF",
+                              "OF",
+                              "TEST_OF"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
                           },
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "relationAP",
-                              "createRfq"
+                              "nextStepAfterBuyersConfirmation",
+                              "nextStepAfterInvitedCandidatesConfirmation"
                             ]
                           },
-                          "existenceRelation": {
-                            "type": "boolean",
-                            "description": "проверка наличия(true)/отсутствия(false) связи\n"
-                          },
-                          "relatedCpid": {
-                            "$ref": "../models/cpid.v1.json"
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id"
+                              ]
+                            }
                           }
                         }
                       }
@@ -83,7 +100,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkRelation"
+                          "checkExistenceOfConfirmationResponses"
                         ]
                       }
                     }

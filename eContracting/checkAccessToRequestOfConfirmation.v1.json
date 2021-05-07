@@ -1,18 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkRelation",
-    "version": "1.02"
+    "title": "checkAccessToRequestOfConfirmation",
+    "version": "1.01"
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9151"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Relation",
+        "summary": "Check Access To Request Of Confirmation",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -42,9 +42,9 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "operationType",
-                          "existenceRelation",
-                          "relatedCpid"
+                          "token",
+                          "owner",
+                          "contracts"
                         ],
                         "properties": {
                           "cpid": {
@@ -53,22 +53,44 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "relatedOcid": {
-                            "$ref": "../models/ocid.v1.json"
+                          "token": {
+                            "type": "string"
                           },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "relationAP",
-                              "createRfq"
-                            ]
+                          "owner": {
+                            "type": "string"
                           },
-                          "existenceRelation": {
-                            "type": "boolean",
-                            "description": "проверка наличия(true)/отсутствия(false) связи\n"
-                          },
-                          "relatedCpid": {
-                            "$ref": "../models/cpid.v1.json"
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "confirmationResponses": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "requestId": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "requestId"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "confirmationResponses"
+                              ]
+                            }
                           }
                         }
                       }
@@ -83,7 +105,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkRelation"
+                          "checkAccessToRequestOfConfirmation"
                         ]
                       }
                     }
@@ -92,7 +114,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       }
     }
   },
