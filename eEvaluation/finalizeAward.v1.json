@@ -1,18 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "finalizeBidsByAwards",
-    "version": "1.0"
+    "title": "finalizeAward",
+    "version": "1.01"
   },
   "servers": [
     {
-      "url": "http://{host}:9061"
+      "url": "http://{host}:9081"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Finalize Bids By Awards",
+        "summary": "Finalize Award",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -30,37 +30,40 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "bids"
+                            "awards"
                           ],
                           "properties": {
-                            "bids": {
-                              "type": "object",
-                              "required": [
-                                "details"
-                              ],
-                              "properties": {
-                                "details": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "id": {
-                                        "type": "string"
-                                      },
-                                      "status": {
-                                        "type": "string",
-                                        "enum": [
-                                          "valid",
-                                          "disqualified"
-                                        ]
-                                      }
-                                    },
-                                    "required": [
-                                      "id",
-                                      "status"
+                            "awards": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "unsuccessful",
+                                      "active"
                                     ]
+                                  },
+                                  "statusDetails": {
+                                    "type": "string",
+                                    "enum": [
+                                      "basedOnHumanDecision"
+                                    ]
+                                  },
+                                  "relatedBid": {
+                                    "type": "string"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "id",
+                                  "status",
+                                  "statusDetails",
+                                  "relatedBid"
+                                ]
                               }
                             }
                           }
@@ -92,7 +95,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "awards"
+                          "contracts"
                         ],
                         "properties": {
                           "cpid": {
@@ -101,7 +104,7 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "awards": {
+                          "contracts": {
                             "type": "array",
                             "items": {
                               "type": "object",
@@ -109,28 +112,13 @@
                                 "id": {
                                   "type": "string"
                                 },
-                                "status": {
-                                  "type": "string",
-                                  "enum": [
-                                    "active",
-                                    "unsuccessful"
-                                  ]
-                                },
-                                "statusDetails": {
-                                  "type": "string",
-                                  "enum": [
-                                    "basedOnHumanDecision"
-                                  ]
-                                },
-                                "relatedBid": {
+                                "awardId": {
                                   "type": "string"
                                 }
                               },
                               "required": [
                                 "id",
-                                "status",
-                                "statusDetails",
-                                "relatedBid"
+                                "awardId"
                               ]
                             }
                           }
@@ -147,7 +135,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "finalizeBidsByAwards"
+                          "finalizeAward"
                         ]
                       }
                     }
