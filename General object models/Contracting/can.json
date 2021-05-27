@@ -1,0 +1,112 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "can",
+    "version": "1.0"
+  },
+  "servers": [],
+  "paths": {
+    "/model": {
+      "options": {
+        "summary": "CAN",
+        "operationId": "options-model",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "contracts": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "pending",
+                                "active",
+                                "unsuccessful",
+                                "cancelled"
+                              ]
+                            },
+                            "statusDetails": {
+                              "type": "string",
+                              "enum": [
+                                "contractProject",
+                                "unsuccessful",
+                                "empty",
+                                "active"
+                              ]
+                            },
+                            "awardId": {
+                              "type": "string"
+                            },
+                            "lotId": {
+                              "type": "string"
+                            },
+                            "documents": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "documentType": {
+                                    "type": "string",
+                                    "enum": [
+                                      "evaluationReports"
+                                    ]
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "relatedLots": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "documentType",
+                                  "title"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "status",
+                            "statusDetails",
+                            "lotId"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "contracts"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
