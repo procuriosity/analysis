@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createRfq",
-    "version": "1.02"
+    "version": "1.03"
   },
   "servers": [
     {
@@ -57,7 +57,11 @@
                                 "awardCriteriaDetails",
                                 "value",
                                 "title",
-                                "description"
+                                "description",
+                                "classification",
+                                "procurementMethod",
+                                "procurementMethodDetails",
+                                "mainProcurementCategory"
                               ],
                               "properties": {
                                 "id": {
@@ -292,6 +296,39 @@
                                 },
                                 "description": {
                                   "type": "string"
+                                },
+                                "classification": {
+                                  "type": "object",
+                                  "required": [
+                                    "id",
+                                    "scheme",
+                                    "description"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "procurementMethod": {
+                                  "type": "string"
+                                },
+                                "procurementMethodDetails": {
+                                  "type": "string"
+                                },
+                                "mainProcurementCategory": {
+                                  "type": "string",
+                                  "enum": [
+                                    "goods",
+                                    "works",
+                                    "services"
+                                  ]
                                 }
                               }
                             },
