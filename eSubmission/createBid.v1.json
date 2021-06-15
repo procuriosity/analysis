@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createBid",
-    "version": "1.04"
+    "version": "1.05"
   },
   "servers": [
     {
@@ -338,6 +338,62 @@
                                                   "type": "string"
                                                 }
                                               }
+                                            },
+                                            "internalId": {
+                                              "type": "string"
+                                            },
+                                            "classification": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "scheme",
+                                                "description"
+                                              ]
+                                            },
+                                            "additionalClassifications": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "scheme": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "CPVS"
+                                                    ]
+                                                  },
+                                                  "description": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "id",
+                                                  "scheme",
+                                                  "description"
+                                                ]
+                                              }
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "quantity": {
+                                              "type": "number"
+                                            },
+                                            "relatedLot": {
+                                              "type": "string"
                                             }
                                           },
                                           "required": [
@@ -410,6 +466,10 @@
                                               "items": {
                                                 "$ref": "../models/evidences.v1.json"
                                               }
+                                            },
+                                            "relatedItem": {
+                                              "type": "string",
+                                              "format": "uuid"
                                             }
                                           },
                                           "required": [
@@ -761,6 +821,65 @@
                                                 "type": "string"
                                               }
                                             }
+                                          },
+                                          "internalId": {
+                                            "type": "string"
+                                          },
+                                          "classification": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "scheme": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "CPV"
+                                                ]
+                                              },
+                                              "description": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "scheme",
+                                              "description"
+                                            ]
+                                          },
+                                          "additionalClassifications": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "CPVS"
+                                                  ]
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "scheme",
+                                                "description"
+                                              ]
+                                            }
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "quantity": {
+                                            "type": "number"
+                                          },
+                                          "relatedLot": {
+                                            "type": "string"
                                           }
                                         },
                                         "required": [
@@ -833,6 +952,9 @@
                                             "items": {
                                               "$ref": "../models/evidences.v1.json"
                                             }
+                                          },
+                                          "relatedItem": {
+                                            "type": "string"
                                           }
                                         },
                                         "required": [
@@ -858,6 +980,28 @@
                           },
                           "owner": {
                             "type": "string"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "properties": {
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "items"
+                            ]
                           }
                         }
                       }
