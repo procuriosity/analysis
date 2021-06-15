@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateBidData",
-    "version": "1.05",
+    "version": "1.06",
     "description": ""
   },
   "servers": [
@@ -334,6 +334,65 @@
                                                 "type": "string"
                                               }
                                             }
+                                          },
+                                          "internalId": {
+                                            "type": "string"
+                                          },
+                                          "classification": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "scheme": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "CPV"
+                                                ]
+                                              },
+                                              "description": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "scheme",
+                                              "description"
+                                            ]
+                                          },
+                                          "additionalClassifications": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "CPVS"
+                                                  ]
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "scheme",
+                                                "description"
+                                              ]
+                                            }
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "quantity": {
+                                            "type": "number"
+                                          },
+                                          "relatedLot": {
+                                            "type": "string"
                                           }
                                         },
                                         "required": [
@@ -406,6 +465,9 @@
                                               "startDate",
                                               "endDate"
                                             ]
+                                          },
+                                          "relatedItem": {
+                                            "type": "string"
                                           }
                                         },
                                         "required": [
