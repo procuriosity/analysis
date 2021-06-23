@@ -369,13 +369,36 @@
                                             },
                                             "quantity": {
                                               "type": "number"
+                                            },
+                                            "classification": {
+                                              "type": "object",
+                                              "required": [
+                                                "id",
+                                                "scheme",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "CPV"
+                                                  ]
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              }
                                             }
                                           },
                                           "required": [
                                             "id",
                                             "unit",
                                             "description",
-                                            "quantity"
+                                            "quantity",
+                                            "classification"
                                           ]
                                         }
                                       },
@@ -944,11 +967,34 @@
                                     },
                                     "description": {
                                       "type": "string"
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme",
+                                        "description"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string",
+                                          "enum": [
+                                            "CPV"
+                                          ]
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        }
+                                      }
                                     }
                                   },
                                   "required": [
                                     "id",
-                                    "description"
+                                    "description",
+                                    "classification"
                                   ]
                                 }
                               },
@@ -962,24 +1008,37 @@
                                     },
                                     "classification": {
                                       "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme",
+                                        "description"
+                                      ],
                                       "properties": {
                                         "id": {
                                           "type": "string"
                                         },
                                         "scheme": {
-                                          "type": "string"
+                                          "type": "string",
+                                          "enum": [
+                                            "CPV"
+                                          ]
                                         },
                                         "description": {
                                           "type": "string"
                                         }
                                       }
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "classification"
+                                  ]
                                 }
                               }
                             },
                             "required": [
-                              "items"
+                              "items",
+                              "lots"
                             ]
                           }
                         }
