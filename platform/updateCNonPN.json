@@ -15,8 +15,8 @@
         "summary": "Update CN on PN",
         "operationId": "post-com",
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         },
         "description": "Update CN on PN for pmd = OT, SV, MV",
@@ -67,15 +67,15 @@
                     "properties": {
                       "planning": {
                         "type": "object",
-                        "required": [
-                          "budget"
-                        ],
                         "properties": {
                           "rationale": {
                             "type": "string"
                           },
                           "budget": {
                             "type": "object",
+                            "required": [
+                              "description"
+                            ],
                             "properties": {
                               "description": {
                                 "type": "string"
@@ -90,7 +90,11 @@
                           "title",
                           "description",
                           "procurementMethodRationale",
-                          "procurementMethodAdditionalInfo"
+                          "procurementMethodAdditionalInfo",
+                          "tenderPeriod",
+                          "enquiryPeriod",
+                          "lots",
+                          "items"
                         ],
                         "properties": {
                           "title": {
@@ -599,7 +603,6 @@
                       }
                     },
                     "required": [
-                      "planning",
                       "tender"
                     ]
                   }
