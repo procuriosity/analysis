@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "getSignOfVariantsToLot",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9271"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Get Sign Of Variants To Lot",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "tender"
+                          ],
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "lots"
+                              ],
+                              "properties": {
+                                "lots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "variants": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "hasVariants": {
+                                              "type": "boolean"
+                                            }
+                                          },
+                                          "required": [
+                                            "hasVariants"
+                                          ]
+                                        }
+                                      },
+                                      "classification": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "scheme",
+                                          "description"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string",
+                                            "enum": [
+                                              "CPV"
+                                            ]
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "variants",
+                                      "classification"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "lots"
+                            ],
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "getSignOfVariantsToLot"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

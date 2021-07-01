@@ -335,27 +335,6 @@
                                               }
                                             }
                                           },
-                                          "internalId": {
-                                            "type": "string"
-                                          },
-                                          "classification": {
-                                            "type": "object",
-                                            "properties": {
-                                              "id": {
-                                                "type": "string"
-                                              },
-                                              "scheme": {
-                                                "type": "string",
-                                                "enum": [
-                                                  "CPV"
-                                                ]
-                                              }
-                                            },
-                                            "required": [
-                                              "id",
-                                              "scheme"
-                                            ]
-                                          },
                                           "additionalClassifications": {
                                             "type": "array",
                                             "items": {
@@ -382,14 +361,12 @@
                                           },
                                           "quantity": {
                                             "type": "number"
-                                          },
-                                          "relatedLot": {
-                                            "type": "string"
                                           }
                                         },
                                         "required": [
                                           "id",
-                                          "unit"
+                                          "unit",
+                                          "quantity"
                                         ]
                                       }
                                     },
@@ -482,7 +459,8 @@
                           "tender": {
                             "type": "object",
                             "required": [
-                              "value"
+                              "value",
+                              "lots"
                             ],
                             "properties": {
                               "procurementMethodModalities": {
@@ -524,11 +502,44 @@
                                           "type": "string"
                                         }
                                       }
+                                    },
+                                    "description": {
+                                      "type": "string"
                                     }
                                   },
                                   "required": [
                                     "id",
-                                    "unit"
+                                    "unit",
+                                    "description"
+                                  ]
+                                }
+                              },
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "variants": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "hasVariants": {
+                                            "type": "boolean"
+                                          }
+                                        },
+                                        "required": [
+                                          "hasVariants"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "variants"
                                   ]
                                 }
                               }

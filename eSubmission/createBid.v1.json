@@ -339,28 +339,6 @@
                                                 }
                                               }
                                             },
-                                            "internalId": {
-                                              "type": "string"
-                                            },
-                                            "classification": {
-                                              "type": "object",
-                                              "properties": {
-                                                "id": {
-                                                  "type": "string"
-                                                },
-                                                "scheme": {
-                                                  "type": "string"
-                                                },
-                                                "description": {
-                                                  "type": "string"
-                                                }
-                                              },
-                                              "required": [
-                                                "id",
-                                                "scheme",
-                                                "description"
-                                              ]
-                                            },
                                             "additionalClassifications": {
                                               "type": "array",
                                               "items": {
@@ -392,13 +370,35 @@
                                             "quantity": {
                                               "type": "number"
                                             },
-                                            "relatedLot": {
-                                              "type": "string"
+                                            "classification": {
+                                              "type": "object",
+                                              "required": [
+                                                "id",
+                                                "scheme",
+                                                "description"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "CPV"
+                                                  ]
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              }
                                             }
                                           },
                                           "required": [
                                             "id",
-                                            "unit"
+                                            "unit",
+                                            "description",
+                                            "quantity",
+                                            "classification"
                                           ]
                                         }
                                       },
@@ -822,31 +822,6 @@
                                               }
                                             }
                                           },
-                                          "internalId": {
-                                            "type": "string"
-                                          },
-                                          "classification": {
-                                            "type": "object",
-                                            "properties": {
-                                              "id": {
-                                                "type": "string"
-                                              },
-                                              "scheme": {
-                                                "type": "string",
-                                                "enum": [
-                                                  "CPV"
-                                                ]
-                                              },
-                                              "description": {
-                                                "type": "string"
-                                              }
-                                            },
-                                            "required": [
-                                              "id",
-                                              "scheme",
-                                              "description"
-                                            ]
-                                          },
                                           "additionalClassifications": {
                                             "type": "array",
                                             "items": {
@@ -877,14 +852,12 @@
                                           },
                                           "quantity": {
                                             "type": "number"
-                                          },
-                                          "relatedLot": {
-                                            "type": "string"
                                           }
                                         },
                                         "required": [
                                           "id",
-                                          "unit"
+                                          "unit",
+                                          "quantity"
                                         ]
                                       }
                                     },
@@ -991,16 +964,81 @@
                                   "properties": {
                                     "id": {
                                       "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme",
+                                        "description"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string",
+                                          "enum": [
+                                            "CPV"
+                                          ]
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        }
+                                      }
                                     }
                                   },
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "description",
+                                    "classification"
+                                  ]
+                                }
+                              },
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme",
+                                        "description"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string",
+                                          "enum": [
+                                            "CPV"
+                                          ]
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "classification"
                                   ]
                                 }
                               }
                             },
                             "required": [
-                              "items"
+                              "items",
+                              "lots"
                             ]
                           }
                         }
@@ -1024,7 +1062,8 @@
                 ]
               }
             }
-          }
+          },
+          "description": ""
         }
       }
     }
