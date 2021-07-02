@@ -16,35 +16,7 @@
         "operationId": "post-com",
         "responses": {
           "202": {
-            "description": "Accepted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "contracts": {
-                      "type": "array",
-                      "description": "CANs",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "description": "идентификатор CAN на основании которого создается contract"
-                          }
-                        },
-                        "required": [
-                          "id"
-                        ]
-                      }
-                    }
-                  },
-                  "required": [
-                    "contracts"
-                  ]
-                }
-              }
-            }
+            "description": "Accepted"
           }
         },
         "parameters": [
@@ -84,7 +56,31 @@
             "description": "токен tender",
             "required": true
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "contracts": {
+                    "type": "array",
+                    "description": "CANs",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "идентификатор CAN на основании которого создается contract"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       "parameters": [
         {
