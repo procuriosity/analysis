@@ -23,12 +23,43 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "requirementResponse": {
-                    "$ref": "../models/requirement_response_object.v1.json"
+                "allOf": [
+                  {
+                    "properties": {
+                      "requirementResponse": {
+                        "$ref": "../models/requirement_response_object.v1.json"
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "requirementResponse": {
+                        "type": "object",
+                        "properties": {
+                          "responder": {
+                            "type": "object",
+                            "enum": [
+                              "Mr.",
+                              "Ms.",
+                              "Mrs."
+                            ],
+                            "properties": {
+                              "title": {
+                                "type": "string",
+                                "enum": [
+                                  "Mr.",
+                                  "Ms.",
+                                  "Mrs."
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
-                }
+                ],
+                "type": "object"
               },
               "examples": {
                 "successExample": {
