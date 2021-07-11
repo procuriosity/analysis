@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateAwardData",
-    "version": "1.02",
+    "version": "1.03",
     "description": ""
   },
   "servers": [
@@ -43,9 +43,9 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "tender",
                           "awards",
-                          "operationType"
+                          "operationType",
+                          "pmd"
                         ],
                         "properties": {
                           "cpid": {
@@ -56,9 +56,6 @@
                           },
                           "tender": {
                             "type": "object",
-                            "required": [
-                              "lots"
-                            ],
                             "properties": {
                               "lots": {
                                 "type": "array",
@@ -90,7 +87,10 @@
                                   ]
                                 }
                               }
-                            }
+                            },
+                            "required": [
+                              "lots"
+                            ]
                           },
                           "awards": {
                             "type": "array",
@@ -334,11 +334,24 @@
                                       "documentType"
                                     ]
                                   }
+                                },
+                                "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ]
+                                  }
                                 }
                               },
                               "required": [
-                                "id",
-                                "suppliers"
+                                "id"
                               ]
                             }
                           },
@@ -351,9 +364,6 @@
                           },
                           "mdm": {
                             "type": "object",
-                            "required": [
-                              "registrationSchemes"
-                            ],
                             "properties": {
                               "registrationSchemes": {
                                 "type": "array",
@@ -377,7 +387,62 @@
                                   ]
                                 }
                               }
-                            }
+                            },
+                            "required": [
+                              "registrationSchemes"
+                            ]
+                          },
+                          "bids": {
+                            "type": "object",
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "items": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "items"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "details"
+                            ]
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "DA",
+                              "NP",
+                              "CD",
+                              "DC",
+                              "IP",
+                              "TEST_DA",
+                              "TEST_NP",
+                              "TEST_CD",
+                              "TEST_DC",
+                              "TEST_IP",
+                              "CF",
+                              "OF",
+                              "TEST_OF",
+                              "TEST_CF"
+                            ]
                           }
                         }
                       }
