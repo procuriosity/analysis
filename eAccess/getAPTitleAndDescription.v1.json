@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "getAPTitleAndDescription",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -51,36 +51,55 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "format": "uuid"
-                  },
-                  "command": {
-                    "type": "string",
-                    "enum": [
-                      "getAPTitleAndDescription"
+                "allOf": [
+                  {
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "command": {
+                        "type": "string",
+                        "enum": [
+                          "getAPTitleAndDescription"
+                        ]
+                      },
+                      "context": {
+                        "$ref": "../models/oldRequestContext.v1.json"
+                      },
+                      "data": {
+                        "type": "object"
+                      },
+                      "version": {
+                        "type": "string",
+                        "example": "0.0.1"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "command",
+                      "context",
+                      "data",
+                      "version"
                     ]
                   },
-                  "context": {
-                    "$ref": "../models/oldRequestContext.v1.json"
-                  },
-                  "data": {
-                    "type": "object"
-                  },
-                  "version": {
-                    "type": "string",
-                    "example": "0.0.1"
+                  {
+                    "properties": {
+                      "context": {
+                        "type": "object",
+                        "properties": {
+                          "ocidCn": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "ocidCn"
+                        ]
+                      }
+                    }
                   }
-                },
-                "required": [
-                  "id",
-                  "command",
-                  "context",
-                  "data",
-                  "version"
-                ]
+                ],
+                "type": "object"
               }
             }
           }
