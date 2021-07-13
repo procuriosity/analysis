@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "getStandardCriteria",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -85,6 +85,15 @@
                                           "integer",
                                           "boolean"
                                         ]
+                                      },
+                                      "expectedValue": {
+                                        "type": [
+                                          "boolean",
+                                          "number",
+                                          "string",
+                                          "integer"
+                                        ],
+                                        "default": true
                                       }
                                     },
                                     "required": [
@@ -100,13 +109,27 @@
                                 "requirements"
                               ]
                             }
+                          },
+                          "relatesTo": {
+                            "type": "string",
+                            "enum": [
+                              "tenderer"
+                            ]
+                          },
+                          "source": {
+                            "type": "string",
+                            "enum": [
+                              "tenderer"
+                            ]
                           }
                         },
                         "required": [
                           "id",
                           "title",
                           "classification",
-                          "requirementGroups"
+                          "requirementGroups",
+                          "relatesTo",
+                          "source"
                         ]
                       }
                     }
