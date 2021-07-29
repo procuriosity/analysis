@@ -120,21 +120,6 @@
                             "description": {
                               "type": "string"
                             },
-                            "classification": {
-                              "type": "object",
-                              "required": [
-                                "id",
-                                "scheme"
-                              ],
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "scheme": {
-                                  "type": "string"
-                                }
-                              }
-                            },
                             "quantity": {
                               "type": "number"
                             },
@@ -155,10 +140,7 @@
                           },
                           "required": [
                             "id",
-                            "description",
-                            "classification",
                             "quantity",
-                            "unit",
                             "relatedLot"
                           ]
                         }
@@ -261,7 +243,7 @@
             },
             "in": "query",
             "name": "FA",
-            "description": "cpid FA, PCR",
+            "description": "cpid FA (PCR)",
             "required": true
           },
           {
@@ -279,7 +261,7 @@
             },
             "in": "query",
             "name": "lotId",
-            "description": "id lot",
+            "description": "lot.id from PCR",
             "required": true
           },
           {
@@ -317,6 +299,14 @@
             "name": "X-TOKEN",
             "required": true,
             "description": "токен PN"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "itemId",
+            "description": "item.id from PCR"
           }
         ]
       },
