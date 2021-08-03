@@ -1,0 +1,99 @@
+{
+  "title": "target",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "relatesTo": {
+      "type": "string",
+      "enum": [
+        "lot",
+        "item"
+      ]
+    },
+    "relatedItem": {
+      "type": "string"
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "period": {
+            "type": "object",
+            "properties": {
+              "startDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "endDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "measure": {
+            "type": [
+              "string",
+              "number",
+              "integer",
+              "boolean"
+            ]
+          },
+          "unit": {
+            "type": "object",
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "dimensions": {
+            "type": "object",
+            "required": [
+              "requirementClassIdPR"
+            ],
+            "properties": {
+              "requirementClassIdPR": {
+                "type": "string"
+              }
+            }
+          },
+          "notes": {
+            "type": "string"
+          },
+          "relatedRequirementId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "measure",
+          "unit",
+          "notes"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "relatesTo",
+    "relatedItem",
+    "observations"
+  ]
+}
