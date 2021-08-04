@@ -51,7 +51,8 @@
                               "lots",
                               "tenderPeriod",
                               "title",
-                              "description"
+                              "description",
+                              "items"
                             ],
                             "properties": {
                               "lots": {
@@ -175,6 +176,45 @@
                               },
                               "description": {
                                 "type": "string"
+                              },
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "internalId": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "type": "number"
+                                    },
+                                    "unit": {
+                                      "type": "object",
+                                      "required": [
+                                        "id"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "relatedLot": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "quantity",
+                                    "relatedLot"
+                                  ]
+                                }
                               }
                             }
                           },
