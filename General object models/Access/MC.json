@@ -1,16 +1,16 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "RFQ",
+    "title": "MC",
     "version": "1.0"
   },
   "servers": [],
   "paths": {
     "/model": {
       "options": {
-        "summary": "Request for Price Quotation",
+        "summary": "Mini Competition",
         "operationId": "options-model",
-        "description": "RFQ is a procequre from Second Stage Competition based on FA",
+        "description": "MC is a procequre from Second Stage Competition based on FA",
         "requestBody": {
           "content": {
             "application/json": {
@@ -134,6 +134,26 @@
                                     "empty",
                                     "awarded"
                                   ]
+                                },
+                                "variants": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "hasVariants": {
+                                        "type": [
+                                          "string",
+                                          "boolean"
+                                        ]
+                                      },
+                                      "variantsDetails": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "hasVariants"
+                                    ]
+                                  }
                                 }
                               },
                               "required": [
@@ -143,7 +163,8 @@
                                 "contractPeriod",
                                 "placeOfPerformance",
                                 "status",
-                                "statusDetails"
+                                "statusDetails",
+                                "variants"
                               ]
                             }
                           },
@@ -250,13 +271,17 @@
                           "awardCriteria": {
                             "type": "string",
                             "enum": [
-                              "priceOnly"
+                              "priceOnly",
+                              "costOnly",
+                              "qualityOnly",
+                              "ratedCriteria"
                             ]
                           },
                           "awardCriteriaDetails": {
                             "type": "string",
                             "enum": [
-                              "automated"
+                              "automated",
+                              "manual"
                             ]
                           },
                           "value": {
@@ -309,17 +334,6 @@
                           "procurementMethodDetails": {
                             "type": "string"
                           },
-                          "additionalProcurementCategories": {
-                            "type": "array",
-                            "items": {
-                              "type": "string",
-                              "enum": [
-                                "goods",
-                                "works",
-                                "services"
-                              ]
-                            }
-                          },
                           "targets": {
                             "type": "array",
                             "items": {
@@ -337,16 +351,67 @@
                             "items": {
                               "$ref": "../../models/criteriaResponse.json"
                             }
+                          },
+                          "documents": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "documentType": {
+                                  "type": "string",
+                                  "enum": [
+                                    "tenderNotice",
+                                    "biddingDocuments",
+                                    "technicalSpecifications",
+                                    "evaluationCriteria",
+                                    "clarifications",
+                                    "eligibilityCriteria",
+                                    "riskProvisions",
+                                    "billOfQuantity",
+                                    "conflictOfInterest",
+                                    "procurementPlan",
+                                    "contractDraft",
+                                    "complaints",
+                                    "illustration",
+                                    "cancellationDetails",
+                                    "evaluationReports",
+                                    "shortlistedFirms",
+                                    "contractArrangements",
+                                    "contractGuarantees"
+                                  ]
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "relatedLots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "documentType",
+                                "title"
+                              ]
+                            }
                           }
                         }
                       },
                       "token": {
                         "type": "string",
-                        "description": "токен RFQ"
+                        "description": "токен MC"
                       },
                       "relatedProcesses": {
                         "type": "array",
-                        "description": "связи в RFQ",
+                        "description": "связи в MC",
                         "items": {
                           "type": "object",
                           "properties": {
