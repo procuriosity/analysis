@@ -1,14 +1,14 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "bid",
+    "title": "bidInPcr",
     "version": "1.0"
   },
   "servers": [],
   "paths": {
     "/model": {
       "options": {
-        "summary": "Bid",
+        "summary": "Bid in PCR",
         "operationId": "options-model",
         "responses": {
           "200": {
@@ -51,10 +51,6 @@
                                 },
                                 "value": {
                                   "type": "object",
-                                  "required": [
-                                    "amount",
-                                    "currency"
-                                  ],
                                   "properties": {
                                     "amount": {
                                       "type": "number"
@@ -62,7 +58,11 @@
                                     "currency": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "amount",
+                                    "currency"
+                                  ]
                                 },
                                 "tenderers": {
                                   "type": "array",
@@ -248,6 +248,108 @@
                                     "type": "string"
                                   }
                                 },
+                                "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "unit": {
+                                        "type": "object",
+                                        "required": [
+                                          "value",
+                                          "id",
+                                          "name"
+                                        ],
+                                        "properties": {
+                                          "value": {
+                                            "type": "object",
+                                            "required": [
+                                              "amount",
+                                              "currency"
+                                            ],
+                                            "properties": {
+                                              "amount": {
+                                                "type": "number"
+                                              },
+                                              "currency": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "quantity": {
+                                        "type": "number"
+                                      },
+                                      "classification": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "scheme",
+                                          "description"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string",
+                                            "enum": [
+                                              "CPV"
+                                            ]
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "additionalClassifications": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string",
+                                              "enum": [
+                                                "CPVS"
+                                              ]
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "scheme",
+                                            "description"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "unit",
+                                      "description",
+                                      "quantity",
+                                      "classification"
+                                    ]
+                                  }
+                                },
                                 "requirementResponses": {
                                   "type": "array",
                                   "items": {
@@ -370,9 +472,9 @@
                                 "id",
                                 "status",
                                 "date",
-                                "value",
                                 "tenderers",
-                                "relatedLots"
+                                "relatedLots",
+                                "items"
                               ]
                             }
                           }
@@ -393,8 +495,7 @@
               }
             }
           }
-        },
-        "description": "Bid for OT, SV, MV, RT, GPA, RFQ, MC, DCO"
+        }
       }
     }
   },
