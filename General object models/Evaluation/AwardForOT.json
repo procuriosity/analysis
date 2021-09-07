@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "AwardForFA",
-    "version": "1.01"
+    "title": "Award",
+    "version": "1.00"
   },
   "servers": [],
   "paths": {
@@ -24,9 +24,6 @@
                         "id": {
                           "type": "string"
                         },
-                        "internalId": {
-                          "type": "string"
-                        },
                         "date": {
                           "type": "string",
                           "format": "date-time"
@@ -46,19 +43,20 @@
                             "awaiting",
                             "noOffersReceived",
                             "consideration",
-                            "active",
-                            "unsuccessful",
-                            "basedOnHumanDecision",
-                            "lotCancelled",
-                            "lackOfSubmissions",
-                            "lackOfQualifications"
+                            "lotCancelled"
                           ]
                         },
                         "description": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "отсутствует для успешного"
                         },
                         "value": {
                           "type": "object",
+                          "required": [
+                            "amount",
+                            "currency"
+                          ],
+                          "description": "отсутствует для неуспешного",
                           "properties": {
                             "amount": {
                               "type": "string"
@@ -66,11 +64,7 @@
                             "currency": {
                               "type": "string"
                             }
-                          },
-                          "required": [
-                            "amount",
-                            "currency"
-                          ]
+                          }
                         },
                         "relatedLots": {
                           "type": "array",
@@ -257,58 +251,66 @@
                             ]
                           }
                         },
-                        "documents": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "title": {
-                                "type": "string"
-                              },
-                              "description": {
-                                "type": "string"
-                              },
-                              "documentType": {
-                                "type": "string",
-                                "enum": [
-                                  "awardNotice",
-                                  "evaluationReports",
-                                  "contractDraft",
-                                  "winningBid",
-                                  "complaints",
-                                  "bidders",
-                                  "conflictOfInterest",
-                                  "cancellationDetails",
-                                  "submissionDocuments",
-                                  "contractArrangements",
-                                  "contractSchedule",
-                                  "shortlistedFirms"
-                                ]
+                        "requirementResponse": {
+                          "type": "object",
+                          "description": "ответ от PE o Декларации об отсутствии конфликта интересов",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "type": [
+                                "string",
+                                "number",
+                                "integer",
+                                "boolean"
+                              ]
+                            },
+                            "relatedTenderer": {
+                              "type": "object",
+                              "required": [
+                                "id"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                }
                               }
                             },
-                            "required": [
-                              "id",
-                              "title",
-                              "documentType"
-                            ]
-                          }
-                        },
-                        "items": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
+                            "requirement": {
+                              "type": "object",
+                              "required": [
+                                "id"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                }
                               }
                             },
-                            "required": [
-                              "id"
-                            ]
-                          }
+                            "responder": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "name"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "value",
+                            "relatedTenderer",
+                            "requirement",
+                            "responder"
+                          ]
                         }
                       },
                       "required": [
@@ -332,7 +334,7 @@
             "description": "Aggregated Plan (for Framework Agreement)"
           }
         },
-        "description": "Award for Framework Agreement (OF, CF)"
+        "description": "Award for OT, SV, MV, RT, GPA, RFQ, MC, DCO"
       },
       "components": {
         "schemas": {}
