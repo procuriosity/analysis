@@ -29,6 +29,9 @@
                       "properties": {
                         "result": {
                           "type": "object",
+                          "required": [
+                            "invitations"
+                          ],
                           "properties": {
                             "invitations": {
                               "type": "array",
@@ -75,12 +78,12 @@
                                 ]
                               }
                             }
-                          },
-                          "required": [
-                            "invitations"
-                          ]
+                          }
                         }
-                      }
+                      },
+                      "required": [
+                        "result"
+                      ]
                     }
                   ]
                 }
@@ -104,7 +107,9 @@
                         "required": [
                           "cpid",
                           "date",
-                          "bids"
+                          "bids",
+                          "additionalCpid",
+                          "additionalOcid"
                         ],
                         "properties": {
                           "cpid": {
@@ -135,6 +140,12 @@
                                 }
                               }
                             }
+                          },
+                          "additionalCpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "additionalOcid": {
+                            "$ref": "../models/ocid.v1.json"
                           }
                         }
                       }
