@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "doPacs",
-    "version": "1.03",
+    "version": "1.04",
     "description": ""
   },
   "servers": [
@@ -147,12 +147,23 @@
                                               "relatedRequirementId"
                                             ]
                                           }
+                                        },
+                                        "relatesTo": {
+                                          "type": "string",
+                                          "enum": [
+                                            "item"
+                                          ]
+                                        },
+                                        "relatedItem": {
+                                          "type": "string"
                                         }
                                       },
                                       "required": [
                                         "id",
                                         "title",
-                                        "observations"
+                                        "observations",
+                                        "relatesTo",
+                                        "relatedItem"
                                       ]
                                     }
                                   },
@@ -379,11 +390,26 @@
                                       "name"
                                     ]
                                   }
+                                },
+                                "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ]
+                                  }
                                 }
                               },
                               "required": [
                                 "id",
-                                "suppliers"
+                                "suppliers",
+                                "items"
                               ]
                             }
                           },
@@ -457,6 +483,9 @@
                                               "startDate",
                                               "endDate"
                                             ]
+                                          },
+                                          "relatedItem": {
+                                            "type": "string"
                                           }
                                         },
                                         "required": [
