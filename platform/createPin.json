@@ -54,7 +54,7 @@
             },
             "in": "query",
             "name": "country",
-            "description": "country code according ISO 3166 alpha-2 standart",
+            "description": "country code according ISO 3166 alpha-2 standard",
             "required": true
           },
           {
@@ -64,7 +64,7 @@
             "in": "query",
             "name": "lang",
             "required": true,
-            "description": "language code according ISO 639-1 standart"
+            "description": "language code according ISO 639-1 standard"
           },
           {
             "schema": {
@@ -188,10 +188,10 @@
                           "tenderPeriod": {
                             "type": "object",
                             "required": [
-                              "endDate"
+                              "startDate"
                             ],
                             "properties": {
-                              "endDate": {
+                              "startDate": {
                                 "type": "string",
                                 "format": "date-time"
                               }
@@ -736,11 +736,18 @@
                                 "classification": {
                                   "type": "object",
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "scheme"
                                   ],
                                   "properties": {
                                     "id": {
                                       "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string",
+                                      "enum": [
+                                        "CPV"
+                                      ]
                                     }
                                   }
                                 },
@@ -751,10 +758,17 @@
                                     "properties": {
                                       "id": {
                                         "type": "string"
+                                      },
+                                      "scheme": {
+                                        "type": "string",
+                                        "enum": [
+                                          "CPVS"
+                                        ]
                                       }
                                     },
                                     "required": [
-                                      "id"
+                                      "id",
+                                      "scheme"
                                     ]
                                   }
                                 },
