@@ -148,11 +148,13 @@
                         "required": [
                           "title",
                           "description",
+                          "classification",
                           "procurementMethodRationale",
                           "procurementMethodAdditionalInfo",
                           "awardCriteria",
                           "awardCriteriaDetails",
                           "tenderPeriod",
+                          "procuringEntity",
                           "lots",
                           "items"
                         ],
@@ -162,6 +164,24 @@
                           },
                           "description": {
                             "type": "string"
+                          },
+                          "classification": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "scheme"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "scheme": {
+                                "type": "string",
+                                "enum": [
+                                  "CPV"
+                                ]
+                              }
+                            }
                           },
                           "procurementMethodRationale": {
                             "type": "string"
@@ -261,6 +281,12 @@
                           },
                           "procuringEntity": {
                             "type": "object",
+                            "required": [
+                              "name",
+                              "identifier",
+                              "address",
+                              "contactPoint"
+                            ],
                             "properties": {
                               "name": {
                                 "type": "string"
@@ -391,13 +417,7 @@
                                   ]
                                 }
                               }
-                            },
-                            "required": [
-                              "name",
-                              "identifier",
-                              "address",
-                              "contactPoint"
-                            ]
+                            }
                           },
                           "criteria": {
                             "type": "array",
@@ -551,7 +571,7 @@
                           "targets": {
                             "type": "array",
                             "items": {
-                              "$ref": "../models/targetRequest.json"
+                              "$ref": "../models/target_optionalUnit_relatesToTender_request.json"
                             }
                           },
                           "lots": {
