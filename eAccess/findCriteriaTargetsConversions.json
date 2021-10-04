@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "findCriteriaTargetsConversions",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -42,7 +42,89 @@
                                 "targets": {
                                   "type": "array",
                                   "items": {
-                                    "$ref": "../models/target.json"
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "title": {
+                                        "type": "string",
+                                        "enum": [
+                                          "lot",
+                                          "item"
+                                        ]
+                                      },
+                                      "relatesTo": {
+                                        "type": "string"
+                                      },
+                                      "relatedItem": {
+                                        "type": "string"
+                                      },
+                                      "observations": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "measure": {
+                                              "type": [
+                                                "string",
+                                                "number",
+                                                "integer",
+                                                "boolean"
+                                              ]
+                                            },
+                                            "period": {
+                                              "type": "object",
+                                              "properties": {
+                                                "startDate": {
+                                                  "type": "string",
+                                                  "format": "date-time"
+                                                },
+                                                "endDate": {
+                                                  "type": "string",
+                                                  "format": "date-time"
+                                                }
+                                              }
+                                            },
+                                            "notes": {
+                                              "type": "string"
+                                            },
+                                            "unit": {
+                                              "type": "string"
+                                            },
+                                            "dimensions": {
+                                              "type": "object",
+                                              "properties": {
+                                                "requirementClassIdPR": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "requirementClassIdPR"
+                                              ]
+                                            },
+                                            "relatedRequirementId": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "measure",
+                                            "notes"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "title",
+                                      "relatesTo",
+                                      "relatedItem",
+                                      "observations"
+                                    ]
                                   }
                                 },
                                 "conversions": {
