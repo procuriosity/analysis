@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "validateClassification",
+    "title": "validateBudgets",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Validate Classification",
+        "summary": "Validate Budgets",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -68,10 +68,29 @@
                                         "classifications": {
                                           "type": "object",
                                           "required": [
-                                            "ei"
+                                            "ei",
+                                            "fs"
                                           ],
                                           "properties": {
                                             "ei": {
+                                              "type": "string"
+                                            },
+                                            "fs": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "amount": {
+                                          "type": "object",
+                                          "required": [
+                                            "amount",
+                                            "currency"
+                                          ],
+                                          "properties": {
+                                            "amount": {
+                                              "type": "number"
+                                            },
+                                            "currency": {
                                               "type": "string"
                                             }
                                           }
@@ -79,7 +98,8 @@
                                       },
                                       "required": [
                                         "id",
-                                        "classifications"
+                                        "classifications",
+                                        "amount"
                                       ]
                                     }
                                   }
@@ -96,11 +116,18 @@
                               "classification": {
                                 "type": "object",
                                 "required": [
-                                  "id"
+                                  "id",
+                                  "scheme"
                                 ],
                                 "properties": {
                                   "id": {
                                     "type": "string"
+                                  },
+                                  "scheme": {
+                                    "type": "string",
+                                    "enum": [
+                                      "CPV"
+                                    ]
                                   }
                                 }
                               }
@@ -119,7 +146,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "validateClassification"
+                          "validateBudgets"
                         ]
                       }
                     }
