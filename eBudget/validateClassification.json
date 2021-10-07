@@ -1,0 +1,138 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "validateClassification",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9051"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Validate Classification",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "planning",
+                          "tender"
+                        ],
+                        "properties": {
+                          "planning": {
+                            "type": "object",
+                            "required": [
+                              "budget"
+                            ],
+                            "properties": {
+                              "budget": {
+                                "type": "object",
+                                "required": [
+                                  "budgetBreakdown"
+                                ],
+                                "properties": {
+                                  "budgetBreakdown": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "format": "uuid"
+                                        },
+                                        "classifications": {
+                                          "type": "object",
+                                          "required": [
+                                            "ei"
+                                          ],
+                                          "properties": {
+                                            "ei": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "classifications"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "classification"
+                            ],
+                            "properties": {
+                              "classification": {
+                                "type": "object",
+                                "required": [
+                                  "id"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validateClassification"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
