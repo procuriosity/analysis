@@ -115,7 +115,8 @@
                                   "type": "object",
                                   "properties": {
                                     "id": {
-                                      "type": "string"
+                                      "type": "string",
+                                      "format": "uuid"
                                     },
                                     "amount": {
                                       "type": "object",
@@ -131,11 +132,29 @@
                                           "type": "string"
                                         }
                                       }
+                                    },
+                                    "classifications": {
+                                      "type": "object",
+                                      "required": [
+                                        "ei",
+                                        "fs"
+                                      ],
+                                      "properties": {
+                                        "ei": {
+                                          "type": "string",
+                                          "description": "identifier of expenditure item"
+                                        },
+                                        "fs": {
+                                          "type": "string",
+                                          "description": "identifier of financial source"
+                                        }
+                                      }
                                     }
                                   },
                                   "required": [
                                     "id",
-                                    "amount"
+                                    "amount",
+                                    "classifications"
                                   ]
                                 }
                               }

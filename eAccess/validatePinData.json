@@ -16,7 +16,14 @@
         "operationId": "post-command",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
           }
         },
         "requestBody": {
@@ -76,11 +83,27 @@
                                               "type": "string"
                                             }
                                           }
+                                        },
+                                        "classifications": {
+                                          "type": "object",
+                                          "required": [
+                                            "ei",
+                                            "fs"
+                                          ],
+                                          "properties": {
+                                            "ei": {
+                                              "type": "string"
+                                            },
+                                            "fs": {
+                                              "type": "string"
+                                            }
+                                          }
                                         }
                                       },
                                       "required": [
                                         "id",
-                                        "amount"
+                                        "amount",
+                                        "classifications"
                                       ]
                                     }
                                   }
