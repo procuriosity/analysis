@@ -40,7 +40,8 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "planning"
+                          "planning",
+                          "tender"
                         ],
                         "properties": {
                           "planning": {
@@ -113,6 +114,21 @@
                           },
                           "tender": {
                             "type": "object",
+                            "required": [
+                              "title",
+                              "description",
+                              "classification",
+                              "legalBasis",
+                              "mainProcurementCategory",
+                              "procurementMethodRationale",
+                              "procurementMethodAdditionalInfo",
+                              "awardCriteria",
+                              "awardCriteriaDetails",
+                              "tenderPeriod",
+                              "procuringEntity",
+                              "lots",
+                              "items"
+                            ],
                             "properties": {
                               "title": {
                                 "type": "string"
@@ -859,21 +875,44 @@
                                   ]
                                 }
                               }
+                            }
+                          },
+                          "mdm": {
+                            "type": "object",
+                            "properties": {
+                              "criteria": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "classification"
+                                  ]
+                                }
+                              }
                             },
                             "required": [
-                              "title",
-                              "description",
-                              "classification",
-                              "legalBasis",
-                              "mainProcurementCategory",
-                              "procurementMethodRationale",
-                              "procurementMethodAdditionalInfo",
-                              "awardCriteria",
-                              "awardCriteriaDetails",
-                              "tenderPeriod",
-                              "procuringEntity",
-                              "lots",
-                              "items"
+                              "criteria"
                             ]
                           }
                         }
