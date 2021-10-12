@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "validatePinData",
+    "title": "createPin",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Validate Pin Data",
+        "summary": "Create Pin",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -20,7 +20,170 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "planning",
+                            "tender"
+                          ],
+                          "properties": {
+                            "planning": {
+                              "type": "object",
+                              "required": [
+                                "budget"
+                              ],
+                              "properties": {
+                                "rationale": {
+                                  "type": "string"
+                                },
+                                "budget": {
+                                  "type": "object",
+                                  "required": [
+                                    "amount",
+                                    "budgetBreakdown"
+                                  ],
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "amount": {
+                                      "type": "object",
+                                      "required": [
+                                        "amount",
+                                        "currency"
+                                      ],
+                                      "properties": {
+                                        "amount": {
+                                          "type": "number"
+                                        },
+                                        "currency": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "budgetBreakdown": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "period": {
+                                            "type": "object",
+                                            "required": [
+                                              "startDate",
+                                              "endDate"
+                                            ],
+                                            "properties": {
+                                              "startDate": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              },
+                                              "endDate": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              }
+                                            }
+                                          },
+                                          "amount": {
+                                            "type": "object",
+                                            "required": [
+                                              "amount",
+                                              "currency"
+                                            ],
+                                            "properties": {
+                                              "amount": {
+                                                "type": "number"
+                                              },
+                                              "currency": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "classifications": {
+                                            "type": "object",
+                                            "required": [
+                                              "ei",
+                                              "fs"
+                                            ],
+                                            "properties": {
+                                              "ei": {
+                                                "type": "string"
+                                              },
+                                              "fs": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "sourcePatry": {
+                                            "type": "object",
+                                            "required": [
+                                              "id",
+                                              "name"
+                                            ],
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "name": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "europeanUnionFunding": {
+                                            "type": "object",
+                                            "properties": {
+                                              "projectIdentifier": {
+                                                "type": "string"
+                                              },
+                                              "projectName": {
+                                                "type": "string"
+                                              },
+                                              "uri": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "projectIdentifier",
+                                              "projectName"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "period",
+                                          "amount",
+                                          "classifications",
+                                          "sourcePatry"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "tender": {
+                              "type": "object"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
                 }
               }
             }
@@ -40,11 +203,19 @@
                       "params": {
                         "type": "object",
                         "required": [
+                          "date",
+                          "owner",
                           "planning",
-                          "tender",
-                          "date"
+                          "tender"
                         ],
                         "properties": {
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "owner": {
+                            "type": "string"
+                          },
                           "planning": {
                             "type": "object",
                             "required": [
@@ -57,11 +228,27 @@
                               "budget": {
                                 "type": "object",
                                 "required": [
+                                  "amount",
                                   "budgetBreakdown"
                                 ],
                                 "properties": {
                                   "description": {
                                     "type": "string"
+                                  },
+                                  "amount": {
+                                    "type": "object",
+                                    "required": [
+                                      "amount",
+                                      "currency"
+                                    ],
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      },
+                                      "currency": {
+                                        "type": "string"
+                                      }
+                                    }
                                   },
                                   "budgetBreakdown": {
                                     "type": "array",
@@ -70,6 +257,26 @@
                                       "properties": {
                                         "id": {
                                           "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "period": {
+                                          "type": "object",
+                                          "required": [
+                                            "startDate",
+                                            "endDate"
+                                          ],
+                                          "properties": {
+                                            "startDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            },
+                                            "endDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            }
+                                          }
                                         },
                                         "amount": {
                                           "type": "object",
@@ -100,12 +307,47 @@
                                               "type": "string"
                                             }
                                           }
+                                        },
+                                        "sourceParty": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "name"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "europeanUnionFunding": {
+                                          "type": "object",
+                                          "properties": {
+                                            "projectIdentifier": {
+                                              "type": "string"
+                                            },
+                                            "projectName": {
+                                              "type": "string"
+                                            },
+                                            "uri": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "projectIdentifier",
+                                            "projectName"
+                                          ]
                                         }
                                       },
                                       "required": [
                                         "id",
+                                        "period",
                                         "amount",
-                                        "classifications"
+                                        "classifications",
+                                        "sourceParty"
                                       ]
                                     }
                                   }
@@ -141,7 +383,8 @@
                                 "type": "object",
                                 "required": [
                                   "id",
-                                  "scheme"
+                                  "scheme",
+                                  "description"
                                 ],
                                 "properties": {
                                   "id": {
@@ -152,6 +395,9 @@
                                     "enum": [
                                       "CPV"
                                     ]
+                                  },
+                                  "description": {
+                                    "type": "string"
                                   }
                                 }
                               },
@@ -307,7 +553,7 @@
                                     }
                                   },
                                   "address": {
-                                    "$ref": "../models/addressRequest.v1.json"
+                                    "$ref": "../models/address.v1.json"
                                   },
                                   "contactPoint": {
                                     "$ref": "../models/contact_point.v1.json"
@@ -438,10 +684,6 @@
                                     },
                                     "classification": {
                                       "type": "object",
-                                      "required": [
-                                        "id",
-                                        "scheme"
-                                      ],
                                       "properties": {
                                         "id": {
                                           "type": "string"
@@ -449,7 +691,11 @@
                                         "scheme": {
                                           "type": "string"
                                         }
-                                      }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ]
                                     },
                                     "description": {
                                       "type": "string"
@@ -576,7 +822,7 @@
                               "targets": {
                                 "type": "array",
                                 "items": {
-                                  "$ref": "../models/target_optionalUnit_relatesToTender_request.json"
+                                  "$ref": "../models/target_optionalUnit_relatesToTender.json"
                                 }
                               },
                               "lots": {
@@ -635,7 +881,7 @@
                                       ],
                                       "properties": {
                                         "address": {
-                                          "$ref": "../models/addressRequest.v1.json"
+                                          "$ref": "../models/address.v1.json"
                                         },
                                         "description": {
                                           "type": "string"
@@ -803,10 +1049,14 @@
                                     "unit": {
                                       "type": "object",
                                       "required": [
-                                        "id"
+                                        "id",
+                                        "name"
                                       ],
                                       "properties": {
                                         "id": {
+                                          "type": "string"
+                                        },
+                                        "name": {
                                           "type": "string"
                                         }
                                       }
@@ -880,48 +1130,6 @@
                                 }
                               }
                             }
-                          },
-                          "mdm": {
-                            "type": "object",
-                            "properties": {
-                              "criteria": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "classification": {
-                                      "type": "object",
-                                      "required": [
-                                        "id",
-                                        "scheme"
-                                      ],
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "scheme": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "classification"
-                                  ]
-                                }
-                              }
-                            },
-                            "required": [
-                              "criteria"
-                            ]
-                          },
-                          "date": {
-                            "type": "string",
-                            "format": "date-time"
                           }
                         }
                       }
@@ -929,6 +1137,17 @@
                     "required": [
                       "params"
                     ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "createPin"
+                        ]
+                      }
+                    }
                   }
                 ]
               }
