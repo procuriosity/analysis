@@ -40,14 +40,52 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "planning",
-                          "tender",
                           "date",
                           "pmd",
                           "country",
-                          "operationType"
+                          "operationType",
+                          "planning",
+                          "tender"
                         ],
                         "properties": {
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "OT",
+                              "SV",
+                              "MV",
+                              "GPA",
+                              "RT",
+                              "DA",
+                              "NP",
+                              "CD",
+                              "DC",
+                              "IP",
+                              "TEST_OT",
+                              "TEST_SV",
+                              "TEST_MV",
+                              "TEST_GPA",
+                              "TEST_RT",
+                              "TEST_DA",
+                              "TEST_NP",
+                              "TEST_CD",
+                              "TEST_DC",
+                              "TEST_IP"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "createPin"
+                            ]
+                          },
                           "planning": {
                             "type": "object",
                             "required": [
@@ -321,7 +359,12 @@
                                       "type": "object",
                                       "properties": {
                                         "title": {
-                                          "type": "string"
+                                          "type": "string",
+                                          "enum": [
+                                            "Mr.",
+                                            "Ms.",
+                                            "Mrs."
+                                          ]
                                         },
                                         "name": {
                                           "type": "string"
@@ -920,44 +963,6 @@
                             },
                             "required": [
                               "criteria"
-                            ]
-                          },
-                          "date": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "OT",
-                              "SV",
-                              "MV",
-                              "GPA",
-                              "RT",
-                              "DA",
-                              "NP",
-                              "CD",
-                              "DC",
-                              "IP",
-                              "TEST_OT",
-                              "TEST_SV",
-                              "TEST_MV",
-                              "TEST_GPA",
-                              "TEST_RT",
-                              "TEST_DA",
-                              "TEST_NP",
-                              "TEST_CD",
-                              "TEST_DC",
-                              "TEST_IP"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "createPin"
                             ]
                           }
                         }
