@@ -168,9 +168,6 @@
                           "title",
                           "description",
                           "classification",
-                          "legalBasis",
-                          "procurementMethodRationale",
-                          "procurementMethodAdditionalInfo",
                           "awardCriteria",
                           "awardCriteriaDetails",
                           "tenderPeriod",
@@ -184,6 +181,43 @@
                           },
                           "description": {
                             "type": "string"
+                          },
+                          "secondStage": {
+                            "type": "object",
+                            "properties": {
+                              "minimumCandidates": {
+                                "type": "number"
+                              },
+                              "maximumCandidates": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "otherCriteria": {
+                            "type": "object",
+                            "properties": {
+                              "reductionCriteria": {
+                                "type": "string",
+                                "enum": [
+                                  "scoring",
+                                  "none"
+                                ]
+                              },
+                              "qualificationSystemMethods": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "automated",
+                                    "manual"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "reductionCriteria",
+                              "qualificationSystemMethods"
+                            ]
                           },
                           "classification": {
                             "type": "object",
@@ -204,20 +238,21 @@
                             }
                           },
                           "legalBasis": {
-                            "type": "string",
-                            "enum": [
-                              "DIRECTIVE_2014_23_EU",
-                              "DIRECTIVE_2014_24_EU",
-                              "DIRECTIVE_2014_25_EU",
-                              "DIRECTIVE_2009_81_EU",
-                              "REGULATION_966_2012",
-                              "NATIONAL_PROCUREMENT_LAW"
-                            ]
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "scheme"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "scheme": {
+                                "type": "string"
+                              }
+                            }
                           },
                           "procurementMethodRationale": {
-                            "type": "string"
-                          },
-                          "procurementMethodAdditionalInfo": {
                             "type": "string"
                           },
                           "awardCriteria": {
