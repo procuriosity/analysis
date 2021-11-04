@@ -198,12 +198,17 @@
                                 "classification",
                                 "legalBasis",
                                 "mainProcurementCategory",
+                                "procurementMethod",
+                                "procurementMethodDetails",
+                                "submissionMethod",
+                                "submissionMethodDetails",
+                                "submissionMethodRationale",
                                 "awardCriteria",
                                 "awardCriteriaDetails",
+                                "eligibilityCriteria",
                                 "tenderPeriod",
                                 "value",
                                 "contractPeriod",
-                                "procurementMethod",
                                 "lots",
                                 "items",
                                 "procuringEntity",
@@ -213,8 +218,7 @@
                                 "procedureOutsourcing",
                                 "framework",
                                 "dynamicPurchasingSystem",
-                                "acceleratedProcedure",
-                                "submissionMethod"
+                                "acceleratedProcedure"
                               ],
                               "properties": {
                                 "id": {
@@ -327,7 +331,30 @@
                                     ]
                                   }
                                 },
+                                "procurementMethod": {
+                                  "type": "string",
+                                  "enum": [
+                                    "open",
+                                    "selective",
+                                    "limited"
+                                  ]
+                                },
+                                "procurementMethodDetails": {
+                                  "type": "string"
+                                },
                                 "procurementMethodRationale ": {
+                                  "type": "string"
+                                },
+                                "submissionMethod": {
+                                  "type": "string",
+                                  "enum": [
+                                    "electronicSubmission"
+                                  ]
+                                },
+                                "submissionMethodDetails": {
+                                  "type": "string"
+                                },
+                                "submissionMethodRationale": {
                                   "type": "string"
                                 },
                                 "awardCriteria": {
@@ -345,6 +372,9 @@
                                     "automated",
                                     "manual"
                                   ]
+                                },
+                                "eligibilityCriteria": {
+                                  "type": "string"
                                 },
                                 "tenderPeriod": {
                                   "type": "object",
@@ -389,14 +419,6 @@
                                       "format": "date-time"
                                     }
                                   }
-                                },
-                                "procurementMethod": {
-                                  "type": "string",
-                                  "enum": [
-                                    "open",
-                                    "selective",
-                                    "limited"
-                                  ]
                                 },
                                 "procurementMethodModalities": {
                                   "type": "string",
@@ -1026,12 +1048,6 @@
                                       "default": false
                                     }
                                   }
-                                },
-                                "submissionMethod": {
-                                  "type": "string",
-                                  "enum": [
-                                    "electronicSubmission"
-                                  ]
                                 }
                               }
                             },
@@ -1419,7 +1435,11 @@
                               "tenderPeriod",
                               "procuringEntity",
                               "lots",
-                              "items"
+                              "items",
+                              "procurementMethodDetails",
+                              "submissionMethodRationale",
+                              "submissionMethodDetails",
+                              "eligibilityCriteria"
                             ],
                             "properties": {
                               "title": {
@@ -1489,10 +1509,6 @@
                               },
                               "legalBasis": {
                                 "type": "object",
-                                "required": [
-                                  "id",
-                                  "scheme"
-                                ],
                                 "properties": {
                                   "id": {
                                     "type": "string"
@@ -1500,7 +1516,11 @@
                                   "scheme": {
                                     "type": "string"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "id",
+                                  "scheme"
+                                ]
                               },
                               "mainProcurementCategory": {
                                 "type": "string",
@@ -2185,6 +2205,18 @@
                                     "documentType"
                                   ]
                                 }
+                              },
+                              "procurementMethodDetails": {
+                                "type": "string"
+                              },
+                              "submissionMethodRationale": {
+                                "type": "string"
+                              },
+                              "submissionMethodDetails": {
+                                "type": "string"
+                              },
+                              "eligibilityCriteria": {
+                                "type": "string"
                               }
                             }
                           }
