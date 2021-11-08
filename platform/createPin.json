@@ -169,8 +169,6 @@
                           "description",
                           "classification",
                           "legalBasis",
-                          "procurementMethodRationale",
-                          "procurementMethodAdditionalInfo",
                           "awardCriteria",
                           "awardCriteriaDetails",
                           "tenderPeriod",
@@ -184,6 +182,43 @@
                           },
                           "description": {
                             "type": "string"
+                          },
+                          "secondStage": {
+                            "type": "object",
+                            "properties": {
+                              "minimumCandidates": {
+                                "type": "number"
+                              },
+                              "maximumCandidates": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "otherCriteria": {
+                            "type": "object",
+                            "properties": {
+                              "reductionCriteria": {
+                                "type": "string",
+                                "enum": [
+                                  "scoring",
+                                  "none"
+                                ]
+                              },
+                              "qualificationSystemMethods": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "automated",
+                                    "manual"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "reductionCriteria",
+                              "qualificationSystemMethods"
+                            ]
                           },
                           "classification": {
                             "type": "object",
@@ -219,9 +254,6 @@
                             }
                           },
                           "procurementMethodRationale": {
-                            "type": "string"
-                          },
-                          "procurementMethodAdditionalInfo": {
                             "type": "string"
                           },
                           "awardCriteria": {
@@ -463,14 +495,15 @@
                                   "type": "string"
                                 },
                                 "title": {
-                                  "type": "string"
+                                  "type": "string",
+                                  "enum": [
+                                    "Mr.",
+                                    "Ms.",
+                                    "Mrs."
+                                  ]
                                 },
                                 "classification": {
                                   "type": "object",
-                                  "required": [
-                                    "id",
-                                    "scheme"
-                                  ],
                                   "properties": {
                                     "id": {
                                       "type": "string"
@@ -478,7 +511,11 @@
                                     "scheme": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "scheme"
+                                  ]
                                 },
                                 "description": {
                                   "type": "string"
@@ -591,7 +628,6 @@
                               "required": [
                                 "id",
                                 "title",
-                                "classification",
                                 "relatesTo",
                                 "requirementGroups"
                               ]

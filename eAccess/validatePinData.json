@@ -40,9 +40,43 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "planning"
+                          "date",
+                          "pmd",
+                          "country",
+                          "operationType",
+                          "planning",
+                          "tender",
+                          "mdm"
                         ],
                         "properties": {
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "OT",
+                              "SV",
+                              "MV",
+                              "GPA",
+                              "RT",
+                              "TEST_OT",
+                              "TEST_SV",
+                              "TEST_MV",
+                              "TEST_GPA",
+                              "TEST_RT"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "createPin"
+                            ]
+                          },
                           "planning": {
                             "type": "object",
                             "required": [
@@ -55,11 +89,27 @@
                               "budget": {
                                 "type": "object",
                                 "required": [
+                                  "amount",
                                   "budgetBreakdown"
                                 ],
                                 "properties": {
                                   "description": {
                                     "type": "string"
+                                  },
+                                  "amount": {
+                                    "type": "object",
+                                    "required": [
+                                      "amount",
+                                      "currency"
+                                    ],
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      },
+                                      "currency": {
+                                        "type": "string"
+                                      }
+                                    }
                                   },
                                   "budgetBreakdown": {
                                     "type": "array",
@@ -68,6 +118,26 @@
                                       "properties": {
                                         "id": {
                                           "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "period": {
+                                          "type": "object",
+                                          "required": [
+                                            "startDate",
+                                            "endDate"
+                                          ],
+                                          "properties": {
+                                            "startDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            },
+                                            "endDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            }
+                                          }
                                         },
                                         "amount": {
                                           "type": "object",
@@ -102,6 +172,7 @@
                                       },
                                       "required": [
                                         "id",
+                                        "period",
                                         "amount",
                                         "classifications"
                                       ]
@@ -113,12 +184,62 @@
                           },
                           "tender": {
                             "type": "object",
+                            "required": [
+                              "title",
+                              "description",
+                              "classification",
+                              "legalBasis",
+                              "mainProcurementCategory",
+                              "awardCriteria",
+                              "awardCriteriaDetails",
+                              "tenderPeriod",
+                              "procuringEntity",
+                              "lots",
+                              "items"
+                            ],
                             "properties": {
                               "title": {
                                 "type": "string"
                               },
                               "description": {
                                 "type": "string"
+                              },
+                              "secondStage": {
+                                "type": "object",
+                                "properties": {
+                                  "minimumCandidates": {
+                                    "type": "number"
+                                  },
+                                  "maximumCandidates": {
+                                    "type": "number"
+                                  }
+                                }
+                              },
+                              "otherCriteria": {
+                                "type": "object",
+                                "properties": {
+                                  "reductionCriteria": {
+                                    "type": "string",
+                                    "enum": [
+                                      "scoring",
+                                      "none"
+                                    ]
+                                  },
+                                  "qualificationSystemMethods": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "enum": [
+                                        "automated",
+                                        "manual"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "reductionCriteria",
+                                  "qualificationSystemMethods"
+                                ]
                               },
                               "classification": {
                                 "type": "object",
@@ -173,9 +294,6 @@
                                 }
                               },
                               "procurementMethodRationale": {
-                                "type": "string"
-                              },
-                              "procurementMethodAdditionalInfo": {
                                 "type": "string"
                               },
                               "awardCriteria": {
@@ -271,12 +389,16 @@
                               "procuringEntity": {
                                 "type": "object",
                                 "required": [
+                                  "id",
                                   "name",
                                   "identifier",
                                   "address",
                                   "contactPoint"
                                 ],
                                 "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
                                   "name": {
                                     "type": "string"
                                   },
@@ -301,7 +423,12 @@
                                       "type": "object",
                                       "properties": {
                                         "title": {
-                                          "type": "string"
+                                          "type": "string",
+                                          "enum": [
+                                            "Mr.",
+                                            "Ms.",
+                                            "Mrs."
+                                          ]
                                         },
                                         "name": {
                                           "type": "string"
@@ -421,10 +548,6 @@
                                     },
                                     "classification": {
                                       "type": "object",
-                                      "required": [
-                                        "id",
-                                        "scheme"
-                                      ],
                                       "properties": {
                                         "id": {
                                           "type": "string"
@@ -432,7 +555,11 @@
                                         "scheme": {
                                           "type": "string"
                                         }
-                                      }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ]
                                     },
                                     "description": {
                                       "type": "string"
@@ -545,7 +672,6 @@
                                   "required": [
                                     "id",
                                     "title",
-                                    "classification",
                                     "relatesTo",
                                     "requirementGroups"
                                   ]
@@ -863,22 +989,67 @@
                                   ]
                                 }
                               }
-                            },
+                            }
+                          },
+                          "mdm": {
+                            "type": "object",
                             "required": [
-                              "title",
-                              "description",
-                              "classification",
-                              "legalBasis",
-                              "mainProcurementCategory",
-                              "procurementMethodRationale",
-                              "procurementMethodAdditionalInfo",
-                              "awardCriteria",
-                              "awardCriteriaDetails",
-                              "tenderPeriod",
-                              "procuringEntity",
-                              "lots",
-                              "items"
-                            ]
+                              "criteria",
+                              "registrationSchemes"
+                            ],
+                            "properties": {
+                              "criteria": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "classification"
+                                  ]
+                                }
+                              },
+                              "registrationSchemes": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "country": {
+                                      "type": "string"
+                                    },
+                                    "schemes": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "country",
+                                    "schemes"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -886,6 +1057,17 @@
                     "required": [
                       "params"
                     ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validatePinData"
+                        ]
+                      }
+                    }
                   }
                 ]
               }
