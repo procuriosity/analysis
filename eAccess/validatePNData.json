@@ -62,11 +62,27 @@
                               "budget": {
                                 "type": "object",
                                 "required": [
+                                  "amount",
                                   "budgetBreakdown"
                                 ],
                                 "properties": {
                                   "description": {
                                     "type": "string"
+                                  },
+                                  "amount": {
+                                    "type": "object",
+                                    "required": [
+                                      "amount",
+                                      "currency"
+                                    ],
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      },
+                                      "currency": {
+                                        "type": "string"
+                                      }
+                                    }
                                   },
                                   "budgetBreakdown": {
                                     "type": "array",
@@ -75,6 +91,26 @@
                                       "properties": {
                                         "id": {
                                           "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "period": {
+                                          "type": "object",
+                                          "required": [
+                                            "startDate",
+                                            "endDate"
+                                          ],
+                                          "properties": {
+                                            "startDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            },
+                                            "endDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            }
+                                          }
                                         },
                                         "amount": {
                                           "type": "object",
@@ -109,6 +145,7 @@
                                       },
                                       "required": [
                                         "id",
+                                        "period",
                                         "amount",
                                         "classifications"
                                       ]
