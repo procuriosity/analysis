@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "createRelationToEI",
+    "title": "createRelationInFS",
     "version": "1.0"
   },
   "servers": [
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Create Relation To EI",
+        "summary": "Create Relation In FS",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -103,12 +103,16 @@
                         "type": "object",
                         "required": [
                           "cpid",
+                          "ocid",
                           "relatedCpid",
                           "relatedOcid"
                         ],
                         "properties": {
                           "cpid": {
                             "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
                           },
                           "relatedCpid": {
                             "$ref": "../models/cpid.v1.json"
@@ -129,7 +133,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "createRelationToEI"
+                          "createRelationInFS"
                         ]
                       }
                     }
@@ -138,8 +142,7 @@
               }
             }
           }
-        },
-        "description": ""
+        }
       }
     }
   },
