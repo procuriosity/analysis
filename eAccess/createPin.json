@@ -192,7 +192,6 @@
                               "required": [
                                 "id",
                                 "status",
-                                "statusDetails",
                                 "title",
                                 "description",
                                 "classification",
@@ -226,12 +225,6 @@
                                   "format": "uuid"
                                 },
                                 "status": {
-                                  "type": "string",
-                                  "enum": [
-                                    "planning"
-                                  ]
-                                },
-                                "statusDetails": {
                                   "type": "string",
                                   "enum": [
                                     "planning"
@@ -477,6 +470,12 @@
                                       "title": {
                                         "type": "string"
                                       },
+                                      "source": {
+                                        "type": "string",
+                                        "enum": [
+                                          "tenderer"
+                                        ]
+                                      },
                                       "classification": {
                                         "type": "object",
                                         "required": [
@@ -530,6 +529,16 @@
                                                   },
                                                   "title": {
                                                     "type": "string"
+                                                  },
+                                                  "status": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "active"
+                                                    ]
+                                                  },
+                                                  "datePublished": {
+                                                    "type": "string",
+                                                    "format": "date-time"
                                                   },
                                                   "dataType": {
                                                     "type": "string",
@@ -590,6 +599,8 @@
                                                 "required": [
                                                   "id",
                                                   "title",
+                                                  "status",
+                                                  "datePublished",
                                                   "dataType"
                                                 ]
                                               }
@@ -605,7 +616,7 @@
                                     "required": [
                                       "id",
                                       "title",
-                                      "classification",
+                                      "source",
                                       "relatesTo",
                                       "requirementGroups"
                                     ]
@@ -635,10 +646,10 @@
                                         "type": "string"
                                       },
                                       "status": {
-                                        "type": "string"
-                                      },
-                                      "statusDetails": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "enum": [
+                                          "planning"
+                                        ]
                                       },
                                       "title": {
                                         "type": "string"
@@ -782,29 +793,19 @@
                                             }
                                           }
                                         }
-                                      },
-                                      "recurrentProcurement": {
-                                        "type": "object",
-                                        "required": [
-                                          "isRecurrent"
-                                        ],
-                                        "properties": {
-                                          "isRecurrent": {
-                                            "type": "boolean",
-                                            "default": false
-                                          }
-                                        }
                                       }
                                     },
                                     "required": [
                                       "id",
-                                      "statusDetails",
+                                      "status",
                                       "title",
                                       "description",
                                       "value",
                                       "contractPeriod",
                                       "placeOfPerformance",
-                                      "recurrentProcurement"
+                                      "hasOptions",
+                                      "hasRecurrence",
+                                      "hasRenewal"
                                     ]
                                   }
                                 },
@@ -1183,18 +1184,6 @@
                                               "period"
                                             ]
                                           }
-                                        },
-                                        "roles": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": [
-                                              "object",
-                                              "string"
-                                            ],
-                                            "enum": [
-                                              "procuringEntity"
-                                            ]
-                                          }
                                         }
                                       },
                                       "required": [
@@ -1202,8 +1191,16 @@
                                         "title",
                                         "name",
                                         "identifier",
-                                        "businessFunctions",
-                                        "roles"
+                                        "businessFunctions"
+                                      ]
+                                    }
+                                  },
+                                  "roles": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "enum": [
+                                        "procuringEntity"
                                       ]
                                     }
                                   }
@@ -1213,7 +1210,8 @@
                                   "name",
                                   "identifier",
                                   "address",
-                                  "contactPoint"
+                                  "contactPoint",
+                                  "roles"
                                 ]
                               }
                             }
