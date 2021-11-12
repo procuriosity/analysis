@@ -192,7 +192,6 @@
                               "required": [
                                 "id",
                                 "status",
-                                "statusDetails",
                                 "title",
                                 "description",
                                 "classification",
@@ -219,12 +218,6 @@
                                   "format": "uuid"
                                 },
                                 "status": {
-                                  "type": "string",
-                                  "enum": [
-                                    "planning"
-                                  ]
-                                },
-                                "statusDetails": {
                                   "type": "string",
                                   "enum": [
                                     "planning"
@@ -259,10 +252,6 @@
                                 },
                                 "legalBasis": {
                                   "type": "object",
-                                  "required": [
-                                    "id",
-                                    "scheme"
-                                  ],
                                   "properties": {
                                     "id": {
                                       "type": "string"
@@ -270,7 +259,11 @@
                                     "scheme": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "scheme"
+                                  ]
                                 },
                                 "mainProcurementCategory": {
                                   "type": "string",
@@ -343,10 +336,6 @@
                                 },
                                 "value": {
                                   "type": "object",
-                                  "required": [
-                                    "amount",
-                                    "currency"
-                                  ],
                                   "properties": {
                                     "amount": {
                                       "type": "number"
@@ -354,14 +343,14 @@
                                     "currency": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "amount",
+                                    "currency"
+                                  ]
                                 },
                                 "contractPeriod": {
                                   "type": "object",
-                                  "required": [
-                                    "startDate",
-                                    "endDate"
-                                  ],
                                   "properties": {
                                     "startDate": {
                                       "type": "string",
@@ -371,7 +360,11 @@
                                       "type": "string",
                                       "format": "date-time"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "startDate",
+                                    "endDate"
+                                  ]
                                 },
                                 "lots": {
                                   "type": "array",
@@ -385,10 +378,10 @@
                                         "type": "string"
                                       },
                                       "status": {
-                                        "type": "string"
-                                      },
-                                      "statusDetails": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "enum": [
+                                          "planning"
+                                        ]
                                       },
                                       "title": {
                                         "type": "string"
@@ -532,29 +525,19 @@
                                             }
                                           }
                                         }
-                                      },
-                                      "recurrentProcurement": {
-                                        "type": "object",
-                                        "required": [
-                                          "isRecurrent"
-                                        ],
-                                        "properties": {
-                                          "isRecurrent": {
-                                            "type": "boolean",
-                                            "default": false
-                                          }
-                                        }
                                       }
                                     },
                                     "required": [
                                       "id",
-                                      "statusDetails",
+                                      "status",
                                       "title",
                                       "description",
                                       "value",
                                       "contractPeriod",
                                       "placeOfPerformance",
-                                      "recurrentProcurement"
+                                      "hasOptions",
+                                      "hasRecurrence",
+                                      "hasRenewal"
                                     ]
                                   }
                                 },
@@ -839,6 +822,64 @@
                                   },
                                   "contactPoint": {
                                     "$ref": "../models/contact_point.v1.json"
+                                  },
+                                  "details": {
+                                    "type": "object",
+                                    "properties": {
+                                      "typeOfBuyer": {
+                                        "type": "string",
+                                        "enum": [
+                                          "BODY_PUBLIC",
+                                          "EU_INSTITUTION",
+                                          "MINISTRY",
+                                          "NATIONAL_AGENCY",
+                                          "REGIONAL_AGENCY",
+                                          "REGIONAL_AUTHORITY"
+                                        ]
+                                      },
+                                      "mainGeneralActivity": {
+                                        "type": "string",
+                                        "enum": [
+                                          "DEFENCE",
+                                          "ECONOMIC_AND_FINANCIAL_AFFAIRS",
+                                          "EDUCATION",
+                                          "ENVIRONMENT",
+                                          "GENERAL_PUBLIC_SERVICES",
+                                          "HEALTH",
+                                          "HOUSING_AND_COMMUNITY_AMENITIES",
+                                          "PUBLIC_ORDER_AND_SAFETY",
+                                          "RECREATION_CULTURE_AND_RELIGION",
+                                          "SOCIAL_PROTECTION"
+                                        ]
+                                      },
+                                      "mainSectoralActivity": {
+                                        "type": "string",
+                                        "enum": [
+                                          "AIRPORT_RELATED_ACTIVITIES",
+                                          "ELECTRICITY",
+                                          "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
+                                          "EXPLORATION_EXTRACTION_GAS_OIL",
+                                          "PORT_RELATED_ACTIVITIES",
+                                          "POSTAL_SERVICES",
+                                          "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
+                                          "RAILWAY_SERVICES",
+                                          "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
+                                          "WATER"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "roles": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "enum": [
+                                        "procuringEntity",
+                                        "buyer",
+                                        "payer",
+                                        "funder"
+                                      ]
+                                    }
                                   }
                                 },
                                 "required": [
@@ -846,7 +887,8 @@
                                   "name",
                                   "identifier",
                                   "address",
-                                  "contactPoint"
+                                  "contactPoint",
+                                  "roles"
                                 ]
                               }
                             }
@@ -883,7 +925,8 @@
                           "country",
                           "operationType",
                           "planning",
-                          "tender"
+                          "tender",
+                          "parties"
                         ],
                         "properties": {
                           "date": {
@@ -914,7 +957,13 @@
                               "TEST_NP",
                               "TEST_CD",
                               "TEST_DC",
-                              "TEST_IP"
+                              "TEST_IP",
+                              "RFQ",
+                              "MC",
+                              "DCO",
+                              "TEST_RFQ",
+                              "TEST_MC",
+                              "TEST_DCO"
                             ]
                           },
                           "country": {
@@ -1097,10 +1146,6 @@
                               },
                               "legalBasis": {
                                 "type": "object",
-                                "required": [
-                                  "id",
-                                  "scheme"
-                                ],
                                 "properties": {
                                   "id": {
                                     "type": "string"
@@ -1108,7 +1153,11 @@
                                   "scheme": {
                                     "type": "string"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "id",
+                                  "scheme"
+                                ]
                               },
                               "mainProcurementCategory": {
                                 "type": "string",
@@ -1504,6 +1553,105 @@
                               "eligibilityCriteria": {
                                 "type": "string"
                               }
+                            }
+                          },
+                          "parties": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "identifier": {
+                                  "$ref": "../models/identifier.v1.json"
+                                },
+                                "additionalIdentifiers": {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "../models/identifier.v1.json"
+                                  }
+                                },
+                                "address": {
+                                  "$ref": "../models/address.v1.json"
+                                },
+                                "contactPoint": {
+                                  "$ref": "../models/contact_point.v1.json"
+                                },
+                                "details": {
+                                  "type": "object",
+                                  "properties": {
+                                    "typeOfBuyer": {
+                                      "type": "string",
+                                      "enum": [
+                                        "BODY_PUBLIC",
+                                        "EU_INSTITUTION",
+                                        "MINISTRY",
+                                        "NATIONAL_AGENCY",
+                                        "REGIONAL_AGENCY",
+                                        "REGIONAL_AUTHORIT"
+                                      ]
+                                    },
+                                    "mainGeneralActivity": {
+                                      "type": "string",
+                                      "enum": [
+                                        "DEFENCE",
+                                        "ECONOMIC_AND_FINANCIAL_AFFAIRS",
+                                        "EDUCATION",
+                                        "ENVIRONMENT",
+                                        "GENERAL_PUBLIC_SERVICES",
+                                        "HEALTH",
+                                        "HOUSING_AND_COMMUNITY_AMENITIES",
+                                        "PUBLIC_ORDER_AND_SAFETY",
+                                        "RECREATION_CULTURE_AND_RELIGION",
+                                        "SOCIAL_PROTECTION"
+                                      ]
+                                    },
+                                    "mainSectoralActivity": {
+                                      "type": "string",
+                                      "enum": [
+                                        "AIRPORT_RELATED_ACTIVITIES",
+                                        "ELECTRICITY",
+                                        "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
+                                        "EXPLORATION_EXTRACTION_GAS_OIL",
+                                        "PORT_RELATED_ACTIVITIES",
+                                        "POSTAL_SERVICES",
+                                        "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
+                                        "RAILWAY_SERVICES",
+                                        "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
+                                        "WATER"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "roles": {
+                                  "type": "array",
+                                  "enum": [
+                                    "buyer",
+                                    "payer",
+                                    "funder"
+                                  ],
+                                  "items": {
+                                    "type": "string",
+                                    "enum": [
+                                      "buyer",
+                                      "payer",
+                                      "funder"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "name",
+                                "identifier",
+                                "address",
+                                "contactPoint",
+                                "roles"
+                              ]
                             }
                           }
                         }

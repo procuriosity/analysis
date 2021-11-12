@@ -41,14 +41,43 @@
                         "type": "object",
                         "required": [
                           "date",
+                          "mdm",
                           "planning",
-                          "tender",
-                          "mdm"
+                          "tender"
                         ],
                         "properties": {
                           "date": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "mdm": {
+                            "type": "object",
+                            "required": [
+                              "registrationSchemes"
+                            ],
+                            "properties": {
+                              "registrationSchemes": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "country": {
+                                      "type": "string"
+                                    },
+                                    "schemes": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "country",
+                                    "schemes"
+                                  ]
+                                }
+                              }
+                            }
                           },
                           "planning": {
                             "type": "object",
@@ -62,27 +91,11 @@
                               "budget": {
                                 "type": "object",
                                 "required": [
-                                  "amount",
                                   "budgetBreakdown"
                                 ],
                                 "properties": {
                                   "description": {
                                     "type": "string"
-                                  },
-                                  "amount": {
-                                    "type": "object",
-                                    "required": [
-                                      "amount",
-                                      "currency"
-                                    ],
-                                    "properties": {
-                                      "amount": {
-                                        "type": "number"
-                                      },
-                                      "currency": {
-                                        "type": "string"
-                                      }
-                                    }
                                   },
                                   "budgetBreakdown": {
                                     "type": "array",
@@ -90,9 +103,6 @@
                                       "type": "object",
                                       "properties": {
                                         "id": {
-                                          "type": "string"
-                                        },
-                                        "description": {
                                           "type": "string"
                                         },
                                         "period": {
@@ -549,35 +559,6 @@
                                     "id",
                                     "title",
                                     "documentType"
-                                  ]
-                                }
-                              }
-                            }
-                          },
-                          "mdm": {
-                            "type": "object",
-                            "required": [
-                              "registrationSchemes"
-                            ],
-                            "properties": {
-                              "registrationSchemes": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "country": {
-                                      "type": "string"
-                                    },
-                                    "schemes": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "string"
-                                      }
-                                    }
-                                  },
-                                  "required": [
-                                    "country",
-                                    "schemes"
                                   ]
                                 }
                               }
