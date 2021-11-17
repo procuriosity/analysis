@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "checkDeclaration",
-    "version": "1.01"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -44,7 +44,8 @@
                           "ocid",
                           "qualificationId",
                           "requirementResponse",
-                          "criteria"
+                          "criteria",
+                          "submissions"
                         ],
                         "properties": {
                           "cpid": {
@@ -155,6 +156,43 @@
                                 "id",
                                 "requirementGroups"
                               ]
+                            }
+                          },
+                          "submissions": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "candidates": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "candidates"
+                                  ]
+                                }
+                              }
                             }
                           }
                         }
