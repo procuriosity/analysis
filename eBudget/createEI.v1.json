@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Create Expenditure Item",
+        "summary": "Create EI",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -32,8 +32,8 @@
                           "required": [
                             "token",
                             "ocid",
-                            "tender",
                             "planning",
+                            "tender",
                             "buyer"
                           ],
                           "properties": {
@@ -43,59 +43,6 @@
                             },
                             "ocid": {
                               "type": "string"
-                            },
-                            "tender": {
-                              "type": "object",
-                              "required": [
-                                "id",
-                                "status",
-                                "statusDetails",
-                                "title",
-                                "mainProcurementCategory",
-                                "classification"
-                              ],
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "status": {
-                                  "type": "string",
-                                  "enum": [
-                                    "planning"
-                                  ]
-                                },
-                                "statusDetails": {
-                                  "type": "string"
-                                },
-                                "title": {
-                                  "type": "string"
-                                },
-                                "description": {
-                                  "type": "string"
-                                },
-                                "mainProcurementCategory": {
-                                  "type": "string"
-                                },
-                                "classification": {
-                                  "type": "object",
-                                  "required": [
-                                    "id",
-                                    "scheme",
-                                    "description"
-                                  ],
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "scheme": {
-                                      "type": "string"
-                                    },
-                                    "description": {
-                                      "type": "string"
-                                    }
-                                  }
-                                }
-                              }
                             },
                             "planning": {
                               "type": "object",
@@ -135,6 +82,153 @@
                                 }
                               }
                             },
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "status",
+                                "title",
+                                "mainProcurementCategory",
+                                "classification"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "format": "uuid"
+                                },
+                                "status": {
+                                  "type": "string",
+                                  "enum": [
+                                    "planning"
+                                  ]
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "mainProcurementCategory": {
+                                  "type": "string",
+                                  "enum": [
+                                    "goods",
+                                    "works",
+                                    "services"
+                                  ]
+                                },
+                                "classification": {
+                                  "type": "object",
+                                  "required": [
+                                    "id",
+                                    "scheme",
+                                    "description"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string",
+                                      "enum": [
+                                        "CPV"
+                                      ]
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "classification": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "scheme",
+                                          "description"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string",
+                                            "enum": [
+                                              "CPV"
+                                            ]
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "additionalClassifications": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string",
+                                              "enum": [
+                                                "CPVS"
+                                              ]
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "scheme",
+                                            "description"
+                                          ]
+                                        }
+                                      },
+                                      "deliveryAddress": {
+                                        "$ref": "../models/address.v1.json"
+                                      },
+                                      "quantity": {
+                                        "type": "number"
+                                      },
+                                      "unit": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "name"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "description",
+                                      "classification",
+                                      "quantity",
+                                      "unit"
+                                    ]
+                                  }
+                                }
+                              }
+                            },
                             "buyer": {
                               "type": "object",
                               "required": [
@@ -152,51 +246,12 @@
                                   "type": "string"
                                 },
                                 "identifier": {
-                                  "type": "object",
-                                  "required": [
-                                    "id",
-                                    "scheme",
-                                    "lagalName"
-                                  ],
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "scheme": {
-                                      "type": "string"
-                                    },
-                                    "lagalName": {
-                                      "type": "string"
-                                    },
-                                    "uri": {
-                                      "type": "string"
-                                    }
-                                  }
+                                  "$ref": "../models/identifier.v1.json"
                                 },
                                 "additionalIdentifiers": {
                                   "type": "array",
                                   "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "id": {
-                                        "type": "string"
-                                      },
-                                      "scheme": {
-                                        "type": "string"
-                                      },
-                                      "legalName": {
-                                        "type": "string"
-                                      },
-                                      "uri": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "required": [
-                                      "id",
-                                      "scheme",
-                                      "legalName",
-                                      "uri"
-                                    ]
+                                    "$ref": "../models/identifier.v1.json"
                                   }
                                 },
                                 "address": {
@@ -209,13 +264,44 @@
                                   "type": "object",
                                   "properties": {
                                     "typeOfBuyer": {
-                                      "type": "string"
+                                      "type": "string",
+                                      "enum": [
+                                        "BODY_PUBLIC",
+                                        "EU_INSTITUTION",
+                                        "MINISTRY",
+                                        "NATIONAL_AGENCY",
+                                        "REGIONAL_AGENCY",
+                                        "REGIONAL_AUTHORITY"
+                                      ]
                                     },
                                     "mainGeneralActivity": {
-                                      "type": "string"
+                                      "type": "string",
+                                      "enum": [
+                                        "DEFENCE",
+                                        "ECONOMIC_AND_FINANCIAL_AFFAIRS",
+                                        "EDUCATION",
+                                        "ENVIRONMENT",
+                                        "GENERAL_PUBLIC_SERVICES",
+                                        "HEALTH",
+                                        "HOUSING_AND_COMMUNITY_AMENITIES",
+                                        "PUBLIC_ORDER_AND_SAFETY",
+                                        "RECREATION_CULTURE_AND_RELIGION"
+                                      ]
                                     },
                                     "mainSectoralActivity": {
-                                      "type": "string"
+                                      "type": "string",
+                                      "enum": [
+                                        "AIRPORT_RELATED_ACTIVITIES",
+                                        "ELECTRICITY",
+                                        "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
+                                        "EXPLORATION_EXTRACTION_GAS_OIL",
+                                        "PORT_RELATED_ACTIVITIES",
+                                        "POSTAL_SERVICES",
+                                        "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
+                                        "RAILWAY_SERVICES",
+                                        "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
+                                        "WATER"
+                                      ]
                                     }
                                   }
                                 }
@@ -248,46 +334,22 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "country",
-                          "tender",
+                          "date",
+                          "owner",
                           "planning",
+                          "tender",
                           "buyer"
                         ],
                         "properties": {
-                          "country": {
-                            "type": "string"
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
                           },
-                          "tender": {
-                            "type": "object",
-                            "required": [
-                              "title",
-                              "classification"
-                            ],
-                            "properties": {
-                              "title": {
-                                "type": "string"
-                              },
-                              "description": {
-                                "type": "string"
-                              },
-                              "classification": {
-                                "type": "object",
-                                "required": [
-                                  "id"
-                                ],
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "scheme": {
-                                    "type": "string"
-                                  },
-                                  "description": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
-                            }
+                          "testMode": {
+                            "type": "boolean"
+                          },
+                          "owner": {
+                            "type": "string"
                           },
                           "planning": {
                             "type": "object",
@@ -323,15 +385,154 @@
                               }
                             }
                           },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "title",
+                              "classification",
+                              "mainProcurementCategory"
+                            ],
+                            "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "classification": {
+                                "type": "object",
+                                "required": [
+                                  "id",
+                                  "scheme",
+                                  "description"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "scheme": {
+                                    "type": "string",
+                                    "enum": [
+                                      "CPV"
+                                    ]
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "mainProcurementCategory": {
+                                "type": "string",
+                                "enum": [
+                                  "goods",
+                                  "works",
+                                  "services"
+                                ]
+                              },
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme",
+                                        "description"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string",
+                                          "enum": [
+                                            "CPV"
+                                          ]
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "additionalClassifications": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string",
+                                            "enum": [
+                                              "CPVS"
+                                            ]
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "scheme",
+                                          "description"
+                                        ]
+                                      }
+                                    },
+                                    "deliveryAddress": {
+                                      "$ref": "../models/address.v1.json"
+                                    },
+                                    "quantity": {
+                                      "type": "number"
+                                    },
+                                    "unit": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "name"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "description",
+                                    "classification",
+                                    "quantity",
+                                    "unit"
+                                  ]
+                                }
+                              }
+                            }
+                          },
                           "buyer": {
                             "type": "object",
                             "required": [
+                              "id",
                               "name",
                               "identifier",
                               "address",
                               "contactPoint"
                             ],
                             "properties": {
+                              "id": {
+                                "type": "string"
+                              },
                               "name": {
                                 "type": "string"
                               },
@@ -357,96 +558,14 @@
                                   }
                                 }
                               },
-                              "address": {
-                                "type": "object",
-                                "required": [
-                                  "streetAddress",
-                                  "addressDetails"
-                                ],
-                                "properties": {
-                                  "streetAddress": {
-                                    "type": "string"
-                                  },
-                                  "postalCode": {
-                                    "type": "string"
-                                  },
-                                  "addressDetails": {
-                                    "type": "object",
-                                    "required": [
-                                      "country",
-                                      "region",
-                                      "locality"
-                                    ],
-                                    "properties": {
-                                      "country": {
-                                        "type": "object",
-                                        "required": [
-                                          "id"
-                                        ],
-                                        "properties": {
-                                          "id": {
-                                            "type": "string"
-                                          }
-                                        }
-                                      },
-                                      "region": {
-                                        "type": "object",
-                                        "required": [
-                                          "id"
-                                        ],
-                                        "properties": {
-                                          "id": {
-                                            "type": "string"
-                                          }
-                                        }
-                                      },
-                                      "locality": {
-                                        "type": "object",
-                                        "required": [
-                                          "scheme",
-                                          "id",
-                                          "description"
-                                        ],
-                                        "properties": {
-                                          "scheme": {
-                                            "type": "string"
-                                          },
-                                          "id": {
-                                            "type": "string"
-                                          },
-                                          "description": {
-                                            "type": "string"
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
                               "additionalIdentifiers": {
                                 "type": "array",
                                 "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "scheme": {
-                                      "type": "string"
-                                    },
-                                    "legalName": {
-                                      "type": "string"
-                                    },
-                                    "uri": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "scheme",
-                                    "legalName"
-                                  ]
+                                  "$ref": "../models/identifier.v1.json"
                                 }
+                              },
+                              "address": {
+                                "$ref": "../models/address.v1.json"
                               },
                               "contactPoint": {
                                 "$ref": "../models/contact_point.v1.json"
@@ -455,20 +574,49 @@
                                 "type": "object",
                                 "properties": {
                                   "typeOfBuyer": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "enum": [
+                                      "BODY_PUBLIC",
+                                      "EU_INSTITUTION",
+                                      "MINISTRY",
+                                      "NATIONAL_AGENCY",
+                                      "REGIONAL_AGENCY",
+                                      "REGIONAL_AUTHORITY"
+                                    ]
                                   },
                                   "mainGeneralActivity": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "enum": [
+                                      "DEFENCE",
+                                      "ECONOMIC_AND_FINANCIAL_AFFAIRS",
+                                      "EDUCATION",
+                                      "ENVIRONMENT",
+                                      "GENERAL_PUBLIC_SERVICES",
+                                      "HEALTH",
+                                      "HOUSING_AND_COMMUNITY_AMENITIES",
+                                      "PUBLIC_ORDER_AND_SAFETY",
+                                      "RECREATION_CULTURE_AND_RELIGION",
+                                      "SOCIAL_PROTECTION"
+                                    ]
                                   },
                                   "mainSectoralActivity": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "enum": [
+                                      "AIRPORT_RELATED_ACTIVITIES",
+                                      "ELECTRICITY",
+                                      "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
+                                      "EXPLORATION_EXTRACTION_GAS_OIL",
+                                      "PORT_RELATED_ACTIVITIES",
+                                      "POSTAL_SERVICES",
+                                      "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
+                                      "RAILWAY_SERVICES",
+                                      "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
+                                      "WATER"
+                                    ]
                                   }
                                 }
                               }
                             }
-                          },
-                          "testMode": {
-                            "type": "boolean"
                           }
                         }
                       }
