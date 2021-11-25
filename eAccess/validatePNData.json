@@ -42,6 +42,7 @@
                         "required": [
                           "date",
                           "pmd",
+                          "language",
                           "mdm",
                           "planning",
                           "tender"
@@ -81,6 +82,9 @@
                               "TEST_DCO"
                             ]
                           },
+                          "language": {
+                            "type": "string"
+                          },
                           "mdm": {
                             "type": "object",
                             "required": [
@@ -106,6 +110,12 @@
                                     "country",
                                     "schemes"
                                   ]
+                                }
+                              },
+                              "languages": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
                                 }
                               }
                             }
@@ -261,13 +271,6 @@
                               },
                               "procuringEntity": {
                                 "type": "object",
-                                "required": [
-                                  "id",
-                                  "name",
-                                  "identifier",
-                                  "address",
-                                  "contactPoint"
-                                ],
                                 "properties": {
                                   "id": {
                                     "type": "string"
@@ -290,7 +293,14 @@
                                   "contactPoint": {
                                     "$ref": "../models/contact_point.v1.json"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "id",
+                                  "name",
+                                  "identifier",
+                                  "address",
+                                  "contactPoint"
+                                ]
                               },
                               "lots": {
                                 "type": "array",
