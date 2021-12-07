@@ -1,0 +1,194 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "validateBudgetsForUpdateContract",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9051"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Validate Budgets For Update Contract",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "planning"
+                        ],
+                        "properties": {
+                          "planning": {
+                            "type": "object",
+                            "required": [
+                              "budget"
+                            ],
+                            "properties": {
+                              "budget": {
+                                "type": "object",
+                                "required": [
+                                  "budgetBreakdown",
+                                  "finance"
+                                ],
+                                "properties": {
+                                  "budgetBreakdown": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "amount": {
+                                          "type": "object",
+                                          "required": [
+                                            "amount",
+                                            "currency"
+                                          ],
+                                          "properties": {
+                                            "amount": {
+                                              "type": "number"
+                                            },
+                                            "currency": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "period": {
+                                          "type": "object",
+                                          "properties": {
+                                            "startDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            },
+                                            "endDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            }
+                                          },
+                                          "required": [
+                                            "startDate",
+                                            "endDate"
+                                          ]
+                                        },
+                                        "classifications": {
+                                          "type": "object",
+                                          "required": [
+                                            "type"
+                                          ],
+                                          "properties": {
+                                            "type": {
+                                              "type": "string",
+                                              "enum": [
+                                                "advance",
+                                                "budgetPart"
+                                              ]
+                                            },
+                                            "relatedItem": {
+                                              "type": "string"
+                                            },
+                                            "relatedFinance": {
+                                              "type": "string"
+                                            },
+                                            "durationInDays": {
+                                              "type": "number"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "amount",
+                                        "classifications"
+                                      ]
+                                    }
+                                  },
+                                  "finance": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "value": {
+                                          "type": "object",
+                                          "required": [
+                                            "amount",
+                                            "currency"
+                                          ],
+                                          "properties": {
+                                            "amount": {
+                                              "type": "number"
+                                            },
+                                            "currency": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "value"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validateBudgetsForUpdateContract"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
