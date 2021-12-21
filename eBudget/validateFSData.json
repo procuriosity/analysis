@@ -1,0 +1,277 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "validateFSData",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9051"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Validate FS Data",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "date",
+                          "mdm",
+                          "planning",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "mdm": {
+                            "type": "object",
+                            "required": [
+                              "registrationSchemes"
+                            ],
+                            "properties": {
+                              "registrationSchemes": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "country": {
+                                      "type": "string"
+                                    },
+                                    "schemes": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "country",
+                                    "schemes"
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "planning": {
+                            "type": "object",
+                            "required": [
+                              "budget"
+                            ],
+                            "properties": {
+                              "rationale": {
+                                "type": "string"
+                              },
+                              "budget": {
+                                "type": "object",
+                                "required": [
+                                  "period",
+                                  "amount",
+                                  "isEuropeanUnionFunded"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "period": {
+                                    "type": "object",
+                                    "required": [
+                                      "startDate",
+                                      "endDate"
+                                    ],
+                                    "properties": {
+                                      "startDate": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                      },
+                                      "endDate": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                      }
+                                    }
+                                  },
+                                  "amount": {
+                                    "type": "object",
+                                    "required": [
+                                      "amount",
+                                      "currency"
+                                    ],
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      },
+                                      "currency": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "isEuropeanUnionFunded": {
+                                    "type": "boolean"
+                                  },
+                                  "europeanUnionFunding": {
+                                    "type": "object",
+                                    "properties": {
+                                      "projectName": {
+                                        "type": "string"
+                                      },
+                                      "projectIdentifier": {
+                                        "type": "string"
+                                      },
+                                      "uri": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "projectName",
+                                      "projectIdentifier"
+                                    ]
+                                  },
+                                  "project": {
+                                    "type": "string"
+                                  },
+                                  "projectId": {
+                                    "type": "string"
+                                  },
+                                  "uri": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "procuringEntity"
+                            ],
+                            "properties": {
+                              "procuringEntity": {
+                                "type": "object",
+                                "required": [
+                                  "name",
+                                  "identifier",
+                                  "address",
+                                  "contactPoint"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "identifier": {
+                                    "$ref": "../models/identifier.v1.json"
+                                  },
+                                  "additionalIdentifiers": {
+                                    "type": "array",
+                                    "items": {
+                                      "$ref": "../models/identifier.v1.json"
+                                    }
+                                  },
+                                  "address": {
+                                    "$ref": "../models/addressRequest.v1.json"
+                                  },
+                                  "contactPoint": {
+                                    "$ref": "../models/contact_point.v1.json"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "buyer": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "identifier": {
+                                "$ref": "../models/identifier.v1.json"
+                              },
+                              "additionalIdentifiers": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "../models/identifier.v1.json"
+                                }
+                              },
+                              "address": {
+                                "$ref": "../models/addressRequest.v1.json"
+                              },
+                              "contactPoint": {
+                                "$ref": "../models/contact_point.v1.json"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "name",
+                              "identifier",
+                              "address",
+                              "contactPoint"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validateFSData"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
