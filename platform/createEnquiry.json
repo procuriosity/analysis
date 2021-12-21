@@ -1,0 +1,161 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "createEnquiry",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/do/enquiry/{cpid}/{ocid}": {
+      "post": {
+        "summary": "Create Enquiry",
+        "operationId": "post-com",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "required": true,
+            "name": "X-OPERATION-ID",
+            "description": "transaction id"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "description": "data type in request body"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "enquiry": {
+                        "type": "object",
+                        "required": [
+                          "title",
+                          "description",
+                          "author"
+                        ],
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "relatedLot": {
+                            "type": "string"
+                          },
+                          "author": {
+                            "type": "object",
+                            "required": [
+                              "name",
+                              "identifier",
+                              "address",
+                              "contactPoint",
+                              "details"
+                            ],
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "identifier": {
+                                "$ref": "../models/identifier.v1.json"
+                              },
+                              "additionalIdentifiers": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "../models/identifier.v1.json"
+                                }
+                              },
+                              "address": {
+                                "$ref": "../models/addressRequest.v1.json"
+                              },
+                              "contactPoint": {
+                                "$ref": "../models/contact_point.v1.json"
+                              },
+                              "details": {
+                                "type": "object",
+                                "required": [
+                                  "scale"
+                                ],
+                                "properties": {
+                                  "scale": {
+                                    "type": "string",
+                                    "enum": [
+                                      "micro",
+                                      "sme",
+                                      "large"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "enquiry"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process cpid "
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "tender process ocid"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
