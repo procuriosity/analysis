@@ -1,0 +1,288 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "FS",
+    "version": "1.0"
+  },
+  "servers": [],
+  "paths": {
+    "/model": {
+      "options": {
+        "summary": "FS",
+        "operationId": "options-model",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "token": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "cpid": {
+                        "$ref": "../../models/cpid.v1.json"
+                      },
+                      "ocid": {
+                        "$ref": "../../models/ocid.v1.json"
+                      },
+                      "planning": {
+                        "type": "object",
+                        "required": [
+                          "budget"
+                        ],
+                        "properties": {
+                          "rationale": {
+                            "type": "string"
+                          },
+                          "budget": {
+                            "type": "object",
+                            "required": [
+                              "period",
+                              "amount",
+                              "isEuropeanUnionFunded",
+                              "sourceEntity"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "period": {
+                                "type": "object",
+                                "required": [
+                                  "startDate",
+                                  "endDate"
+                                ],
+                                "properties": {
+                                  "startDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "endDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                }
+                              },
+                              "amount": {
+                                "type": "object",
+                                "required": [
+                                  "amount",
+                                  "currency"
+                                ],
+                                "properties": {
+                                  "amount": {
+                                    "type": "number"
+                                  },
+                                  "currency": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "isEuropeanUnionFunded": {
+                                "type": "boolean"
+                              },
+                              "europeanUnionFunding": {
+                                "type": "object",
+                                "properties": {
+                                  "projectName": {
+                                    "type": "string"
+                                  },
+                                  "projectIdentifier": {
+                                    "type": "string"
+                                  },
+                                  "uri": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "projectName",
+                                  "projectIdentifier"
+                                ]
+                              },
+                              "project": {
+                                "type": "string"
+                              },
+                              "projectId": {
+                                "type": "string"
+                              },
+                              "uri": {
+                                "type": "string"
+                              },
+                              "sourceEntity": {
+                                "type": "object",
+                                "required": [
+                                  "id",
+                                  "name"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "tender": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "status",
+                          "date"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "planning",
+                              "active"
+                            ]
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      },
+                      "payer": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "identifier",
+                          "address",
+                          "contactPoint"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "identifier": {
+                            "$ref": "../models/identifier.v1.json"
+                          },
+                          "additionalIdentifiers": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "../models/identifier.v1.json"
+                            }
+                          },
+                          "address": {
+                            "$ref": "../models/address.v1.json"
+                          },
+                          "contactPoint": {
+                            "$ref": "../models/contact_point.v1.json"
+                          }
+                        }
+                      },
+                      "funder": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "identifier",
+                          "address",
+                          "contactPoint"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "identifier": {
+                            "$ref": "../models/identifier.v1.json"
+                          },
+                          "additionalIdentifiers": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "../models/identifier.v1.json"
+                            }
+                          },
+                          "address": {
+                            "$ref": "../models/address.v1.json"
+                          },
+                          "contactPoint": {
+                            "$ref": "../models/contact_point.v1.json"
+                          }
+                        }
+                      },
+                      "relatedProcess": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "relationship": {
+                              "type": "string",
+                              "enum": [
+                                "parent"
+                              ]
+                            },
+                            "scheme": {
+                              "type": "string",
+                              "enum": [
+                                "ocid"
+                              ]
+                            },
+                            "identifier": {
+                              "type": "string"
+                            },
+                            "uri": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "relationship",
+                            "scheme",
+                            "identifier",
+                            "uri"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "token",
+                      "cpid",
+                      "ocid",
+                      "planning",
+                      "tender",
+                      "payer",
+                      "funder",
+                      "relatedProcess"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "description": "Finance Source"
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
