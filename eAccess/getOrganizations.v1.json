@@ -26,28 +26,6 @@
                       "$ref": "../models/response_command.v1.json"
                     },
                     {
-                      "type": "object",
-                      "properties": {
-                        "result": {
-                          "type": "object",
-                          "required": [
-                            "parties"
-                          ],
-                          "properties": {
-                            "parties": {
-                              "type": "array",
-                              "items": {
-                                "$ref": "../models/organization.v1.json"
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "required": [
-                        "result"
-                      ]
-                    },
-                    {
                       "allOf": [
                         {
                           "type": "object",
@@ -60,6 +38,39 @@
                                   "items": {
                                     "type": "object",
                                     "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "identifier": {
+                                        "$ref": "../models/identifier.v1.json"
+                                      },
+                                      "additionalIdentifiers": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "../models/identifier.v1.json"
+                                        }
+                                      },
+                                      "address": {
+                                        "$ref": "../models/address.v1.json"
+                                      },
+                                      "contactPoint": {
+                                        "$ref": "../models/contact_point.v1.json"
+                                      },
+                                      "persones": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "../models/person.v1.json"
+                                        }
+                                      },
+                                      "roles": {
+                                        "type": "string",
+                                        "enum": [
+                                          "procuringEntity"
+                                        ]
+                                      },
                                       "details": {
                                         "type": "object",
                                         "properties": {
@@ -105,20 +116,22 @@
                                             ]
                                           }
                                         }
-                                      },
-                                      "roles": {
-                                        "type": "string",
-                                        "enum": [
-                                          "procuringEntity"
-                                        ]
                                       }
                                     },
                                     "required": [
+                                      "id",
+                                      "name",
+                                      "identifier",
+                                      "address",
+                                      "contactPoint",
                                       "roles"
                                     ]
                                   }
                                 }
-                              }
+                              },
+                              "required": [
+                                "parties"
+                              ]
                             }
                           }
                         }
