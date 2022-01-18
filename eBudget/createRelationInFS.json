@@ -1,0 +1,152 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "createRelationInFS",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9051"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Create Relation In FS",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "relatedProcesses"
+                          ],
+                          "properties": {
+                            "relatedProcesses": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "идентификатор relatedProcess"
+                                  },
+                                  "relationship": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "enum": [
+                                        "x_execution"
+                                      ]
+                                    }
+                                  },
+                                  "scheme": {
+                                    "type": "string",
+                                    "description": "ocid",
+                                    "example": "ocid"
+                                  },
+                                  "identifier": {
+                                    "type": "string",
+                                    "description": "cpid сущности, на которую создан relatedProcess"
+                                  },
+                                  "uri": {
+                                    "type": "string",
+                                    "description": "путь к сущности, на которую создан relatedProcess"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "relationship",
+                                  "scheme",
+                                  "identifier",
+                                  "uri"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "relatedCpid",
+                          "relatedOcid"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "relatedCpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "relatedOcid": {
+                            "$ref": "../models/ocid.v1.json"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "createRelationInFS"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

@@ -13,51 +13,14 @@
     "/do/pn": {
       "post": {
         "summary": "Create PN",
-        "operationId": "post-command",
+        "operationId": "post-com",
         "responses": {
           "202": {
             "description": "Accepted"
           }
         },
+        "description": "",
         "parameters": [
-          {
-            "schema": {
-              "type": "string",
-              "example": "UA"
-            },
-            "in": "query",
-            "name": "country",
-            "required": true,
-            "description": "country code according ISO 3166 alpha-2 standart"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "example": "EN"
-            },
-            "in": "query",
-            "name": "lang",
-            "required": true,
-            "description": "language code according ISO 639-1 standart"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "example": "OT"
-            },
-            "in": "query",
-            "name": "pmd",
-            "required": true,
-            "description": "procurement method details"
-          },
-          {
-            "schema": {
-              "type": "boolean"
-            },
-            "in": "query",
-            "name": "testMode",
-            "description": "test entity creation flag "
-          },
           {
             "schema": {
               "type": "string"
@@ -72,9 +35,9 @@
               "type": "string"
             },
             "in": "header",
+            "required": true,
             "name": "X-OPERATION-ID",
-            "description": "transaction id",
-            "required": true
+            "description": "transaction id"
           },
           {
             "schema": {
@@ -84,6 +47,41 @@
             "name": "Content-Type",
             "required": true,
             "description": "data type in request body"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "country",
+            "description": "country code according ISO 3166 alpha-2 standard",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lang",
+            "required": true,
+            "description": "language code according ISO 639-1 standard"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "pmd",
+            "description": "procurement method details",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "testMode",
+            "description": "test entity creation flag "
           }
         ],
         "requestBody": {
@@ -117,7 +115,8 @@
                                   "type": "object",
                                   "properties": {
                                     "id": {
-                                      "type": "string"
+                                      "type": "string",
+                                      "format": "uuid"
                                     },
                                     "amount": {
                                       "type": "object",
@@ -133,11 +132,29 @@
                                           "type": "string"
                                         }
                                       }
+                                    },
+                                    "classifications": {
+                                      "type": "object",
+                                      "required": [
+                                        "ei",
+                                        "fs"
+                                      ],
+                                      "properties": {
+                                        "ei": {
+                                          "type": "string",
+                                          "description": "identifier of expenditure item"
+                                        },
+                                        "fs": {
+                                          "type": "string",
+                                          "description": "identifier of financial source"
+                                        }
+                                      }
                                     }
                                   },
                                   "required": [
                                     "id",
-                                    "amount"
+                                    "amount",
+                                    "classifications"
                                   ]
                                 }
                               }
@@ -150,9 +167,8 @@
                         "required": [
                           "title",
                           "description",
-                          "legalBasis",
-                          "tenderPeriod",
-                          "procuringEntity"
+                          "classification",
+                          "tenderPeriod"
                         ],
                         "properties": {
                           "title": {
@@ -161,13 +177,40 @@
                           "description": {
                             "type": "string"
                           },
+                          "classification": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "scheme"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "scheme": {
+                                "type": "string",
+                                "enum": [
+                                  "CPV"
+                                ]
+                              }
+                            }
+                          },
                           "legalBasis": {
-                            "type": "string"
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "scheme": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "scheme"
+                            ]
                           },
                           "procurementMethodRationale": {
-                            "type": "string"
-                          },
-                          "procurementMethodAdditionalInfo": {
                             "type": "string"
                           },
                           "tenderPeriod": {
@@ -204,7 +247,7 @@
                                 }
                               },
                               "address": {
-                                "$ref": "../models/short_address.v1.json"
+                                "$ref": "../models/addressRequest.v1.json"
                               },
                               "contactPoint": {
                                 "$ref": "../models/contact_point.v1.json"
@@ -267,10 +310,104 @@
                                   ],
                                   "properties": {
                                     "address": {
-                                      "$ref": "../models/short_address.v1.json"
+                                      "$ref": "../models/addressRequest.v1.json"
                                     },
                                     "description": {
                                       "type": "string"
+                                    }
+                                  }
+                                },
+                                "hasOptions": {
+                                  "type": "boolean"
+                                },
+                                "options": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "period": {
+                                        "type": "object",
+                                        "properties": {
+                                          "durationInDays": {
+                                            "type": "number"
+                                          },
+                                          "startDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          },
+                                          "endDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          },
+                                          "maxExtentDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "hasRecurrence": {
+                                  "type": "boolean"
+                                },
+                                "recurrence": {
+                                  "type": "object",
+                                  "properties": {
+                                    "dates": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "startDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "hasRenewal": {
+                                  "type": "boolean"
+                                },
+                                "renewal": {
+                                  "type": "object",
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "minimumRenewals": {
+                                      "type": "number"
+                                    },
+                                    "maximumRenewals": {
+                                      "type": "number"
+                                    },
+                                    "period": {
+                                      "type": "object",
+                                      "properties": {
+                                        "durationInDays": {
+                                          "type": "number"
+                                        },
+                                        "startDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        },
+                                        "endDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        },
+                                        "maxExtentDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        }
+                                      }
                                     }
                                   }
                                 }
@@ -299,11 +436,18 @@
                                 "classification": {
                                   "type": "object",
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "scheme"
                                   ],
                                   "properties": {
                                     "id": {
                                       "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string",
+                                      "enum": [
+                                        "CPV"
+                                      ]
                                     }
                                   }
                                 },
@@ -314,10 +458,17 @@
                                     "properties": {
                                       "id": {
                                         "type": "string"
+                                      },
+                                      "scheme": {
+                                        "type": "string",
+                                        "enum": [
+                                          "CPVS"
+                                        ]
                                       }
                                     },
                                     "required": [
-                                      "id"
+                                      "id",
+                                      "scheme"
                                     ]
                                   }
                                 },
@@ -416,8 +567,7 @@
               }
             }
           }
-        },
-        "description": "Create PN for pmd = OT, SV, MV"
+        }
       },
       "parameters": []
     }

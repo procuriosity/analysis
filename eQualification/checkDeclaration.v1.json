@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "checkDeclaration",
-    "version": "1.01"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -44,7 +44,8 @@
                           "ocid",
                           "qualificationId",
                           "requirementResponse",
-                          "criteria"
+                          "criteria",
+                          "submissions"
                         ],
                         "properties": {
                           "cpid": {
@@ -54,7 +55,8 @@
                             "$ref": "../models/ocid.v1.json"
                           },
                           "qualificationId": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uuid"
                           },
                           "requirementResponse": {
                             "type": "object",
@@ -83,7 +85,8 @@
                               },
                               "requirementId": {
                                 "type": "string",
-                                "description": "требование, на которое подается декларация"
+                                "description": "требование, на которое подается декларация",
+                                "format": "uuid"
                               },
                               "responder": {
                                 "type": "object",
@@ -155,6 +158,44 @@
                                 "id",
                                 "requirementGroups"
                               ]
+                            }
+                          },
+                          "submissions": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    },
+                                    "candidates": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "candidates"
+                                  ]
+                                }
+                              }
                             }
                           }
                         }

@@ -1,0 +1,77 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "cancelPlan",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/cancel/plan/{cpid}/{ocid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process identifier"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "PN/PIN ocid"
+        }
+      ],
+      "post": {
+        "summary": "Cancel Plan",
+        "operationId": "post-cancel-plan-cpid-ocid",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "transaction id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "PN/PIN token",
+            "required": true
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

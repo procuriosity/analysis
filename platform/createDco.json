@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "createMC",
+    "title": "createDCO",
     "version": "1.00"
   },
   "servers": [
@@ -32,9 +32,7 @@
                       "items",
                       "tenderPeriod",
                       "title",
-                      "description",
-                      "awardCriteria",
-                      "awardCriteriaDetails"
+                      "description"
                     ],
                     "properties": {
                       "lots": {
@@ -96,23 +94,6 @@
                                   "$ref": "../models/addressRequest.v1.json"
                                 }
                               }
-                            },
-                            "variants": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "hasVariants": {
-                                    "type": "boolean"
-                                  },
-                                  "variantsDetails": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "hasVariants"
-                                ]
-                              }
                             }
                           },
                           "required": [
@@ -120,8 +101,7 @@
                             "title",
                             "value",
                             "contractPeriod",
-                            "placeOfPerformance",
-                            "variants"
+                            "placeOfPerformance"
                           ]
                         }
                       },
@@ -145,14 +125,14 @@
                             },
                             "unit": {
                               "type": "object",
-                              "required": [
-                                "id"
-                              ],
                               "properties": {
                                 "id": {
                                   "type": "string"
                                 }
-                              }
+                              },
+                              "required": [
+                                "id"
+                              ]
                             },
                             "relatedLot": {
                               "type": "string"
@@ -160,9 +140,7 @@
                           },
                           "required": [
                             "id",
-                            "description",
                             "quantity",
-                            "unit",
                             "relatedLot"
                           ]
                         }
@@ -184,22 +162,6 @@
                       },
                       "description": {
                         "type": "string"
-                      },
-                      "awardCriteria": {
-                        "type": "string",
-                        "enum": [
-                          "priceOnly",
-                          "costOnly",
-                          "qualityOnly",
-                          "ratedCriteria"
-                        ]
-                      },
-                      "awardCriteriaDetails": {
-                        "type": "string",
-                        "enum": [
-                          "automated",
-                          "manual"
-                        ]
                       },
                       "criteria": {
                         "type": "array",
@@ -247,11 +209,12 @@
                                           "type": "string"
                                         },
                                         "dataType": {
-                                          "type": [
+                                          "type": "string",
+                                          "enum": [
                                             "string",
-                                            "number",
                                             "integer",
-                                            "boolean"
+                                            "boolean",
+                                            "number"
                                           ]
                                         },
                                         "period": {
@@ -425,7 +388,6 @@
                                 "required": [
                                   "id",
                                   "measure",
-                                  "unit",
                                   "notes"
                                 ]
                               }
@@ -546,7 +508,7 @@
             "in": "header",
             "name": "X-OPERATION-ID",
             "required": true,
-            "description": "ID транзакции"
+            "description": "transaction ID "
           },
           {
             "schema": {
@@ -554,7 +516,7 @@
             },
             "in": "header",
             "name": "Content-Type",
-            "description": "тип данных в теле запроса",
+            "description": "data type in request body",
             "required": true
           },
           {
@@ -564,7 +526,7 @@
             "in": "header",
             "name": "X-TOKEN",
             "required": true,
-            "description": "токен PN"
+            "description": "PN token"
           },
           {
             "schema": {

@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "prepareItemsForSsc",
-    "version": "1.0"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -116,7 +116,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "tender"
+                          "tender",
+                          "pmd"
                         ],
                         "properties": {
                           "cpid": {
@@ -128,8 +129,7 @@
                           "tender": {
                             "type": "object",
                             "required": [
-                              "items",
-                              "lots"
+                              "items"
                             ],
                             "properties": {
                               "items": {
@@ -145,14 +145,14 @@
                                     },
                                     "unit": {
                                       "type": "object",
-                                      "required": [
-                                        "id"
-                                      ],
                                       "properties": {
                                         "id": {
                                           "type": "string"
                                         }
-                                      }
+                                      },
+                                      "required": [
+                                        "id"
+                                      ]
                                     }
                                   },
                                   "required": [
@@ -171,6 +171,86 @@
                                   },
                                   "required": [
                                     "id"
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "RFQ",
+                              "TEST_RFQ",
+                              "MC",
+                              "TEST_MC",
+                              "DCO",
+                              "TEST_DCO"
+                            ]
+                          },
+                          "bids": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "items": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "classification": {
+                                            "type": "object",
+                                            "required": [
+                                              "id",
+                                              "scheme"
+                                            ],
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "scheme": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "unit": {
+                                            "type": "object",
+                                            "required": [
+                                              "id"
+                                            ],
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "description",
+                                          "classification",
+                                          "unit"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "items"
                                   ]
                                 }
                               }

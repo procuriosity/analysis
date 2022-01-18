@@ -1,0 +1,151 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "getProcurementCategory",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9161"
+    }
+  ],
+  "paths": {
+    "/get/procurementCategory": {
+      "post": {
+        "summary": "Get Procurement Category",
+        "operationId": "post-procurementCategory",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "required": [
+                            "mainProcurementCategory"
+                          ],
+                          "properties": {
+                            "mainProcurementCategory": {
+                              "type": "string",
+                              "enum": [
+                                "goods",
+                                "works",
+                                "services"
+                              ]
+                            },
+                            "additionalProcurementCategories": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "goods",
+                                  "works",
+                                  "services"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "data"
+                      ]
+                    }
+                  ],
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "tender": {
+                        "type": "object",
+                        "required": [
+                          "classification"
+                        ],
+                        "properties": {
+                          "classification": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "scheme"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "scheme": {
+                                "type": "string",
+                                "enum": [
+                                  "CPV"
+                                ]
+                              }
+                            }
+                          },
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "classification": {
+                                  "type": "object",
+                                  "required": [
+                                    "id",
+                                    "scheme"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string",
+                                      "enum": [
+                                        "CPV"
+                                      ]
+                                    }
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "classification"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "tender"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "description": ""
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "title": "target",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "relatesTo": {
+      "type": "string",
+      "enum": [
+        "lot",
+        "item",
+        "tender"
+      ]
+    },
+    "relatedItem": {
+      "type": "string"
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "period": {
+            "type": "object",
+            "properties": {
+              "startDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "endDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "measure": {
+            "type": [
+              "string",
+              "number",
+              "integer",
+              "boolean"
+            ]
+          },
+          "unit": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          "dimensions": {
+            "type": "object",
+            "properties": {
+              "requirementClassIdPR": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "requirementClassIdPR"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          },
+          "relatedRequirementId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "measure",
+          "notes"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "relatesTo",
+    "observations"
+  ]
+}

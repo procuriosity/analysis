@@ -1,19 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "prepareItemsForDco",
-    "version": "1.0",
-    "description": ""
+    "title": "createInvitation",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9271"
+      "url": "http://{host}:9061"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Prepare Items For DCO",
+        "summary": "Create Invitation",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -31,45 +30,52 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "tender"
+                            "invitations"
                           ],
                           "properties": {
-                            "tender": {
-                              "type": "object",
-                              "required": [
-                                "items"
-                              ],
-                              "properties": {
-                                "items": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "id": {
-                                        "type": "string"
-                                      },
-                                      "classification": {
-                                        "type": "object",
-                                        "required": [
-                                          "id",
-                                          "scheme"
-                                        ],
-                                        "properties": {
-                                          "id": {
-                                            "type": "string"
-                                          },
-                                          "scheme": {
-                                            "type": "string"
-                                          }
-                                        }
-                                      }
-                                    },
-                                    "required": [
-                                      "id",
-                                      "classification"
+                            "invitations": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "date": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "active"
                                     ]
+                                  },
+                                  "tenderers": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "name"
+                                      ]
+                                    }
                                   }
-                                }
+                                },
+                                "required": [
+                                  "id",
+                                  "date",
+                                  "status",
+                                  "tenderers"
+                                ]
                               }
                             }
                           }
@@ -100,23 +106,26 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid",
-                          "tender"
+                          "date",
+                          "bids",
+                          "additionalCpid",
+                          "additionalOcid"
                         ],
                         "properties": {
                           "cpid": {
                             "$ref": "../models/cpid.v1.json"
                           },
-                          "ocid": {
-                            "$ref": "../models/ocid.v1.json"
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
                           },
-                          "tender": {
+                          "bids": {
                             "type": "object",
                             "required": [
-                              "items"
+                              "details"
                             ],
                             "properties": {
-                              "items": {
+                              "details": {
                                 "type": "array",
                                 "items": {
                                   "type": "object",
@@ -131,6 +140,12 @@
                                 }
                               }
                             }
+                          },
+                          "additionalCpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "additionalOcid": {
+                            "$ref": "../models/ocid.v1.json"
                           }
                         }
                       }
@@ -145,7 +160,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "prepareItemsForDco"
+                          "createInvitation"
                         ]
                       }
                     }
