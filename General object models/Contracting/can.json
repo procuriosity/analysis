@@ -40,7 +40,8 @@
                                 "contractProject",
                                 "unsuccessful",
                                 "empty",
-                                "active"
+                                "active",
+                                "allOffersRejected"
                               ]
                             },
                             "awardId": {
@@ -87,6 +88,58 @@
                             "date": {
                               "type": "string",
                               "format": "date-time"
+                            },
+                            "amendment": {
+                              "type": "object",
+                              "description": "присутствует для отмененного CAN",
+                              "properties": {
+                                "rationale": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "documents": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "title": {
+                                        "type": "string"
+                                      },
+                                      "documentType": {
+                                        "type": "string",
+                                        "enum": [
+                                          "contractNotice",
+                                          "contractArrangements",
+                                          "contractSchedule",
+                                          "contractAnnexe",
+                                          "contractGuarantees",
+                                          "subContract",
+                                          "illustration",
+                                          "contractSummary",
+                                          "cancellationDetails",
+                                          "conflictOfInterest"
+                                        ]
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "title",
+                                      "documentType"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "rationale"
+                              ]
                             }
                           },
                           "required": [

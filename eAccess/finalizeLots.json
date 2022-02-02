@@ -1,18 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "finalizeAwards",
-    "version": "1.02"
+    "title": "finalizeLot",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9081"
+      "url": "http://{host}:9031"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Finalize Awards",
+        "summary": "Finalize Lot",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -30,39 +30,54 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "awards"
+                            "tender"
                           ],
                           "properties": {
-                            "awards": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "status": {
-                                    "type": "string",
-                                    "enum": [
-                                      "unsuccessful",
-                                      "active"
-                                    ]
-                                  },
-                                  "statusDetails": {
-                                    "type": "string",
-                                    "enum": [
-                                      "basedOnHumanDecision"
-                                    ]
-                                  },
-                                  "relatedBid": {
-                                    "type": "string"
-                                  }
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "lots"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
                                 },
-                                "required": [
-                                  "id",
-                                  "status",
-                                  "statusDetails"
-                                ]
+                                "status": {
+                                  "type": "string",
+                                  "enum": [
+                                    "unsuccessful",
+                                    "complete"
+                                  ]
+                                },
+                                "statusDetails": {
+                                  "type": "string"
+                                },
+                                "lots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "status": {
+                                        "type": "string",
+                                        "enum": [
+                                          "unsuccessful"
+                                        ]
+                                      },
+                                      "statusDetails": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "status",
+                                      "statusDetails"
+                                    ]
+                                  }
+                                }
                               }
                             }
                           }
@@ -94,7 +109,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "operationType"
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -103,26 +118,11 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "contracts": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "awardId": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "id",
-                                "awardId"
-                              ]
-                            }
-                          },
                           "tender": {
                             "type": "object",
+                            "required": [
+                              "lots"
+                            ],
                             "properties": {
                               "lots": {
                                 "type": "array",
@@ -138,17 +138,7 @@
                                   ]
                                 }
                               }
-                            },
-                            "required": [
-                              "lots"
-                            ]
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "applyConfirmations",
-                              "confirmCan"
-                            ]
+                            }
                           }
                         }
                       }
@@ -163,7 +153,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "finalizeAwards"
+                          "finalizeLot"
                         ]
                       }
                     }
