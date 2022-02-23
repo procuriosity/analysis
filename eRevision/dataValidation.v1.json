@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Data Validation",
-    "version": "1.01"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -41,25 +41,6 @@
                   {
                     "type": "object",
                     "properties": {
-                      "params": {
-                        "type": "object",
-                        "required": [
-                          "amendment"
-                        ],
-                        "properties": {
-                          "amendment": {
-                            "$ref": "../models/amendment_object.json"
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "params"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
                       "action": {
                         "type": "string",
                         "enum": [
@@ -69,29 +50,12 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "amendment",
                           "cpid",
                           "ocid",
-                          "operationType"
+                          "operationType",
+                          "tender"
                         ],
                         "properties": {
-                          "amendment": {
-                            "type": "object",
-                            "required": [
-                              "id",
-                              "rationale"
-                            ],
-                            "properties": {
-                              "id": {
-                                "type": "string",
-                                "description": "временный id amendment",
-                                "format": "uuid"
-                              },
-                              "rationale": {
-                                "type": "string"
-                              }
-                            }
-                          },
                           "cpid": {
                             "$ref": "../models/cpid.v1.json"
                           },
@@ -102,8 +66,67 @@
                             "type": "string",
                             "enum": [
                               "tenderCancellation",
-                              "lotCancellation"
+                              "lotCancellation",
+                              "cancelPlan"
                             ]
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "amendments"
+                            ],
+                            "properties": {
+                              "amendments": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    },
+                                    "rationale": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "title": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "documentType": {
+                                            "type": "string",
+                                            "enum": [
+                                              "cancellationDetails"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "title",
+                                          "documentType"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "rationale"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }
