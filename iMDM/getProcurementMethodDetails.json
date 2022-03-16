@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getLanguages",
+    "title": "getProcurementMethodDetails",
     "version": "1.0"
   },
   "servers": [
@@ -10,9 +10,9 @@
     }
   ],
   "paths": {
-    "/languages": {
+    "/procurementMethodDetails": {
       "get": {
-        "summary": "GET Languages",
+        "summary": "GET Procurement Method Details",
         "tags": [],
         "responses": {
           "200": {
@@ -25,14 +25,11 @@
                     "data": {
                       "type": "object",
                       "required": [
-                        "languages"
+                        "procurementMethodDetails"
                       ],
                       "properties": {
-                        "languages": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
+                        "procurementMethodDetails": {
+                          "type": "string"
                         }
                       }
                     }
@@ -86,9 +83,18 @@
               "type": "string"
             },
             "in": "query",
-            "name": "country",
-            "required": true,
-            "description": "country code from ISO-ALPHA2"
+            "name": "lang",
+            "description": "language",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "pmd",
+            "description": "procurement method details",
+            "required": true
           }
         ]
       },
