@@ -41,7 +41,9 @@
                         "type": "object",
                         "required": [
                           "planning",
-                          "tender"
+                          "tender",
+                          "country",
+                          "operationType"
                         ],
                         "properties": {
                           "planning": {
@@ -73,10 +75,10 @@
                                           ],
                                           "properties": {
                                             "ei": {
-                                              "type": "string"
+                                              "$ref": "../models/cpid.v1.json"
                                             },
                                             "fs": {
-                                              "type": "string"
+                                              "$ref": "../models/ocid.v1.json"
                                             }
                                           }
                                         },
@@ -135,6 +137,16 @@
                           },
                           "testMode": {
                             "type": "boolean"
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "createPin",
+                              "createPN"
+                            ]
                           }
                         }
                       }
