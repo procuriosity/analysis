@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "createEnquiryPeriod",
-    "version": "1.01"
+    "title": "setEnquiryPeriod",
+    "version": "1.0"
   },
   "servers": [
     {
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Create Enquiry Period",
+        "summary": "Set Enquiry Period",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -71,6 +71,7 @@
             }
           }
         },
+        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -87,10 +88,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "owner",
-                          "pmd",
-                          "country",
-                          "operationType"
+                          "date",
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -99,56 +98,22 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "owner": {
+                          "date": {
                             "type": "string",
-                            "description": "owber площадки"
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "CF",
-                              "TEST_CF",
-                              "OF",
-                              "TEST_OF",
-                              "SV",
-                              "TEST_SV",
-                              "MV",
-                              "TEST_MV",
-                              "OT",
-                              "TEST_OT",
-                              "RT",
-                              "TEST_RT",
-                              "GPA",
-                              "TEST_GPA"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "createPcr",
-                              "createTenderFromPlan"
-                            ]
+                            "format": "date-time"
                           },
                           "tender": {
                             "type": "object",
                             "required": [
-                              "tenderPeriod"
+                              "enquiryPeriod"
                             ],
                             "properties": {
-                              "tenderPeriod": {
+                              "enquiryPeriod": {
                                 "type": "object",
                                 "required": [
-                                  "startDate",
                                   "endDate"
                                 ],
                                 "properties": {
-                                  "startDate": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
                                   "endDate": {
                                     "type": "string",
                                     "format": "date-time"
@@ -156,31 +121,6 @@
                                 }
                               }
                             }
-                          },
-                          "preQualification": {
-                            "type": "object",
-                            "properties": {
-                              "period": {
-                                "type": "object",
-                                "required": [
-                                  "startDate",
-                                  "endDate"
-                                ],
-                                "properties": {
-                                  "startDate": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  },
-                                  "endDate": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                }
-                              }
-                            },
-                            "required": [
-                              "period"
-                            ]
                           }
                         }
                       }
@@ -195,7 +135,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "createEnquiryPeriod"
+                          "setEnquiryPeriod"
                         ]
                       }
                     }
