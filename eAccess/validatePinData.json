@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validatePinData",
-    "version": "1.01"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -245,19 +245,15 @@
                                 }
                               },
                               "legalBasis": {
-                                "type": "object",
-                                "required": [
-                                  "id",
-                                  "scheme"
-                                ],
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "scheme": {
-                                    "type": "string"
-                                  }
-                                }
+                                "type": "string",
+                                "enum": [
+                                  "DIRECTIVE_2014_23_EU",
+                                  "DIRECTIVE_2014_24_EU",
+                                  "DIRECTIVE_2014_25_EU",
+                                  "DIRECTIVE_2009_81_EU",
+                                  "REGULATION_966_2012",
+                                  "NATIONAL_PROCUREMENT_LAW"
+                                ]
                               },
                               "mainProcurementCategory": {
                                 "type": "string",
@@ -318,59 +314,59 @@
                                   ]
                                 }
                               },
-                          "electronicAuctions": {
-                            "type": "object",
-                            "properties": {
-                              "details": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "relatedLot": {
-                                      "type": "string"
-                                    },
-                                    "electronicAuctionModalities": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "eligibleMinimumDifference": {
-                                            "type": "object",
-                                            "required": [
-                                              "amount",
-                                              "currency"
-                                            ],
-                                            "properties": {
-                                              "amount": {
-                                                "type": "number"
-                                              },
-                                              "currency": {
-                                                "type": "string"
-                                              }
-                                            }
-                                          }
+                              "electronicAuctions": {
+                                "type": "object",
+                                "properties": {
+                                  "details": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
                                         },
-                                        "required": [
-                                          "eligibleMinimumDifference"
-                                        ]
-                                      }
+                                        "relatedLot": {
+                                          "type": "string"
+                                        },
+                                        "electronicAuctionModalities": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "eligibleMinimumDifference": {
+                                                "type": "object",
+                                                "required": [
+                                                  "amount",
+                                                  "currency"
+                                                ],
+                                                "properties": {
+                                                  "amount": {
+                                                    "type": "number"
+                                                  },
+                                                  "currency": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            "required": [
+                                              "eligibleMinimumDifference"
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "relatedLot",
+                                        "electronicAuctionModalities"
+                                      ]
                                     }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "relatedLot",
-                                    "electronicAuctionModalities"
-                                  ]
-                                }
-                              }
-                            },
-                            "required": [
-                              "details"
-                            ]
-                          },                              
+                                  }
+                                },
+                                "required": [
+                                  "details"
+                                ]
+                              },
                               "procuringEntity": {
                                 "type": "object",
                                 "required": [
