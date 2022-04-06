@@ -1,19 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "validateTenderPeriod",
-    "version": "1.06",
-    "description": ""
+    "title": "validateEnquiryPeriod",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9061"
+      "url": "http://{host}:9071"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Validate Tender Period",
+        "summary": "Validate Enquiry Period",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -41,64 +40,44 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "date",
-                          "country",
                           "pmd",
+                          "country",
                           "operationType",
+                          "date",
                           "tender"
                         ],
                         "properties": {
-                          "date": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "country": {
-                            "type": "string",
-                            "example": "MD"
-                          },
                           "pmd": {
                             "type": "string",
                             "enum": [
-                              "GPA",
-                              "TEST_GPA",
-                              "RT",
-                              "TEST_RT",
-                              "CF",
-                              "TEST_CF",
-                              "OF",
-                              "TEST_OF",
-                              "RFQ",
-                              "TEST_RFQ",
-                              "MC",
-                              "TEST_MC",
-                              "DCO",
-                              "TEST_DCO",
                               "OT",
-                              "TEST_OT",
-                              "MV",
-                              "TEST_MV",
                               "SV",
-                              "TEST_SV"
+                              "MV",
+                              "TEST_OT",
+                              "TEST_SV",
+                              "TEST_MV"
                             ]
+                          },
+                          "country": {
+                            "type": "string"
                           },
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "startSecondStage",
-                              "createPcr",
-                              "createRfq",
-                              "createMC",
-                              "createDco",
                               "createTenderFromPlan"
                             ]
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
                           },
                           "tender": {
                             "type": "object",
                             "required": [
-                              "tenderPeriod"
+                              "enquiryPeriod"
                             ],
                             "properties": {
-                              "tenderPeriod": {
+                              "enquiryPeriod": {
                                 "type": "object",
                                 "required": [
                                   "endDate"
@@ -125,7 +104,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "validateTenderPeriod"
+                          "validateEnquiryPeriod"
                         ]
                       }
                     }
