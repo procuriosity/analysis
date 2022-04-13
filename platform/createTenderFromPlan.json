@@ -2,7 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createTenderFromPlan",
-    "version": "1.0"
+    "version": "1.0",
+    "description": ""
   },
   "servers": [
     {
@@ -10,8 +11,26 @@
     }
   ],
   "paths": {
-    "/do/cn/{cpid}/{ocidOpenPN}": {
+    "/do/tender/{cpid}/{ocidOpenPN}": {
       "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process identifier"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocidOpenPN",
+          "in": "path",
+          "required": true,
+          "description": "PN ocid Open procedure"
+        },
         {
           "schema": {
             "type": "string"
@@ -47,24 +66,6 @@
           "name": "X-TOKEN",
           "description": "PN token",
           "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "cpid",
-          "in": "path",
-          "required": true,
-          "description": "tender process identifier"
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "ocidOpenPN",
-          "in": "path",
-          "required": true,
-          "description": "PN ocid Open procedure"
         }
       ],
       "post": {
@@ -819,10 +820,13 @@
           "description": ""
         },
         "description": "create tender from PN for pmd = OT, SV, MV",
-        "x-internal": true
+        "x-internal": true,
+        "tags": [
+          "fromPN"
+        ]
       }
     },
-    "/do/cn/{cpid}/{ocidSelectivePN}": {
+    "/do/tender/{cpid}/{ocidSelectivePN}": {
       "post": {
         "summary": "Create Selective Tender From PN",
         "operationId": "post-com",
@@ -1609,7 +1613,10 @@
           },
           "description": ""
         },
-        "x-internal": true
+        "x-internal": true,
+        "tags": [
+          "fromPN"
+        ]
       },
       "parameters": [
         {
@@ -1632,7 +1639,7 @@
         }
       ]
     },
-    "/do/cn/{cpid}/{ocidOfflinePN}": {
+    "/do/tender/{cpid}/{ocidNegotiationPN}": {
       "parameters": [
         {
           "schema": {
@@ -1647,14 +1654,13 @@
           "schema": {
             "type": "string"
           },
-          "name": "ocidOfflinePN",
+          "name": "ocidNegotiationPN",
           "in": "path",
-          "required": true,
-          "description": "PN ocid Offline procedure"
+          "required": true
         }
       ],
       "post": {
-        "summary": "Create Offline Tender From PN",
+        "summary": "Create Negotiation Tender From PN",
         "operationId": "post-do-cn-cpid-ocidOfflinePN",
         "responses": {
           "202": {
@@ -2145,10 +2151,13 @@
           },
           "description": ""
         },
-        "x-internal": true
+        "x-internal": true,
+        "tags": [
+          "fromPN"
+        ]
       }
     },
-    "/do/cn/{cpid}/{ocidOpenPin}": {
+    "/do/tender/{cpid}/{ocidOpenPin}": {
       "parameters": [
         {
           "schema": {
@@ -2438,10 +2447,13 @@
           },
           "description": ""
         },
-        "x-internal": true
+        "x-internal": true,
+        "tags": [
+          "fromPin"
+        ]
       }
     },
-    "/do/cn/{cpid}/{ocidSelectivePin}": {
+    "/do/tender/{cpid}/{ocidSelectivePin}": {
       "parameters": [
         {
           "schema": {
@@ -2739,11 +2751,22 @@
           },
           "description": ""
         },
-        "x-internal": true
+        "x-internal": true,
+        "tags": [
+          "fromPin"
+        ]
       }
     }
   },
   "components": {
     "schemas": {}
-  }
+  },
+  "tags": [
+    {
+      "name": "fromPin"
+    },
+    {
+      "name": "fromPN"
+    }
+  ]
 }
