@@ -168,6 +168,7 @@
                           "title",
                           "description",
                           "classification",
+                          "legalBasis",
                           "tenderPeriod"
                         ],
                         "properties": {
@@ -196,18 +197,14 @@
                             }
                           },
                           "legalBasis": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "scheme": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "id",
-                              "scheme"
+                            "type": "string",
+                            "enum": [
+                              "DIRECTIVE_2014_23_EU",
+                              "DIRECTIVE_2014_24_EU",
+                              "DIRECTIVE_2014_25_EU",
+                              "DIRECTIVE_2009_81_EU",
+                              "REGULATION_966_2012",
+                              "NATIONAL_PROCUREMENT_LAW"
                             ]
                           },
                           "procurementMethodRationale": {
@@ -227,12 +224,6 @@
                           },
                           "procuringEntity": {
                             "type": "object",
-                            "required": [
-                              "name",
-                              "identifier",
-                              "address",
-                              "contactPoint"
-                            ],
                             "properties": {
                               "name": {
                                 "type": "string"
@@ -252,7 +243,13 @@
                               "contactPoint": {
                                 "$ref": "../models/contact_point.v1.json"
                               }
-                            }
+                            },
+                            "required": [
+                              "name",
+                              "identifier",
+                              "address",
+                              "contactPoint"
+                            ]
                           },
                           "lots": {
                             "type": "array",
