@@ -1,0 +1,285 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "buyer",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/buyer": {
+      "post": {
+        "summary": "buyer",
+        "operationId": "post-buyer",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "buyer": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "identifier": {
+                        "$ref": "../models/identifier.v1.json"
+                      },
+                      "additionalIdentifiers": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "../models/identifier.v1.json"
+                        }
+                      },
+                      "address": {
+                        "$ref": "../models/address.v1.json"
+                      },
+                      "contactPoint": {
+                        "$ref": "../models/contact_point.v1.json"
+                      },
+                      "persones": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string",
+                              "enum": [
+                                "Mr.",
+                                "Ms.",
+                                "Mrs."
+                              ]
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "identifier": {
+                              "$ref": "../models/identifierPerson.v1.json"
+                            },
+                            "businessFunctions": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "enum": [
+                                      "chairman",
+                                      "contactPoint",
+                                      "technicalOpener",
+                                      "priceOpener",
+                                      "priceEvaluator",
+                                      "technicalEvaluator",
+                                      "procurementOfficer"
+                                    ]
+                                  },
+                                  "jobTitle": {
+                                    "type": "string"
+                                  },
+                                  "period": {
+                                    "type": "object",
+                                    "required": [
+                                      "startDate"
+                                    ],
+                                    "properties": {
+                                      "startDate": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                      }
+                                    }
+                                  },
+                                  "documents": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "documentType": {
+                                          "type": "string",
+                                          "enum": [
+                                            "regulatoryDocument"
+                                          ]
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "documentType",
+                                        "title"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "type",
+                                  "jobTitle",
+                                  "period"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "name",
+                            "identifier",
+                            "businessFunctions"
+                          ]
+                        }
+                      },
+                      "details": {
+                        "type": "object",
+                        "properties": {
+                          "typeOfBuyer": {
+                            "type": "string",
+                            "enum": [
+                              "BODY_PUBLIC",
+                              "EU_INSTITUTION",
+                              "MINISTRY",
+                              "NATIONAL_AGENCY",
+                              "REGIONAL_AGENCY",
+                              "REGIONAL_AUTHORITY"
+                            ]
+                          },
+                          "mainGeneralActivity": {
+                            "type": "string",
+                            "enum": [
+                              "DEFENCE",
+                              "ECONOMIC_AND_FINANCIAL_AFFAIRS",
+                              "EDUCATION",
+                              "ENVIRONMENT",
+                              "GENERAL_PUBLIC_SERVICES",
+                              "HEALTH",
+                              "HOUSING_AND_COMMUNITY_AMENITIES",
+                              "PUBLIC_ORDER_AND_SAFETY",
+                              "RECREATION_CULTURE_AND_RELIGION",
+                              "SOCIAL_PROTECTION"
+                            ]
+                          },
+                          "mainSectoralActivity": {
+                            "type": "string",
+                            "enum": [
+                              "AIRPORT_RELATED_ACTIVITIES",
+                              "ELECTRICITY",
+                              "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
+                              "EXPLORATION_EXTRACTION_GAS_OIL",
+                              "PORT_RELATED_ACTIVITIES",
+                              "POSTAL_SERVICES",
+                              "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
+                              "RAILWAY_SERVICES",
+                              "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
+                              "WATER"
+                            ]
+                          },
+                          "bankAccounts": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "../models/bankAccount.v1.json"
+                            }
+                          },
+                          "legalForm": {
+                            "$ref": "../models/legalForm.v1.json"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "identifier",
+                      "address",
+                      "contactPoint"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "title": "User",
+        "type": "object",
+        "description": "",
+        "x-examples": {
+          "Alice Smith": {
+            "id": 142,
+            "firstName": "Alice",
+            "lastName": "Smith",
+            "email": "alice.smith@gmail.com",
+            "dateOfBirth": "1997-10-31",
+            "emailVerified": true,
+            "signUpDate": "2019-08-24"
+          }
+        },
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the given user."
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date",
+            "example": "1997-10-31"
+          },
+          "emailVerified": {
+            "type": "boolean",
+            "description": "Set to true if the user's email has been verified."
+          },
+          "createDate": {
+            "type": "string",
+            "format": "date",
+            "description": "The date that the user was created."
+          }
+        },
+        "required": [
+          "id",
+          "firstName",
+          "lastName",
+          "email",
+          "emailVerified"
+        ]
+      }
+    }
+  }
+}
