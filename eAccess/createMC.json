@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createMC",
-    "version": "1.02"
+    "version": "1.03"
   },
   "servers": [
     {
@@ -32,8 +32,10 @@
                           "required": [
                             "ocid",
                             "token",
+                            "planning",
                             "tender",
-                            "relatedProcesses"
+                            "relatedProcesses",
+                            "parties"
                           ],
                           "properties": {
                             "ocid": {
@@ -43,6 +45,145 @@
                               "type": "string",
                               "format": "uuid",
                               "description": "token созданного RFQ"
+                            },
+                            "planning": {
+                              "type": "object",
+                              "required": [
+                                "budget"
+                              ],
+                              "properties": {
+                                "rationale": {
+                                  "type": "string"
+                                },
+                                "budget": {
+                                  "type": "object",
+                                  "required": [
+                                    "amount",
+                                    "budgetBreakdown"
+                                  ],
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "amount": {
+                                      "type": "object",
+                                      "required": [
+                                        "amount",
+                                        "currency"
+                                      ],
+                                      "properties": {
+                                        "amount": {
+                                          "type": "number"
+                                        },
+                                        "currency": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "budgetBreakdown": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "period": {
+                                            "type": "object",
+                                            "required": [
+                                              "startDate",
+                                              "endDate"
+                                            ],
+                                            "properties": {
+                                              "startDate": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              },
+                                              "endDate": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              }
+                                            }
+                                          },
+                                          "amount": {
+                                            "type": "object",
+                                            "required": [
+                                              "amount",
+                                              "currency"
+                                            ],
+                                            "properties": {
+                                              "amount": {
+                                                "type": "number"
+                                              },
+                                              "currency": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "classifications": {
+                                            "type": "object",
+                                            "required": [
+                                              "ei",
+                                              "fs"
+                                            ],
+                                            "properties": {
+                                              "ei": {
+                                                "type": "string"
+                                              },
+                                              "fs": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "sourcePatry": {
+                                            "type": "object",
+                                            "required": [
+                                              "id",
+                                              "name"
+                                            ],
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "name": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "europeanUnionFunding": {
+                                            "type": "object",
+                                            "properties": {
+                                              "projectIdentifier": {
+                                                "type": "string"
+                                              },
+                                              "projectName": {
+                                                "type": "string"
+                                              },
+                                              "uri": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "projectIdentifier",
+                                              "projectName"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "period",
+                                          "amount",
+                                          "classifications",
+                                          "sourcePatry"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
+                              }
                             },
                             "tender": {
                               "type": "object",
@@ -58,6 +199,8 @@
                                 "value",
                                 "title",
                                 "description",
+                                "legalBasis",
+                                "contractPeriod",
                                 "classification",
                                 "procurementMethod",
                                 "procurementMethodDetails",
@@ -101,6 +244,12 @@
                                       "description": {
                                         "type": "string"
                                       },
+                                      "status": {
+                                        "type": "string",
+                                        "enum": [
+                                          "active"
+                                        ]
+                                      },
                                       "value": {
                                         "type": "object",
                                         "required": [
@@ -143,18 +292,6 @@
                                           }
                                         }
                                       },
-                                      "status": {
-                                        "type": "string",
-                                        "enum": [
-                                          "active"
-                                        ]
-                                      },
-                                      "statusDetails": {
-                                        "type": "string",
-                                        "enum": [
-                                          "empty"
-                                        ]
-                                      },
                                       "variants": {
                                         "type": "array",
                                         "items": {
@@ -173,11 +310,10 @@
                                     "required": [
                                       "id",
                                       "title",
+                                      "status",
                                       "value",
                                       "contractPeriod",
                                       "placeOfPerformance",
-                                      "status",
-                                      "statusDetails",
                                       "variants"
                                     ]
                                   }
@@ -315,6 +451,34 @@
                                 },
                                 "description": {
                                   "type": "string"
+                                },
+                                "legalBasis": {
+                                  "type": "string",
+                                  "enum": [
+                                    "DIRECTIVE_2014_23_EU",
+                                    "DIRECTIVE_2014_24_EU",
+                                    "DIRECTIVE_2014_25_EU",
+                                    "DIRECTIVE_2009_81_EU",
+                                    "REGULATION_966_2012",
+                                    "NATIONAL_PROCUREMENT_LAW"
+                                  ]
+                                },
+                                "contractPeriod": {
+                                  "type": "object",
+                                  "required": [
+                                    "startDate",
+                                    "endDate"
+                                  ],
+                                  "properties": {
+                                    "startDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "endDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
+                                  }
                                 },
                                 "classification": {
                                   "type": "object",
@@ -461,6 +625,100 @@
                                   "scheme",
                                   "identifier",
                                   "uri"
+                                ]
+                              }
+                            },
+                            "parties": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "identifier": {
+                                    "$ref": "../models/identifier.v1.json"
+                                  },
+                                  "additionalIdentifiers": {
+                                    "type": "array",
+                                    "items": {
+                                      "$ref": "../models/identifier.v1.json"
+                                    }
+                                  },
+                                  "address": {
+                                    "$ref": "../models/address.v1.json"
+                                  },
+                                  "contactPoint": {
+                                    "$ref": "../models/contact_point.v1.json"
+                                  },
+                                  "details": {
+                                    "type": "object",
+                                    "properties": {
+                                      "typeOfBuyer": {
+                                        "type": "string",
+                                        "enum": [
+                                          "BODY_PUBLIC",
+                                          "EU_INSTITUTION",
+                                          "MINISTRY",
+                                          "NATIONAL_AGENCY",
+                                          "REGIONAL_AGENCY",
+                                          "REGIONAL_AUTHORITY"
+                                        ]
+                                      },
+                                      "mainGeneralActivity": {
+                                        "type": "string",
+                                        "enum": [
+                                          "DEFENCE",
+                                          "ECONOMIC_AND_FINANCIAL_AFFAIRS",
+                                          "EDUCATION",
+                                          "ENVIRONMENT",
+                                          "GENERAL_PUBLIC_SERVICES",
+                                          "HEALTH",
+                                          "HOUSING_AND_COMMUNITY_AMENITIES",
+                                          "PUBLIC_ORDER_AND_SAFETY",
+                                          "RECREATION_CULTURE_AND_RELIGION",
+                                          "SOCIAL_PROTECTION"
+                                        ]
+                                      },
+                                      "mainSectoralActivity": {
+                                        "type": "string",
+                                        "enum": [
+                                          "AIRPORT_RELATED_ACTIVITIES",
+                                          "ELECTRICITY",
+                                          "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
+                                          "EXPLORATION_EXTRACTION_GAS_OIL",
+                                          "PORT_RELATED_ACTIVITIES",
+                                          "POSTAL_SERVICES",
+                                          "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
+                                          "RAILWAY_SERVICES",
+                                          "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
+                                          "WATER"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "roles": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "enum": [
+                                        "buyer",
+                                        "payer",
+                                        "funder"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "name",
+                                  "identifier",
+                                  "address",
+                                  "contactPoint",
+                                  "roles"
                                 ]
                               }
                             }
