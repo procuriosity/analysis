@@ -21,6 +21,9 @@
                         "type": "string",
                         "format": "uuid"
                       },
+                      "cpid": {
+                        "$ref": "../../models/cpid.v1.json"
+                      },
                       "ocid": {
                         "$ref": "../../models/ocid.v1.json"
                       },
@@ -519,6 +522,29 @@
                             "description": {
                               "type": "string"
                             },
+                            "value": {
+                              "type": "object",
+                              "required": [
+                                "amount",
+                                "currency",
+                                "amountNet",
+                                "valueAddedTaxIncluded"
+                              ],
+                              "properties": {
+                                "amount": {
+                                  "type": "number"
+                                },
+                                "currency": {
+                                  "type": "string"
+                                },
+                                "amountNet": {
+                                  "type": "number"
+                                },
+                                "valueAddedTaxIncluded": {
+                                  "type": "boolean"
+                                }
+                              }
+                            },
                             "period": {
                               "type": "object",
                               "required": [
@@ -589,6 +615,7 @@
                             "awardId",
                             "title",
                             "description",
+                            "value",
                             "period"
                           ]
                         }
@@ -967,6 +994,7 @@
                     },
                     "required": [
                       "token",
+                      "cpid",
                       "ocid",
                       "planning",
                       "tender",
