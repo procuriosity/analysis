@@ -30,9 +30,6 @@
                       "planning": {
                         "type": "object",
                         "description": "",
-                        "required": [
-                          "budget"
-                        ],
                         "properties": {
                           "budget": {
                             "type": "object",
@@ -150,7 +147,10 @@
                               }
                             }
                           }
-                        }
+                        },
+                        "required": [
+                          "budget"
+                        ]
                       },
                       "tender": {
                         "type": "object",
@@ -426,12 +426,6 @@
                                       },
                                       "value": {
                                         "type": "object",
-                                        "required": [
-                                          "amount",
-                                          "amountNet",
-                                          "currency",
-                                          "valueAddedTaxIncluded"
-                                        ],
                                         "properties": {
                                           "amount": {
                                             "type": "number"
@@ -445,7 +439,13 @@
                                           "valueAddedTaxIncluded": {
                                             "type": "boolean"
                                           }
-                                        }
+                                        },
+                                        "required": [
+                                          "amount",
+                                          "amountNet",
+                                          "currency",
+                                          "valueAddedTaxIncluded"
+                                        ]
                                       }
                                     }
                                   },
@@ -520,12 +520,6 @@
                             },
                             "value": {
                               "type": "object",
-                              "required": [
-                                "amount",
-                                "currency",
-                                "amountNet",
-                                "valueAddedTaxIncluded"
-                              ],
                               "properties": {
                                 "amount": {
                                   "type": "number"
@@ -539,14 +533,16 @@
                                 "valueAddedTaxIncluded": {
                                   "type": "boolean"
                                 }
-                              }
+                              },
+                              "required": [
+                                "amount",
+                                "currency",
+                                "amountNet",
+                                "valueAddedTaxIncluded"
+                              ]
                             },
                             "period": {
                               "type": "object",
-                              "required": [
-                                "startDate",
-                                "endDate"
-                              ],
                               "properties": {
                                 "startDate": {
                                   "type": "string",
@@ -556,7 +552,11 @@
                                   "type": "string",
                                   "format": "date-time"
                                 }
-                              }
+                              },
+                              "required": [
+                                "startDate",
+                                "endDate"
+                              ]
                             },
                             "documents": {
                               "type": "array",
@@ -601,6 +601,74 @@
                                   "title"
                                 ]
                               }
+                            },
+                            "agreedMetrics": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "observations": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "notes": {
+                                          "type": "string"
+                                        },
+                                        "measure": {
+                                          "type": [
+                                            "string",
+                                            "number",
+                                            "integer",
+                                            "boolean"
+                                          ]
+                                        },
+                                        "unit": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "name",
+                                            "scheme"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "notes"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "title",
+                                  "description",
+                                  "observations"
+                                ]
+                              }
                             }
                           },
                           "required": [
@@ -608,7 +676,8 @@
                             "status",
                             "statusDetails",
                             "date",
-                            "awardId"
+                            "awardId",
+                            "agreedMetrics"
                           ]
                         }
                       },
@@ -786,9 +855,6 @@
                             },
                             "details": {
                               "type": "object",
-                              "required": [
-                                "scale"
-                              ],
                               "properties": {
                                 "typeOfSupplier": {
                                   "type": "string",
@@ -957,7 +1023,10 @@
                                     "WATER"
                                   ]
                                 }
-                              }
+                              },
+                              "required": [
+                                "scale"
+                              ]
                             },
                             "roles": {
                               "type": "array",
