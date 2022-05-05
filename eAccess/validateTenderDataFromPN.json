@@ -1573,12 +1573,6 @@
                                 }
                               }
                             }
-                          },
-                          "action": {
-                            "type": "string",
-                            "enum": [
-                              "validateTenderDataFromPN"
-                            ]
                           }
                         }
                       }
@@ -1586,6 +1580,17 @@
                     "required": [
                       "params"
                     ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validateTenderDataFromPN"
+                        ]
+                      }
+                    }
                   }
                 ]
               }
@@ -1628,6 +1633,9 @@
             "application/json": {
               "schema": {
                 "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
                   {
                     "type": "object",
                     "properties": {
@@ -2097,9 +2105,6 @@
                     "required": [
                       "params"
                     ]
-                  },
-                  {
-                    "$ref": "../models/request_command.v1.json"
                   },
                   {
                     "type": "object",
