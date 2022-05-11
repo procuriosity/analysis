@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Create Amendment",
-    "version": "1.01"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -30,59 +30,66 @@
                       "type": "object",
                       "properties": {
                         "result": {
-                          "$ref": "../models/amendment_object.json"
-                        }
-                      },
-                      "required": [
-                        "result"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "result": {
                           "type": "object",
                           "required": [
-                            "id",
-                            "date",
-                            "status",
-                            "type",
-                            "relatesTo",
-                            "relatedItem",
+                            "tender",
                             "token"
                           ],
                           "properties": {
-                            "id": {
-                              "type": "string",
-                              "format": "uuid"
-                            },
-                            "date": {
-                              "type": "string",
-                              "format": "date-time",
-                              "example": "2020-02-22T11:25:44Z"
-                            },
-                            "status": {
-                              "type": "string",
-                              "enum": [
-                                "pending"
-                              ]
-                            },
-                            "type": {
-                              "type": "string",
-                              "enum": [
-                                "cancellation"
-                              ]
-                            },
-                            "relatesTo": {
-                              "type": "string",
-                              "enum": [
-                                "tender",
-                                "lot"
-                              ]
-                            },
-                            "relatedItem": {
-                              "type": "string",
-                              "description": "id лота или ocid тендера,id кана"
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "amendments"
+                              ],
+                              "properties": {
+                                "amendments": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "status": {
+                                        "type": "string",
+                                        "enum": [
+                                          "pending",
+                                          "active"
+                                        ]
+                                      },
+                                      "date": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                      },
+                                      "type": {
+                                        "type": "string",
+                                        "enum": [
+                                          "cancellation"
+                                        ]
+                                      },
+                                      "relatesTo": {
+                                        "type": "string",
+                                        "enum": [
+                                          "tender",
+                                          "lot"
+                                        ]
+                                      },
+                                      "relatedItem": {
+                                        "type": "string",
+                                        "description": "id лота или ocid тендера/PN/PIN,id кана"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "status",
+                                      "date",
+                                      "type",
+                                      "relatesTo",
+                                      "relatedItem"
+                                    ]
+                                  }
+                                }
+                              }
                             },
                             "token": {
                               "type": "string",
@@ -194,35 +201,20 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "amendment",
-                          "relatedEntityId",
-                          "operationType",
-                          "date",
                           "cpid",
                           "ocid",
-                          "owner"
+                          "operationType",
+                          "date",
+                          "relatedEntityId",
+                          "owner",
+                          "tender"
                         ],
                         "properties": {
-                          "amendment": {
-                            "type": "object",
-                            "required": [
-                              "id",
-                              "rationale"
-                            ],
-                            "properties": {
-                              "id": {
-                                "type": "string",
-                                "format": "uuid",
-                                "description": "id amendment"
-                              },
-                              "rationale": {
-                                "type": "string"
-                              }
-                            }
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
                           },
-                          "relatedEntityId": {
-                            "type": "string",
-                            "description": "id сущности для связки (id лота, ocid тендера,id кана)"
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
                           },
                           "operationType": {
                             "type": "string",
@@ -235,16 +227,72 @@
                             "type": "string",
                             "format": "date-time"
                           },
-                          "cpid": {
-                            "$ref": "../models/cpid.v1.json"
-                          },
-                          "ocid": {
-                            "$ref": "../models/ocid.v1.json"
+                          "relatedEntityId": {
+                            "type": "string",
+                            "description": "id сущности для связки (id лота, ocid тендера,id кана)"
                           },
                           "owner": {
                             "type": "string",
                             "format": "uuid",
                             "description": "id площадки"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "amendments"
+                            ],
+                            "properties": {
+                              "amendments": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    },
+                                    "rationale": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "title": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "documentType": {
+                                            "type": "string",
+                                            "enum": [
+                                              "cancellationDetails"
+                                            ]
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "title",
+                                          "documentType"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "rationale"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }

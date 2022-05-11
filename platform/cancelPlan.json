@@ -67,7 +67,71 @@
             "description": "PN/PIN token",
             "required": true
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "amendment": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "rationale"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "rationale": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "documents": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "documentType": {
+                                  "type": "string",
+                                  "enum": [
+                                    "cancellationDetails"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "title",
+                                "documentType"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "amendment"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
       }
     }
   },
