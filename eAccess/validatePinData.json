@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validatePinData",
-    "version": "1.0"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -245,19 +245,15 @@
                                 }
                               },
                               "legalBasis": {
-                                "type": "object",
-                                "required": [
-                                  "id",
-                                  "scheme"
-                                ],
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "scheme": {
-                                    "type": "string"
-                                  }
-                                }
+                                "type": "string",
+                                "enum": [
+                                  "DIRECTIVE_2014_23_EU",
+                                  "DIRECTIVE_2014_24_EU",
+                                  "DIRECTIVE_2014_25_EU",
+                                  "DIRECTIVE_2009_81_EU",
+                                  "REGULATION_966_2012",
+                                  "NATIONAL_PROCUREMENT_LAW"
+                                ]
                               },
                               "mainProcurementCategory": {
                                 "type": "string",
@@ -422,23 +418,7 @@
                                           "type": "string"
                                         },
                                         "identifier": {
-                                          "type": "object",
-                                          "required": [
-                                            "id",
-                                            "scheme",
-                                            "uri"
-                                          ],
-                                          "properties": {
-                                            "id": {
-                                              "type": "string"
-                                            },
-                                            "scheme": {
-                                              "type": "string"
-                                            },
-                                            "uri": {
-                                              "type": "string"
-                                            }
-                                          }
+                                          "$ref": "../models/identifierPerson.v1.json"
                                         },
                                         "businessFunctions": {
                                           "type": "array",

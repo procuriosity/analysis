@@ -21,15 +21,15 @@
                         "type": "string",
                         "format": "uuid"
                       },
+                      "cpid": {
+                        "$ref": "../../models/cpid.v1.json"
+                      },
                       "ocid": {
                         "$ref": "../../models/ocid.v1.json"
                       },
                       "planning": {
                         "type": "object",
                         "description": "",
-                        "required": [
-                          "budget"
-                        ],
                         "properties": {
                           "budget": {
                             "type": "object",
@@ -147,7 +147,10 @@
                               }
                             }
                           }
-                        }
+                        },
+                        "required": [
+                          "budget"
+                        ]
                       },
                       "tender": {
                         "type": "object",
@@ -240,7 +243,7 @@
                                       "type": "string"
                                     },
                                     "address": {
-                                      "$ref": "../models/address.v1.json"
+                                      "$ref": "../../models/address.v1.json"
                                     }
                                   }
                                 }
@@ -267,9 +270,7 @@
                               "type": "object",
                               "required": [
                                 "amount",
-                                "currency",
-                                "amountNet",
-                                "valueAddedTaxIncluded"
+                                "currency"
                               ],
                               "properties": {
                                 "amount": {
@@ -414,8 +415,7 @@
                                     "type": "object",
                                     "required": [
                                       "id",
-                                      "name",
-                                      "value"
+                                      "name"
                                     ],
                                     "properties": {
                                       "id": {
@@ -426,12 +426,6 @@
                                       },
                                       "value": {
                                         "type": "object",
-                                        "required": [
-                                          "amount",
-                                          "amountNet",
-                                          "currency",
-                                          "valueAddedTaxIncluded"
-                                        ],
                                         "properties": {
                                           "amount": {
                                             "type": "number"
@@ -445,7 +439,13 @@
                                           "valueAddedTaxIncluded": {
                                             "type": "boolean"
                                           }
-                                        }
+                                        },
+                                        "required": [
+                                          "amount",
+                                          "amountNet",
+                                          "currency",
+                                          "valueAddedTaxIncluded"
+                                        ]
                                       }
                                     }
                                   },
@@ -456,7 +456,7 @@
                                     "type": "string"
                                   },
                                   "deliveryAddress": {
-                                    "$ref": "../models/address.v1.json"
+                                    "$ref": "../../models/address.v1.json"
                                   }
                                 },
                                 "required": [
@@ -465,8 +465,7 @@
                                   "quantity",
                                   "unit",
                                   "description",
-                                  "relatedLot",
-                                  "deliveryAddress"
+                                  "relatedLot"
                                 ]
                               }
                             }
@@ -502,7 +501,8 @@
                               "type": "string",
                               "enum": [
                                 "contractProject",
-                                "issued"
+                                "issued",
+                                "contractPreparation"
                               ]
                             },
                             "date": {
@@ -518,12 +518,31 @@
                             "description": {
                               "type": "string"
                             },
+                            "value": {
+                              "type": "object",
+                              "properties": {
+                                "amount": {
+                                  "type": "number"
+                                },
+                                "currency": {
+                                  "type": "string"
+                                },
+                                "amountNet": {
+                                  "type": "number"
+                                },
+                                "valueAddedTaxIncluded": {
+                                  "type": "boolean"
+                                }
+                              },
+                              "required": [
+                                "amount",
+                                "currency",
+                                "amountNet",
+                                "valueAddedTaxIncluded"
+                              ]
+                            },
                             "period": {
                               "type": "object",
-                              "required": [
-                                "startDate",
-                                "endDate"
-                              ],
                               "properties": {
                                 "startDate": {
                                   "type": "string",
@@ -533,7 +552,11 @@
                                   "type": "string",
                                   "format": "date-time"
                                 }
-                              }
+                              },
+                              "required": [
+                                "startDate",
+                                "endDate"
+                              ]
                             },
                             "documents": {
                               "type": "array",
@@ -585,10 +608,7 @@
                             "status",
                             "statusDetails",
                             "date",
-                            "awardId",
-                            "title",
-                            "description",
-                            "period"
+                            "awardId"
                           ]
                         }
                       },
@@ -645,19 +665,19 @@
                               "type": "string"
                             },
                             "identifier": {
-                              "$ref": "../models/identifier.v1.json"
+                              "$ref": "../../models/identifier.v1.json"
                             },
                             "additionalIdentifiers": {
                               "type": "array",
                               "items": {
-                                "$ref": "../models/identifier.v1.json"
+                                "$ref": "../../models/identifier.v1.json"
                               }
                             },
                             "address": {
-                              "$ref": "../models/address.v1.json"
+                              "$ref": "../../models/address.v1.json"
                             },
                             "contactPoint": {
-                              "$ref": "../models/contact_point.v1.json"
+                              "$ref": "../../models/contact_point.v1.json"
                             },
                             "persones": {
                               "type": "array",
@@ -679,7 +699,7 @@
                                     "type": "string"
                                   },
                                   "identifier": {
-                                    "$ref": "../models/identifierPerson.v1.json"
+                                    "$ref": "../../models/identifierPerson.v1.json"
                                   },
                                   "businessFunctions": {
                                     "type": "array",
@@ -766,9 +786,6 @@
                             },
                             "details": {
                               "type": "object",
-                              "required": [
-                                "scale"
-                              ],
                               "properties": {
                                 "typeOfSupplier": {
                                   "type": "string",
@@ -891,11 +908,11 @@
                                 "bankAccounts": {
                                   "type": "array",
                                   "items": {
-                                    "$ref": "../models/bankAccountFull.v1.json"
+                                    "$ref": "../../models/bankAccountFull.v1.json"
                                   }
                                 },
                                 "legalForm": {
-                                  "$ref": "../models/legalForm.v1.json"
+                                  "$ref": "../../models/legalForm.v1.json"
                                 },
                                 "typeOfBuyer": {
                                   "type": "string",
@@ -937,7 +954,10 @@
                                     "WATER"
                                   ]
                                 }
-                              }
+                              },
+                              "required": [
+                                "scale"
+                              ]
                             },
                             "roles": {
                               "type": "array",
@@ -957,8 +977,6 @@
                             "identifier",
                             "address",
                             "contactPoint",
-                            "persones",
-                            "details",
                             "roles"
                           ]
                         }
@@ -966,8 +984,8 @@
                     },
                     "required": [
                       "token",
+                      "cpid",
                       "ocid",
-                      "planning",
                       "tender",
                       "awards",
                       "contracts",

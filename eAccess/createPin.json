@@ -2,7 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createPin",
-    "version": "1.0"
+    "version": "1.03",
+    "description": ""
   },
   "servers": [
     {
@@ -35,7 +36,8 @@
                             "token",
                             "planning",
                             "tender",
-                            "parties"
+                            "parties",
+                            "relatedProcesses"
                           ],
                           "properties": {
                             "cpid": {
@@ -192,6 +194,7 @@
                               "required": [
                                 "id",
                                 "status",
+                                "date",
                                 "title",
                                 "description",
                                 "classification",
@@ -229,6 +232,10 @@
                                   "enum": [
                                     "planning"
                                   ]
+                                },
+                                "date": {
+                                  "type": "string",
+                                  "format": "date-time"
                                 },
                                 "title": {
                                   "type": "string"
@@ -295,19 +302,15 @@
                                   }
                                 },
                                 "legalBasis": {
-                                  "type": "object",
-                                  "required": [
-                                    "id",
-                                    "scheme"
-                                  ],
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "scheme": {
-                                      "type": "string"
-                                    }
-                                  }
+                                  "type": "string",
+                                  "enum": [
+                                    "DIRECTIVE_2014_23_EU",
+                                    "DIRECTIVE_2014_24_EU",
+                                    "DIRECTIVE_2014_25_EU",
+                                    "DIRECTIVE_2009_81_EU",
+                                    "REGULATION_966_2012",
+                                    "NATIONAL_PROCUREMENT_LAW"
+                                  ]
                                 },
                                 "mainProcurementCategory": {
                                   "type": "string",
@@ -427,10 +430,13 @@
                                   }
                                 },
                                 "procurementMethodModalities": {
-                                  "type": "string",
-                                  "enum": [
-                                    "electronicAuction"
-                                  ]
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "enum": [
+                                      "electronicAuction"
+                                    ]
+                                  }
                                 },
                                 "electronicAuctions": {
                                   "type": "object",
@@ -478,10 +484,6 @@
                                       },
                                       "classification": {
                                         "type": "object",
-                                        "required": [
-                                          "id",
-                                          "scheme"
-                                        ],
                                         "properties": {
                                           "id": {
                                             "type": "string"
@@ -489,7 +491,11 @@
                                           "scheme": {
                                             "type": "string"
                                           }
-                                        }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "scheme"
+                                        ]
                                       },
                                       "description": {
                                         "type": "string"
@@ -754,6 +760,9 @@
                                                 }
                                               }
                                             }
+                                          },
+                                          "description": {
+                                            "type": "string"
                                           }
                                         }
                                       },
@@ -1263,6 +1272,40 @@
                                   "roles"
                                 ]
                               }
+                            },
+                            "relatedProcesses": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                  },
+                                  "relationship": {
+                                    "type": "string",
+                                    "enum": [
+                                      "parent"
+                                    ]
+                                  },
+                                  "scheme": {
+                                    "type": "string"
+                                  },
+                                  "identifier": {
+                                    "type": "string"
+                                  },
+                                  "uri": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "relationship",
+                                  "scheme",
+                                  "identifier",
+                                  "uri"
+                                ]
+                              }
                             }
                           }
                         }
@@ -1291,6 +1334,7 @@
                       "params": {
                         "type": "object",
                         "required": [
+                          "cpid",
                           "date",
                           "owner",
                           "pmd",
@@ -1301,6 +1345,9 @@
                           "parties"
                         ],
                         "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
                           "date": {
                             "type": "string",
                             "format": "date-time"
@@ -1544,19 +1591,15 @@
                                 }
                               },
                               "legalBasis": {
-                                "type": "object",
-                                "required": [
-                                  "id",
-                                  "scheme"
-                                ],
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "scheme": {
-                                    "type": "string"
-                                  }
-                                }
+                                "type": "string",
+                                "enum": [
+                                  "DIRECTIVE_2014_23_EU",
+                                  "DIRECTIVE_2014_24_EU",
+                                  "DIRECTIVE_2014_25_EU",
+                                  "DIRECTIVE_2009_81_EU",
+                                  "REGULATION_966_2012",
+                                  "NATIONAL_PROCUREMENT_LAW"
+                                ]
                               },
                               "mainProcurementCategory": {
                                 "type": "string",
@@ -1679,6 +1722,9 @@
                                     "items": {
                                       "type": "object",
                                       "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
                                         "title": {
                                           "type": "string",
                                           "enum": [
@@ -1767,6 +1813,7 @@
                                         }
                                       },
                                       "required": [
+                                        "id",
                                         "title",
                                         "name",
                                         "identifier",

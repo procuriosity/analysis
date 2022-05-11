@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "addGeneratedDocumentToContract",
-    "version": "1.02"
+    "version": "1.03"
   },
   "servers": [
     {
@@ -50,7 +50,8 @@
                                   "statusDetails": {
                                     "type": "string",
                                     "enum": [
-                                      "issued"
+                                      "issued",
+                                      "approvement"
                                     ]
                                   },
                                   "documents": {
@@ -64,7 +65,8 @@
                                         "documentType": {
                                           "type": "string",
                                           "enum": [
-                                            "x_frameworkProject"
+                                            "x_frameworkProject",
+                                            "contractSigned"
                                           ]
                                         }
                                       },
@@ -125,7 +127,8 @@
                           "processInitiator": {
                             "type": "string",
                             "enum": [
-                              "issuingFrameworkContract"
+                              "issuingFrameworkContract",
+                              "issuingContract"
                             ]
                           },
                           "contracts": {
@@ -133,6 +136,9 @@
                             "items": {
                               "type": "object",
                               "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
                                 "documents": {
                                   "type": "array",
                                   "items": {
@@ -146,12 +152,10 @@
                                       "id"
                                     ]
                                   }
-                                },
-                                "id": {
-                                  "type": "string"
                                 }
                               },
                               "required": [
+                                "id",
                                 "documents"
                               ]
                             }

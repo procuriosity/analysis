@@ -43,8 +43,14 @@
                             "awaiting",
                             "noOffersReceived",
                             "consideration",
-                            "lotCancelled"
+                            "lotCancelled",
+                            "active",
+                            "unsuccessful"
                           ]
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "отсутствует для успешного"
                         },
                         "description": {
                           "type": "string",
@@ -102,7 +108,100 @@
                               "persones": {
                                 "type": "array",
                                 "items": {
-                                  "$ref": "../../models/person.v1.json"
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "title": {
+                                      "type": "string",
+                                      "enum": [
+                                        "Mr.",
+                                        "Ms.",
+                                        "Mrs."
+                                      ]
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "identifier": {
+                                      "$ref": "../../models/identifierPerson.v1.json"
+                                    },
+                                    "businessFunctions": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "type": {
+                                            "type": "string",
+                                            "enum": [
+                                              "authority",
+                                              "contactPoint"
+                                            ]
+                                          },
+                                          "jobTitle": {
+                                            "type": "string"
+                                          },
+                                          "period": {
+                                            "type": "object",
+                                            "required": [
+                                              "startDate"
+                                            ],
+                                            "properties": {
+                                              "startDate": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              }
+                                            }
+                                          },
+                                          "documents": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "documentType": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "regulatoryDocument"
+                                                  ]
+                                                },
+                                                "title": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "documentType",
+                                                "title"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "type",
+                                          "jobTitle",
+                                          "period"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "title",
+                                    "name",
+                                    "identifier",
+                                    "businessFunctions"
+                                  ]
                                 }
                               },
                               "details": {
@@ -253,6 +352,7 @@
                         },
                         "weightedValue": {
                           "type": "object",
+                          "description": "отсутствует у неуспешного",
                           "properties": {
                             "amount": {
                               "type": "number"
@@ -268,7 +368,7 @@
                         },
                         "requirementResponses": {
                           "type": "array",
-                          "description": "ответ от PE o Декларации об отсутствии конфликта интересов",
+                          "description": "ответ от PE o Декларации об отсутствии конфликта интересов. отсутствует у неуспешного",
                           "items": {
                             "type": "object",
                             "properties": {
@@ -329,6 +429,10 @@
                               "responder"
                             ]
                           }
+                        },
+                        "relatedBid": {
+                          "type": "string",
+                          "description": "отсутствует у неуспешного"
                         }
                       },
                       "required": [
@@ -345,7 +449,8 @@
                   }
                 },
                 "required": [
-                  "awards"
+                  "awards",
+                  "token"
                 ]
               }
             },

@@ -35,7 +35,8 @@
                             "token",
                             "planning",
                             "tender",
-                            "parties"
+                            "parties",
+                            "relatedProcesses"
                           ],
                           "properties": {
                             "cpid": {
@@ -192,9 +193,11 @@
                               "required": [
                                 "id",
                                 "status",
+                                "date",
                                 "title",
                                 "description",
                                 "classification",
+                                "legalBasis",
                                 "mainProcurementCategory",
                                 "procurementMethod",
                                 "procurementMethodDetails",
@@ -222,6 +225,10 @@
                                   "enum": [
                                     "planning"
                                   ]
+                                },
+                                "date": {
+                                  "type": "string",
+                                  "format": "date-time"
                                 },
                                 "title": {
                                   "type": "string"
@@ -251,18 +258,14 @@
                                   }
                                 },
                                 "legalBasis": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "scheme": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "scheme"
+                                  "type": "string",
+                                  "enum": [
+                                    "DIRECTIVE_2014_23_EU",
+                                    "DIRECTIVE_2014_24_EU",
+                                    "DIRECTIVE_2014_25_EU",
+                                    "DIRECTIVE_2009_81_EU",
+                                    "REGULATION_966_2012",
+                                    "NATIONAL_PROCUREMENT_LAW"
                                   ]
                                 },
                                 "mainProcurementCategory": {
@@ -688,10 +691,6 @@
                                 },
                                 "procuringEntity": {
                                   "type": "object",
-                                  "required": [
-                                    "id",
-                                    "name"
-                                  ],
                                   "properties": {
                                     "id": {
                                       "type": "string"
@@ -699,7 +698,11 @@
                                     "name": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "name"
+                                  ]
                                 },
                                 "designContest": {
                                   "type": "object",
@@ -891,6 +894,40 @@
                                   "roles"
                                 ]
                               }
+                            },
+                            "relatedProcesses": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                  },
+                                  "relationship": {
+                                    "type": "string",
+                                    "enum": [
+                                      "parent"
+                                    ]
+                                  },
+                                  "scheme": {
+                                    "type": "string"
+                                  },
+                                  "identifier": {
+                                    "type": "string"
+                                  },
+                                  "uri": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "relationship",
+                                  "scheme",
+                                  "identifier",
+                                  "uri"
+                                ]
+                              }
                             }
                           }
                         }
@@ -919,6 +956,7 @@
                       "params": {
                         "type": "object",
                         "required": [
+                          "cpid",
                           "date",
                           "owner",
                           "pmd",
@@ -929,6 +967,9 @@
                           "parties"
                         ],
                         "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
                           "date": {
                             "type": "string",
                             "format": "date-time"
@@ -1107,6 +1148,7 @@
                               "title",
                               "description",
                               "classification",
+                              "legalBasis",
                               "mainProcurementCategory",
                               "tenderPeriod",
                               "procurementMethodDetails",
@@ -1144,18 +1186,14 @@
                                 }
                               },
                               "legalBasis": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "scheme": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "id",
-                                  "scheme"
+                                "type": "string",
+                                "enum": [
+                                  "DIRECTIVE_2014_23_EU",
+                                  "DIRECTIVE_2014_24_EU",
+                                  "DIRECTIVE_2014_25_EU",
+                                  "DIRECTIVE_2009_81_EU",
+                                  "REGULATION_966_2012",
+                                  "NATIONAL_PROCUREMENT_LAW"
                                 ]
                               },
                               "mainProcurementCategory": {
@@ -1194,13 +1232,6 @@
                               },
                               "procuringEntity": {
                                 "type": "object",
-                                "required": [
-                                  "id",
-                                  "name",
-                                  "identifier",
-                                  "address",
-                                  "contactPoint"
-                                ],
                                 "properties": {
                                   "id": {
                                     "type": "string"
@@ -1223,7 +1254,14 @@
                                   "contactPoint": {
                                     "$ref": "../models/contact_point.v1.json"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "id",
+                                  "name",
+                                  "identifier",
+                                  "address",
+                                  "contactPoint"
+                                ]
                               },
                               "lots": {
                                 "type": "array",

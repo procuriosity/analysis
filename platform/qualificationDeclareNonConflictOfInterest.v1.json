@@ -62,12 +62,50 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "requirementResponse": {
-                    "$ref": "../models/requirement_response_object.v1.json"
+                "allOf": [
+                  {
+                    "properties": {
+                      "requirementResponse": {
+                        "$ref": "../models/requirement_response_object.v1.json"
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "requirementResponse": {
+                        "type": "object",
+                        "properties": {
+                          "responder": {
+                            "type": "object",
+                            "properties": {
+                              "businessFunctions": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "enum": [
+                                        "chairman",
+                                        "procurmentOfficer",
+                                        "contactPoint",
+                                        "technicalEvaluator",
+                                        "technicalOpener",
+                                        "priceOpener",
+                                        "priceEvaluator"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
-                }
+                ],
+                "type": "object"
               },
               "examples": {
                 "successExample": {

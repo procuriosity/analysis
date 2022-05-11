@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createRelationToOtherProcess",
-    "version": "1.03"
+    "version": "1.05"
   },
   "servers": [
     {
@@ -50,7 +50,11 @@
                                       "enum": [
                                         "x_demand",
                                         "x_scope",
-                                        "x_pcr"
+                                        "x_pcr",
+                                        "x_purchasing",
+                                        "x_evaluation",
+                                        "x_tendering",
+                                        "x_negotiation"
                                       ]
                                     }
                                   },
@@ -127,7 +131,8 @@
                           "cpid",
                           "ocid",
                           "relatedCpid",
-                          "operationType"
+                          "operationType",
+                          "pmd"
                         ],
                         "properties": {
                           "cpid": {
@@ -147,18 +152,56 @@
                             "pattern": "^[a-z]{4}-[a-z0-9]{6}-[A-Z]{2}-[0-9]{13}$",
                             "example": "ocds-b3wdp1-MD-1580458690892"
                           },
+                          "relatedOcid": {
+                            "type": "string",
+                            "description": "ocid объекта на который создается связь",
+                            "example": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896"
+                          },
                           "operationType": {
                             "type": "string",
                             "enum": [
                               "relationAP",
                               "outsourcingPN",
-                              "createPcr"
+                              "createPcr",
+                              "createRfq",
+                              "createMC",
+                              "createDco"
                             ]
                           },
-                          "relatedOcid": {
+                          "pmd": {
                             "type": "string",
-                            "description": "ocid объекта на который создается связь",
-                            "example": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896"
+                            "enum": [
+                              "OT",
+                              "TEST_OT",
+                              "SV",
+                              "TEST_SV",
+                              "MV",
+                              "TEST_MV",
+                              "GPA",
+                              "TEST_GPA",
+                              "RT",
+                              "TEST_RT",
+                              "DA",
+                              "NP",
+                              "CD",
+                              "DC",
+                              "IP",
+                              "TEST_DA",
+                              "TEST_NP",
+                              "TEST_CD",
+                              "TEST_DC",
+                              "TEST_IP",
+                              "RFQ",
+                              "TEST_RFQ",
+                              "MC",
+                              "TEST_MC",
+                              "DCO",
+                              "TEST_DCO",
+                              "OF",
+                              "TEST_OF",
+                              "CF",
+                              "TEST_CF"
+                            ]
                           }
                         }
                       }
