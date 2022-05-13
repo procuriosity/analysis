@@ -32,15 +32,11 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "tender",
                             "token"
                           ],
                           "properties": {
                             "tender": {
                               "type": "object",
-                              "required": [
-                                "amendments"
-                              ],
                               "properties": {
                                 "amendments": {
                                   "type": "array",
@@ -50,16 +46,16 @@
                                       "id": {
                                         "type": "string"
                                       },
+                                      "date": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                      },
                                       "status": {
                                         "type": "string",
                                         "enum": [
                                           "pending",
                                           "active"
                                         ]
-                                      },
-                                      "date": {
-                                        "type": "string",
-                                        "format": "date-time"
                                       },
                                       "type": {
                                         "type": "string",
@@ -81,8 +77,8 @@
                                     },
                                     "required": [
                                       "id",
-                                      "status",
                                       "date",
+                                      "status",
                                       "type",
                                       "relatesTo",
                                       "relatedItem"
@@ -182,31 +178,12 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "amendment"
-                        ],
-                        "properties": {
-                          "amendment": {
-                            "$ref": "../models/amendment_object.json"
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "params"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "params": {
-                        "type": "object",
-                        "required": [
                           "cpid",
                           "ocid",
                           "operationType",
                           "date",
-                          "relatedEntityId",
                           "owner",
+                          "relatedEntityId",
                           "tender"
                         ],
                         "properties": {
@@ -220,21 +197,22 @@
                             "type": "string",
                             "enum": [
                               "tenderCancellation",
-                              "lotCancellation"
+                              "lotCancellation",
+                              "cancelPlan"
                             ]
                           },
                           "date": {
                             "type": "string",
                             "format": "date-time"
                           },
-                          "relatedEntityId": {
-                            "type": "string",
-                            "description": "id сущности для связки (id лота, ocid тендера,id кана)"
-                          },
                           "owner": {
                             "type": "string",
                             "format": "uuid",
                             "description": "id площадки"
+                          },
+                          "relatedEntityId": {
+                            "type": "string",
+                            "description": "id сущности для связки (id лота, ocid тендера,id кана)"
                           },
                           "tender": {
                             "type": "object",
@@ -248,8 +226,7 @@
                                   "type": "object",
                                   "properties": {
                                     "id": {
-                                      "type": "string",
-                                      "format": "uuid"
+                                      "type": "string"
                                     },
                                     "rationale": {
                                       "type": "string"
@@ -268,14 +245,14 @@
                                           "title": {
                                             "type": "string"
                                           },
-                                          "description": {
-                                            "type": "string"
-                                          },
                                           "documentType": {
                                             "type": "string",
                                             "enum": [
                                               "cancellationDetails"
                                             ]
+                                          },
+                                          "description": {
+                                            "type": "string"
                                           }
                                         },
                                         "required": [
