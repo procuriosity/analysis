@@ -46,7 +46,7 @@
                           "pmd",
                           "country",
                           "operationType",
-                          "enquiry",
+                          "tender",
                           "mdm"
                         ],
                         "properties": {
@@ -84,71 +84,82 @@
                               "createEnquiry"
                             ]
                           },
-                          "enquiry": {
+                          "tender": {
                             "type": "object",
                             "required": [
-                              "title",
-                              "description",
-                              "author"
+                              "enquiries"
                             ],
                             "properties": {
-                              "title": {
-                                "type": "string"
-                              },
-                              "description": {
-                                "type": "string"
-                              },
-                              "relatedLot": {
-                                "type": "string"
-                              },
-                              "author": {
-                                "type": "object",
-                                "required": [
-                                  "id",
-                                  "name",
-                                  "identifier",
-                                  "address",
-                                  "contactPoint",
-                                  "details"
-                                ],
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "name": {
-                                    "type": "string"
-                                  },
-                                  "identifier": {
-                                    "$ref": "../models/identifier.v1.json"
-                                  },
-                                  "additionalIdentifiers": {
-                                    "type": "array",
-                                    "items": {
-                                      "$ref": "../models/identifier.v1.json"
-                                    }
-                                  },
-                                  "address": {
-                                    "$ref": "../models/addressRequest.v1.json"
-                                  },
-                                  "contactPoint": {
-                                    "$ref": "../models/contact_point.v1.json"
-                                  },
-                                  "details": {
-                                    "type": "object",
-                                    "required": [
-                                      "scale"
-                                    ],
-                                    "properties": {
-                                      "scale": {
-                                        "type": "string",
-                                        "enum": [
-                                          "micro",
-                                          "sme",
-                                          "large"
-                                        ]
+                              "enquiries": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "title": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "relatedLot": {
+                                      "type": "string"
+                                    },
+                                    "author": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "name",
+                                        "identifier",
+                                        "address",
+                                        "contactPoint",
+                                        "details"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        },
+                                        "identifier": {
+                                          "$ref": "../models/identifier.v1.json"
+                                        },
+                                        "additionalIdentifiers": {
+                                          "type": "array",
+                                          "items": {
+                                            "$ref": "../models/identifier.v1.json"
+                                          }
+                                        },
+                                        "address": {
+                                          "$ref": "../models/addressRequest.v1.json"
+                                        },
+                                        "contactPoint": {
+                                          "$ref": "../models/contact_point.v1.json"
+                                        },
+                                        "details": {
+                                          "type": "object",
+                                          "required": [
+                                            "scale"
+                                          ],
+                                          "properties": {
+                                            "scale": {
+                                              "type": "string",
+                                              "enum": [
+                                                "micro",
+                                                "sme",
+                                                "large"
+                                              ]
+                                            }
+                                          }
+                                        }
                                       }
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "title",
+                                    "description",
+                                    "author"
+                                  ]
                                 }
                               }
                             }
