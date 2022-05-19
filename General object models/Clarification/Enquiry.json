@@ -1,0 +1,127 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Enquiry",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/model": {
+      "options": {
+        "summary": "Enquiry",
+        "operationId": "options-model",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tender": {
+                    "type": "object",
+                    "required": [
+                      "enquiries"
+                    ],
+                    "properties": {
+                      "enquiries": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "date": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "relatedLot": {
+                              "type": "string"
+                            },
+                            "author": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "name",
+                                "identifier",
+                                "address",
+                                "contactPoint",
+                                "details"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "identifier": {
+                                  "$ref": "../../models/identifier.v1.json"
+                                },
+                                "additionalIdentifiers": {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "../../models/identifier.v1.json"
+                                  }
+                                },
+                                "address": {
+                                  "$ref": "../../models/address.v1.json"
+                                },
+                                "contactPoint": {
+                                  "$ref": "../../models/contact_point.v1.json"
+                                },
+                                "details": {
+                                  "type": "object",
+                                  "required": [
+                                    "scale"
+                                  ],
+                                  "properties": {
+                                    "scale": {
+                                      "type": "string",
+                                      "enum": [
+                                        "micro",
+                                        "sme",
+                                        "large"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "date",
+                            "title",
+                            "description",
+                            "author"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "tender"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
