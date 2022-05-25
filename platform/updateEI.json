@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "updateExpenditureItem",
+    "title": "updateEI",
     "version": "1.0"
   },
   "servers": [
@@ -81,6 +81,25 @@
                         "properties": {
                           "rationale": {
                             "type": "string"
+                          },
+                          "budget": {
+                            "type": "object",
+                            "properties": {
+                              "amount": {
+                                "type": "object",
+                                "required": [
+                                  "amount"
+                                ],
+                                "properties": {
+                                  "amount": {
+                                    "type": "number"
+                                  }
+                                }
+                              }
+                            },
+                            "required": [
+                              "amount"
+                            ]
                           }
                         }
                       },
@@ -106,10 +125,6 @@
                                 },
                                 "classification": {
                                   "type": "object",
-                                  "required": [
-                                    "id",
-                                    "scheme"
-                                  ],
                                   "properties": {
                                     "id": {
                                       "type": "string"
@@ -120,7 +135,11 @@
                                         "CPV"
                                       ]
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "scheme"
+                                  ]
                                 },
                                 "additionalClassifications": {
                                   "type": "array",
@@ -151,14 +170,14 @@
                                 },
                                 "unit": {
                                   "type": "object",
-                                  "required": [
-                                    "id"
-                                  ],
                                   "properties": {
                                     "id": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
                                 }
                               },
                               "required": [
