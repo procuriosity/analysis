@@ -55,6 +55,7 @@
                           "date",
                           "country",
                           "language",
+                          "operationType",
                           "mdm",
                           "planning",
                           "tender",
@@ -70,6 +71,12 @@
                           },
                           "language": {
                             "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "createEI"
+                            ]
                           },
                           "mdm": {
                             "type": "object",
@@ -135,6 +142,21 @@
                                         "format": "date-time"
                                       }
                                     }
+                                  },
+                                  "amount": {
+                                    "type": "object",
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      },
+                                      "currency": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "amount",
+                                      "currency"
+                                    ]
                                   }
                                 }
                               },
@@ -246,7 +268,6 @@
                                     "id",
                                     "description",
                                     "classification",
-                                    "deliveryAddress",
                                     "quantity",
                                     "unit"
                                   ]

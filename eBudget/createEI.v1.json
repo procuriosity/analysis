@@ -74,6 +74,21 @@
                                           "type": "string"
                                         }
                                       }
+                                    },
+                                    "amount": {
+                                      "type": "object",
+                                      "properties": {
+                                        "amount": {
+                                          "type": "number"
+                                        },
+                                        "currency": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "amount",
+                                        "currency"
+                                      ]
                                     }
                                   }
                                 },
@@ -222,7 +237,6 @@
                                       "id",
                                       "description",
                                       "classification",
-                                      "deliveryAddress",
                                       "quantity",
                                       "unit"
                                     ]
@@ -332,11 +346,24 @@
                   {
                     "type": "object",
                     "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "createEI"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
                       "params": {
                         "type": "object",
                         "required": [
                           "date",
                           "owner",
+                          "country",
+                          "operationType",
                           "planning",
                           "tender",
                           "buyer"
@@ -351,6 +378,15 @@
                           },
                           "owner": {
                             "type": "string"
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "createEI"
+                            ]
                           },
                           "planning": {
                             "type": "object",
@@ -378,6 +414,20 @@
                                         "type": "string"
                                       }
                                     }
+                                  },
+                                  "amount": {
+                                    "type": "object",
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      },
+                                      "currency": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "amount"
+                                    ]
                                   }
                                 }
                               },
@@ -514,7 +564,6 @@
                                     "id",
                                     "description",
                                     "classification",
-                                    "deliveryAddress",
                                     "quantity",
                                     "unit"
                                   ]
@@ -626,17 +675,6 @@
                     "required": [
                       "params"
                     ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "action": {
-                        "type": "string",
-                        "enum": [
-                          "createEI"
-                        ]
-                      }
-                    }
                   }
                 ]
               }
