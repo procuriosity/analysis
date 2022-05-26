@@ -69,6 +69,21 @@
                                           "type": "string"
                                         }
                                       }
+                                    },
+                                    "amount": {
+                                      "type": "object",
+                                      "properties": {
+                                        "amount": {
+                                          "type": "number"
+                                        },
+                                        "currency": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "amount",
+                                        "currency"
+                                      ]
                                     }
                                   }
                                 },
@@ -191,9 +206,6 @@
                                           ]
                                         }
                                       },
-                                      "deliveryAddress": {
-                                        "$ref": "../models/address.v1.json"
-                                      },
                                       "quantity": {
                                         "type": "number"
                                       },
@@ -211,6 +223,97 @@
                                             "type": "string"
                                           }
                                         }
+                                      },
+                                      "deliveryAddress": {
+                                        "type": "object",
+                                        "required": [
+                                          "addressDetails"
+                                        ],
+                                        "properties": {
+                                          "streetAddress": {
+                                            "type": "string"
+                                          },
+                                          "postalCode": {
+                                            "type": "string"
+                                          },
+                                          "addressDetails": {
+                                            "type": "object",
+                                            "required": [
+                                              "country",
+                                              "region"
+                                            ],
+                                            "properties": {
+                                              "country": {
+                                                "type": "object",
+                                                "required": [
+                                                  "id",
+                                                  "description",
+                                                  "scheme",
+                                                  "uri"
+                                                ],
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "description": {
+                                                    "type": "string"
+                                                  },
+                                                  "scheme": {
+                                                    "type": "string"
+                                                  },
+                                                  "uri": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              },
+                                              "region": {
+                                                "type": "object",
+                                                "required": [
+                                                  "id",
+                                                  "description",
+                                                  "scheme",
+                                                  "uri"
+                                                ],
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "description": {
+                                                    "type": "string"
+                                                  },
+                                                  "scheme": {
+                                                    "type": "string"
+                                                  },
+                                                  "uri": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              },
+                                              "locality": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "description": {
+                                                    "type": "string"
+                                                  },
+                                                  "scheme": {
+                                                    "type": "string"
+                                                  },
+                                                  "uri": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "id",
+                                                  "description",
+                                                  "scheme"
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        }
                                       }
                                     },
                                     "required": [
@@ -218,7 +321,8 @@
                                       "description",
                                       "classification",
                                       "quantity",
-                                      "unit"
+                                      "unit",
+                                      "deliveryAddress"
                                     ]
                                   }
                                 }
@@ -337,14 +441,33 @@
                           },
                           "planning": {
                             "type": "object",
-                            "required": [
-                              "rationale"
-                            ],
                             "properties": {
                               "rationale": {
                                 "type": "string"
+                              },
+                              "budget": {
+                                "type": "object",
+                                "properties": {
+                                  "amount": {
+                                    "type": "object",
+                                    "required": [
+                                      "amount"
+                                    ],
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      }
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "amount"
+                                ]
                               }
-                            }
+                            },
+                            "required": [
+                              "rationale"
+                            ]
                           },
                           "tender": {
                             "type": "object",
@@ -413,9 +536,6 @@
                                         ]
                                       }
                                     },
-                                    "deliveryAddress": {
-                                      "$ref": "../models/address.v1.json"
-                                    },
                                     "quantity": {
                                       "type": "number"
                                     },
@@ -433,10 +553,106 @@
                                           "type": "string"
                                         }
                                       }
+                                    },
+                                    "deliveryAddress": {
+                                      "type": "object",
+                                      "required": [
+                                        "addressDetails"
+                                      ],
+                                      "properties": {
+                                        "streetAddress": {
+                                          "type": "string"
+                                        },
+                                        "postalCode": {
+                                          "type": "string"
+                                        },
+                                        "addressDetails": {
+                                          "type": "object",
+                                          "required": [
+                                            "country",
+                                            "region"
+                                          ],
+                                          "properties": {
+                                            "country": {
+                                              "type": "object",
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme",
+                                                "uri"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                },
+                                                "uri": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "region": {
+                                              "type": "object",
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme",
+                                                "uri"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                },
+                                                "uri": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "locality": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                },
+                                                "uri": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
                                     }
                                   },
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "description",
+                                    "classification",
+                                    "quantity",
+                                    "unit",
+                                    "deliveryAddress"
                                   ]
                                 }
                               }
