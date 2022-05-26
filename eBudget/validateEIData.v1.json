@@ -246,9 +246,6 @@
                                         ]
                                       }
                                     },
-                                    "deliveryAddress": {
-                                      "$ref": "../models/addressRequest.v1.json"
-                                    },
                                     "quantity": {
                                       "type": "number"
                                     },
@@ -262,6 +259,86 @@
                                           "type": "string"
                                         }
                                       }
+                                    },
+                                    "deliveryAddress": {
+                                      "type": "object",
+                                      "required": [
+                                        "addressDetails"
+                                      ],
+                                      "properties": {
+                                        "streetAddress": {
+                                          "type": "string"
+                                        },
+                                        "postalCode": {
+                                          "type": "string"
+                                        },
+                                        "addressDetails": {
+                                          "type": "object",
+                                          "required": [
+                                            "country",
+                                            "region"
+                                          ],
+                                          "properties": {
+                                            "country": {
+                                              "type": "object",
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "region": {
+                                              "type": "object",
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "locality": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
                                     }
                                   },
                                   "required": [
@@ -269,7 +346,8 @@
                                     "description",
                                     "classification",
                                     "quantity",
-                                    "unit"
+                                    "unit",
+                                    "deliveryAddress"
                                   ]
                                 }
                               }
