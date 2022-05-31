@@ -1,10 +1,10 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "ae7747b1a235a"
+    "id": "c1a4b35ba2949"
   },
   "info": {
-    "title": "updateEI",
+    "title": "createEI",
     "version": "1.0"
   },
   "servers": [
@@ -13,19 +13,10 @@
     }
   ],
   "paths": {
-    "/do/ei/{cpidMD}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "cpidLT",
-          "in": "path",
-          "required": true
-        }
-      ],
+    "/do/ei - MD": {
+      "parameters": [],
       "post": {
-        "summary": "Update Expenditure Item",
+        "summary": "Create Expenditure Item",
         "operationId": "post-do-EI",
         "responses": {
           "202": {
@@ -64,13 +55,30 @@
             "schema": {
               "type": "string"
             },
-            "in": "header",
-            "name": "X-TOKEN",
-            "description": "EI token",
+            "in": "query",
+            "name": "country",
+            "description": "country code according ISO 3166 alpha-2 standard",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lang",
+            "description": "language code according ISO 639-1 standard",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "testMode",
+            "description": "test entity creation flag"
           }
         ],
-        "description": "Update EI for MD",
+        "description": "Create EI for MD",
         "requestBody": {
           "content": {
             "application/json": {
@@ -80,7 +88,35 @@
                     "properties": {
                       "planning": {
                         "type": "object",
+                        "required": [
+                          "budget"
+                        ],
                         "properties": {
+                          "budget": {
+                            "type": "object",
+                            "required": [
+                              "period"
+                            ],
+                            "properties": {
+                              "period": {
+                                "type": "object",
+                                "required": [
+                                  "startDate",
+                                  "endDate"
+                                ],
+                                "properties": {
+                                  "startDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "endDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                }
+                              }
+                            }
+                          },
                           "rationale": {
                             "type": "string"
                           }
@@ -88,12 +124,35 @@
                       },
                       "tender": {
                         "type": "object",
+                        "required": [
+                          "title",
+                          "classification"
+                        ],
                         "properties": {
                           "title": {
                             "type": "string"
                           },
                           "description": {
                             "type": "string"
+                          },
+                          "classification": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "scheme"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "scheme": {
+                                "type": "string",
+                                "example": "CPV",
+                                "enum": [
+                                  "CPV"
+                                ]
+                              }
+                            }
                           },
                           "items": {
                             "type": "array",
@@ -251,11 +310,103 @@
                             }
                           }
                         }
+                      },
+                      "buyer": {
+                        "type": "object",
+                        "required": [
+                          "name",
+                          "identifier",
+                          "address",
+                          "contactPoint"
+                        ],
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "identifier": {
+                            "$ref": "../models/identifier.v1.json"
+                          },
+                          "additionalIdentifiers": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "../models/identifier.v1.json"
+                            }
+                          },
+                          "address": {
+                            "$ref": "../models/addressRequest.v1.json"
+                          },
+                          "contactPoint": {
+                            "$ref": "../models/contact_point.v1.json"
+                          },
+                          "details": {
+                            "type": "object",
+                            "properties": {
+                              "typeOfBuyer": {
+                                "type": "string",
+                                "enum": [
+                                  "BODY_PUBLIC",
+                                  "EU_INSTITUTION",
+                                  "MINISTRY",
+                                  "NATIONAL_AGENCY",
+                                  "REGIONAL_AGENCY",
+                                  "REGIONAL_AUTHORITY"
+                                ]
+                              },
+                              "mainGeneralActivity": {
+                                "type": "string",
+                                "enum": [
+                                  "DEFENCE",
+                                  "ECONOMIC_AND_FINANCIAL_AFFAIRS",
+                                  "EDUCATION",
+                                  "ENVIRONMENT",
+                                  "GENERAL_PUBLIC_SERVICES",
+                                  "HEALTH",
+                                  "HOUSING_AND_COMMUNITY_AMENITIES",
+                                  "PUBLIC_ORDER_AND_SAFETY",
+                                  "RECREATION_CULTURE_AND_RELIGION",
+                                  "SOCIAL_PROTECTION"
+                                ]
+                              },
+                              "mainSectoralActivity": {
+                                "type": "string",
+                                "enum": [
+                                  "AIRPORT_RELATED_ACTIVITIES",
+                                  "ELECTRICITY",
+                                  "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
+                                  "EXPLORATION_EXTRACTION_GAS_OIL",
+                                  "PORT_RELATED_ACTIVITIES",
+                                  "POSTAL_SERVICES",
+                                  "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
+                                  "RAILWAY_SERVICES",
+                                  "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
+                                  "WATER"
+                                ]
+                              }
+                            }
+                          }
+                        }
                       }
-                    }
+                    },
+                    "required": [
+                      "planning",
+                      "tender",
+                      "buyer"
+                    ]
                   }
                 ],
                 "type": "object"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
               }
             }
           },
@@ -266,9 +417,10 @@
         ]
       }
     },
-    "/do/ei/{cpidLT}": {
+    "/do/ei - LT": {
+      "parameters": [],
       "post": {
-        "summary": "Update Expenditure Item",
+        "summary": "Create Expenditure Item",
         "operationId": "post-do-EI",
         "responses": {
           "202": {
@@ -307,13 +459,30 @@
             "schema": {
               "type": "string"
             },
-            "in": "header",
-            "name": "X-TOKEN",
-            "description": "EI token",
+            "in": "query",
+            "name": "country",
+            "description": "country code according ISO 3166 alpha-2 standard",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lang",
+            "description": "language code according ISO 639-1 standard",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "testMode",
+            "description": "test entity creation flag"
           }
         ],
-        "description": "Update EI for LT",
+        "description": "Create EI for LT",
         "requestBody": {
           "content": {
             "application/json": {
@@ -323,39 +492,87 @@
                     "properties": {
                       "planning": {
                         "type": "object",
+                        "required": [
+                          "budget"
+                        ],
                         "properties": {
-                          "rationale": {
-                            "type": "string"
-                          },
                           "budget": {
                             "type": "object",
+                            "required": [
+                              "period",
+                              "amount"
+                            ],
                             "properties": {
+                              "period": {
+                                "type": "object",
+                                "required": [
+                                  "startDate",
+                                  "endDate"
+                                ],
+                                "properties": {
+                                  "startDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "endDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                }
+                              },
                               "amount": {
                                 "type": "object",
                                 "required": [
-                                  "amount"
+                                  "amount",
+                                  "currency"
                                 ],
                                 "properties": {
                                   "amount": {
                                     "type": "number"
+                                  },
+                                  "currency": {
+                                    "type": "string"
                                   }
                                 }
                               }
-                            },
-                            "required": [
-                              "amount"
-                            ]
+                            }
+                          },
+                          "rationale": {
+                            "type": "string"
                           }
                         }
                       },
                       "tender": {
                         "type": "object",
+                        "required": [
+                          "title",
+                          "classification"
+                        ],
                         "properties": {
                           "title": {
                             "type": "string"
                           },
                           "description": {
                             "type": "string"
+                          },
+                          "classification": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "scheme"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "scheme": {
+                                "type": "string",
+                                "example": "CPV",
+                                "enum": [
+                                  "CPV"
+                                ]
+                              }
+                            }
                           },
                           "items": {
                             "type": "array",
@@ -513,11 +730,97 @@
                             }
                           }
                         }
+                      },
+                      "buyer": {
+                        "type": "object",
+                        "required": [
+                          "name",
+                          "identifier",
+                          "address",
+                          "contactPoint"
+                        ],
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "identifier": {
+                            "$ref": "../models/identifier.v1.json"
+                          },
+                          "additionalIdentifiers": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "../models/identifier.v1.json"
+                            }
+                          },
+                          "address": {
+                            "$ref": "../models/addressRequest.v1.json"
+                          },
+                          "contactPoint": {
+                            "$ref": "../models/contact_point.v1.json"
+                          },
+                          "details": {
+                            "type": "object",
+                            "properties": {
+                              "typeOfBuyer": {
+                                "type": "string",
+                                "enum": [
+                                  "BODY_PUBLIC",
+                                  "EU_INSTITUTION",
+                                  "MINISTRY",
+                                  "NATIONAL_AGENCY",
+                                  "REGIONAL_AGENCY",
+                                  "REGIONAL_AUTHORITY"
+                                ]
+                              },
+                              "mainGeneralActivity": {
+                                "type": "string",
+                                "enum": [
+                                  "DEFENCE",
+                                  "ECONOMIC_AND_FINANCIAL_AFFAIRS",
+                                  "EDUCATION",
+                                  "ENVIRONMENT",
+                                  "GENERAL_PUBLIC_SERVICES",
+                                  "HEALTH",
+                                  "HOUSING_AND_COMMUNITY_AMENITIES",
+                                  "PUBLIC_ORDER_AND_SAFETY",
+                                  "RECREATION_CULTURE_AND_RELIGION",
+                                  "SOCIAL_PROTECTION"
+                                ]
+                              },
+                              "mainSectoralActivity": {
+                                "type": "string",
+                                "enum": [
+                                  "AIRPORT_RELATED_ACTIVITIES",
+                                  "ELECTRICITY",
+                                  "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
+                                  "EXPLORATION_EXTRACTION_GAS_OIL",
+                                  "PORT_RELATED_ACTIVITIES",
+                                  "POSTAL_SERVICES",
+                                  "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
+                                  "RAILWAY_SERVICES",
+                                  "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
+                                  "WATER"
+                                ]
+                              }
+                            }
+                          }
+                        }
                       }
-                    }
+                    },
+                    "required": [
+                      "planning",
+                      "tender",
+                      "buyer"
+                    ]
                   }
                 ],
                 "type": "object"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
               }
             }
           },
@@ -526,20 +829,18 @@
         "tags": [
           "LT"
         ]
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "cpidLT",
-          "in": "path",
-          "required": true
-        }
-      ]
+      }
     }
   },
   "components": {
     "schemas": {}
-  }
+  },
+  "tags": [
+    {
+      "name": "LT"
+    },
+    {
+      "name": "MD"
+    }
+  ]
 }
