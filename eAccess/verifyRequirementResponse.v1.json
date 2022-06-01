@@ -90,34 +90,40 @@
                             ]
                           },
                           "responder": {
-                            "$ref": "../models/person.v1.json"
-                          },
-                          "requirementId": {
-                            "type": "string",
-                            "format": "uuid",
-                            "description": "permanent"
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "params"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "params": {
-                        "type": "object",
-                        "properties": {
-                          "responder": {
                             "type": "object",
+                            "required": [
+                              "id",
+                              "title",
+                              "name",
+                              "identifier",
+                              "businessFunctions"
+                            ],
                             "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string",
+                                "enum": [
+                                  "Mr.",
+                                  "Ms.",
+                                  "Mrs."
+                                ]
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "identifier": {
+                                "$ref": "../models/identifierPerson.v1.json"
+                              },
                               "businessFunctions": {
                                 "type": "array",
                                 "items": {
                                   "type": "object",
                                   "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
                                     "type": {
                                       "type": "string",
                                       "enum": [
@@ -130,28 +136,71 @@
                                         "priceEvaluator"
                                       ]
                                     },
+                                    "jobTitle": {
+                                      "type": "string"
+                                    },
+                                    "period": {
+                                      "type": "object",
+                                      "required": [
+                                        "startDate"
+                                      ],
+                                      "properties": {
+                                        "startDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        }
+                                      }
+                                    },
                                     "documents": {
                                       "type": "array",
                                       "items": {
                                         "type": "object",
                                         "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "title": {
+                                            "type": "string"
+                                          },
                                           "documentType": {
                                             "type": "string",
                                             "enum": [
                                               "regulatoryDocument"
                                             ]
+                                          },
+                                          "description": {
+                                            "type": "string"
                                           }
-                                        }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "title",
+                                          "documentType"
+                                        ]
                                       }
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type",
+                                    "jobTitle",
+                                    "period"
+                                  ]
                                 }
                               }
                             }
+                          },
+                          "requirementId": {
+                            "type": "string",
+                            "format": "uuid",
+                            "description": "permanent"
                           }
                         }
                       }
-                    }
+                    },
+                    "required": [
+                      "params"
+                    ]
                   }
                 ]
               },
