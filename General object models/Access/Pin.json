@@ -105,8 +105,7 @@
                                 "classifications": {
                                   "type": "object",
                                   "required": [
-                                    "ei",
-                                    "fs"
+                                    "ei"
                                   ],
                                   "properties": {
                                     "ei": {
@@ -153,10 +152,8 @@
                               },
                               "required": [
                                 "id",
-                                "period",
                                 "amount",
-                                "classifications",
-                                "sourcePatry"
+                                "classifications"
                               ]
                             }
                           }
@@ -277,19 +274,15 @@
                         }
                       },
                       "legalBasis": {
-                        "type": "object",
-                        "required": [
-                          "id",
-                          "scheme"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "scheme": {
-                            "type": "string"
-                          }
-                        }
+                        "type": "string",
+                        "enum": [
+                          "DIRECTIVE_2014_23_EU",
+                          "DIRECTIVE_2014_24_EU",
+                          "DIRECTIVE_2014_25_EU",
+                          "DIRECTIVE_2009_81_EU",
+                          "REGULATION_966_2012",
+                          "NATIONAL_PROCUREMENT_LAW"
+                        ]
                       },
                       "mainProcurementCategory": {
                         "type": "string",
@@ -610,13 +603,13 @@
                       "conversions": {
                         "type": "array",
                         "items": {
-                          "$ref": "../models/conversion.json"
+                          "$ref": "../../models/conversion.json"
                         }
                       },
                       "targets": {
                         "type": "array",
                         "items": {
-                          "$ref": "../models/target_optionalUnit_relatesToTender.json"
+                          "$ref": "../../models/target_optionalUnit_relatesToTender.json"
                         }
                       },
                       "lots": {
@@ -681,7 +674,7 @@
                               ],
                               "properties": {
                                 "address": {
-                                  "$ref": "../models/address.v1.json"
+                                  "$ref": "../../models/address.v1.json"
                                 },
                                 "description": {
                                   "type": "string"
@@ -1065,19 +1058,19 @@
                           "type": "string"
                         },
                         "identifier": {
-                          "$ref": "../models/identifier.v1.json"
+                          "$ref": "../../models/identifier.v1.json"
                         },
                         "additionalIdentifiers": {
                           "type": "array",
                           "items": {
-                            "$ref": "../models/identifier.v1.json"
+                            "$ref": "../../models/identifier.v1.json"
                           }
                         },
                         "address": {
-                          "$ref": "../models/address.v1.json"
+                          "$ref": "../../models/address.v1.json"
                         },
                         "contactPoint": {
-                          "$ref": "../models/contact_point.v1.json"
+                          "$ref": "../../models/contact_point.v1.json"
                         },
                         "persones": {
                           "type": "array",
@@ -1099,7 +1092,7 @@
                                 "type": "string"
                               },
                               "identifier": {
-                                "$ref": "../models/identifierPerson.v1.json"
+                                "$ref": "../../models/identifierPerson.v1.json"
                               },
                               "businessFunctions": {
                                 "type": "array",
@@ -1251,6 +1244,42 @@
                         "roles"
                       ]
                     }
+                  },
+                  "relatedProcesses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "relationship": {
+                          "type": "string",
+                          "enum": [
+                            "x_evaluation",
+                            "x_tendering",
+                            "x_negotiation",
+                            "parent"
+                          ]
+                        },
+                        "scheme": {
+                          "type": "string"
+                        },
+                        "identifier": {
+                          "type": "string"
+                        },
+                        "uri": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "relationship",
+                        "scheme",
+                        "identifier",
+                        "uri"
+                      ]
+                    }
                   }
                 },
                 "required": [
@@ -1259,7 +1288,8 @@
                   "token",
                   "planning",
                   "tender",
-                  "parties"
+                  "parties",
+                  "relatedProcesses"
                 ]
               }
             },
