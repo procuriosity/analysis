@@ -16,6 +16,15 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "cpid": {
+                    "$ref": "../../models/cpid.v1.json"
+                  },
+                  "ocid": {
+                    "$ref": "../../models/ocid.v1.json"
+                  },
+                  "token": {
+                    "type": "string"
+                  },
                   "tender": {
                     "type": "object",
                     "required": [
@@ -452,53 +461,11 @@
                             "relatedLot"
                           ]
                         }
+                      },
+                      "": {
+                        "type": "string"
                       }
                     }
-                  },
-                  "relatedProcesses": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "format": "uuid",
-                          "description": "идентификатор relatedProcess"
-                        },
-                        "relationship": {
-                          "type": "array",
-                          "description": "связь в PN",
-                          "items": {
-                            "type": "string",
-                            "enum": [
-                              "x_scope"
-                            ]
-                          }
-                        },
-                        "scheme": {
-                          "type": "string",
-                          "description": "ocid"
-                        },
-                        "identifier": {
-                          "type": "string",
-                          "description": "ocid PN, на который создан relatedProcess"
-                        },
-                        "uri": {
-                          "type": "string",
-                          "description": "путь к сущности, на которую создан relatedProcess"
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "relationship",
-                        "scheme",
-                        "identifier",
-                        "uri"
-                      ]
-                    }
-                  },
-                  "token": {
-                    "type": "string"
                   },
                   "parties": {
                     "type": "array",
@@ -592,12 +559,55 @@
                         "roles"
                       ]
                     }
+                  },
+                  "relatedProcesses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "description": "идентификатор relatedProcess"
+                        },
+                        "relationship": {
+                          "type": "array",
+                          "description": "связь в PN",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "x_scope"
+                            ]
+                          }
+                        },
+                        "scheme": {
+                          "type": "string",
+                          "description": "ocid"
+                        },
+                        "identifier": {
+                          "type": "string",
+                          "description": "ocid PN, на который создан relatedProcess"
+                        },
+                        "uri": {
+                          "type": "string",
+                          "description": "путь к сущности, на которую создан relatedProcess"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "relationship",
+                        "scheme",
+                        "identifier",
+                        "uri"
+                      ]
+                    }
                   }
                 },
                 "required": [
-                  "tender",
-                  "relatedProcesses",
+                  "cpid",
+                  "ocid",
                   "token",
+                  "tender",
                   "parties"
                 ]
               }
