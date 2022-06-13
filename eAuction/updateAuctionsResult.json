@@ -1,0 +1,440 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "0d011f8e9a6e8"
+  },
+  "info": {
+    "title": "updateAuctionsResult",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9191"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Update Auctions Result",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "tender"
+                          ],
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "auctionPeriod",
+                                "electronicAuctions"
+                              ],
+                              "properties": {
+                                "auctionPeriod": {
+                                  "type": "object",
+                                  "required": [
+                                    "startDate",
+                                    "endDate"
+                                  ],
+                                  "properties": {
+                                    "startDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "endDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
+                                  }
+                                },
+                                "electronicAuctions": {
+                                  "type": "object",
+                                  "required": [
+                                    "details"
+                                  ],
+                                  "properties": {
+                                    "details": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "relatedLot": {
+                                            "type": "string"
+                                          },
+                                          "auctionPeriod": {
+                                            "type": "object",
+                                            "required": [
+                                              "startDate",
+                                              "endDate"
+                                            ],
+                                            "properties": {
+                                              "startDate": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              },
+                                              "endDate": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              }
+                                            }
+                                          },
+                                          "electronicAuctionProgress": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "period": {
+                                                  "type": "object",
+                                                  "required": [
+                                                    "startDate",
+                                                    "endDate"
+                                                  ],
+                                                  "properties": {
+                                                    "startDate": {
+                                                      "type": "string",
+                                                      "format": "date-time"
+                                                    },
+                                                    "endDate": {
+                                                      "type": "string",
+                                                      "format": "date-time"
+                                                    }
+                                                  }
+                                                },
+                                                "breakdown": {
+                                                  "type": "object",
+                                                  "required": [
+                                                    "relatedBid",
+                                                    "status",
+                                                    "dateMet",
+                                                    "value"
+                                                  ],
+                                                  "properties": {
+                                                    "relatedBid": {
+                                                      "type": "string"
+                                                    },
+                                                    "status": {
+                                                      "type": "string",
+                                                      "enum": [
+                                                        "met"
+                                                      ]
+                                                    },
+                                                    "dateMet": {
+                                                      "type": "string",
+                                                      "format": "date-time"
+                                                    },
+                                                    "value": {
+                                                      "type": "object",
+                                                      "required": [
+                                                        "amount",
+                                                        "currency"
+                                                      ],
+                                                      "properties": {
+                                                        "amount": {
+                                                          "type": "number"
+                                                        },
+                                                        "currency": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "period",
+                                                "breakdown"
+                                              ]
+                                            }
+                                          },
+                                          "electronicAuctionResult": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "relatedBid": {
+                                                  "type": "string"
+                                                },
+                                                "value": {
+                                                  "type": "object",
+                                                  "required": [
+                                                    "amount",
+                                                    "currency"
+                                                  ],
+                                                  "properties": {
+                                                    "amount": {
+                                                      "type": "number"
+                                                    },
+                                                    "currency": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "required": [
+                                                "relatedBid",
+                                                "value"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "relatedLot",
+                                          "auctionPeriod",
+                                          "electronicAuctionProgress",
+                                          "electronicAuctionResult"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "auctionPeriod",
+                              "electronicAuctions"
+                            ],
+                            "properties": {
+                              "auctionPeriod": {
+                                "type": "object",
+                                "required": [
+                                  "startDate",
+                                  "endDate"
+                                ],
+                                "properties": {
+                                  "startDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "endDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                }
+                              },
+                              "electronicAuctions": {
+                                "type": "object",
+                                "required": [
+                                  "details"
+                                ],
+                                "properties": {
+                                  "details": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "relatedLot": {
+                                          "type": "string"
+                                        },
+                                        "auctionPeriod": {
+                                          "type": "object",
+                                          "required": [
+                                            "startDate",
+                                            "endDate"
+                                          ],
+                                          "properties": {
+                                            "startDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            },
+                                            "endDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            }
+                                          }
+                                        },
+                                        "electronicAuctionProgress": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "period": {
+                                                "type": "object",
+                                                "required": [
+                                                  "startDate",
+                                                  "endDate"
+                                                ],
+                                                "properties": {
+                                                  "startDate": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                  },
+                                                  "endDate": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                  }
+                                                }
+                                              },
+                                              "breakdown": {
+                                                "type": "object",
+                                                "required": [
+                                                  "relatedBid",
+                                                  "dateMet",
+                                                  "value"
+                                                ],
+                                                "properties": {
+                                                  "relatedBid": {
+                                                    "type": "string"
+                                                  },
+                                                  "dateMet": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                  },
+                                                  "value": {
+                                                    "type": "object",
+                                                    "required": [
+                                                      "amount"
+                                                    ],
+                                                    "properties": {
+                                                      "amount": {
+                                                        "type": "number"
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "period",
+                                              "breakdown"
+                                            ]
+                                          }
+                                        },
+                                        "electronicAuctionResult": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "relatedBid": {
+                                                "type": "string"
+                                              },
+                                              "value": {
+                                                "type": "object",
+                                                "required": [
+                                                  "amount"
+                                                ],
+                                                "properties": {
+                                                  "amount": {
+                                                    "type": "number"
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            "required": [
+                                              "relatedBid",
+                                              "value"
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "relatedLot",
+                                        "auctionPeriod",
+                                        "electronicAuctionProgress",
+                                        "electronicAuctionResult"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "updateAuctionsResult"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
