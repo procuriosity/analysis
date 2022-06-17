@@ -214,7 +214,8 @@
                         "type": "string",
                         "enum": [
                           "submission",
-                          "externalPublication"
+                          "externalPublication",
+                          "control"
                         ]
                       },
                       "date": {
@@ -1016,6 +1017,70 @@
                             "type": "boolean",
                             "default": false
                           }
+                        }
+                      },
+                      "milestones": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "control",
+                                "externalPublication"
+                              ]
+                            },
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "scheduled",
+                                "met",
+                                "notMet"
+                              ]
+                            },
+                            "dateMet": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "documents": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "documentType": {
+                                    "type": "string"
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "documentType",
+                                  "title"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "type",
+                            "status",
+                            "dateMet"
+                          ]
                         }
                       }
                     }
