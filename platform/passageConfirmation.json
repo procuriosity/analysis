@@ -60,24 +60,7 @@
                     "properties": {
                       "milestone": {
                         "type": "object",
-                        "required": [
-                          "type",
-                          "status"
-                        ],
                         "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "control",
-                              "externalPublication"
-                            ]
-                          },
-                          "status": {
-                            "type": "string",
-                            "enum": [
-                              "scheduled"
-                            ]
-                          },
                           "description": {
                             "type": "string"
                           },
@@ -115,30 +98,6 @@
                   },
                   {
                     "properties": {
-                      "tenderPeriod": {
-                        "type": "object",
-                        "properties": {
-                          "endDate": {
-                            "type": "string",
-                            "format": "date-time"
-                          }
-                        },
-                        "required": [
-                          "endDate"
-                        ]
-                      },
-                      "enquiryPeriod": {
-                        "type": "object",
-                        "properties": {
-                          "endDate": {
-                            "type": "string",
-                            "format": "date-time"
-                          }
-                        },
-                        "required": [
-                          "endDate"
-                        ]
-                      },
                       "preQualification": {
                         "type": "object",
                         "properties": {
@@ -157,6 +116,42 @@
                         },
                         "required": [
                           "period"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "tender": {
+                        "type": "object",
+                        "properties": {
+                          "tenderPeriod": {
+                            "type": "object",
+                            "required": [
+                              "endDate"
+                            ],
+                            "properties": {
+                              "endDate": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            }
+                          },
+                          "enquiryPeriod": {
+                            "type": "object",
+                            "properties": {
+                              "endDate": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            },
+                            "required": [
+                              "endDate"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "tenderPeriod"
                         ]
                       }
                     }
