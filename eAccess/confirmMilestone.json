@@ -4,7 +4,7 @@
     "id": "5f99a6b4d569c"
   },
   "info": {
-    "title": "setStateForConfirmMilestone",
+    "title": "confirmMilestone",
     "version": "1.0"
   },
   "servers": [
@@ -15,7 +15,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Set State For Confirm Milestone",
+        "summary": "Confirm Milestone",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -158,6 +158,34 @@
                                   "properties": {
                                     "id": {
                                       "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "documentType": {
+                                            "type": "string"
+                                          },
+                                          "title": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "documentType",
+                                          "title"
+                                        ]
+                                      }
                                     }
                                   },
                                   "required": [
@@ -183,7 +211,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "setStateForConfirmMilestone"
+                          "confirmMilestone"
                         ]
                       }
                     }
