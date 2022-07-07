@@ -41,10 +41,52 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "tender",
-                          "operationType"
+                          "pmd",
+                          "country",
+                          "operationType",
+                          "tender"
                         ],
                         "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "OT",
+                              "TEST_OT",
+                              "SV",
+                              "TEST_SV",
+                              "MV",
+                              "TEST_MV",
+                              "GPA",
+                              "TEST_GPA",
+                              "RT",
+                              "TEST_RT",
+                              "MC",
+                              "TEST_MC",
+                              "RFQ",
+                              "TEST_RFQ"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "createPcr",
+                              "createRfq",
+                              "createMC",
+                              "createPin",
+                              "createTenderFromPlan",
+                              "updateTender"
+                            ],
+                            "description": ""
+                          },
                           "tender": {
                             "type": "object",
                             "required": [
@@ -140,18 +182,6 @@
                                 ]
                               }
                             }
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "createPcr",
-                              "createRfq",
-                              "createMC",
-                              "createPin",
-                              "createTenderFromPlan",
-                              "updateTender"
-                            ],
-                            "description": ""
                           }
                         }
                       }
