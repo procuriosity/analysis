@@ -94,10 +94,6 @@
                                           },
                                           "period": {
                                             "type": "object",
-                                            "required": [
-                                              "startDate",
-                                              "endDate"
-                                            ],
                                             "properties": {
                                               "startDate": {
                                                 "type": "string",
@@ -107,7 +103,11 @@
                                                 "type": "string",
                                                 "format": "date-time"
                                               }
-                                            }
+                                            },
+                                            "required": [
+                                              "startDate",
+                                              "endDate"
+                                            ]
                                           },
                                           "amount": {
                                             "type": "object",
@@ -140,10 +140,6 @@
                                           },
                                           "sourcePatry": {
                                             "type": "object",
-                                            "required": [
-                                              "id",
-                                              "name"
-                                            ],
                                             "properties": {
                                               "id": {
                                                 "type": "string"
@@ -151,7 +147,11 @@
                                               "name": {
                                                 "type": "string"
                                               }
-                                            }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "name"
+                                            ]
                                           },
                                           "europeanUnionFunding": {
                                             "type": "object",
@@ -1244,11 +1244,14 @@
                                     "format": "uuid"
                                   },
                                   "relationship": {
-                                    "type": "string",
+                                    "type": "array",
                                     "enum": [
                                       "parent",
                                       "planning"
-                                    ]
+                                    ],
+                                    "items": {
+                                      "type": "string"
+                                    }
                                   },
                                   "scheme": {
                                     "type": "string"
