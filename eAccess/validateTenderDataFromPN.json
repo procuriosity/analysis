@@ -1697,6 +1697,49 @@
                                   "priceOnly"
                                 ]
                               },
+                              "awardCriteriaDetails": {
+                                "type": "string",
+                                "enum": [
+                                  "manual"
+                                ]
+                              },
+                              "secondStage": {
+                                "type": "object",
+                                "properties": {
+                                  "minimumCandidates": {
+                                    "type": "number"
+                                  },
+                                  "maximumCandidates": {
+                                    "type": "number"
+                                  }
+                                }
+                              },
+                              "otherCriteria": {
+                                "type": "object",
+                                "properties": {
+                                  "reductionCriteria": {
+                                    "type": "string",
+                                    "enum": [
+                                      "scoring",
+                                      "none"
+                                    ]
+                                  },
+                                  "qualificationSystemMethods": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "enum": [
+                                        "automated",
+                                        "manual"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "reductionCriteria",
+                                  "qualificationSystemMethods"
+                                ]
+                              },
                               "procuringEntity": {
                                 "type": "object",
                                 "properties": {
@@ -2107,6 +2150,160 @@
                                     "title",
                                     "documentType"
                                   ]
+                                }
+                              },
+                              "criteria": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "title": {
+                                      "type": "string"
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ]
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "relatesTo": {
+                                      "type": "string",
+                                      "enum": [
+                                        "lot",
+                                        "item",
+                                        "tender",
+                                        "tenderer"
+                                      ]
+                                    },
+                                    "relatedItem": {
+                                      "type": "string"
+                                    },
+                                    "requirementGroups": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "requirements": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "title": {
+                                                  "type": "string"
+                                                },
+                                                "dataType": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "string",
+                                                    "number",
+                                                    "integer",
+                                                    "boolean"
+                                                  ]
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "period": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "startDate": {
+                                                      "type": "string",
+                                                      "format": "date-time"
+                                                    },
+                                                    "endDate": {
+                                                      "type": "string",
+                                                      "format": "date-time"
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "startDate",
+                                                    "endDate"
+                                                  ]
+                                                },
+                                                "expectedValue": {
+                                                  "type": [
+                                                    "string",
+                                                    "number",
+                                                    "integer",
+                                                    "boolean"
+                                                  ]
+                                                },
+                                                "minValue": {
+                                                  "type": [
+                                                    "number",
+                                                    "integer"
+                                                  ]
+                                                },
+                                                "maxValue": {
+                                                  "type": [
+                                                    "number",
+                                                    "integer"
+                                                  ]
+                                                },
+                                                "eligibleEvidences": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "$ref": "../models/eligibleEvidences.v1.json"
+                                                  }
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "title",
+                                                "dataType"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "requirements"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "title",
+                                    "relatesTo",
+                                    "requirementGroups"
+                                  ]
+                                }
+                              },
+                              "targets": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "../models/target_optionalUnit_relatesToTender_request.json"
+                                }
+                              },
+                              "conversions": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "../models/conversion.v1.json"
                                 }
                               }
                             }
