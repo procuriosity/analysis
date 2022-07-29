@@ -182,6 +182,7 @@
                       "submissionMethodDetails",
                       "submissionMethodRationale",
                       "awardCriteria",
+                      "awardCriteriaDetails",
                       "eligibilityCriteria",
                       "value",
                       "contractPeriod",
@@ -315,7 +316,53 @@
                       "awardCriteria": {
                         "type": "string",
                         "enum": [
-                          "priceOnly"
+                          "priceOnly",
+                          "ratedCriteria",
+                          "qualityOnly",
+                          "costOnly"
+                        ]
+                      },
+                      "awardCriteriaDetails": {
+                        "type": "string",
+                        "enum": [
+                          "manual"
+                        ]
+                      },
+                      "secondStage": {
+                        "type": "object",
+                        "properties": {
+                          "minimumCandidates": {
+                            "type": "number"
+                          },
+                          "maximumCandidates": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "otherCriteria": {
+                        "type": "object",
+                        "properties": {
+                          "reductionCriteria": {
+                            "type": "string",
+                            "enum": [
+                              "scoring",
+                              "none"
+                            ]
+                          },
+                          "qualificationSystemMethods": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "automated",
+                                "manual"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "reductionCriteria",
+                          "qualificationSystemMethods"
                         ]
                       },
                       "eligibilityCriteria": {
@@ -847,6 +894,182 @@
                             "status",
                             "dateMet"
                           ]
+                        }
+                      },
+                      "criteria": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "source": {
+                              "type": "string",
+                              "enum": [
+                                "tenderer"
+                              ]
+                            },
+                            "classification": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "scheme": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "scheme"
+                              ]
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "relatesTo": {
+                              "type": "string",
+                              "enum": [
+                                "lot",
+                                "item",
+                                "tender",
+                                "tenderer"
+                              ]
+                            },
+                            "relatedItem": {
+                              "type": "string"
+                            },
+                            "requirementGroups": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "requirements": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "format": "uuid"
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        },
+                                        "status": {
+                                          "type": "string",
+                                          "enum": [
+                                            "active"
+                                          ]
+                                        },
+                                        "datePublished": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        },
+                                        "dataType": {
+                                          "type": "string",
+                                          "enum": [
+                                            "string",
+                                            "number",
+                                            "integer",
+                                            "boolean"
+                                          ]
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "period": {
+                                          "type": "object",
+                                          "properties": {
+                                            "startDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            },
+                                            "endDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            }
+                                          },
+                                          "required": [
+                                            "startDate",
+                                            "endDate"
+                                          ]
+                                        },
+                                        "expectedValue": {
+                                          "type": [
+                                            "string",
+                                            "number",
+                                            "integer",
+                                            "boolean"
+                                          ]
+                                        },
+                                        "minValue": {
+                                          "type": [
+                                            "number",
+                                            "integer"
+                                          ]
+                                        },
+                                        "maxValue": {
+                                          "type": [
+                                            "number",
+                                            "integer"
+                                          ]
+                                        },
+                                        "eligibleEvidences": {
+                                          "type": "array",
+                                          "items": {
+                                            "$ref": "../../models/eligibleEvidences.v1.json"
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "title",
+                                        "status",
+                                        "datePublished",
+                                        "dataType"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "requirements"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "source",
+                            "relatesTo",
+                            "requirementGroups"
+                          ]
+                        }
+                      },
+                      "targets": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "../../models/target_optionalUnit_relatesToTender.json"
+                        }
+                      },
+                      "conversions": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "../../models/conversion.json"
                         }
                       }
                     }
