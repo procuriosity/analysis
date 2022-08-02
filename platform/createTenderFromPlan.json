@@ -2998,8 +2998,8 @@
         "summary": "Create Negotiation Tender From PIN",
         "operationId": "post-do-tender-cpid-ocidNegotiationPin",
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         },
         "requestBody": {
@@ -3198,7 +3198,62 @@
         },
         "tags": [
           "fromPin"
-        ]
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "required": true,
+            "description": "transaction id"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "description": "data type in request body"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "required": true,
+            "description": "PIN token"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ted",
+            "description": "indication of the need to send a tender for publication to TED"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "control",
+            "description": "indication of the need to send a tender for approve to control organization"
+          }
+        ],
+        "description": "create tender from PIN for pmd = DA, NP, CD, DC, IP"
       }
     }
   },
