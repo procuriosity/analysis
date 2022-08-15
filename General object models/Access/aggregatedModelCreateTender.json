@@ -25,6 +25,9 @@
                   "ocid": {
                     "$ref": "../../models/ocid.v1.json"
                   },
+                  "owner": {
+                    "type": "string"
+                  },
                   "token": {
                     "type": "string",
                     "format": "uuid"
@@ -108,9 +111,6 @@
                                 },
                                 "classifications": {
                                   "type": "object",
-                                  "required": [
-                                    "ei"
-                                  ],
                                   "properties": {
                                     "ei": {
                                       "type": "string"
@@ -118,7 +118,10 @@
                                     "fs": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "ei"
+                                  ]
                                 },
                                 "sourcePatry": {
                                   "type": "object",
@@ -159,6 +162,9 @@
                                 "amount"
                               ]
                             }
+                          },
+                          "isEuropeanUnionFunded": {
+                            "type": "boolean"
                           }
                         }
                       }
@@ -167,7 +173,6 @@
                   "tender": {
                     "type": "object",
                     "required": [
-                      "awardCriteria",
                       "procuringEntity",
                       "lots",
                       "items",
@@ -187,7 +192,6 @@
                       "submissionMethodRationale",
                       "eligibilityCriteria",
                       "value",
-                      "contractPeriod",
                       "designContest",
                       "electronicWorkflows",
                       "jointProcurement",
@@ -324,6 +328,125 @@
                           },
                           "name": {
                             "type": "string"
+                          },
+                          "identifier": {
+                            "$ref": "../../models/identifier.v1.json"
+                          },
+                          "additionalIdentifiers": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "../../models/identifier.v1.json"
+                            }
+                          },
+                          "address": {
+                            "$ref": "../../models/address.v1.json"
+                          },
+                          "contactPoint": {
+                            "$ref": "../../models/contact_point.v1.json"
+                          },
+                          "persones": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Mr.",
+                                    "Ms.",
+                                    "Mrs."
+                                  ]
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "identifier": {
+                                  "$ref": "../../models/identifierPerson.v1.json"
+                                },
+                                "businessFunctions": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "type": "string",
+                                        "enum": [
+                                          "chairman",
+                                          "contactPoint",
+                                          "technicalOpener",
+                                          "priceOpener",
+                                          "priceEvaluator",
+                                          "technicalEvaluator",
+                                          "procurementOfficer"
+                                        ]
+                                      },
+                                      "jobTitle": {
+                                        "type": "string"
+                                      },
+                                      "period": {
+                                        "type": "object",
+                                        "required": [
+                                          "startDate"
+                                        ],
+                                        "properties": {
+                                          "startDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        }
+                                      },
+                                      "documents": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "title": {
+                                              "type": "string"
+                                            },
+                                            "documentType": {
+                                              "type": "string",
+                                              "enum": [
+                                                "regulatoryDocument"
+                                              ]
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "title",
+                                            "documentType"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "type",
+                                      "jobTitle",
+                                      "period"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "title",
+                                "name",
+                                "identifier",
+                                "businessFunctions"
+                              ]
+                            }
                           }
                         }
                       },
@@ -351,6 +474,12 @@
                               "required": [
                                 "id",
                                 "scheme"
+                              ]
+                            },
+                            "source": {
+                              "type": "string",
+                              "enum": [
+                                "tenderer"
                               ]
                             },
                             "description": {
@@ -444,12 +573,24 @@
                                           "items": {
                                             "$ref": "../../models/eligibleEvidences.v1.json"
                                           }
+                                        },
+                                        "status": {
+                                          "type": "string",
+                                          "enum": [
+                                            "active"
+                                          ]
+                                        },
+                                        "datePublished": {
+                                          "type": "string",
+                                          "format": "date-time"
                                         }
                                       },
                                       "required": [
                                         "id",
                                         "title",
-                                        "dataType"
+                                        "dataType",
+                                        "status",
+                                        "datePublished"
                                       ]
                                     }
                                   }
@@ -464,7 +605,6 @@
                           "required": [
                             "id",
                             "title",
-                            "relatesTo",
                             "requirementGroups"
                           ]
                         }
@@ -478,7 +618,7 @@
                       "targets": {
                         "type": "array",
                         "items": {
-                          "$ref": "../../models/target_optionalUnit_relatesToTender_request.json"
+                          "$ref": "../../models/target_optionalUnit_relatesToTender.json"
                         }
                       },
                       "lots": {
@@ -804,7 +944,6 @@
                           },
                           "required": [
                             "id",
-                            "title",
                             "documentType"
                           ]
                         }
@@ -817,7 +956,10 @@
                         "type": "string",
                         "enum": [
                           "active",
-                          "pending"
+                          "pending",
+                          "cancelled",
+                          "complete",
+                          "unsuccessful"
                         ]
                       },
                       "statusDetails": {
@@ -828,7 +970,12 @@
                           "control",
                           "submission",
                           "clarification",
-                          "tendering"
+                          "tendering",
+                          "clarification",
+                          "empty",
+                          "suspended",
+                          "awarding",
+                          "auction"
                         ]
                       },
                       "date": {
@@ -1052,8 +1199,53 @@
                       "requiresElectronicCatalogue": {
                         "type": "boolean"
                       },
-                      "procurementMethodAdditionalInfo": {
-                        "type": "string"
+                      "tenderPeriod": {
+                        "type": "object",
+                        "properties": {
+                          "startDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "endDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "required": [
+                          "startDate",
+                          "endDate"
+                        ]
+                      },
+                      "enquiryPeriod": {
+                        "type": "object",
+                        "properties": {
+                          "startDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "endDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "required": [
+                          "startDate",
+                          "endDate"
+                        ]
+                      },
+                      "lotGroups": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "optionToCombine": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "optionToCombine"
+                          ]
+                        }
                       },
                       "milestones": {
                         "type": "array",
@@ -1362,6 +1554,7 @@
                 "required": [
                   "cpid",
                   "ocid",
+                  "owner",
                   "token",
                   "planning",
                   "tender"
