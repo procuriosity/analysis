@@ -156,8 +156,7 @@
                               },
                               "required": [
                                 "id",
-                                "amount",
-                                "classifications"
+                                "amount"
                               ]
                             }
                           }
@@ -169,7 +168,6 @@
                     "type": "object",
                     "required": [
                       "awardCriteria",
-                      "awardCriteriaDetails",
                       "procuringEntity",
                       "lots",
                       "items",
@@ -539,7 +537,7 @@
                               ],
                               "properties": {
                                 "address": {
-                                  "$ref": "../../models/addressRequest.v1.json"
+                                  "$ref": "../../models/address.v1.json"
                                 },
                                 "description": {
                                   "type": "string"
@@ -639,6 +637,21 @@
                                   }
                                 }
                               }
+                            },
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "active",
+                                "cancelled",
+                                "unsuccessful"
+                              ]
+                            },
+                            "statusDetails": {
+                              "type": "string",
+                              "enum": [
+                                "empty",
+                                "awarded"
+                              ]
                             }
                           },
                           "required": [
@@ -647,7 +660,8 @@
                             "description",
                             "value",
                             "contractPeriod",
-                            "placeOfPerformance"
+                            "placeOfPerformance",
+                            "status"
                           ]
                         }
                       },
@@ -666,7 +680,8 @@
                               "type": "object",
                               "required": [
                                 "id",
-                                "scheme"
+                                "scheme",
+                                "description"
                               ],
                               "properties": {
                                 "id": {
@@ -677,6 +692,9 @@
                                   "enum": [
                                     "CPV"
                                   ]
+                                },
+                                "description": {
+                                  "type": "string"
                                 }
                               }
                             },
@@ -693,11 +711,15 @@
                                     "enum": [
                                       "CPVS"
                                     ]
+                                  },
+                                  "description": {
+                                    "type": "string"
                                   }
                                 },
                                 "required": [
                                   "id",
-                                  "scheme"
+                                  "scheme",
+                                  "description"
                                 ]
                               }
                             },
@@ -707,10 +729,14 @@
                             "unit": {
                               "type": "object",
                               "required": [
-                                "id"
+                                "id",
+                                "name"
                               ],
                               "properties": {
                                 "id": {
+                                  "type": "string"
+                                },
+                                "name": {
                                   "type": "string"
                                 }
                               }
