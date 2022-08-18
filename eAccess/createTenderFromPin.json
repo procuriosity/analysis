@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createTenderFromPin",
-    "version": "1.0",
+    "version": "1.01",
     "description": ""
   },
   "servers": [
@@ -450,11 +450,16 @@
                                       "source": {
                                         "type": "string",
                                         "enum": [
-                                          "tenderer"
+                                          "tenderer",
+                                          "procuringEntity"
                                         ]
                                       },
                                       "classification": {
                                         "type": "object",
+                                        "required": [
+                                          "id",
+                                          "scheme"
+                                        ],
                                         "properties": {
                                           "id": {
                                             "type": "string"
@@ -462,11 +467,7 @@
                                           "scheme": {
                                             "type": "string"
                                           }
-                                        },
-                                        "required": [
-                                          "id",
-                                          "scheme"
-                                        ]
+                                        }
                                       },
                                       "description": {
                                         "type": "string"
@@ -594,6 +595,7 @@
                                       "id",
                                       "title",
                                       "source",
+                                      "classification",
                                       "relatesTo",
                                       "requirementGroups"
                                     ]
@@ -773,6 +775,61 @@
                                             }
                                           }
                                         }
+                                      },
+                                      "awardCriteria": {
+                                        "type": "object",
+                                        "properties": {
+                                          "weightingDescription": {
+                                            "type": "string",
+                                            "enum": [
+                                              "ISZF",
+                                              "ARGITEK",
+                                              "KUIPER_2"
+                                            ]
+                                          },
+                                          "criteria": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "quality",
+                                                    "cost",
+                                                    "price"
+                                                  ]
+                                                },
+                                                "numbers": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "number": {
+                                                        "type": "number"
+                                                      },
+                                                      "weight": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "number",
+                                                      "weight"
+                                                    ]
+                                                  }
+                                                }
+                                              },
+                                              "required": [
+                                                "type",
+                                                "numbers"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "weightingDescription",
+                                          "criteria"
+                                        ]
                                       }
                                     },
                                     "required": [
