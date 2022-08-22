@@ -3300,7 +3300,7 @@
         }
       ],
       "post": {
-        "summary": "Recreate Tender (DRAFT, not for development)",
+        "summary": "Recreate Tender",
         "operationId": "post-do-tender-cpid-ocid",
         "responses": {
           "200": {
@@ -3394,10 +3394,10 @@
                     "properties": {
                       "tenderPeriod": {
                         "type": "object",
+                        "description": "for pmd = OT, SV, MV",
                         "required": [
                           "endDate"
                         ],
-                        "description": "for pmd = OT, SV, MV",
                         "properties": {
                           "endDate": {
                             "type": "string",
@@ -3433,7 +3433,24 @@
                             "documentType": {
                               "type": "string",
                               "enum": [
-                                "regulatoryDocument"
+                                "tenderNotice",
+                                "biddingDocuments",
+                                "technicalSpecifications",
+                                "evaluationCriteria",
+                                "clarifications",
+                                "eligibilityCriteria",
+                                "riskProvisions",
+                                "billOfQuantity",
+                                "conflictOfInterest",
+                                "procurementPlan",
+                                "contractDraft",
+                                "complaints",
+                                "illustration",
+                                "cancellationDetails",
+                                "evaluationReports",
+                                "shortlistedFirms",
+                                "contractArrangements",
+                                "contractGuarantees"
                               ]
                             },
                             "description": {
@@ -3457,7 +3474,10 @@
             }
           },
           "description": ""
-        }
+        },
+        "tags": [
+          "recreateTender"
+        ]
       }
     }
   },
@@ -3470,6 +3490,9 @@
     },
     {
       "name": "fromPN"
+    },
+    {
+      "name": "recreateTender"
     }
   ]
 }
