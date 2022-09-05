@@ -72,10 +72,6 @@
                                 },
                                 "period": {
                                   "type": "object",
-                                  "required": [
-                                    "startDate",
-                                    "endDate"
-                                  ],
                                   "properties": {
                                     "startDate": {
                                       "type": "string",
@@ -85,7 +81,11 @@
                                       "type": "string",
                                       "format": "date-time"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "startDate",
+                                    "endDate"
+                                  ]
                                 },
                                 "amount": {
                                   "type": "object",
@@ -118,10 +118,6 @@
                                 },
                                 "sourcePatry": {
                                   "type": "object",
-                                  "required": [
-                                    "id",
-                                    "name"
-                                  ],
                                   "properties": {
                                     "id": {
                                       "type": "string"
@@ -129,7 +125,14 @@
                                     "name": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "name"
+                                  ]
+                                },
+                                "isEuropeanUnionFunded": {
+                                  "type": "boolean"
                                 },
                                 "europeanUnionFunding": {
                                   "type": "object",
@@ -145,15 +148,15 @@
                                     }
                                   },
                                   "required": [
-                                    "projectIdentifier",
-                                    "projectName"
+                                    "projectIdentifier"
                                   ]
                                 }
                               },
                               "required": [
                                 "id",
                                 "amount",
-                                "classifications"
+                                "classifications",
+                                "isEuropeanUnionFunded"
                               ]
                             }
                           }
@@ -202,7 +205,8 @@
                       "status": {
                         "type": "string",
                         "enum": [
-                          "planning"
+                          "planning",
+                          "planned"
                         ]
                       },
                       "date": {
@@ -451,11 +455,16 @@
                             "source": {
                               "type": "string",
                               "enum": [
-                                "tenderer"
+                                "tenderer",
+                                "procuringEntity"
                               ]
                             },
                             "classification": {
                               "type": "object",
+                              "required": [
+                                "id",
+                                "scheme"
+                              ],
                               "properties": {
                                 "id": {
                                   "type": "string"
@@ -463,11 +472,7 @@
                                 "scheme": {
                                   "type": "string"
                                 }
-                              },
-                              "required": [
-                                "id",
-                                "scheme"
-                              ]
+                              }
                             },
                             "description": {
                               "type": "string"
@@ -595,6 +600,7 @@
                             "id",
                             "title",
                             "source",
+                            "classification",
                             "relatesTo",
                             "requirementGroups"
                           ]
@@ -774,6 +780,61 @@
                                   }
                                 }
                               }
+                            },
+                            "awardCriteria": {
+                              "type": "object",
+                              "properties": {
+                                "weightingDescription": {
+                                  "type": "string",
+                                  "enum": [
+                                    "ISZF",
+                                    "ARGITEK",
+                                    "KUIPER_2"
+                                  ]
+                                },
+                                "criteria": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "type": {
+                                        "type": "string",
+                                        "enum": [
+                                          "quality",
+                                          "cost",
+                                          "price"
+                                        ]
+                                      },
+                                      "numbers": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "number": {
+                                              "type": "number"
+                                            },
+                                            "weight": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "number",
+                                            "weight"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "type",
+                                      "numbers"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "weightingDescription",
+                                "criteria"
+                              ]
                             }
                           },
                           "required": [
