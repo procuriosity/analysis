@@ -1,20 +1,19 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getDataForAuctions",
+    "title": "getTenderPeriod",
     "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9061"
     }
   ],
   "paths": {
-    "command": {
-      "parameters": [],
+    "/command": {
       "post": {
-        "summary": "Get Data For Auctions",
-        "operationId": "post-users-userId",
+        "summary": "Get Tender Period",
+        "operationId": "post-command",
         "responses": {
           "200": {
             "description": "OK",
@@ -37,67 +36,24 @@
                             "tender": {
                               "type": "object",
                               "required": [
-                                "id",
-                                "title",
-                                "description",
-                                "lots"
+                                "tenderPeriod"
                               ],
                               "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "title": {
-                                  "type": "string"
-                                },
-                                "description": {
-                                  "type": "string"
-                                },
-                                "value": {
+                                "tenderPeriod": {
                                   "type": "object",
-                                  "properties": {
-                                    "currency ": {
-                                      "type": "string"
-                                    }
-                                  },
                                   "required": [
-                                    "currency "
-                                  ]
-                                },
-                                "lots": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "id": {
-                                        "type": "string"
-                                      },
-                                      "title": {
-                                        "type": "string"
-                                      },
-                                      "description": {
-                                        "type": "string"
-                                      },
-                                      "value": {
-                                        "type": "object",
-                                        "required": [
-                                          "amount",
-                                          "currency"
-                                        ],
-                                        "properties": {
-                                          "amount": {
-                                            "type": "number"
-                                          },
-                                          "currency": {
-                                            "type": "string"
-                                          }
-                                        }
-                                      }
+                                    "startDate",
+                                    "endDate"
+                                  ],
+                                  "properties": {
+                                    "startDate": {
+                                      "type": "string",
+                                      "format": "date-time"
                                     },
-                                    "required": [
-                                      "id",
-                                      "title",
-                                      "description"
-                                    ]
+                                    "endDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
                                   }
                                 }
                               }
@@ -152,7 +108,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getDataForAuctions"
+                          "getTenderPeriod"
                         ]
                       }
                     }
