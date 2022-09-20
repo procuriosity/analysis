@@ -6,15 +6,14 @@
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9061"
     }
   ],
   "paths": {
-    "command": {
-      "parameters": [],
+    "/command": {
       "post": {
         "summary": "Get Data For Auctions",
-        "operationId": "post-users-userId",
+        "operationId": "post-command",
         "responses": {
           "200": {
             "description": "OK",
@@ -31,39 +30,16 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "tender"
+                            "bids"
                           ],
                           "properties": {
-                            "tender": {
+                            "bids": {
                               "type": "object",
                               "required": [
-                                "id",
-                                "title",
-                                "description",
-                                "lots"
+                                "details"
                               ],
                               "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "title": {
-                                  "type": "string"
-                                },
-                                "description": {
-                                  "type": "string"
-                                },
-                                "value": {
-                                  "type": "object",
-                                  "properties": {
-                                    "currency ": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "currency "
-                                  ]
-                                },
-                                "lots": {
+                                "details": {
                                   "type": "array",
                                   "items": {
                                     "type": "object",
@@ -71,32 +47,32 @@
                                       "id": {
                                         "type": "string"
                                       },
-                                      "title": {
-                                        "type": "string"
+                                      "date": {
+                                        "type": "string",
+                                        "format": "date-time"
                                       },
-                                      "description": {
-                                        "type": "string"
+                                      "relatedLots": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
                                       },
                                       "value": {
                                         "type": "object",
-                                        "required": [
-                                          "amount",
-                                          "currency"
-                                        ],
                                         "properties": {
                                           "amount": {
                                             "type": "number"
-                                          },
-                                          "currency": {
-                                            "type": "string"
                                           }
-                                        }
+                                        },
+                                        "required": [
+                                          "amount"
+                                        ]
                                       }
                                     },
                                     "required": [
                                       "id",
-                                      "title",
-                                      "description"
+                                      "date",
+                                      "relatedLots"
                                     ]
                                   }
                                 }
@@ -130,7 +106,8 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "bids"
                         ],
                         "properties": {
                           "cpid": {
@@ -138,6 +115,28 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
+                          },
+                          "bids": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }

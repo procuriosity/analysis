@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "getDataForAuctions",
+    "title": "getLotIds",
     "version": "1.0"
   },
   "servers": [
@@ -10,11 +10,10 @@
     }
   ],
   "paths": {
-    "command": {
-      "parameters": [],
+    "/command": {
       "post": {
-        "summary": "Get Data For Auctions",
-        "operationId": "post-users-userId",
+        "summary": "Get Lot Ids",
+        "operationId": "post-command",
         "responses": {
           "200": {
             "description": "OK",
@@ -37,32 +36,9 @@
                             "tender": {
                               "type": "object",
                               "required": [
-                                "id",
-                                "title",
-                                "description",
                                 "lots"
                               ],
                               "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "title": {
-                                  "type": "string"
-                                },
-                                "description": {
-                                  "type": "string"
-                                },
-                                "value": {
-                                  "type": "object",
-                                  "properties": {
-                                    "currency ": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "currency "
-                                  ]
-                                },
                                 "lots": {
                                   "type": "array",
                                   "items": {
@@ -70,33 +46,10 @@
                                     "properties": {
                                       "id": {
                                         "type": "string"
-                                      },
-                                      "title": {
-                                        "type": "string"
-                                      },
-                                      "description": {
-                                        "type": "string"
-                                      },
-                                      "value": {
-                                        "type": "object",
-                                        "required": [
-                                          "amount",
-                                          "currency"
-                                        ],
-                                        "properties": {
-                                          "amount": {
-                                            "type": "number"
-                                          },
-                                          "currency": {
-                                            "type": "string"
-                                          }
-                                        }
                                       }
                                     },
                                     "required": [
-                                      "id",
-                                      "title",
-                                      "description"
+                                      "id"
                                     ]
                                   }
                                 }
@@ -115,6 +68,7 @@
             }
           }
         },
+        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -130,7 +84,8 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "states"
                         ],
                         "properties": {
                           "cpid": {
@@ -138,6 +93,60 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
+                          },
+                          "states": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "properties": {
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "active"
+                                      ]
+                                    },
+                                    "statusDetails": {
+                                      "type": "string",
+                                      "enum": [
+                                        "empty"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "status",
+                                    "statusDetails"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "active"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "status"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "statusDetails": {
+                                      "type": "string",
+                                      "enum": [
+                                        "empty"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "statusDetails"
+                                  ]
+                                }
+                              ],
+                              "type": "object"
+                            }
                           }
                         }
                       }
@@ -152,7 +161,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getDataForAuctions"
+                          "getLotIds"
                         ]
                       }
                     }
