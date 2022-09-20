@@ -95,7 +95,8 @@
                           "ocid",
                           "pmd",
                           "bids",
-                          "awards"
+                          "awards",
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -172,10 +173,6 @@
                                 },
                                 "weightedValue": {
                                   "type": "object",
-                                  "required": [
-                                    "amount",
-                                    "currency"
-                                  ],
                                   "properties": {
                                     "amount": {
                                       "type": "number"
@@ -183,7 +180,11 @@
                                     "currency": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "amount",
+                                    "currency"
+                                  ]
                                 },
                                 "value": {
                                   "type": "object",
@@ -206,6 +207,31 @@
                                 "relatedLots"
                               ]
                             }
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "awardCriteria",
+                              "awardCriteriaDetails"
+                            ],
+                            "properties": {
+                              "awardCriteria": {
+                                "type": "string",
+                                "enum": [
+                                  "priceOnly",
+                                  "costOnly",
+                                  "qualityOnly",
+                                  "ratedCriteria"
+                                ]
+                              },
+                              "awardCriteriaDetails": {
+                                "type": "string",
+                                "enum": [
+                                  "automated",
+                                  "manual"
+                                ]
+                              }
+                            }
                           }
                         }
                       }
@@ -220,7 +246,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "createAwards"
+                          "setAwardStatesForEvaluation"
                         ]
                       }
                     }
