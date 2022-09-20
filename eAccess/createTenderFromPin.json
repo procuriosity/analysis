@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createTenderFromPin",
-    "version": "1.0",
+    "version": "1.01",
     "description": ""
   },
   "servers": [
@@ -156,6 +156,9 @@
                                               "name"
                                             ]
                                           },
+                                          "isEuropeanUnionFunded": {
+                                            "type": "boolean"
+                                          },
                                           "europeanUnionFunding": {
                                             "type": "object",
                                             "properties": {
@@ -170,15 +173,15 @@
                                               }
                                             },
                                             "required": [
-                                              "projectIdentifier",
-                                              "projectName"
+                                              "projectIdentifier"
                                             ]
                                           }
                                         },
                                         "required": [
                                           "id",
                                           "amount",
-                                          "classifications"
+                                          "classifications",
+                                          "isEuropeanUnionFunded"
                                         ]
                                       }
                                     }
@@ -450,7 +453,8 @@
                                       "source": {
                                         "type": "string",
                                         "enum": [
-                                          "tenderer"
+                                          "tenderer",
+                                          "procuringEntity"
                                         ]
                                       },
                                       "classification": {
@@ -594,6 +598,7 @@
                                       "id",
                                       "title",
                                       "source",
+                                      "classification",
                                       "relatesTo",
                                       "requirementGroups"
                                     ]
@@ -773,6 +778,61 @@
                                             }
                                           }
                                         }
+                                      },
+                                      "awardCriteria": {
+                                        "type": "object",
+                                        "properties": {
+                                          "weightingDescription": {
+                                            "type": "string",
+                                            "enum": [
+                                              "ISZF",
+                                              "ARGITEK",
+                                              "KUIPER_2"
+                                            ]
+                                          },
+                                          "criteria": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "quality",
+                                                    "cost",
+                                                    "price"
+                                                  ]
+                                                },
+                                                "numbers": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "number": {
+                                                        "type": "number"
+                                                      },
+                                                      "weight": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "number",
+                                                      "weight"
+                                                    ]
+                                                  }
+                                                }
+                                              },
+                                              "required": [
+                                                "type",
+                                                "numbers"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "weightingDescription",
+                                          "criteria"
+                                        ]
                                       }
                                     },
                                     "required": [
