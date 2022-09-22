@@ -1,0 +1,101 @@
+{
+  "title": "target with tender.targets.observations.dimensions.metricType",
+  "x-stoplight": {
+    "id": "fdc45ff9ce599"
+  },
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "relatesTo": {
+      "type": "string",
+      "enum": [
+        "item",
+        "lot",
+        "tender"
+      ]
+    },
+    "relatedItem": {
+      "type": "string"
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "period": {
+            "type": "object",
+            "properties": {
+              "startDate": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "endDate": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "measure": {
+            "type": [
+              "string",
+              "number",
+              "integer",
+              "boolean"
+            ]
+          },
+          "unit": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "dimensions": {
+            "type": "object",
+            "properties": {
+              "requirementClassIdPR": {
+                "type": "string"
+              },
+              "metricType": {
+                "type": "string"
+              }
+            }
+          },
+          "notes": {
+            "type": "string"
+          },
+          "relatedRequirementId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "measure",
+          "notes"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "relatesTo",
+    "observations"
+  ]
+}
