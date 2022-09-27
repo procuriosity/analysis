@@ -1,0 +1,84 @@
+{
+  "title": "contratTerms_request",
+  "x-stoplight": {
+    "id": "7vqcrjcubjqez"
+  },
+  "type": "object",
+  "properties": {
+    "contractType": {
+      "type": "string",
+      "enum": [
+        "fixedRate",
+        "fixedPrice",
+        "fixedPriceWithRevision",
+        "fixedRateWithRevision",
+        "variableRate",
+        "reimbursementOfContractPerformanceCosts"
+      ]
+    },
+    "financialTermsDetails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "relatesTo": {
+            "type": "string",
+            "enum": [
+              "lot",
+              "item"
+            ]
+          },
+          "relatedItem": {
+            "type": "string"
+          },
+          "measure": {
+            "type": "number"
+          },
+          "unit": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          "classification": {
+            "type": "object",
+            "required": [
+              "termType"
+            ],
+            "properties": {
+              "termType": {
+                "type": "string",
+                "enum": [
+                  "vatRates",
+                  "revisionPercentage"
+                ]
+              }
+            }
+          },
+          "relatedRequirementId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "relatesTo",
+          "relatedItem",
+          "measure",
+          "unit",
+          "classification"
+        ]
+      }
+    }
+  },
+  "required": [
+    "contractType"
+  ]
+}
