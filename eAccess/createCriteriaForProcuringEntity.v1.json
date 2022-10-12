@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Create Criteria For Procuring Entity",
-    "version": "1.03"
+    "version": "1.04"
   },
   "servers": [
     {
@@ -28,122 +28,133 @@
                       "type": "object",
                       "properties": {
                         "result": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string",
-                                "example": "MD.TEST_GPA.1"
-                              },
-                              "title": {
-                                "type": "string"
-                              },
-                              "description": {
-                                "type": "string"
-                              },
-                              "source": {
-                                "type": "string",
-                                "enum": [
-                                  "procuringEntity"
-                                ]
-                              },
-                              "relatesTo": {
-                                "type": "string",
-                                "enum": [
-                                  "award",
-                                  "qualification"
-                                ]
-                              },
-                              "requirementGroups": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string",
-                                      "example": "MD.TEST_GPA.1.1"
-                                    },
-                                    "description": {
-                                      "type": "string"
-                                    },
-                                    "requirements": {
-                                      "type": "array",
-                                      "items": {
+                          "required": [
+                            "tender"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "criteria"
+                              ],
+                              "properties": {
+                                "criteria": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "title": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "source": {
+                                        "type": "string",
+                                        "enum": [
+                                          "procuringEntity"
+                                        ]
+                                      },
+                                      "relatesTo": {
+                                        "type": "string",
+                                        "enum": [
+                                          "award",
+                                          "qualification"
+                                        ]
+                                      },
+                                      "classification": {
                                         "type": "object",
-                                        "properties": {
-                                          "id": {
-                                            "type": "string",
-                                            "example": "MD.TEST_GPA.1.1.1"
-                                          },
-                                          "title": {
-                                            "type": "string"
-                                          },
-                                          "description": {
-                                            "type": "string"
-                                          },
-                                          "dataType": {
-                                            "type": "string",
-                                            "default": "boolean",
-                                            "example": "boolean",
-                                            "enum": [
-                                              "integer",
-                                              "string",
-                                              "boolean",
-                                              "number"
-                                            ]
-                                          },
-                                          "status": {
-                                            "type": "string",
-                                            "enum": [
-                                              "active"
-                                            ]
-                                          },
-                                          "datePublished": {
-                                            "type": "string",
-                                            "format": "date-time"
-                                          }
-                                        },
                                         "required": [
                                           "id",
-                                          "title",
-                                          "dataType",
-                                          "status",
-                                          "datePublished"
-                                        ]
+                                          "scheme"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "requirementGroups": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "requirements": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "title": {
+                                                    "type": "string"
+                                                  },
+                                                  "description": {
+                                                    "type": "string"
+                                                  },
+                                                  "dataType": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "integer",
+                                                      "string",
+                                                      "boolean",
+                                                      "number"
+                                                    ]
+                                                  },
+                                                  "status": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "active"
+                                                    ]
+                                                  },
+                                                  "datePublished": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "id",
+                                                  "title",
+                                                  "dataType",
+                                                  "status",
+                                                  "datePublished"
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "requirements"
+                                          ]
+                                        }
                                       }
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "requirements"
-                                  ]
-                                }
-                              },
-                              "classification": {
-                                "type": "object",
-                                "required": [
-                                  "id",
-                                  "scheme"
-                                ],
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "scheme": {
-                                    "type": "string"
+                                    },
+                                    "required": [
+                                      "id",
+                                      "title",
+                                      "source",
+                                      "relatesTo",
+                                      "classification",
+                                      "requirementGroups"
+                                    ]
                                   }
                                 }
                               }
-                            },
-                            "required": [
-                              "id",
-                              "title",
-                              "source",
-                              "relatesTo",
-                              "requirementGroups",
-                              "classification"
-                            ]
+                            }
                           }
                         }
                       },
@@ -173,9 +184,9 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "criteria",
                           "operationType",
-                          "date"
+                          "date",
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -184,96 +195,100 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "criteria": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string",
-                                  "example": "MD.TEST_GPA.1"
-                                },
-                                "title": {
-                                  "type": "string"
-                                },
-                                "description": {
-                                  "type": "string"
-                                },
-                                "requirementGroups": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "id": {
-                                        "type": "string",
-                                        "example": "MD.TEST_GPA.1.1"
-                                      },
-                                      "description": {
-                                        "type": "string"
-                                      },
-                                      "requirements": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "object",
-                                          "properties": {
-                                            "id": {
-                                              "type": "string",
-                                              "example": "MD.TEST_GPA.1.1.1"
-                                            },
-                                            "title": {
-                                              "type": "string"
-                                            },
-                                            "description": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "id",
-                                            "title"
-                                          ]
-                                        }
-                                      }
-                                    },
-                                    "required": [
-                                      "id",
-                                      "requirements"
-                                    ]
-                                  }
-                                },
-                                "classification": {
-                                  "type": "object",
-                                  "required": [
-                                    "id",
-                                    "scheme"
-                                  ],
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "scheme": {
-                                      "type": "string"
-                                    }
-                                  }
-                                }
-                              },
-                              "required": [
-                                "id",
-                                "title",
-                                "requirementGroups",
-                                "classification"
-                              ]
-                            }
-                          },
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "submissionPeriodEnd",
-                              "tenderPeriodEnd"
+                              "createTenderFromPlan"
                             ]
                           },
                           "date": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "criteria"
+                            ],
+                            "properties": {
+                              "criteria": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "title": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "requirementGroups": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "requirements": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "title": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "title"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "requirements"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "title",
+                                    "classification",
+                                    "requirementGroups"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }
