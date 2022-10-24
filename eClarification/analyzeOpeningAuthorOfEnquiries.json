@@ -4,7 +4,7 @@
     "id": "b1eaa99eedcb2"
   },
   "info": {
-    "title": "analyzeFindingEnquiries",
+    "title": "analyzeOpeningAuthorOfEnquiries",
     "version": "1.0",
     "description": ""
   },
@@ -16,7 +16,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Analyze Finding Enquiries",
+        "summary": "Analyze Opening Author Of Enquiries",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -48,38 +48,13 @@
                                       "id": {
                                         "type": "string"
                                       },
-                                      "date": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                      },
-                                      "title": {
-                                        "type": "string"
-                                      },
-                                      "description": {
-                                        "type": "string"
-                                      },
-                                      "relatedLot": {
-                                        "type": "string"
-                                      },
                                       "author": {
-                                        "$ref": "../models/authorForEnquiry.v1.json"
-                                      },
-                                      "answer": {
-                                        "type": "string"
-                                      },
-                                      "dateAnswered": {
-                                        "type": "string",
-                                        "format": "date-time"
+                                        "$ref": "../models/authorForEnquiryWithoutEmptyScale.json"
                                       }
                                     },
                                     "required": [
                                       "id",
-                                      "date",
-                                      "title",
-                                      "description",
-                                      "author",
-                                      "answer",
-                                      "dateAnswered"
+                                      "author"
                                     ]
                                   }
                                 }
@@ -135,7 +110,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "analyzeFindingEnquiries"
+                          "analyzeOpeningAuthorOfEnquiries"
                         ]
                       }
                     }
