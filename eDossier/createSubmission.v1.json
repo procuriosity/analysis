@@ -30,44 +30,62 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "id",
-                            "date",
-                            "candidates",
-                            "status",
+                            "submissions",
                             "token"
                           ],
                           "properties": {
-                            "id": {
-                              "type": "string",
-                              "format": "uuid"
-                            },
-                            "date": {
-                              "type": "string",
-                              "format": "date-time"
-                            },
-                            "requirementResponses": {
-                              "type": "array",
-                              "items": {
-                                "$ref": "../models/requirementResponseShortRelatedCandidate.v1.json"
+                            "submissions": {
+                              "type": "object",
+                              "required": [
+                                "details"
+                              ],
+                              "properties": {
+                                "details": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "format": "uuid"
+                                      },
+                                      "date": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                      },
+                                      "status": {
+                                        "type": "string",
+                                        "enum": [
+                                          "pending"
+                                        ]
+                                      },
+                                      "requirementResponses": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "../models/requirementResponseShortRelatedCandidate.v1.json"
+                                        }
+                                      },
+                                      "candidates": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "../models/organizationReference.v1.json"
+                                        }
+                                      },
+                                      "documents": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "../models/documents_object.v1.json"
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "date",
+                                      "status"
+                                    ]
+                                  }
+                                }
                               }
-                            },
-                            "candidates": {
-                              "type": "array",
-                              "items": {
-                                "$ref": "../models/organizationReference.v1.json"
-                              }
-                            },
-                            "documents": {
-                              "type": "array",
-                              "items": {
-                                "$ref": "../models/documents_object.v1.json"
-                              }
-                            },
-                            "status": {
-                              "type": "string",
-                              "enum": [
-                                "pending"
-                              ]
                             },
                             "token": {
                               "type": "string",
@@ -86,20 +104,33 @@
                         "result": {
                           "type": "object",
                           "properties": {
-                            "documents": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "documentType": {
-                                    "type": "string",
-                                    "enum": [
-                                      "illustration",
-                                      "submissionDocuments",
-                                      "x_qualificationDocuments",
-                                      "x_eligibilityDocuments",
-                                      "x_technicalDocuments"
-                                    ]
+                            "submissions": {
+                              "type": "object",
+                              "properties": {
+                                "details": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "documents": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "documentType": {
+                                              "type": "string",
+                                              "enum": [
+                                                "illustration",
+                                                "submissionDocuments",
+                                                "x_qualificationDocuments",
+                                                "x_eligibilityDocuments",
+                                                "x_technicalDocuments"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
                                   }
                                 }
                               }
@@ -146,7 +177,7 @@
                           "ocid",
                           "date",
                           "owner",
-                          "submission"
+                          "submissions"
                         ],
                         "properties": {
                           "cpid": {
@@ -164,34 +195,44 @@
                             "type": "string",
                             "format": "uuid"
                           },
-                          "submission": {
+                          "submissions": {
                             "type": "object",
                             "required": [
-                              "candidates",
-                              "id"
+                              "details"
                             ],
                             "properties": {
-                              "candidates": {
+                              "details": {
                                 "type": "array",
                                 "items": {
-                                  "$ref": "../models/organizationSupplierFull.v1.json"
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    },
+                                    "candidates": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "../models/organizationSupplierFull.v1.json"
+                                      }
+                                    },
+                                    "requirementResponses": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "../models/requirementResponseShortRelatedCandidate.v1.json"
+                                      }
+                                    },
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "../models/documents_object.v1.json"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
                                 }
-                              },
-                              "requirementResponses": {
-                                "type": "array",
-                                "items": {
-                                  "$ref": "../models/requirementResponseShortRelatedCandidate.v1.json"
-                                }
-                              },
-                              "documents": {
-                                "type": "array",
-                                "items": {
-                                  "$ref": "../models/documents_object.v1.json"
-                                }
-                              },
-                              "id": {
-                                "type": "string",
-                                "format": "uuid"
                               }
                             }
                           }
@@ -208,23 +249,31 @@
                       "params": {
                         "type": "object",
                         "properties": {
-                          "submission": {
+                          "submissions": {
                             "type": "object",
                             "properties": {
-                              "documents": {
+                              "details": {
                                 "type": "array",
                                 "items": {
                                   "type": "object",
                                   "properties": {
-                                    "documentType": {
-                                      "type": "string",
-                                      "enum": [
-                                        "illustration",
-                                        "submissionDocuments",
-                                        "x_qualificationDocuments",
-                                        "x_eligibilityDocuments",
-                                        "x_technicalDocuments"
-                                      ]
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "documentType": {
+                                            "type": "string",
+                                            "enum": [
+                                              "illustration",
+                                              "submissionDocuments",
+                                              "x_qualificationDocuments",
+                                              "x_eligibilityDocuments",
+                                              "x_technicalDocuments"
+                                            ]
+                                          }
+                                        }
+                                      }
                                     }
                                   }
                                 }

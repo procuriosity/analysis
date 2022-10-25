@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Validate Submission",
-    "version": "1.03"
+    "version": "1.04"
   },
   "servers": [
     {
@@ -54,83 +54,185 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "id",
-                          "candidates",
+                          "submissions",
                           "mdm"
                         ],
                         "properties": {
-                          "id": {
-                            "type": "string",
-                            "description": "id submission"
-                          },
-                          "candidates": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "../models/organizationSupplierWithIdShortAddress.v1.json"
-                            }
-                          },
-                          "documents": {
-                            "type": "array",
-                            "items": {
-                              "$ref": "../models/documents_object.v1.json"
-                            }
-                          },
-                          "requirementResponses": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "value": {
-                                  "type": [
-                                    "string",
-                                    "number",
-                                    "integer",
-                                    "boolean"
-                                  ]
-                                },
-                                "requirement": {
+                          "submissions": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
                                   "type": "object",
-                                  "required": [
-                                    "id"
-                                  ],
                                   "properties": {
                                     "id": {
-                                      "type": "string"
-                                    }
-                                  }
-                                },
-                                "relatedCandidate": {
-                                  "type": "object",
-                                  "required": [
-                                    "name",
-                                    "id"
-                                  ],
-                                  "properties": {
-                                    "name": {
                                       "type": "string"
                                     },
+                                    "candidates": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "../models/organizationSupplierWithIdShortAddress.v1.json"
+                                      }
+                                    },
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "../models/documents_object.v1.json"
+                                      }
+                                    },
+                                    "requirementResponses": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "value": {
+                                            "type": [
+                                              "string",
+                                              "number",
+                                              "integer",
+                                              "boolean"
+                                            ]
+                                          },
+                                          "requirement": {
+                                            "type": "object",
+                                            "required": [
+                                              "id"
+                                            ],
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "relatedCandidate": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "name": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "name"
+                                            ]
+                                          },
+                                          "evidences": {
+                                            "type": "array",
+                                            "items": {
+                                              "$ref": "../models/evidences.v1.json"
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "value",
+                                          "requirement"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "candidates"
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "tender": {
+                            "type": "object",
+                            "properties": {
+                              "criteria": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
                                     "id": {
                                       "type": "string"
+                                    },
+                                    "relatesTo": {
+                                      "type": "string",
+                                      "enum": [
+                                        "tenderer"
+                                      ]
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "requirementGroups": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "requirements": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "dataType": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "integer",
+                                                    "string",
+                                                    "boolean",
+                                                    "number"
+                                                  ]
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "dataType"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "requirements"
+                                        ]
+                                      }
                                     }
-                                  }
-                                },
-                                "evidences": {
-                                  "type": "array",
-                                  "items": {
-                                    "$ref": "../models/evidences.v1.json"
-                                  }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "relatesTo",
+                                    "classification",
+                                    "requirementGroups"
+                                  ]
                                 }
-                              },
-                              "required": [
-                                "id",
-                                "value",
-                                "requirement",
-                                "relatedCandidate"
-                              ]
-                            }
+                              }
+                            },
+                            "required": [
+                              "criteria"
+                            ]
                           },
                           "mdm": {
                             "type": "object",
@@ -175,21 +277,33 @@
                       "params": {
                         "type": "object",
                         "properties": {
-                          "documents": {
-                            "type": "array",
-                            "uniqueItems": false,
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "documentType": {
-                                  "type": "string",
-                                  "enum": [
-                                    "illustration",
-                                    "submissionDocuments",
-                                    "x_qualificationDocuments",
-                                    "x_eligibilityDocuments",
-                                    "x_technicalDocuments"
-                                  ]
+                          "submissions": {
+                            "type": "object",
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "documentType": {
+                                            "type": "string",
+                                            "enum": [
+                                              "illustration",
+                                              "submissionDocuments",
+                                              "x_qualificationDocuments",
+                                              "x_eligibilityDocuments",
+                                              "x_technicalDocuments"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
                                 }
                               }
                             }
