@@ -1311,7 +1311,7 @@
                           "format": "date-time"
                         },
                         "durationInDays": {
-                          "type": "integer"
+                          "type": "number"
                         }
                       }
                     },
@@ -2463,8 +2463,21 @@
                           "description": "is not used in the processes"
                         },
                         "formerValue": {
-                          "type": "string",
-                          "description": "is not used in the processes"
+                          "description": "is not used in the processes",
+                          "oneOf": [
+                            {
+                              "type": "string"
+                            },
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "boolean"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2509,10 +2522,13 @@
                               "type": "string"
                             }
                           },
-                          "relatedConfirmations": {
-                            "type": "string",
-                            "description": "is not used in the processes"
-                          }
+                           "relatedConfirmations": {
+                      "type": "array",
+                      "description": "is not used in the processes",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
                         },
                         "required": [
                           "id"
@@ -2554,7 +2570,7 @@
                     },
                     "datePublished": {
                       "type": "string",
-                      "minLength": 1
+                      "format": "date-time"
                     },
                     "dateModified": {
                       "type": "string",
@@ -2573,8 +2589,11 @@
                       }
                     },
                     "relatedConfirmations": {
-                      "type": "string",
-                      "description": "is not used in the processes"
+                      "type": "array",
+                      "description": "is not used in the processes",
+                      "items": {
+                        "type": "string"
+                      }
                     }
                   },
                   "required": [
@@ -4395,10 +4414,13 @@
                           "type": "string"
                         }
                       },
-                      "relatedConfirmations": {
-                        "type": "string",
-                        "description": "is not used in the processes"
+                       "relatedConfirmations": {
+                      "type": "array",
+                      "description": "is not used in the processes",
+                      "items": {
+                        "type": "string"
                       }
+                    }
                     },
                     "required": [
                       "id"
@@ -4446,8 +4468,21 @@
                               "description": "is not used in the processes"
                             },
                             "formerValue": {
-                              "type": "string",
-                              "description": "is not used in the processes"
+                              "description": "is not used in the processes",
+                              "oneOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "boolean"
+                                }
+                              ]
                             }
                           }
                         }
@@ -4492,10 +4527,13 @@
                                 "type": "string"
                               }
                             },
-                            "relatedConfirmations": {
-                              "type": "string",
-                              "description": "is not used in the processes"
-                            }
+                             "relatedConfirmations": {
+                      "type": "array",
+                      "description": "is not used in the processes",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
                           },
                           "required": [
                             "id"
@@ -4546,7 +4584,21 @@
                             "type": "string"
                           },
                           "formerValue": {
-                            "type": "object"
+                            "description": "is not used in the processes",
+                            "oneOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "boolean"
+                              }
+                            ]
                           }
                         }
                       }
@@ -4572,7 +4624,8 @@
                             "type": "string"
                           },
                           "datePublished": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "date-time"
                           },
                           "dateModified": {
                             "type": "string"
@@ -4589,10 +4642,13 @@
                               "type": "string"
                             }
                           },
-                          "relatedConfirmations": {
-                            "type": "string",
-                            "description": "is not used in the processes"
-                          }
+                           "relatedConfirmations": {
+                      "type": "array",
+                      "description": "is not used in the processes",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
                         }
                       }
                     }
@@ -4604,8 +4660,7 @@
                     "type": "object",
                     "properties": {
                       "id": {
-                        "type": "string",
-                        "example": "401651e3-c6d2-4080-a199-d4fefeab0a89"
+                        "type": "string"
                       },
                       "title": {
                         "type": "string"
@@ -4906,10 +4961,7 @@
                                                 "type": "string"
                                               },
                                               "durationInDays": {
-                                                "type": [
-                                                  "string",
-                                                  "number"
-                                                ]
+                                                "type": "number"
                                               }
                                             }
                                           }
@@ -5483,10 +5535,7 @@
                                               "type": "string"
                                             },
                                             "durationInDays": {
-                                              "type": [
-                                                "string",
-                                                "number"
-                                              ]
+                                              "type": "number"
                                             }
                                           }
                                         }
@@ -5930,7 +5979,7 @@
                           },
                           "identifier": {
                             "type": "object",
-                            "description": "is not used in the processes все крім id name",
+                            "description": "is not used in the processes",
                             "properties": {
                               "scheme": {
                                 "type": "string"
@@ -5953,6 +6002,7 @@
                           },
                           "address": {
                             "type": "object",
+                            "description": "is not used in the processes",
                             "properties": {
                               "streetAddress": {
                                 "type": "string"
@@ -6033,6 +6083,7 @@
                           },
                           "additionalIdentifiers": {
                             "type": "array",
+                            "description": "is not used in the processes",
                             "items": {
                               "type": "object",
                               "properties": {
@@ -6058,6 +6109,7 @@
                           },
                           "contactPoint": {
                             "type": "object",
+                            "description": "is not used in the processes",
                             "properties": {
                               "name": {
                                 "type": "string"
@@ -6078,6 +6130,7 @@
                           },
                           "details": {
                             "type": "object",
+                            "description": "is not used in the processes",
                             "properties": {
                               "typeOfSupplier": {
                                 "type": "string"
@@ -6173,10 +6226,7 @@
                                               "type": "string"
                                             },
                                             "durationInDays": {
-                                              "type": [
-                                                "string",
-                                                "number"
-                                              ]
+                                              "type": "number"
                                             }
                                           }
                                         }
@@ -6366,6 +6416,7 @@
                           },
                           "persones": {
                             "type": "array",
+                            "description": "is not used in the processes",
                             "items": {
                               "type": "object",
                               "properties": {
@@ -6653,10 +6704,13 @@
                               "type": "string"
                             }
                           },
-                          "relatedConfirmations": {
-                            "type": "string",
-                            "description": "is not used in the processes"
-                          }
+                           "relatedConfirmations": {
+                      "type": "array",
+                      "description": "is not used in the processes",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
                         },
                         "required": [
                           "id"
@@ -6675,8 +6729,7 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string",
-                            "example": "401651e3-c6d2-4080-a199-d4fefeab0a89"
+                            "type": "string"
                           },
                           "title": {
                             "type": "string",
@@ -6981,10 +7034,7 @@
                                                     "type": "string"
                                                   },
                                                   "durationInDays": {
-                                                    "type": [
-                                                      "string",
-                                                      "number"
-                                                    ]
+                                                    "type": "number"
                                                   }
                                                 }
                                               }
@@ -7579,10 +7629,7 @@
                                                   "type": "string"
                                                 },
                                                 "durationInDays": {
-                                                  "type": [
-                                                    "string",
-                                                    "number"
-                                                  ]
+                                                  "type": "number"
                                                 }
                                               }
                                             }
@@ -7920,7 +7967,8 @@
                   "type": "string"
                 },
                 "date": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "date-time"
                 },
                 "awardId": {
                   "type": "string",
@@ -7988,10 +8036,13 @@
                           "type": "string"
                         }
                       },
-                      "relatedConfirmations": {
-                        "type": "string",
-                        "description": "is not used in the processes"
+                       "relatedConfirmations": {
+                      "type": "array",
+                      "description": "is not used in the processes",
+                      "items": {
+                        "type": "string"
                       }
+                    }
                     },
                     "required": [
                       "id"
@@ -8380,7 +8431,21 @@
                               "type": "string"
                             },
                             "formerValue": {
-                              "type": "string"
+                              "description": "is not used in the processes",
+                              "oneOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "boolean"
+                                }
+                              ]
                             }
                           }
                         }
@@ -8429,10 +8494,13 @@
                                 "type": "string"
                               }
                             },
-                            "relatedConfirmations": {
-                              "type": "string",
-                              "description": "is not used in the processes"
-                            }
+                             "relatedConfirmations": {
+                      "type": "array",
+                      "description": "is not used in the processes",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
                           },
                           "required": [
                             "id"
@@ -8483,7 +8551,21 @@
                             "type": "string"
                           },
                           "formerValue": {
-                            "type": "object"
+                            "description": "is not used in the processes",
+                            "oneOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "boolean"
+                              }
+                            ]
                           }
                         }
                       }
@@ -8509,7 +8591,8 @@
                             "type": "string"
                           },
                           "datePublished": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "date-time"
                           },
                           "dateModified": {
                             "type": "string"
@@ -8526,10 +8609,13 @@
                               "type": "string"
                             }
                           },
-                          "relatedConfirmations": {
-                            "type": "string",
-                            "description": "is not used in the processes"
-                          }
+                           "relatedConfirmations": {
+                      "type": "array",
+                      "description": "is not used in the processes",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
                         }
                       }
                     }
@@ -8541,8 +8627,7 @@
                     "type": "object",
                     "properties": {
                       "id": {
-                        "type": "string",
-                        "example": "401651e3-c6d2-4080-a199-d4fefeab0a89"
+                        "type": "string"
                       },
                       "title": {
                         "type": "string",
@@ -8852,10 +8937,7 @@
                                                 "type": "string"
                                               },
                                               "durationInDays": {
-                                                "type": [
-                                                  "string",
-                                                  "number"
-                                                ]
+                                                "type": "number"
                                               }
                                             }
                                           }
@@ -9454,10 +9536,7 @@
                                               "type": "string"
                                             },
                                             "durationInDays": {
-                                              "type": [
-                                                "string",
-                                                "number"
-                                              ]
+                                              "type": "number"
                                             }
                                           }
                                         }
@@ -10326,10 +10405,7 @@
                                           "type": "string"
                                         },
                                         "durationInDays": {
-                                          "type": [
-                                            "string",
-                                            "number"
-                                          ]
+                                          "type": "number"
                                         }
                                       }
                                     }
@@ -11048,10 +11124,7 @@
                                               "type": "string"
                                             },
                                             "durationInDays": {
-                                              "type": [
-                                                "string",
-                                                "number"
-                                              ]
+                                              "type": "number"
                                             }
                                           }
                                         }
@@ -11650,10 +11723,7 @@
                                               "type": "string"
                                             },
                                             "durationInDays": {
-                                              "type": [
-                                                "string",
-                                                "number"
-                                              ]
+                                              "type": "number"
                                             }
                                           }
                                         }
@@ -12020,10 +12090,13 @@
                           "type": "string"
                         }
                       },
-                      "relatedConfirmations": {
-                        "type": "string",
-                        "description": "is not used in the processes"
+                       "relatedConfirmations": {
+                      "type": "array",
+                      "description": "is not used in the processes",
+                      "items": {
+                        "type": "string"
                       }
+                    }
                     },
                     "required": [
                       "id"
@@ -12059,8 +12132,7 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string",
-                            "example": "401651e3-c6d2-4080-a199-d4fefeab0a89"
+                            "type": "string"
                           },
                           "title": {
                             "type": "string",
@@ -12370,10 +12442,7 @@
                                                     "type": "string"
                                                   },
                                                   "durationInDays": {
-                                                    "type": [
-                                                      "string",
-                                                      "number"
-                                                    ]
+                                                    "type": "number"
                                                   }
                                                 }
                                               }
@@ -12962,10 +13031,7 @@
                                                   "type": "string"
                                                 },
                                                 "durationInDays": {
-                                                  "type": [
-                                                    "string",
-                                                    "number"
-                                                  ]
+                                                  "type": "number"
                                                 }
                                               }
                                             }
@@ -13533,10 +13599,7 @@
                                               "type": "string"
                                             },
                                             "durationInDays": {
-                                              "type": [
-                                                "string",
-                                                "number"
-                                              ]
+                                              "type": "number"
                                             }
                                           }
                                         }
@@ -13897,10 +13960,13 @@
                               "type": "string"
                             }
                           },
-                          "relatedConfirmations": {
-                            "type": "string",
-                            "description": "is not used in the processes"
-                          }
+                           "relatedConfirmations": {
+                      "type": "array",
+                      "description": "is not used in the processes",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
                         },
                         "required": [
                           "id"
@@ -14190,10 +14256,7 @@
                                           "type": "string"
                                         },
                                         "durationInDays": {
-                                          "type": [
-                                            "string",
-                                            "number"
-                                          ]
+                                          "type": "number"
                                         }
                                       }
                                     }
