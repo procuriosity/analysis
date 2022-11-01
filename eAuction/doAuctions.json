@@ -1,7 +1,10 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "37e1a43b7b70b"
+  },
   "info": {
-    "title": "analyzeAuctions",
+    "title": "doAuctions",
     "version": "1.0",
     "description": ""
   },
@@ -13,7 +16,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Analyze Auctions",
+        "summary": "Do Auctions",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -30,14 +33,36 @@
                       "properties": {
                         "result": {
                           "type": "object",
+                          "required": [
+                            "tender"
+                          ],
                           "properties": {
                             "tender": {
                               "type": "object",
                               "required": [
-                                "electronicAuctions",
-                                "tender"
+                                "electronicAuctions"
                               ],
                               "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "object",
+                                  "properties": {
+                                    "currency": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "currency"
+                                  ]
+                                },
                                 "electronicAuctions": {
                                   "type": "object",
                                   "required": [
@@ -53,6 +78,9 @@
                                             "type": "string"
                                           },
                                           "relatedLot": {
+                                            "type": "string"
+                                          },
+                                          "status": {
                                             "type": "string"
                                           },
                                           "auctionPeriod": {
@@ -101,6 +129,7 @@
                                         "required": [
                                           "id",
                                           "relatedLot",
+                                          "status",
                                           "auctionPeriod",
                                           "electronicAuctionModalities"
                                         ]
@@ -108,89 +137,57 @@
                                     }
                                   }
                                 },
-                                "tender": {
-                                  "type": "object",
-                                  "required": [
-                                    "id",
-                                    "title",
-                                    "description",
-                                    "lots"
-                                  ],
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "title": {
-                                      "type": "string"
-                                    },
-                                    "description": {
-                                      "type": "string"
-                                    },
-                                    "value": {
-                                      "type": "object",
-                                      "properties": {
-                                        "currency": {
-                                          "type": "string"
-                                        }
+                                "lots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
                                       },
-                                      "required": [
-                                        "currency"
-                                      ]
-                                    },
-                                    "lots": {
-                                      "type": "array",
-                                      "items": {
+                                      "title": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "value": {
                                         "type": "object",
                                         "properties": {
-                                          "id": {
-                                            "type": "string"
-                                          },
-                                          "title": {
-                                            "type": "string"
-                                          },
-                                          "description": {
-                                            "type": "string"
-                                          },
-                                          "value": {
-                                            "type": "object",
-                                            "properties": {
-                                              "amount": {
-                                                "type": "number"
-                                              },
-                                              "currency": {
-                                                "type": "string"
-                                              }
-                                            },
-                                            "required": [
-                                              "amount",
-                                              "currency"
-                                            ]
-                                          },
-                                          "eligibleMinimumDifference": {
+                                          "amount": {
                                             "type": "number"
                                           },
-                                          "auctionPeriod": {
-                                            "type": "object",
-                                            "required": [
-                                              "startDate"
-                                            ],
-                                            "properties": {
-                                              "startDate": {
-                                                "type": "string",
-                                                "format": "date-time"
-                                              }
-                                            }
+                                          "currency": {
+                                            "type": "string"
                                           }
                                         },
                                         "required": [
-                                          "id",
-                                          "title",
-                                          "description",
-                                          "eligibleMinimumDifference",
-                                          "auctionPeriod"
+                                          "amount",
+                                          "currency"
                                         ]
+                                      },
+                                      "eligibleMinimumDifference": {
+                                        "type": "number"
+                                      },
+                                      "auctionPeriod": {
+                                        "type": "object",
+                                        "required": [
+                                          "startDate"
+                                        ],
+                                        "properties": {
+                                          "startDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        }
                                       }
-                                    }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "title",
+                                      "description",
+                                      "auctionPeriod"
+                                    ]
                                   }
                                 }
                               }
@@ -240,7 +237,6 @@
                                       "owner",
                                       "date",
                                       "relatedLots",
-                                      "value",
                                       "sign"
                                     ]
                                   }
@@ -280,14 +276,12 @@
                                 ]
                               }
                             }
-                          },
-                          "required": [
-                            "tender",
-                            "bids",
-                            "auctionsLinks"
-                          ]
+                          }
                         }
-                      }
+                      },
+                      "required": [
+                        "result"
+                      ]
                     }
                   ]
                 }
@@ -462,8 +456,7 @@
                                     "id",
                                     "owner",
                                     "date",
-                                    "relatedLots",
-                                    "value"
+                                    "relatedLots"
                                   ]
                                 }
                               }
@@ -482,7 +475,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "analyzeAuctions"
+                          "doAuctions"
                         ]
                       }
                     }
