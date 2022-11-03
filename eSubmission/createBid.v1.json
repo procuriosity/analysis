@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createBid",
-    "version": "1.07"
+    "version": "1.08"
   },
   "servers": [
     {
@@ -310,12 +310,13 @@
                                             },
                                             "unit": {
                                               "type": "object",
-                                              "required": [
-                                                "value",
-                                                "id",
-                                                "name"
-                                              ],
                                               "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "name": {
+                                                  "type": "string"
+                                                },
                                                 "value": {
                                                   "type": "object",
                                                   "required": [
@@ -330,14 +331,13 @@
                                                       "type": "string"
                                                     }
                                                   }
-                                                },
-                                                "id": {
-                                                  "type": "string"
-                                                },
-                                                "name": {
-                                                  "type": "string"
                                                 }
-                                              }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "name",
+                                                "value"
+                                              ]
                                             },
                                             "additionalClassifications": {
                                               "type": "array",
@@ -395,8 +395,6 @@
                                           },
                                           "required": [
                                             "id",
-                                            "unit",
-                                            "description",
                                             "quantity",
                                             "classification"
                                           ]
@@ -485,7 +483,8 @@
                                       "status",
                                       "date",
                                       "tenderers",
-                                      "relatedLots"
+                                      "relatedLots",
+                                      "items"
                                     ]
                                   }
                                 }
@@ -523,6 +522,7 @@
                           "bids",
                           "date",
                           "owner",
+                          "tender",
                           "pmd"
                         ],
                         "properties": {
@@ -794,12 +794,13 @@
                                           },
                                           "unit": {
                                             "type": "object",
-                                            "required": [
-                                              "value",
-                                              "id",
-                                              "name"
-                                            ],
                                             "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "name": {
+                                                "type": "string"
+                                              },
                                               "value": {
                                                 "type": "object",
                                                 "required": [
@@ -814,14 +815,13 @@
                                                     "type": "string"
                                                   }
                                                 }
-                                              },
-                                              "id": {
-                                                "type": "string"
-                                              },
-                                              "name": {
-                                                "type": "string"
                                               }
-                                            }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "name",
+                                              "value"
+                                            ]
                                           },
                                           "additionalClassifications": {
                                             "type": "array",
@@ -857,7 +857,6 @@
                                         },
                                         "required": [
                                           "id",
-                                          "unit",
                                           "quantity"
                                         ]
                                       }
@@ -942,7 +941,8 @@
                                   "required": [
                                     "id",
                                     "tenderers",
-                                    "relatedLots"
+                                    "relatedLots",
+                                    "items"
                                   ]
                                 }
                               }
@@ -957,6 +957,9 @@
                           },
                           "tender": {
                             "type": "object",
+                            "required": [
+                              "items"
+                            ],
                             "properties": {
                               "items": {
                                 "type": "array",
@@ -994,7 +997,6 @@
                                   },
                                   "required": [
                                     "id",
-                                    "description",
                                     "classification"
                                   ]
                                 }
