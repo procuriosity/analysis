@@ -45,7 +45,8 @@
                               "required": [
                                 "awardCriteria",
                                 "awardCriteriaDetails",
-                                "items"
+                                "items",
+                                "lots"
                               ],
                               "properties": {
                                 "awardCriteria": {
@@ -158,6 +159,75 @@
                                     ]
                                   }
                                 },
+                                "lots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "awardCriteria": {
+                                        "type": "object",
+                                        "properties": {
+                                          "weightingDescription": {
+                                            "type": "string",
+                                            "enum": [
+                                              "ISZF",
+                                              "ARGITEK",
+                                              "KUIPER_2"
+                                            ]
+                                          },
+                                          "criteria": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "quality",
+                                                    "cost",
+                                                    "price"
+                                                  ]
+                                                },
+                                                "numbers": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "number": {
+                                                        "type": "number"
+                                                      },
+                                                      "weight": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "number",
+                                                      "weight"
+                                                    ]
+                                                  }
+                                                }
+                                              },
+                                              "required": [
+                                                "type",
+                                                "numbers"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "weightingDescription",
+                                          "criteria"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ]
+                                  }
+                                },
                                 "criteria": {
                                   "type": "array",
                                   "items": {
@@ -202,7 +272,8 @@
                                       "source": {
                                         "type": "string",
                                         "enum": [
-                                          "tenderer"
+                                          "tenderer",
+                                          "procuringEntity"
                                         ]
                                       },
                                       "requirementGroups": {
