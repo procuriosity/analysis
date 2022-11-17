@@ -81,7 +81,12 @@
                                             "type": "string"
                                           },
                                           "status": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "enum": [
+                                              "cancelled",
+                                              "withdrawn",
+                                              "active"
+                                            ]
                                           },
                                           "auctionPeriod": {
                                             "type": "object",
@@ -194,9 +199,6 @@
                             },
                             "bids": {
                               "type": "object",
-                              "required": [
-                                "details"
-                              ],
                               "properties": {
                                 "details": {
                                   "type": "array",
@@ -218,14 +220,14 @@
                                       },
                                       "value": {
                                         "type": "object",
-                                        "required": [
-                                          "amount"
-                                        ],
                                         "properties": {
                                           "amount": {
                                             "type": "number"
                                           }
-                                        }
+                                        },
+                                        "required": [
+                                          "amount"
+                                        ]
                                       },
                                       "sign": {
                                         "type": "string",
@@ -241,7 +243,10 @@
                                     ]
                                   }
                                 }
-                              }
+                              },
+                              "required": [
+                                "details"
+                              ]
                             },
                             "auctionsLinks": {
                               "type": "array",
