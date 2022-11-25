@@ -60,7 +60,8 @@
                                 },
                                 "required": [
                                   "id",
-                                  "status"
+                                  "status",
+                                  "statusDetails"
                                 ]
                               }
                             }
@@ -94,9 +95,9 @@
                           "cpid",
                           "ocid",
                           "pmd",
+                          "tender",
                           "bids",
-                          "awards",
-                          "tender"
+                          "awards"
                         ],
                         "properties": {
                           "cpid": {
@@ -125,6 +126,31 @@
                               "DCO",
                               "TEST_DCO"
                             ]
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "awardCriteria",
+                              "awardCriteriaDetails"
+                            ],
+                            "properties": {
+                              "awardCriteria": {
+                                "type": "string",
+                                "enum": [
+                                  "priceOnly",
+                                  "costOnly",
+                                  "qualityOnly",
+                                  "ratedCriteria"
+                                ]
+                              },
+                              "awardCriteriaDetails": {
+                                "type": "string",
+                                "enum": [
+                                  "automated",
+                                  "manual"
+                                ]
+                              }
+                            }
                           },
                           "bids": {
                             "type": "object",
@@ -167,70 +193,11 @@
                               "properties": {
                                 "id": {
                                   "type": "string"
-                                },
-                                "relatedLots": {
-                                  "type": "string"
-                                },
-                                "weightedValue": {
-                                  "type": "object",
-                                  "properties": {
-                                    "amount": {
-                                      "type": "number"
-                                    },
-                                    "currency": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "amount",
-                                    "currency"
-                                  ]
-                                },
-                                "value": {
-                                  "type": "object",
-                                  "properties": {
-                                    "amount": {
-                                      "type": "number"
-                                    },
-                                    "currency": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "amount",
-                                    "currency"
-                                  ]
                                 }
                               },
                               "required": [
-                                "id",
-                                "relatedLots"
+                                "id"
                               ]
-                            }
-                          },
-                          "tender": {
-                            "type": "object",
-                            "required": [
-                              "awardCriteria",
-                              "awardCriteriaDetails"
-                            ],
-                            "properties": {
-                              "awardCriteria": {
-                                "type": "string",
-                                "enum": [
-                                  "priceOnly",
-                                  "costOnly",
-                                  "qualityOnly",
-                                  "ratedCriteria"
-                                ]
-                              },
-                              "awardCriteriaDetails": {
-                                "type": "string",
-                                "enum": [
-                                  "automated",
-                                  "manual"
-                                ]
-                              }
                             }
                           }
                         }
