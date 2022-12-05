@@ -1,0 +1,121 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "3febbd1487862"
+  },
+  "info": {
+    "title": "AnalyzeBidsForEvaluation",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9081"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Check For Absence Of Certain Awards",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "checkForAbsenceOfCertainAwards"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "action"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "country",
+                          "pmd",
+                          "operationType",
+                          "cpid",
+                          "ocid"
+                        ],
+                        "properties": {
+                          "country": {
+                            "type": "string"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "OT",
+                              "TEST_OT",
+                              "SV",
+                              "TEST_SV",
+                              "MV",
+                              "TEST_MV",
+                              "RT",
+                              "TEST_RT",
+                              "GPA",
+                              "TEST_GPA",
+                              "RFQ",
+                              "TEST_RFQ",
+                              "MC",
+                              "TEST_MC",
+                              "DCO",
+                              "TEST_DCO"
+                            ]
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "awardConsideration",
+                              "awardQualification",
+                              "evaluateAward"
+                            ]
+                          },
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
