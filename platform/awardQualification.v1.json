@@ -47,8 +47,8 @@
         "summary": "Award Qualification",
         "operationId": "post-do-consideration-cpid-ocid",
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         },
         "description": "",
@@ -89,7 +89,36 @@
             "description": "award token",
             "required": true
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "award": {
+                    "type": "object",
+                    "required": [
+                      "statusDetails"
+                    ],
+                    "properties": {
+                      "statusDetails": {
+                        "type": "string",
+                        "enum": [
+                          "qualified",
+                          "disqualified"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "award"
+                ]
+              }
+            }
+          }
+        }
       }
     }
   },
