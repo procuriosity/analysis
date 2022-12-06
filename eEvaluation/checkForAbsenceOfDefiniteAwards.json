@@ -1,19 +1,22 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "3febbd1487862"
+  },
   "info": {
-    "title": "checkLotsState",
-    "version": "1.11",
+    "title": "CheckForAbsenceOfDefiniteAwards",
+    "version": "1.0",
     "description": ""
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9081"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Lots State",
+        "summary": "Check For Absence Of Definite Awards",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -27,7 +30,6 @@
             }
           }
         },
-        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -39,47 +41,47 @@
                   {
                     "type": "object",
                     "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "checkForAbsenceOfDefiniteAwards"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "action"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
                       "params": {
                         "type": "object",
                         "required": [
+                          "country",
+                          "pmd",
+                          "operationType",
                           "cpid",
                           "ocid",
-                          "pmd",
-                          "country",
-                          "operationType",
                           "tender"
                         ],
                         "properties": {
-                          "cpid": {
-                            "$ref": "../models/cpid.v1.json"
-                          },
-                          "ocid": {
-                            "$ref": "../models/ocid.v1.json"
+                          "country": {
+                            "type": "string"
                           },
                           "pmd": {
                             "type": "string",
-                            "description": "",
                             "enum": [
-                              "DA",
-                              "TEST_DA",
-                              "DC",
-                              "TEST_DC",
-                              "NP",
-                              "TEST_NP",
-                              "CD",
-                              "TEST_CD",
-                              "IP",
-                              "TEST_IP",
-                              "GPA",
-                              "TEST_GPA",
-                              "RT",
-                              "TEST_RT",
                               "OT",
                               "TEST_OT",
                               "SV",
                               "TEST_SV",
                               "MV",
                               "TEST_MV",
+                              "RT",
+                              "TEST_RT",
+                              "GPA",
+                              "TEST_GPA",
                               "RFQ",
                               "TEST_RFQ",
                               "MC",
@@ -88,24 +90,19 @@
                               "TEST_DCO"
                             ]
                           },
-                          "country": {
-                            "type": "string"
-                          },
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "createAward",
-                              "updateAward",
-                              "divideLot",
-                              "submitBid",
-                              "declareNonConflictOfInterest",
                               "awardConsideration",
-                              "tenderOrLotAmendmentConfirmation",
-                              "createRfq",
-                              "createMC",
-                              "createEnquiry",
-                              "awardQualification"
+                              "awardQualification",
+                              "evaluateAward"
                             ]
+                          },
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
                           },
                           "tender": {
                             "type": "object",
@@ -135,17 +132,6 @@
                     "required": [
                       "params"
                     ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "action": {
-                        "type": "string",
-                        "enum": [
-                          "checkLotsState"
-                        ]
-                      }
-                    }
                   }
                 ]
               }
@@ -154,8 +140,5 @@
         }
       }
     }
-  },
-  "components": {
-    "schemas": {}
   }
 }
