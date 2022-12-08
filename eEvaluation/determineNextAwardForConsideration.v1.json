@@ -4,7 +4,7 @@
     "id": "zv18ydnjnj72d"
   },
   "info": {
-    "title": "findNextAwardForConsideration",
+    "title": "determineNextAwardForConsideration",
     "version": "1.0"
   },
   "servers": [
@@ -15,7 +15,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Find Next Award For Consideration",
+        "summary": "Determine Next Award For Consideration",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -95,7 +95,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "awards"
+                          "awards",
+                          "bids"
                         ],
                         "properties": {
                           "cpid": {
@@ -118,6 +119,33 @@
                                 "id"
                               ]
                             }
+                          },
+                          "bids": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "date": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "date"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -132,7 +160,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "findNextAwardForConsideration"
+                          "determineNextAwardForConsideration"
                         ]
                       }
                     }
