@@ -1,0 +1,177 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "evaluateAward",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/do/award/{cpid}/{ocid}/{awardId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process cpid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "tender process ocid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "awardId",
+          "in": "path",
+          "required": true,
+          "description": "award id"
+        }
+      ],
+      "post": {
+        "summary": "Evaluate Award",
+        "operationId": "post-do-consideration-cpid-ocid",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "transaction id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "data type in request body",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "award token",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "award": {
+                        "type": "object",
+                        "required": [
+                          "statusDetails"
+                        ],
+                        "properties": {
+                          "statusDetails": {
+                            "type": "string",
+                            "enum": [
+                              "active",
+                              "unsuccessful"
+                            ]
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "documents": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "documentType": {
+                                  "type": "string",
+                                  "enum": [
+                                    "awardNotice",
+                                    "evaluationReports",
+                                    "contractDraft",
+                                    "winningBid",
+                                    "complaints",
+                                    "bidders",
+                                    "conflictOfInterest",
+                                    "cancellationDetails",
+                                    "submissionDocuments",
+                                    "contractArrangements",
+                                    "contractSchedule",
+                                    "shortlistedFirms"
+                                  ]
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "relatedLots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "documentType",
+                                "title"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "award"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
