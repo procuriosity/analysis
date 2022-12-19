@@ -1,19 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkLotsState",
-    "version": "1.13",
-    "description": ""
+    "title": "getAwardByIds",
+    "version": "1.03"
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9081"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Lots State",
+        "summary": "Get Awards By Lot",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -21,13 +20,65 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "awards"
+                          ],
+                          "properties": {
+                            "awards": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "pending"
+                                    ]
+                                  },
+                                  "statusDetails": {
+                                    "type": "string",
+                                    "enum": [
+                                      "active",
+                                      "unsuccessful",
+                                      "empty"
+                                    ]
+                                  },
+                                  "relatedBid": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "status",
+                                  "statusDetails"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
                 }
               }
             }
           }
         },
-        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -44,9 +95,6 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "pmd",
-                          "country",
-                          "operationType",
                           "tender"
                         ],
                         "properties": {
@@ -55,59 +103,6 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "description": "",
-                            "enum": [
-                              "DA",
-                              "TEST_DA",
-                              "DC",
-                              "TEST_DC",
-                              "NP",
-                              "TEST_NP",
-                              "CD",
-                              "TEST_CD",
-                              "IP",
-                              "TEST_IP",
-                              "GPA",
-                              "TEST_GPA",
-                              "RT",
-                              "TEST_RT",
-                              "OT",
-                              "TEST_OT",
-                              "SV",
-                              "TEST_SV",
-                              "MV",
-                              "TEST_MV",
-                              "RFQ",
-                              "TEST_RFQ",
-                              "MC",
-                              "TEST_MC",
-                              "DCO",
-                              "TEST_DCO"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "createAward",
-                              "updateAward",
-                              "divideLot",
-                              "submitBid",
-                              "declareNonConflictOfInterest",
-                              "awardConsideration",
-                              "tenderOrLotAmendmentConfirmation",
-                              "createRfq",
-                              "createMC",
-                              "createEnquiry",
-                              "awardQualification",
-                              "evaluateAward",
-                              "protocol"
-                            ]
                           },
                           "tender": {
                             "type": "object",
@@ -144,7 +139,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkLotsState"
+                          "getAwardsByLot"
                         ]
                       }
                     }
