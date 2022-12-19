@@ -1,19 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkLotsState",
-    "version": "1.13",
-    "description": ""
+    "title": "checkAwardsForProtocol",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9081"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Lots State",
+        "summary": "Check Awards For Protocol",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -27,7 +26,6 @@
             }
           }
         },
-        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -44,9 +42,6 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "pmd",
-                          "country",
-                          "operationType",
                           "tender"
                         ],
                         "properties": {
@@ -55,59 +50,6 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "description": "",
-                            "enum": [
-                              "DA",
-                              "TEST_DA",
-                              "DC",
-                              "TEST_DC",
-                              "NP",
-                              "TEST_NP",
-                              "CD",
-                              "TEST_CD",
-                              "IP",
-                              "TEST_IP",
-                              "GPA",
-                              "TEST_GPA",
-                              "RT",
-                              "TEST_RT",
-                              "OT",
-                              "TEST_OT",
-                              "SV",
-                              "TEST_SV",
-                              "MV",
-                              "TEST_MV",
-                              "RFQ",
-                              "TEST_RFQ",
-                              "MC",
-                              "TEST_MC",
-                              "DCO",
-                              "TEST_DCO"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "createAward",
-                              "updateAward",
-                              "divideLot",
-                              "submitBid",
-                              "declareNonConflictOfInterest",
-                              "awardConsideration",
-                              "tenderOrLotAmendmentConfirmation",
-                              "createRfq",
-                              "createMC",
-                              "createEnquiry",
-                              "awardQualification",
-                              "evaluateAward",
-                              "protocol"
-                            ]
                           },
                           "tender": {
                             "type": "object",
@@ -144,7 +86,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkLotsState"
+                          "checkAwardsForProtocol"
                         ]
                       }
                     }
