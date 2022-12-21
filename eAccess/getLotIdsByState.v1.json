@@ -1,0 +1,219 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "7e6hrcucaxu2a"
+  },
+  "info": {
+    "title": "Get Lot Ids By State",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031",
+      "description": "Access"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "parameters": [],
+      "post": {
+        "summary": "Get Lot Ids By State",
+        "operationId": "post-command-getLotByStates",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "description": "id лотов",
+                          "required": [
+                            "tender"
+                          ],
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "lots"
+                              ],
+                              "properties": {
+                                "lots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "getLotIdsByState"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "action"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "state"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "state": {
+                            "oneOf": [
+                              {
+                                "properties": {
+                                  "status": {
+                                    "type": "string"
+                                  },
+                                  "statusDetails": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "status",
+                                  "statusDetails"
+                                ]
+                              },
+                              {
+                                "properties": {
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "active"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "status"
+                                ]
+                              },
+                              {
+                                "properties": {
+                                  "statusDetails": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "statusDetails"
+                                ]
+                              }
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  }
+                ]
+              },
+              "examples": {
+                "validExample": {
+                  "value": {
+                    "version": "2.0.0",
+                    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "action": "findLotIds",
+                    "params": {
+                      "states": [
+                        {
+                          "status": "active",
+                          "statusDetails": "empty"
+                        },
+                        {
+                          "status": "complete"
+                        },
+                        {
+                          "statusDetails": "awarded"
+                        }
+                      ],
+                      "cpid": "ocds-b3wdp1-MD-1580458690892",
+                      "ocid": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": []
+      }
+    }
+  }
+}
