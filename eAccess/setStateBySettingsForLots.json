@@ -1,18 +1,21 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "iy5t5knop3vha"
+  },
   "info": {
-    "title": "finalizeBidsByAwards",
+    "title": "setStateBySettingsForLots",
     "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9061"
+      "url": "http://{host}:9031"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Finalize Bids By Awards",
+        "summary": "Set State By Settings For Lots",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -30,16 +33,16 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "bids"
+                            "tender"
                           ],
                           "properties": {
-                            "bids": {
+                            "tender": {
                               "type": "object",
                               "required": [
-                                "details"
+                                "lots"
                               ],
                               "properties": {
-                                "details": {
+                                "lots": {
                                   "type": "array",
                                   "items": {
                                     "type": "object",
@@ -50,16 +53,13 @@
                                       "status": {
                                         "type": "string",
                                         "enum": [
-                                          "valid",
-                                          "disqualified",
-                                          "pending"
+                                          "active"
                                         ]
                                       },
                                       "statusDetails": {
                                         "type": "string",
                                         "enum": [
-                                          "valid",
-                                          "disqualified"
+                                          "awarded"
                                         ]
                                       }
                                     },
@@ -100,7 +100,9 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "awards"
+                          "pmd",
+                          "country",
+                          "operationType"
                         ],
                         "properties": {
                           "cpid": {
@@ -109,44 +111,45 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "awards": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "status": {
-                                  "type": "string",
-                                  "enum": [
-                                    "active",
-                                    "unsuccessful",
-                                    "pending"
-                                  ]
-                                },
-                                "statusDetails": {
-                                  "type": "string",
-                                  "enum": [
-                                    "basedOnHumanDecision",
-                                    "active",
-                                    "unsuccessful",
-                                    "consideration",
-                                    "qualified",
-                                    "disqualified",
-                                    "awaiting"
-                                  ]
-                                },
-                                "relatedBid": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "id",
-                                "status",
-                                "relatedBid"
-                              ]
-                            }
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "OT",
+                              "SV",
+                              "MV",
+                              "GPA",
+                              "RT",
+                              "TEST_OT",
+                              "TEST_SV",
+                              "TEST_MV",
+                              "TEST_RT",
+                              "DA",
+                              "NP",
+                              "CD",
+                              "DC",
+                              "IP",
+                              "TEST_DA",
+                              "TEST_NP",
+                              "TEST_CD",
+                              "TEST_DC",
+                              "TEST_IP",
+                              "TEST_GPA",
+                              "RFQ",
+                              "TEST_RFQ",
+                              "MC",
+                              "TEST_MC",
+                              "DCO",
+                              "TEST_DCO"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "protocol"
+                            ]
                           }
                         }
                       }
@@ -161,7 +164,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "finalizeBidsByAwards"
+                          "setStateBySettingForLots"
                         ]
                       }
                     }
@@ -170,7 +173,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       }
     }
   },
