@@ -1,8 +1,11 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "8316336b60b7a"
+  },
   "info": {
-    "title": "getAwardByIds",
-    "version": "1.03"
+    "title": "getAwardsDataByLot",
+    "version": "1.0"
   },
   "servers": [
     {
@@ -12,7 +15,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Get Awards By Lot",
+        "summary": "Get Awards Data By Lot",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -52,7 +55,11 @@
                                     "enum": [
                                       "active",
                                       "unsuccessful",
-                                      "empty"
+                                      "empty",
+                                      "consideration",
+                                      "qualified",
+                                      "disqualified",
+                                      "awaiting"
                                     ]
                                   },
                                   "relatedBid": {
@@ -61,8 +68,7 @@
                                 },
                                 "required": [
                                   "id",
-                                  "status",
-                                  "statusDetails"
+                                  "status"
                                 ]
                               }
                             }
@@ -139,7 +145,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getAwardsByLot"
+                          "getAwardsDataByLot"
                         ]
                       }
                     }
