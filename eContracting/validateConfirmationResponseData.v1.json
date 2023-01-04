@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateConfirmationResponseData",
-    "version": "1.01"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -75,22 +75,29 @@
                                         "type": "string",
                                         "enum": [
                                           "document",
-                                          "hash"
+                                          "hash",
+                                          "statement"
                                         ]
                                       },
                                       "value": {
-                                        "type": "string"
+                                        "type": [
+                                          "string",
+                                          "boolean"
+                                        ]
                                       },
                                       "relatedPerson": {
                                         "type": "object",
                                         "required": [
+                                          "id",
                                           "title",
                                           "name",
                                           "identifier",
-                                          "businessFunctions",
-                                          "id"
+                                          "businessFunctions"
                                         ],
                                         "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
                                           "title": {
                                             "type": "string",
                                             "enum": [
@@ -177,9 +184,6 @@
                                                 "id"
                                               ]
                                             }
-                                          },
-                                          "id": {
-                                            "type": "string"
                                           }
                                         }
                                       }
