@@ -1,0 +1,292 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "cancelCan",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9151"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Cancel Can",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "contracts"
+                          ],
+                          "properties": {
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "cancelled"
+                                    ]
+                                  },
+                                  "statusDetails": {
+                                    "type": "string",
+                                    "enum": [
+                                      "empty"
+                                    ]
+                                  },
+                                  "date": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "awardId": {
+                                    "type": "string"
+                                  },
+                                  "lotId": {
+                                    "type": "string"
+                                  },
+                                  "documents": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        },
+                                        "documentType": {
+                                          "type": "string",
+                                          "enum": [
+                                            "evaluationReports"
+                                          ]
+                                        },
+                                        "relatedLots": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "title",
+                                        "documentType"
+                                      ]
+                                    }
+                                  },
+                                  "amendment": {
+                                    "type": "object",
+                                    "required": [
+                                      "rationale"
+                                    ],
+                                    "properties": {
+                                      "rationale": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "documents": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "title": {
+                                              "type": "string"
+                                            },
+                                            "documentType": {
+                                              "type": "string",
+                                              "enum": [
+                                                "contractNotice",
+                                                "contractArrangements",
+                                                "contractSchedule",
+                                                "contractAnnexe",
+                                                "contractGuarantees",
+                                                "subContract",
+                                                "illustration",
+                                                "contractSummary",
+                                                "cancellationDetails",
+                                                "conflictOfInterest"
+                                              ]
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "title",
+                                            "documentType"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "status",
+                                  "statusDetails",
+                                  "date",
+                                  "lotId",
+                                  "amendment"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "contracts"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "amendment": {
+                                  "type": "object",
+                                  "required": [
+                                    "rationale"
+                                  ],
+                                  "properties": {
+                                    "rationale": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "documentType": {
+                                            "type": "string",
+                                            "enum": [
+                                              "contractNotice",
+                                              "contractArrangements",
+                                              "contractSchedule",
+                                              "contractAnnexe",
+                                              "contractGuarantees",
+                                              "subContract",
+                                              "illustration",
+                                              "contractSummary",
+                                              "cancellationDetails",
+                                              "conflictOfInterest"
+                                            ]
+                                          },
+                                          "title": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "documentType",
+                                          "title"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "amendment"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "cancelCan"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
