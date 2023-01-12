@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Cancel Tender",
+    "title": "cancelTender",
     "version": "1.0",
     "description": ""
   },
@@ -14,7 +14,7 @@
   "paths": {
     "/cancel/tender/{cpid}/{ocid}": {
       "post": {
-        "summary": "",
+        "summary": "Cancel Tender",
         "operationId": "post-api-v1-cancel-cn-cpid-ocid-tenderId",
         "responses": {
           "202": {
@@ -29,7 +29,7 @@
             },
             "in": "header",
             "name": "Authorization",
-            "description": "Bearer {access_token}",
+            "description": "bearer {access_token}",
             "required": true
           },
           {
@@ -38,7 +38,7 @@
             },
             "in": "header",
             "name": "X-OPERATION-ID",
-            "description": "ID транзакции",
+            "description": "transaction id",
             "required": true
           },
           {
@@ -47,7 +47,7 @@
             },
             "in": "header",
             "name": "X-TOKEN",
-            "description": "токен тендера",
+            "description": "tender token",
             "required": true
           },
           {
@@ -60,7 +60,7 @@
             },
             "in": "header",
             "name": "Content-Type",
-            "description": "тип данных в теле запроса",
+            "description": "data type in request body",
             "required": true
           }
         ],
@@ -68,7 +68,54 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "../models/amendmentForCancel.v1.json"
+                "type": "object",
+                "properties": {
+                  "amendment": {
+                    "type": "object",
+                    "required": [
+                      "rationale"
+                    ],
+                    "properties": {
+                      "rationale": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "documents": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "documentType": {
+                              "type": "string",
+                              "enum": [
+                                "cancellationDetails"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "documentType"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "amendment"
+                ]
               },
               "examples": {
                 "successExample": {
@@ -105,7 +152,7 @@
           "name": "cpid",
           "in": "path",
           "required": true,
-          "description": "идентификатор тендерного процесса"
+          "description": "cpid tender process"
         },
         {
           "schema": {
@@ -115,7 +162,7 @@
           "name": "ocid",
           "in": "path",
           "required": true,
-          "description": "идентификатор стадии тендерного процесса"
+          "description": "ocid tender process"
         }
       ]
     }
