@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Find Amendment Ids",
-    "version": "1.01",
+    "version": "1.02",
     "description": ""
   },
   "servers": [
@@ -30,12 +30,61 @@
                       "type": "object",
                       "properties": {
                         "result": {
-                          "type": "array",
                           "example": "5407df26-9305-4f1b-b438-8e16d2ab2201",
-                          "uniqueItems": true,
                           "description": "id поправок",
-                          "items": {
-                            "type": "string"
+                          "type": "object",
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "properties": {
+                                "amendments": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "amendments"
+                              ]
+                            },
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "amendments": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "amendments"
+                                ]
+                              }
+                            }
                           }
                         }
                       }
@@ -108,7 +157,8 @@
                             "type": "string",
                             "enum": [
                               "lot",
-                              "tender"
+                              "tender",
+                              "can"
                             ]
                           },
                           "relatedItems": {

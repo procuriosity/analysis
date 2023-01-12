@@ -52,8 +52,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "operationType",
-                          "tender"
+                          "operationType"
                         ],
                         "properties": {
                           "cpid": {
@@ -67,14 +66,12 @@
                             "enum": [
                               "tenderCancellation",
                               "lotCancellation",
-                              "cancelPlan"
+                              "cancelPlan",
+                              "cancelCan"
                             ]
                           },
                           "tender": {
                             "type": "object",
-                            "required": [
-                              "amendments"
-                            ],
                             "properties": {
                               "amendments": {
                                 "type": "array",
@@ -126,6 +123,74 @@
                                   ]
                                 }
                               }
+                            },
+                            "required": [
+                              "amendments"
+                            ]
+                          },
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "amendments": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "format": "uuid"
+                                      },
+                                      "rationale": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "documents": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "title": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "documentType": {
+                                              "type": "string",
+                                              "enum": [
+                                                "cancellationDetails"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "title",
+                                            "documentType"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "rationale"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "amendments"
+                              ]
                             }
                           }
                         }

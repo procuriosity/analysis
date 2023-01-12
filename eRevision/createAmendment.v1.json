@@ -73,6 +73,40 @@
                                       "relatedItem": {
                                         "type": "string",
                                         "description": "id лота или ocid тендера/PN/PIN,id кана"
+                                      },
+                                      "rationale": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "documents": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "title": {
+                                              "type": "string"
+                                            },
+                                            "documentType": {
+                                              "type": "string",
+                                              "enum": [
+                                                "cancellationDetails"
+                                              ]
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "title",
+                                            "documentType"
+                                          ]
+                                        }
                                       }
                                     },
                                     "required": [
@@ -81,10 +115,108 @@
                                       "status",
                                       "type",
                                       "relatesTo",
-                                      "relatedItem"
+                                      "relatedItem",
+                                      "rationale"
                                     ]
                                   }
                                 }
+                              },
+                              "required": [
+                                "amendments"
+                              ]
+                            },
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "amendments": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "date": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        },
+                                        "status": {
+                                          "type": "string",
+                                          "enum": [
+                                            "pending"
+                                          ]
+                                        },
+                                        "type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "cancellation"
+                                          ]
+                                        },
+                                        "relatesTo": {
+                                          "type": "string",
+                                          "enum": [
+                                            "contract"
+                                          ]
+                                        },
+                                        "relatedItem": {
+                                          "type": "string"
+                                        },
+                                        "rationale": {
+                                          "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "documents": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "title": {
+                                                "type": "string"
+                                              },
+                                              "documentType": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "cancellationDetails"
+                                                ]
+                                              },
+                                              "description": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "title",
+                                              "documentType"
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "date",
+                                        "status",
+                                        "type",
+                                        "relatesTo",
+                                        "relatedItem",
+                                        "rationale"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "amendments"
+                                ]
                               }
                             },
                             "token": {
@@ -183,8 +315,7 @@
                           "operationType",
                           "date",
                           "owner",
-                          "relatedEntityId",
-                          "tender"
+                          "relatedEntityId"
                         ],
                         "properties": {
                           "cpid": {
@@ -198,7 +329,8 @@
                             "enum": [
                               "tenderCancellation",
                               "lotCancellation",
-                              "cancelPlan"
+                              "cancelPlan",
+                              "cancelCan"
                             ]
                           },
                           "date": {
@@ -269,6 +401,70 @@
                                   ]
                                 }
                               }
+                            }
+                          },
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "amendments": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "rationale": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "documents": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "title": {
+                                              "type": "string"
+                                            },
+                                            "documentType": {
+                                              "type": "string",
+                                              "enum": [
+                                                "cancellationDetails"
+                                              ]
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "title",
+                                            "documentType"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "rationale"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "amendments"
+                              ]
                             }
                           }
                         }
