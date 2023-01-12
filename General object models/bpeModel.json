@@ -9137,7 +9137,7 @@
                     ]
                   }
                 },
-                "confirmationResponses": {
+               "confirmationResponses": {
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -9145,20 +9145,34 @@
                       "id": {
                         "type": "string"
                       },
+                      "date": {
+                        "type": "string"
+                      },
+                      "requestId": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "document",
+                          "hash",
+                          "statement"
+                        ]
+                      },
                       "value": {
+                        "oneOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "boolean"
+                          }
+                        ]
+                      },
+                      "relatedPerson": {
                         "type": "object",
                         "properties": {
-                          "name": {
-                            "type": "string"
-                          },
-                          "id": {
-                            "type": "string"
-                          },
-                          "date": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "relatedPerson": {
+                          "": {
                             "type": "object",
                             "properties": {
                               "id": {
@@ -9167,159 +9181,11 @@
                               "name": {
                                 "type": "string"
                               }
-                            }
-                          },
-                          "verification": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "type": {
-                                  "type": "string"
-                                },
-                                "value": {
-                                  "type": "string"
-                                },
-                                "rationale": {
-                                  "type": "string"
-                                }
-                              }
-                            }
+                            },
+                            "required": [
+                              "id"
+                            ]
                           }
-                        }
-                      },
-                      "request": {
-                        "type": "string"
-                      },
-                      "relatedPerson": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "title": {
-                              "type": "string"
-                            },
-                            "name": {
-                              "type": "string"
-                            },
-                            "identifier": {
-                              "type": "object",
-                              "properties": {
-                                "scheme": {
-                                  "type": "string"
-                                },
-                                "id": {
-                                  "type": "string"
-                                },
-                                "legalName": {
-                                  "type": "string"
-                                },
-                                "uri": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "scheme",
-                                "id"
-                              ]
-                            },
-                            "businessFunctions": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "type": {
-                                    "type": "string"
-                                  },
-                                  "jobTitle": {
-                                    "type": "string"
-                                  },
-                                  "period": {
-                                    "type": "object",
-                                    "properties": {
-                                      "startDate": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                      },
-                                      "endDate": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                      },
-                                      " maxExtentDate": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                      },
-                                      "durationInDays": {
-                                        "type": "number"
-                                      }
-                                    }
-                                  },
-                                  "documents": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "documentType": {
-                                          "type": "string"
-                                        },
-                                        "title": {
-                                          "type": "string"
-                                        },
-                                        "description": {
-                                          "type": "string"
-                                        },
-                                        "url": {
-                                          "type": "string",
-                                          "format": "uri"
-                                        },
-                                        "datePublished": {
-                                          "type": "string",
-                                          "format": "date-time"
-                                        },
-                                        "dateModified": {
-                                          "type": "string",
-                                          "format": "date-time"
-                                        },
-                                        "relatedConfirmations": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": "string"
-                                          }
-                                        },
-                                        "relatedLots": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": "string"
-                                          }
-                                        },
-                                        "format": {
-                                          "type": "string"
-                                        }
-                                      },
-                                      "required": [
-                                        "id"
-                                      ]
-                                    }
-                                  }
-                                },
-                                "required": [
-                                  "id"
-                                ]
-                              }
-                            }
-                          },
-                          "required": [
-                            "id"
-                          ]
                         }
                       }
                     },
@@ -9327,8 +9193,7 @@
                       "id"
                     ]
                   }
-                }
-              },
+                },
               "required": [
                 "id"
               ]
