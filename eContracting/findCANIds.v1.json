@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Find CAN Ids",
-    "version": "1.0"
+    "title": "findCanIds",
+    "version": "1.01"
   },
   "servers": [
     {
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "",
+        "summary": "Find CAN Ids",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -28,10 +28,26 @@
                       "type": "object",
                       "properties": {
                         "result": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
+                          "type": "object",
+                          "properties": {
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "contracts"
+                          ]
                         }
                       }
                     }
@@ -132,11 +148,27 @@
                               "type": "object"
                             }
                           },
-                          "lotIds": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
+                          "tender": {
+                            "type": "object",
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "lots"
+                            ]
                           }
                         }
                       }
