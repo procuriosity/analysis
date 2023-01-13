@@ -367,6 +367,78 @@
                                       "documentType"
                                     ]
                                   }
+                                },
+                                "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "unit": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "name",
+                                          "value"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          },
+                                          "value": {
+                                            "type": "object",
+                                            "required": [
+                                              "amount",
+                                              "currency"
+                                            ],
+                                            "properties": {
+                                              "amount": {
+                                                "type": "number"
+                                              },
+                                              "currency": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "quantity": {
+                                        "type": "number"
+                                      },
+                                      "classification": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "scheme",
+                                          "description"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string",
+                                            "enum": [
+                                              "CPV"
+                                            ]
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "quantity",
+                                      "classification"
+                                    ]
+                                  }
                                 }
                               },
                               "required": [
@@ -375,7 +447,8 @@
                                 "date",
                                 "value",
                                 "tenderers",
-                                "relatedLots"
+                                "relatedLots",
+                                "items"
                               ]
                             }
                           }
