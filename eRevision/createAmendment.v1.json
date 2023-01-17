@@ -232,52 +232,7 @@
                     }
                   ]
                 },
-                "examples": {
-                  "successfulResponse": {
-                    "value": {
-                      "version": "2.0.0",
-                      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                      "status": "success",
-                      "result": {
-                        "rationale": "string",
-                        "description": "string",
-                        "documents": [
-                          {
-                            "documentType": "cancellationDetails",
-                            "id": "835b8d03-80dc-4d1b-8b1c-fe2b1a23366c-1573211196021",
-                            "title": "string",
-                            "description": "string"
-                          }
-                        ],
-                        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                        "date": "2020-02-22T11:25:44Z",
-                        "status": "pending",
-                        "type": "cancellation",
-                        "relatesTo": "tender",
-                        "relatedItem": "string",
-                        "token": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-                      }
-                    }
-                  },
-                  "errorExample": {
-                    "value": {
-                      "version": "2.0.0",
-                      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                      "status": "error",
-                      "result": [
-                        {
-                          "code": "DR-1/09",
-                          "description": "Missing required attribute",
-                          "details": [
-                            {
-                              "name": "params.amendment.id"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                }
+                "examples": {}
               }
             }
           }
@@ -327,10 +282,10 @@
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "tenderCancellation",
-                              "lotCancellation",
                               "cancelPlan",
-                              "cancelCan"
+                              "cancelCan",
+                              "cancelLot",
+                              "cancelTender"
                             ]
                           },
                           "date": {
@@ -348,9 +303,6 @@
                           },
                           "tender": {
                             "type": "object",
-                            "required": [
-                              "amendments"
-                            ],
                             "properties": {
                               "amendments": {
                                 "type": "array",
@@ -401,7 +353,10 @@
                                   ]
                                 }
                               }
-                            }
+                            },
+                            "required": [
+                              "amendments"
+                            ]
                           },
                           "contracts": {
                             "type": "array",
