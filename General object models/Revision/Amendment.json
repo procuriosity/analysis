@@ -1,5 +1,8 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "wlc7os4837wii"
+  },
   "info": {
     "title": "Revision",
     "version": "1.0"
@@ -15,99 +18,196 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "amendments": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "status": {
-                          "type": "string",
-                          "enum": [
-                            "pending",
-                            "active",
-                            "cancelled"
-                          ]
-                        },
-                        "date": {
-                          "type": "string",
-                          "format": "date-time"
-                        },
-                        "type": {
-                          "type": "string",
-                          "enum": [
-                            "cancellation"
-                          ]
-                        },
-                        "relatesTo": {
-                          "type": "string",
-                          "enum": [
-                            "tender",
-                            "lot"
-                          ]
-                        },
-                        "relatedItem": {
-                          "type": "string"
-                        },
-                        "description": {
-                          "type": "string"
-                        },
-                        "rationale": {
-                          "type": "string"
-                        },
-                        "documents": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
+                "oneOf": [
+                  {
+                    "properties": {
+                      "tender": {
+                        "type": "object",
+                        "properties": {
+                          "amendments": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "type": "string",
+                                  "enum": [
+                                    "pending",
+                                    "active",
+                                    "cancelled"
+                                  ]
+                                },
+                                "date": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "cancellation"
+                                  ]
+                                },
+                                "relatesTo": {
+                                  "type": "string",
+                                  "enum": [
+                                    "tender",
+                                    "lot"
+                                  ]
+                                },
+                                "relatedItem": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "rationale": {
+                                  "type": "string"
+                                },
+                                "documents": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "documentType": {
+                                        "type": "string",
+                                        "enum": [
+                                          "cancellationDetails"
+                                        ]
+                                      },
+                                      "title": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "documentType",
+                                      "title"
+                                    ]
+                                  }
+                                }
                               },
-                              "documentType": {
-                                "type": "string",
-                                "enum": [
-                                  "cancellationDetails"
-                                ]
-                              },
-                              "title": {
-                                "type": "string"
-                              },
-                              "description": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "id",
-                              "documentType",
-                              "title"
-                            ]
+                              "required": [
+                                "id",
+                                "status",
+                                "date",
+                                "type",
+                                "relatesTo",
+                                "relatedItem",
+                                "rationale"
+                              ]
+                            }
                           }
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "status",
-                        "date",
-                        "type",
-                        "relatesTo",
-                        "relatedItem",
-                        "rationale"
-                      ]
+                        },
+                        "required": [
+                          "amendments"
+                        ]
+                      }
                     }
                   },
-                  "token": {
-                    "type": "string",
-                    "description": "amendment token "
+                  {
+                    "properties": {
+                      "contracts": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "amendments": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "pending",
+                                      "active",
+                                      "cancelled"
+                                    ]
+                                  },
+                                  "date": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "enum": [
+                                      "cancellation"
+                                    ]
+                                  },
+                                  "relatesTo": {
+                                    "type": "string",
+                                    "enum": [
+                                      "contract"
+                                    ]
+                                  },
+                                  "relatedItem": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "rationale": {
+                                    "type": "string"
+                                  },
+                                  "documents": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "documentType": {
+                                          "type": "string",
+                                          "enum": [
+                                            "cancellationDetails"
+                                          ]
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "documentType",
+                                        "title"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "status",
+                                  "date",
+                                  "type",
+                                  "relatesTo",
+                                  "relatedItem",
+                                  "rationale"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
-                },
-                "required": [
-                  "amendments",
-                  "token"
-                ]
+                ],
+                "type": "object"
               }
             }
           }
