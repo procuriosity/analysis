@@ -81,6 +81,10 @@
                             "type": "string"
                           }
                         },
+                        "relatedBid": {
+                          "type": "string",
+                          "description": "отсутствует у неуспешного"
+                        },
                         "suppliers": {
                           "type": "array",
                           "description": "отсутствует у неуспешного",
@@ -369,6 +373,20 @@
                             "currency"
                           ]
                         },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id"
+                            ]
+                          }
+                        },
                         "requirementResponses": {
                           "type": "array",
                           "description": "ответ от PE o Декларации об отсутствии конфликта интересов. отсутствует у неуспешного",
@@ -433,9 +451,44 @@
                             ]
                           }
                         },
-                        "relatedBid": {
-                          "type": "string",
-                          "description": "отсутствует у неуспешного"
+                        "documents": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "documentType": {
+                                "type": "string",
+                                "enum": [
+                                  "awardNotice",
+                                  "evaluationReports",
+                                  "contractDraft",
+                                  "winningBid",
+                                  "complaints",
+                                  "bidders",
+                                  "conflictOfInterest",
+                                  "cancellationDetails",
+                                  "submissionDocuments",
+                                  "contractArrangements",
+                                  "contractSchedule",
+                                  "shortlistedFirms"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "title",
+                              "documentType"
+                            ]
+                          }
                         }
                       },
                       "required": [
