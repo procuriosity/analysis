@@ -1,8 +1,11 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "6d9c0lftpa19k"
+  },
   "info": {
-    "title": "Сheck Access To Amendment",
-    "version": "1.02"
+    "title": "checkAmendmentsState",
+    "version": "1.0"
   },
   "servers": [
     {
@@ -14,7 +17,7 @@
     "/command": {
       "parameters": [],
       "post": {
-        "summary": "Check Access to Amendment",
+        "summary": "Check Amendments State",
         "operationId": "post-command-check access to amendment",
         "responses": {
           "200": {
@@ -43,7 +46,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkAccessToAmendment"
+                          "checkAmendmentsState"
                         ]
                       }
                     },
@@ -59,8 +62,10 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "token",
-                          "owner"
+                          "pmd",
+                          "country",
+                          "operationType",
+                          "contracts"
                         ],
                         "properties": {
                           "cpid": {
@@ -69,36 +74,44 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "token": {
+                          "pmd": {
                             "type": "string",
-                            "format": "uuid",
-                            "description": "amendment token"
+                            "enum": [
+                              "DA",
+                              "TEST_DA",
+                              "DC",
+                              "TEST_DC",
+                              "NP",
+                              "TEST_NP",
+                              "CD",
+                              "TEST_CD",
+                              "IP",
+                              "TEST_IP",
+                              "GPA",
+                              "TEST_GPA",
+                              "RT",
+                              "TEST_RT",
+                              "OT",
+                              "TEST_OT",
+                              "SV",
+                              "TEST_SV",
+                              "MV",
+                              "TEST_MV",
+                              "RFQ",
+                              "TEST_RFQ",
+                              "MC",
+                              "TEST_MC",
+                              "DCO",
+                              "TEST_DCO"
+                            ]
                           },
-                          "owner": {
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
                             "type": "string",
-                            "format": "uuid",
-                            "description": "id владельца (площадки) amendment"
-                          },
-                          "tender": {
-                            "type": "object",
-                            "properties": {
-                              "amendments": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "id"
-                                  ]
-                                }
-                              }
-                            },
-                            "required": [
-                              "amendments"
+                            "enum": [
+                              "contractAmendmentConfirmation"
                             ]
                           },
                           "contracts": {
