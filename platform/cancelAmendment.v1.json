@@ -1,7 +1,10 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "bfe0b8d537251"
+  },
   "info": {
-    "title": "tenderOrLotAmendmentCancellation",
+    "title": "cancelAmendment",
     "version": "1.0",
     "description": ""
   },
@@ -42,7 +45,7 @@
         }
       ],
       "post": {
-        "summary": "Tender Or Lot Amendment Cancellation",
+        "summary": "Cancel Amendment",
         "operationId": "post-confirm-amendment-cpid-ocid-amendmentId",
         "responses": {
           "202": {
@@ -79,6 +82,28 @@
             "name": "X-TOKEN",
             "description": "amendment token",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "tender",
+                "lot",
+                "contract"
+              ]
+            },
+            "in": "query",
+            "name": "relatesTo",
+            "required": true,
+            "description": "the entity to which the amendment refers"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "relatedItem",
+            "description": "entity id to which the amendment refers"
           }
         ]
       }
