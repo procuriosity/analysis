@@ -10,7 +10,6 @@
       "Notice": {
         "title": "Release",
         "type": "object",
-        "description": "",
         "properties": {
           "ocid": {
             "type": "string",
@@ -2463,7 +2462,6 @@
                           "description": "is not used in the processes"
                         },
                         "formerValue": {
-                          "description": "is not used in the processes",
                           "oneOf": [
                             {
                               "type": "string"
@@ -2522,13 +2520,13 @@
                               "type": "string"
                             }
                           },
-                           "relatedConfirmations": {
-                      "type": "array",
-                      "description": "is not used in the processes",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
+                          "relatedConfirmations": {
+                            "type": "array",
+                            "description": "is not used in the processes",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
                         },
                         "required": [
                           "id"
@@ -4417,13 +4415,13 @@
                           "type": "string"
                         }
                       },
-                       "relatedConfirmations": {
-                      "type": "array",
-                      "description": "is not used in the processes",
-                      "items": {
-                        "type": "string"
+                      "relatedConfirmations": {
+                        "type": "array",
+                        "description": "is not used in the processes",
+                        "items": {
+                          "type": "string"
+                        }
                       }
-                    }
                     },
                     "required": [
                       "id"
@@ -4471,7 +4469,6 @@
                               "description": "is not used in the processes"
                             },
                             "formerValue": {
-                              "description": "is not used in the processes",
                               "oneOf": [
                                 {
                                   "type": "string"
@@ -4530,13 +4527,13 @@
                                 "type": "string"
                               }
                             },
-                             "relatedConfirmations": {
-                      "type": "array",
-                      "description": "is not used in the processes",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
+                            "relatedConfirmations": {
+                              "type": "array",
+                              "description": "is not used in the processes",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
                           },
                           "required": [
                             "id"
@@ -4587,7 +4584,6 @@
                             "type": "string"
                           },
                           "formerValue": {
-                            "description": "is not used in the processes",
                             "oneOf": [
                               {
                                 "type": "string"
@@ -4645,13 +4641,13 @@
                               "type": "string"
                             }
                           },
-                           "relatedConfirmations": {
-                      "type": "array",
-                      "description": "is not used in the processes",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
+                          "relatedConfirmations": {
+                            "type": "array",
+                            "description": "is not used in the processes",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
                         }
                       }
                     }
@@ -5916,7 +5912,7 @@
               ]
             }
           },
-         "bids": {
+          "bids": {
             "type": "object",
             "properties": {
               "statistics": {
@@ -6834,20 +6830,16 @@
                           "value": {
                             "oneOf": [
                               {
-                                "type": "string",
-                                "properties": {}
+                                "type": "string"
                               },
                               {
-                                "type": "number",
-                                "properties": {}
+                                "type": "number"
                               },
                               {
-                                "type": "integer",
-                                "properties": {}
+                                "type": "integer"
                               },
                               {
-                                "type": "boolean",
-                                "properties": {}
+                                "type": "boolean"
                               }
                             ]
                           },
@@ -7661,13 +7653,13 @@
                           "type": "string"
                         }
                       },
-                       "relatedConfirmations": {
-                      "type": "array",
-                      "description": "is not used in the processes",
-                      "items": {
-                        "type": "string"
+                      "relatedConfirmations": {
+                        "type": "array",
+                        "description": "is not used in the processes",
+                        "items": {
+                          "type": "string"
+                        }
                       }
-                    }
                     },
                     "required": [
                       "id"
@@ -8025,55 +8017,43 @@
                       "id": {
                         "type": "string"
                       },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "pending",
+                          "active",
+                          "cancelled"
+                        ]
+                      },
                       "date": {
                         "type": "string",
                         "format": "date-time"
                       },
-                      "releaseID": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "cancellation"
+                        ]
+                      },
+                      "relatesTo": {
+                        "type": "string",
+                        "enum": [
+                          "contract"
+                        ]
+                      },
+                      "relatedItem": {
                         "type": "string"
                       },
                       "description": {
                         "type": "string"
                       },
-                      "amendsReleaseID": {
-                        "type": "string"
-                      },
                       "rationale": {
-                        "type": "string"
-                      },
-                      "relatedLots": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "changes": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "property": {
-                              "type": "string"
-                            },
-                            "formerValue": {
-                              "description": "is not used in the processes",
-                              "oneOf": [
-                                {
-                                  "type": "string"
-                                },
-                                {
-                                  "type": "number"
-                                },
-                                {
-                                  "type": "integer"
-                                },
-                                {
-                                  "type": "boolean"
-                                }
-                              ]
-                            }
-                          }
-                        }
+                        "type": "string",
+                        "enum": [
+                          "lackOfEvidences",
+                          "reviewDecision",
+                          "nonSigningContract"
+                        ]
                       },
                       "documents": {
                         "type": "array",
@@ -8119,17 +8099,56 @@
                                 "type": "string"
                               }
                             },
-                             "relatedConfirmations": {
-                      "type": "array",
-                      "description": "is not used in the processes",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
+                            "relatedConfirmations": {
+                              "type": "array",
+                              "description": "is not used in the processes",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
                           },
                           "required": [
                             "id"
                           ]
+                        }
+                      },
+                      "releaseID": {
+                        "type": "string"
+                      },
+                      "amendsReleaseID": {
+                        "type": "string"
+                      },
+                      "relatedLots": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "changes": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "property": {
+                              "type": "string"
+                            },
+                            "formerValue": {
+                              "oneOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "number"
+                                },
+                                {
+                                  "type": "integer"
+                                },
+                                {
+                                  "type": "boolean"
+                                }
+                              ]
+                            }
+                          }
                         }
                       }
                     },
@@ -8176,7 +8195,6 @@
                             "type": "string"
                           },
                           "formerValue": {
-                            "description": "is not used in the processes",
                             "oneOf": [
                               {
                                 "type": "string"
@@ -8234,13 +8252,13 @@
                               "type": "string"
                             }
                           },
-                           "relatedConfirmations": {
-                      "type": "array",
-                      "description": "is not used in the processes",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
+                          "relatedConfirmations": {
+                            "type": "array",
+                            "description": "is not used in the processes",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
                         }
                       }
                     }
@@ -11715,13 +11733,13 @@
                           "type": "string"
                         }
                       },
-                       "relatedConfirmations": {
-                      "type": "array",
-                      "description": "is not used in the processes",
-                      "items": {
-                        "type": "string"
+                      "relatedConfirmations": {
+                        "type": "array",
+                        "description": "is not used in the processes",
+                        "items": {
+                          "type": "string"
+                        }
                       }
-                    }
                     },
                     "required": [
                       "id"
@@ -13585,13 +13603,13 @@
                               "type": "string"
                             }
                           },
-                           "relatedConfirmations": {
-                      "type": "array",
-                      "description": "is not used in the processes",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
+                          "relatedConfirmations": {
+                            "type": "array",
+                            "description": "is not used in the processes",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
                         },
                         "required": [
                           "id"
