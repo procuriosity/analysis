@@ -34,9 +34,6 @@
                       "properties": {
                         "result": {
                           "type": "object",
-                          "required": [
-                            "contracts"
-                          ],
                           "properties": {
                             "contracts": {
                               "type": "array",
@@ -57,7 +54,7 @@
                                         "status": {
                                           "type": "string",
                                           "enum": [
-                                            "active"
+                                            "cancelled"
                                           ]
                                         }
                                       },
@@ -73,6 +70,35 @@
                                   "amendments"
                                 ]
                               }
+                            },
+                            "tender": {
+                              "type": "object",
+                              "properties": {
+                                "amendments": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "status": {
+                                        "type": "string",
+                                        "enum": [
+                                          "cancelled"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "status"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "amendments"
+                              ]
                             }
                           }
                         }
@@ -120,8 +146,7 @@
                           "ocid",
                           "pmd",
                           "country",
-                          "operationType",
-                          "contracts"
+                          "operationType"
                         ],
                         "properties": {
                           "cpid": {
@@ -167,7 +192,7 @@
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "contractAmendmentConfirmation"
+                              "cancelAmendment"
                             ]
                           },
                           "contracts": {
@@ -194,6 +219,28 @@
                                 "amendments"
                               ]
                             }
+                          },
+                          "tender": {
+                            "type": "object",
+                            "properties": {
+                              "amendments": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "amendments"
+                            ]
                           }
                         }
                       }
