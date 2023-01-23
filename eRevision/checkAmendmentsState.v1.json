@@ -64,8 +64,7 @@
                           "ocid",
                           "pmd",
                           "country",
-                          "operationType",
-                          "contracts"
+                          "operationType"
                         ],
                         "properties": {
                           "cpid": {
@@ -102,7 +101,11 @@
                               "MC",
                               "TEST_MC",
                               "DCO",
-                              "TEST_DCO"
+                              "TEST_DCO",
+                              "OF",
+                              "TEST_OF",
+                              "CF",
+                              "TEST_CF"
                             ]
                           },
                           "country": {
@@ -111,7 +114,7 @@
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "contractAmendmentConfirmation"
+                              "cancelAmendment"
                             ]
                           },
                           "contracts": {
@@ -138,6 +141,28 @@
                                 "amendments"
                               ]
                             }
+                          },
+                          "tender": {
+                            "type": "object",
+                            "properties": {
+                              "amendments": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "amendments"
+                            ]
                           }
                         }
                       }
