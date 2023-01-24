@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Get Amendment By Ids",
-    "version": "1.0",
+    "version": "1.01",
     "description": ""
   },
   "servers": [
@@ -29,67 +29,202 @@
                       "type": "object",
                       "properties": {
                         "result": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "status": {
-                                "type": "string",
-                                "enum": [
-                                  "pending",
-                                  "active"
-                                ]
+                          "type": "object",
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "properties": {
+                                "amendments": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "date": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                      },
+                                      "status": {
+                                        "type": "string",
+                                        "enum": [
+                                          "pending",
+                                          "active"
+                                        ]
+                                      },
+                                      "type": {
+                                        "type": "string",
+                                        "enum": [
+                                          "cancellation"
+                                        ]
+                                      },
+                                      "relatesTo": {
+                                        "type": "string",
+                                        "enum": [
+                                          "tender",
+                                          "lot"
+                                        ]
+                                      },
+                                      "relatedItem": {
+                                        "type": "string"
+                                      },
+                                      "rationale": {
+                                        "type": "string",
+                                        "enum": [
+                                          "fundsLimitation",
+                                          "needCancellation",
+                                          "terminalError"
+                                        ]
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "documents": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "title": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "documentType": {
+                                              "type": "string",
+                                              "enum": [
+                                                "cancellationDetails"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "title",
+                                            "documentType"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "date",
+                                      "status",
+                                      "type",
+                                      "relatesTo",
+                                      "relatedItem",
+                                      "rationale"
+                                    ]
+                                  }
+                                }
                               },
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "cancellation"
-                                ]
-                              },
-                              "relatesTo": {
-                                "type": "string",
-                                "enum": [
-                                  "tender",
-                                  "lot"
-                                ]
-                              },
-                              "documents": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "documentType": {
-                                      "type": "string",
-                                      "enum": [
-                                        "cancellationDetails"
+                              "required": [
+                                "amendments"
+                              ]
+                            },
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "amendments": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "date": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        },
+                                        "status": {
+                                          "type": "string",
+                                          "enum": [
+                                            "pending",
+                                            "active"
+                                          ]
+                                        },
+                                        "type": {
+                                          "type": "string",
+                                          "enum": [
+                                            "cancellation"
+                                          ]
+                                        },
+                                        "relatesTo": {
+                                          "type": "string",
+                                          "enum": [
+                                            "contract"
+                                          ]
+                                        },
+                                        "relatedItem": {
+                                          "type": "string"
+                                        },
+                                        "rationale": {
+                                          "type": "string",
+                                          "enum": [
+                                            "lackOfEvidences",
+                                            "reviewDecision",
+                                            "nonSigningContract"
+                                          ]
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "documents": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "title": {
+                                                "type": "string"
+                                              },
+                                              "description": {
+                                                "type": "string"
+                                              },
+                                              "documentType": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "cancellationDetails"
+                                                ]
+                                              }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "title",
+                                              "documentType"
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "date",
+                                        "status",
+                                        "type",
+                                        "relatesTo",
+                                        "relatedItem",
+                                        "rationale"
                                       ]
                                     }
-                                  },
-                                  "required": [
-                                    "documentType"
-                                  ]
-                                }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "amendments"
+                                ]
                               }
-                            },
-                            "required": [
-                              "status",
-                              "type",
-                              "relatesTo"
-                            ]
-                          }
-                        }
-                      },
-                      "required": [
-                        "result"
-                      ]
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "result": {
-                          "type": "array",
-                          "items": {
-                            "$ref": "../models/amendment_full.v1.json"
+                            }
                           }
                         }
                       },
@@ -132,8 +267,7 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid",
-                          "amendmentIds"
+                          "ocid"
                         ],
                         "properties": {
                           "cpid": {
@@ -142,11 +276,55 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "amendmentIds": {
+                          "tender": {
+                            "type": "object",
+                            "properties": {
+                              "amendments": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "amendments"
+                            ]
+                          },
+                          "contracts": {
                             "type": "array",
-                            "description": "",
                             "items": {
-                              "type": "string"
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "amendments": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "amendments"
+                              ]
                             }
                           }
                         }
