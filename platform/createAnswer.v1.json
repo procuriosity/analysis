@@ -1,0 +1,129 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "f1nj27l6hoak5"
+  },
+  "info": {
+    "title": "createAnswer",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/cancel/can/{cpid}/{ocid}/{enquiryId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process cpid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "tender process ocid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "enquiryId",
+          "in": "path",
+          "required": true,
+          "description": "enquiry id"
+        }
+      ],
+      "post": {
+        "summary": "Create Answer",
+        "operationId": "post-users-userId",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "description": "bearer {access_token}"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "transaction id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "enquiry token",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "data type in request body",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "enquiry": {
+                        "type": "object",
+                        "required": [
+                          "answer"
+                        ],
+                        "properties": {
+                          "answer": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "enquiry"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": ""
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
