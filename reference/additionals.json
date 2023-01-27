@@ -1,0 +1,249 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "additional",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {},
+  "components": {
+    "schemas": {
+      "User": {
+        "title": "Additional",
+        "type": "object",
+        "x-examples": {
+          "Alice Smith": {
+            "id": 142,
+            "firstName": "Alice",
+            "lastName": "Smith",
+            "email": "alice.smith@gmail.com",
+            "dateOfBirth": "1997-10-31",
+            "emailVerified": true,
+            "signUpDate": "2019-08-24"
+          }
+        },
+        "properties": {
+          "MS": {
+            "type": "object",
+            "properties": {
+              "parties": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "object",
+                      "properties": {
+                        "buyerProfile": {
+                          "type": "string",
+                          "description": "если parties.role = buyer"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "tender": {
+                "type": "object",
+                "properties": {
+                  "electronicWorkflows": {
+                    "type": "object",
+                    "properties": {
+                      "useOrdering": {
+                        "type": "boolean",
+                        "description": "add to payload as optional , keep default if absent in paylaod, IF {MS.tender.electronicWorkflows.useOrdering == TRUE) THEN \"YES\", ELSE \"NO\""
+                      },
+                      "acceptInvoicing": {
+                        "type": "boolean",
+                        "description": "add to payload as optional , keep default if absent in paylaod"
+                      },
+                      "usePayment": {
+                        "type": "boolean",
+                        "description": "add to payload as optional , keep default if absent in paylaod, IF (MS.tender.electronicWorkflows.usePayment == TRUE) THEN \"Yes\" else \"NO\""
+                      }
+                    }
+                  },
+                  "framework": {
+                    "type": "object",
+                    "properties": {
+                      "method": {
+                        "type": "string",
+                        "enum": [
+                          "withReopeningCompetition",
+                          "withoutReopeningCompetition",
+                          "withAndWithoutReopeningCompetition"
+                        ]
+                      },
+                      "maximumParticipants": {
+                        "type": "number"
+                      },
+                      "periodRationale": {
+                        "type": "string"
+                      },
+                      "buyerCategories": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "EV": {
+            "type": "object",
+            "properties": {
+              "tender": {
+                "type": "object",
+                "properties": {
+                  "lots": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "contractPeriod": {
+                          "type": "object",
+                          "properties": {
+                            "startDate": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "make optional if no FSs. No need to generate tender.contractPeriod if the are no FS logic (LT case)"
+                            },
+                            "endDate": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "make optional if no FSs"
+                            }
+                          }
+                        },
+                        "contractTerms": {
+                          "type": "object",
+                          "properties": {
+                            "reservedExecution": {
+                              "type": "boolean"
+                            },
+                            "tendererLegalForm": {
+                              "type": "string"
+                            },
+                            "performanceTerms": {
+                              "type": "string"
+                            },
+                            "financialTerms": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "procedure": {
+                    "type": "object",
+                    "properties": {
+                      "features": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "lotDetails": {
+                    "type": "object",
+                    "properties": {
+                      "maximumLotsBidPerSupplier": {
+                        "type": "number"
+                      },
+                      "maximumLotsAwardedPerSupplier": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "otherRequirements": {
+                    "type": "object",
+                    "properties": {
+                      "reservedParticipation": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "shelteredWorkshop",
+                            "publicServiceMissionOrganization"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "subcontractingTerms": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "minimumPercentage": {
+                        "type": "number"
+                      },
+                      "maximumPercentage": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "submissionTerms": {
+                    "type": "object",
+                    "properties": {
+                      "languages": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "electronicCataloguePolicy": {
+                        "type": "string"
+                      },
+                      "variantPolicy": {
+                        "type": "string"
+                      },
+                      "bidValidityPeriod": {
+                        "type": "object",
+                        "properties": {
+                          "duration": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "depositsGuarantees": {
+                        "type": "string"
+                      },
+                      "subcontractingIndication": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "secondStage": {
+                    "type": "object",
+                    "properties": {
+                      "successiveReduction": {
+                        "type": "boolean"
+                      },
+                      "noNegotiationNecessary": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "coveredBy": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "GPA"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
