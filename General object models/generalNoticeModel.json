@@ -495,6 +495,10 @@
                     },
                     "scale": {
                       "type": "string"
+                    },
+                    "buyerProfile": {
+                      "type": "string",
+                      "description": "if parties.role = buyer"
                     }
                   }
                 },
@@ -1298,12 +1302,14 @@
                         "startDate": {
                           "type": "string",
                           "minLength": 1,
-                          "format": "date-time"
+                          "format": "date-time",
+                          "description": "make optional if no FSs. No need to generate tender.contractPeriod if the are no FS logic (LT case)"
                         },
                         "endDate": {
                           "type": "string",
                           "minLength": 1,
-                          "format": "date-time"
+                          "format": "date-time",
+                          "description": "make optional if no FSs"
                         },
                         "maxExtentDate": {
                           "type": "string",
@@ -1539,6 +1545,23 @@
                               "type": "number"
                             }
                           }
+                        }
+                      }
+                    },
+                    "contractTerms": {
+                      "type": "object",
+                      "properties": {
+                        "reservedExecution": {
+                          "type": "boolean"
+                        },
+                        "tendererLegalForm": {
+                          "type": "string"
+                        },
+                        "performanceTerms": {
+                          "type": "string"
+                        },
+                        "financialTerms": {
+                          "type": "string"
                         }
                       }
                     }
@@ -2806,6 +2829,12 @@
                   },
                   "maximumCandidates": {
                     "type": "number"
+                  },
+                  "successiveReduction": {
+                    "type": "boolean"
+                  },
+                  "noNegotiationNecessary": {
+                    "type": "boolean"
                   }
                 }
               },
@@ -3508,6 +3537,133 @@
                   },
                   "required": [
                     "id"
+                  ]
+                }
+              },
+              "electronicWorkflows": {
+                "type": "object",
+                "properties": {
+                  "useOrdering": {
+                    "type": "boolean",
+                    "description": "add to payload as optional , keep default if absent in paylaod, IF {MS.tender.electronicWorkflows.useOrdering == TRUE) THEN \"YES\", ELSE \"NO\""
+                  },
+                  "acceptInvoicing": {
+                    "type": "boolean",
+                    "description": "add to payload as optional , keep default if absent in paylaod"
+                  },
+                  "usePayment": {
+                    "type": "boolean",
+                    "description": "add to payload as optional , keep default if absent in paylaod, IF (MS.tender.electronicWorkflows.usePayment == TRUE) THEN \"Yes\" else \"NO\""
+                  }
+                }
+              },
+              "framework": {
+                "type": "object",
+                "properties": {
+                  "method": {
+                    "type": "string",
+                    "enum": [
+                      "withReopeningCompetition",
+                      "withoutReopeningCompetition",
+                      "withAndWithoutReopeningCompetition"
+                    ]
+                  },
+                  "maximumParticipants": {
+                    "type": "number"
+                  },
+                  "periodRationale": {
+                    "type": "string"
+                  },
+                  "buyerCategories": {
+                    "type": "string"
+                  }
+                }
+              },
+              "procedure": {
+                "type": "object",
+                "properties": {
+                  "features": {
+                    "type": "string"
+                  }
+                }
+              },
+              "lotDetails": {
+                "type": "object",
+                "properties": {
+                  "maximumLotsBidPerSupplier": {
+                    "type": "number"
+                  },
+                  "maximumLotsAwardedPerSupplier": {
+                    "type": "number"
+                  }
+                }
+              },
+              "otherRequirements": {
+                "type": "object",
+                "properties": {
+                  "reservedParticipation": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "shelteredWorkshop",
+                        "publicServiceMissionOrganization"
+                      ]
+                    }
+                  }
+                }
+              },
+              "subcontractingTerms": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "minimumPercentage": {
+                    "type": "number"
+                  },
+                  "maximumPercentage": {
+                    "type": "number"
+                  }
+                }
+              },
+              "submissionTerms": {
+                "type": "object",
+                "properties": {
+                  "languages": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "electronicCataloguePolicy": {
+                    "type": "string"
+                  },
+                  "variantPolicy": {
+                    "type": "string"
+                  },
+                  "bidValidityPeriod": {
+                    "type": "object",
+                    "properties": {
+                      "duration": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "depositsGuarantees": {
+                    "type": "string"
+                  },
+                  "subcontractingIndication": {
+                    "type": "string"
+                  }
+                }
+              },
+              "coveredBy": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "GPA"
                   ]
                 }
               }
