@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "getTenderData",
-    "version": "1.05",
+    "version": "1.06",
     "description": ""
   },
   "servers": [
@@ -228,14 +228,22 @@
                                     "pending"
                                   ]
                                 },
+                                "statusDetails": {
+                                  "type": "string",
+                                  "enum": [
+                                    "clarification",
+                                    "tendering",
+                                    "externalPublication",
+                                    "control",
+                                    "submission",
+                                    "negotiation"
+                                  ]
+                                },
                                 "date": {
                                   "type": "string",
                                   "format": "date-time"
                                 },
                                 "title": {
-                                  "type": "string"
-                                },
-                                "description": {
                                   "type": "string"
                                 },
                                 "secondStage": {
@@ -246,8 +254,17 @@
                                     },
                                     "maximumCandidates": {
                                       "type": "number"
+                                    },
+                                    "successiveReduction": {
+                                      "type": "boolean"
+                                    },
+                                    "noNegotiationNecessary": {
+                                      "type": "boolean"
                                     }
                                   }
+                                },
+                                "description": {
+                                  "type": "string"
                                 },
                                 "otherCriteria": {
                                   "type": "object",
@@ -382,15 +399,15 @@
                                 },
                                 "tenderPeriod": {
                                   "type": "object",
+                                  "required": [
+                                    "startDate"
+                                  ],
                                   "properties": {
                                     "startDate": {
                                       "type": "string",
                                       "format": "date-time"
                                     }
-                                  },
-                                  "required": [
-                                    "startDate"
-                                  ]
+                                  }
                                 },
                                 "value": {
                                   "type": "object",
@@ -418,11 +435,7 @@
                                       "type": "string",
                                       "format": "date-time"
                                     }
-                                  },
-                                  "required": [
-                                    "startDate",
-                                    "endDate"
-                                  ]
+                                  }
                                 },
                                 "procurementMethodModalities": {
                                   "type": "array",
@@ -677,10 +690,6 @@
                                       },
                                       "contractPeriod": {
                                         "type": "object",
-                                        "required": [
-                                          "startDate",
-                                          "endDate"
-                                        ],
                                         "properties": {
                                           "startDate": {
                                             "type": "string",
@@ -865,7 +874,6 @@
                                       "title",
                                       "description",
                                       "value",
-                                      "contractPeriod",
                                       "placeOfPerformance",
                                       "hasOptions",
                                       "hasRecurrence",
@@ -1054,16 +1062,13 @@
                                   ],
                                   "properties": {
                                     "useOrdering": {
-                                      "type": "boolean",
-                                      "default": false
+                                      "type": "boolean"
                                     },
                                     "usePayment": {
-                                      "type": "boolean",
-                                      "default": false
+                                      "type": "boolean"
                                     },
                                     "acceptInvoicing": {
-                                      "type": "boolean",
-                                      "default": false
+                                      "type": "boolean"
                                     }
                                   }
                                 },
@@ -1100,6 +1105,23 @@
                                     "isAFramework": {
                                       "type": "boolean",
                                       "default": false
+                                    },
+                                    "method": {
+                                      "type": "string",
+                                      "enum": [
+                                        "withReopeningCompetition",
+                                        "withoutReopeningCompetition",
+                                        "withAndWithoutReopeningCompetition"
+                                      ]
+                                    },
+                                    "maximumParticipants": {
+                                      "type": "number"
+                                    },
+                                    "periodRationale": {
+                                      "type": "string"
+                                    },
+                                    "buyerCategories": {
+                                      "type": "string"
                                     }
                                   }
                                 },
@@ -1127,16 +1149,93 @@
                                     }
                                   }
                                 },
-                                "statusDetails": {
-                                  "type": "string",
-                                  "enum": [
-                                    "clarification",
-                                    "tendering",
-                                    "externalPublication",
-                                    "control",
-                                    "submission",
-                                    "negotiation"
-                                  ]
+                                "procedure": {
+                                  "type": "object",
+                                  "properties": {
+                                    "features": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "lotDetails": {
+                                  "type": "object",
+                                  "properties": {
+                                    "maximumLotsBidPerSupplier": {
+                                      "type": "number"
+                                    },
+                                    "maximumLotsAwardedPerSupplier": {
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "otherRequirements": {
+                                  "type": "object",
+                                  "properties": {
+                                    "reservedParticipation": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string",
+                                        "enum": [
+                                          "shelteredWorkshop",
+                                          "publicServiceMissionOrganization"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                },
+                                "subcontractingTerms": {
+                                  "type": "object",
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "minimumPercentage": {
+                                      "type": "number"
+                                    },
+                                    "maximumPercentage": {
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "submissionTerms": {
+                                  "type": "object",
+                                  "properties": {
+                                    "languages": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "electronicCataloguePolicy": {
+                                      "type": "string"
+                                    },
+                                    "variantPolicy": {
+                                      "type": "string"
+                                    },
+                                    "bidValidityPeriod": {
+                                      "type": "object",
+                                      "properties": {
+                                        "duration": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "depositsGuarantees": {
+                                      "type": "string"
+                                    },
+                                    "subcontractingIndication": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "coveredBy": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "enum": [
+                                      "GPA"
+                                    ]
+                                  }
                                 }
                               }
                             },
@@ -1313,6 +1412,9 @@
                                           "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
                                           "WATER"
                                         ]
+                                      },
+                                      "buyerProfile": {
+                                        "type": "string"
                                       }
                                     }
                                   },
