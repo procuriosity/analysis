@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createPin",
-    "version": "1.08",
+    "version": "1.09",
     "description": ""
   },
   "servers": [
@@ -210,7 +210,6 @@
                                 "eligibilityCriteria",
                                 "tenderPeriod",
                                 "value",
-                                "contractPeriod",
                                 "lots",
                                 "items",
                                 "procuringEntity",
@@ -251,6 +250,12 @@
                                     },
                                     "maximumCandidates": {
                                       "type": "number"
+                                    },
+                                    "successiveReduction": {
+                                      "type": "boolean"
+                                    },
+                                    "noNegotiationNecessary": {
+                                      "type": "boolean"
                                     }
                                   }
                                 },
@@ -414,10 +419,6 @@
                                 },
                                 "contractPeriod": {
                                   "type": "object",
-                                  "required": [
-                                    "startDate",
-                                    "endDate"
-                                  ],
                                   "properties": {
                                     "startDate": {
                                       "type": "string",
@@ -682,10 +683,6 @@
                                       },
                                       "contractPeriod": {
                                         "type": "object",
-                                        "required": [
-                                          "startDate",
-                                          "endDate"
-                                        ],
                                         "properties": {
                                           "startDate": {
                                             "type": "string",
@@ -870,7 +867,6 @@
                                       "title",
                                       "description",
                                       "value",
-                                      "contractPeriod",
                                       "placeOfPerformance",
                                       "hasOptions",
                                       "hasRecurrence",
@@ -1059,16 +1055,13 @@
                                   ],
                                   "properties": {
                                     "useOrdering": {
-                                      "type": "boolean",
-                                      "default": false
+                                      "type": "boolean"
                                     },
                                     "usePayment": {
-                                      "type": "boolean",
-                                      "default": false
+                                      "type": "boolean"
                                     },
                                     "acceptInvoicing": {
-                                      "type": "boolean",
-                                      "default": false
+                                      "type": "boolean"
                                     }
                                   }
                                 },
@@ -1105,6 +1098,23 @@
                                     "isAFramework": {
                                       "type": "boolean",
                                       "default": false
+                                    },
+                                    "method": {
+                                      "type": "string",
+                                      "enum": [
+                                        "withReopeningCompetition",
+                                        "withoutReopeningCompetition",
+                                        "withAndWithoutReopeningCompetition"
+                                      ]
+                                    },
+                                    "maximumParticipants": {
+                                      "type": "number"
+                                    },
+                                    "periodRationale": {
+                                      "type": "string"
+                                    },
+                                    "buyerCategories": {
+                                      "type": "string"
                                     }
                                   }
                                 },
@@ -1130,6 +1140,94 @@
                                       "type": "boolean",
                                       "default": false
                                     }
+                                  }
+                                },
+                                "procedure": {
+                                  "type": "object",
+                                  "properties": {
+                                    "features": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "lotDetails": {
+                                  "type": "object",
+                                  "properties": {
+                                    "maximumLotsBidPerSupplier": {
+                                      "type": "number"
+                                    },
+                                    "maximumLotsAwardedPerSupplier": {
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "otherRequirements": {
+                                  "type": "object",
+                                  "properties": {
+                                    "reservedParticipation": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string",
+                                        "enum": [
+                                          "shelteredWorkshop",
+                                          "publicServiceMissionOrganization"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                },
+                                "subcontractingTerms": {
+                                  "type": "object",
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "minimumPercentage": {
+                                      "type": "number"
+                                    },
+                                    "maximumPercentage": {
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "submissionTerms": {
+                                  "type": "object",
+                                  "properties": {
+                                    "languages": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "electronicCataloguePolicy": {
+                                      "type": "string"
+                                    },
+                                    "variantPolicy": {
+                                      "type": "string"
+                                    },
+                                    "bidValidityPeriod": {
+                                      "type": "object",
+                                      "properties": {
+                                        "duration": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "depositsGuarantees": {
+                                      "type": "string"
+                                    },
+                                    "subcontractingIndication": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "coveredBy": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "enum": [
+                                      "GPA"
+                                    ]
                                   }
                                 }
                               }
@@ -1307,6 +1405,9 @@
                                           "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
                                           "WATER"
                                         ]
+                                      },
+                                      "buyerProfile": {
+                                        "type": "string"
                                       }
                                     }
                                   },
@@ -1612,6 +1713,12 @@
                                   },
                                   "maximumCandidates": {
                                     "type": "number"
+                                  },
+                                  "successiveReduction": {
+                                    "type": "boolean"
+                                  },
+                                  "noNegotiationNecessary": {
+                                    "type": "boolean"
                                   }
                                 }
                               },
@@ -2091,10 +2198,6 @@
                                     },
                                     "contractPeriod": {
                                       "type": "object",
-                                      "required": [
-                                        "startDate",
-                                        "endDate"
-                                      ],
                                       "properties": {
                                         "startDate": {
                                           "type": "string",
@@ -2278,7 +2381,6 @@
                                     "title",
                                     "description",
                                     "value",
-                                    "contractPeriod",
                                     "placeOfPerformance"
                                   ]
                                 }
@@ -2441,6 +2543,130 @@
                               },
                               "eligibilityCriteria": {
                                 "type": "string"
+                              },
+                              "electronicWorkflows": {
+                                "type": "object",
+                                "properties": {
+                                  "useOrdering": {
+                                    "type": "boolean"
+                                  },
+                                  "acceptInvoicing": {
+                                    "type": "boolean"
+                                  },
+                                  "usePayment": {
+                                    "type": "boolean"
+                                  }
+                                }
+                              },
+                              "framework": {
+                                "type": "object",
+                                "properties": {
+                                  "method": {
+                                    "type": "string",
+                                    "enum": [
+                                      "withReopeningCompetition",
+                                      "withoutReopeningCompetition",
+                                      "withAndWithoutReopeningCompetition"
+                                    ]
+                                  },
+                                  "maximumParticipants": {
+                                    "type": "number"
+                                  },
+                                  "periodRationale": {
+                                    "type": "string"
+                                  },
+                                  "buyerCategories": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "procedure": {
+                                "type": "object",
+                                "properties": {
+                                  "features": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "lotDetails": {
+                                "type": "object",
+                                "properties": {
+                                  "maximumLotsBidPerSupplier": {
+                                    "type": "number"
+                                  },
+                                  "maximumLotsAwardedPerSupplier": {
+                                    "type": "number"
+                                  }
+                                }
+                              },
+                              "otherRequirements": {
+                                "type": "object",
+                                "properties": {
+                                  "reservedParticipation": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "enum": [
+                                        "shelteredWorkshop",
+                                        "publicServiceMissionOrganization"
+                                      ]
+                                    }
+                                  }
+                                }
+                              },
+                              "subcontractingTerms": {
+                                "type": "object",
+                                "properties": {
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "minimumPercentage": {
+                                    "type": "number"
+                                  },
+                                  "maximumPercentage": {
+                                    "type": "number"
+                                  }
+                                }
+                              },
+                              "submissionTerms": {
+                                "type": "object",
+                                "properties": {
+                                  "languages": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "electronicCataloguePolicy": {
+                                    "type": "string"
+                                  },
+                                  "variantPolicy": {
+                                    "type": "string"
+                                  },
+                                  "bidValidityPeriod": {
+                                    "type": "object",
+                                    "properties": {
+                                      "duration": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "depositsGuarantees": {
+                                    "type": "string"
+                                  },
+                                  "subcontractingIndication": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "coveredBy": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "GPA"
+                                  ]
+                                }
                               }
                             }
                           },
@@ -2513,6 +2739,9 @@
                                         "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
                                         "WATER"
                                       ]
+                                    },
+                                    "buyerProfile": {
+                                      "type": "string"
                                     }
                                   }
                                 },
