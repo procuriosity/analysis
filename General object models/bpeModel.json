@@ -522,10 +522,6 @@
                       },
                       "identifier": {
                         "type": "object",
-                        "required": [
-                          "scheme",
-                          "id"
-                        ],
                         "properties": {
                           "scheme": {
                             "type": "string"
@@ -539,7 +535,11 @@
                           "uri": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "scheme",
+                          "id"
+                        ]
                       },
                       "businessFunctions": {
                         "type": "array",
@@ -2231,20 +2231,11 @@
                     "relatedItem": {
                       "type": "string"
                     },
-                    "date": {
-                      "type": "string",
-                      "minLength": 1,
-                      "format": "date-time"
-                    },
                     "releaseID": {
                       "type": "string"
                     },
                     "description": {
                       "type": "string"
-                    },
-                    "amendsReleaseID": {
-                      "type": "string",
-                      "minLength": 1
                     },
                     "rationale": {
                       "type": "string",
@@ -2307,9 +2298,6 @@
                           "id"
                         ]
                       }
-                    },
-                    "releaseID": {
-                      "type": "string"
                     },
                     "amendsReleaseID": {
                       "type": "string",
@@ -4653,138 +4641,6 @@
                     ]
                   }
                 },
-                "amendments": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "date": {
-                        "type": "string",
-                        "format": "date-time"
-                      },
-                      "releaseID": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
-                      },
-                      "amendsReleaseID": {
-                        "type": "string"
-                      },
-                      "rationale": {
-                        "type": "string"
-                      },
-                      "relatedLots": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "changes": {
-                        "type": "array",
-                        "description": "is not used in the processes",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "property": {
-                              "type": "string",
-                              "description": "is not used in the processes"
-                            },
-                            "formerValue": {
-                              "description": "is not used in the processes"
-                            },
-                              "oneOf": [
-                                {
-                                  "type": "string"
-                                },
-                                {
-                                  "type": "number"
-                                },
-                                {
-                                  "type": "integer"
-                                },
-                                {
-                                  "type": "boolean"
-                                }
-                              ]
-                            }
-                          }
-                        }
-                      },
-                      "documents": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "documentType": {
-                              "type": "string"
-                            },
-                            "title": {
-                              "type": "string"
-                            },
-                            "description": {
-                              "type": "string"
-                            },
-                            "url": {
-                              "type": "string"
-                            },
-                            "datePublished": {
-                              "type": "string",
-                              "format": "date-time"
-                            },
-                            "dateModified": {
-                              "type": "string",
-                              "format": "date-time"
-                            },
-                            "format": {
-                              "type": "string"
-                            },
-                            "language": {
-                              "type": "string"
-                            },
-                            "relatedLots": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            },
-                            "relatedConfirmations": {
-                              "type": "array",
-                              "description": "is not used in the processes",
-                              "items": {
-                                "type": "string"
-                              }
-                            }
-                          },
-                          "required": [
-                            "id"
-                          ]
-                        }
-                      },
-                      "relatedItem": {
-                        "type": "string"
-                      },
-                      "relatesTo": {
-                        "type": "string"
-                      },
-                      "status": {
-                        "type": "string"
-                      },
-                      "type": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "id"
-                    ]
-                  }
-                },
                 "amendment": {
                   "type": "object",
                   "description": "is not used in the processes",
@@ -4823,7 +4679,6 @@
                             "type": "string"
                           },
                           "formerValue": {
-                            "description": "is not used in the processes",
                             "oneOf": [
                               {
                                 "type": "string"
@@ -4911,6 +4766,134 @@
                   "required": [
                     "id"
                   ]
+                },
+                "amendments": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "date": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "releaseID": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "amendsReleaseID": {
+                        "type": "string"
+                      },
+                      "documents": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "documentType": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "url": {
+                              "type": "string"
+                            },
+                            "datePublished": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "dateModified": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "format": {
+                              "type": "string"
+                            },
+                            "language": {
+                              "type": "string"
+                            },
+                            "relatedLots": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "relatedConfirmations": {
+                              "type": "array",
+                              "description": "is not used in the processes",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "required": [
+                            "id"
+                          ]
+                        }
+                      },
+                      "rationale": {
+                        "type": "string"
+                      },
+                      "relatedLots": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "relatedItem": {
+                        "type": "string"
+                      },
+                      "relatesTo": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "changes": {
+                        "type": "array",
+                        "description": "is not used in the processes",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "property": {
+                              "type": "string",
+                              "description": "is not used in the processes"
+                            },
+                            "formerValue": {
+                              "description": "is not used in the processes"
+                            },
+                            "": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "boolean"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
                 "requirementResponses": {
                   "type": "array",
@@ -6077,12 +6060,6 @@
                         ]
                       }
                     },
-                    "relatedLots": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
                     "requirementResponses": {
                       "type": "array",
                       "items": {
@@ -6827,739 +6804,6 @@
                                 "type": "string"
                               }
                             }
-                          }
-                        },
-                        "required": [
-                          "id"
-                        ]
-                      }
-                    },
-                    "documents": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "documentType": {
-                            "type": "string"
-                          },
-                          "title": {
-                            "type": "string"
-                          },
-                          "description": {
-                            "type": "string"
-                          },
-                          "url": {
-                            "type": "string"
-                          },
-                          "datePublished": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "dateModified": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "is not used in the processes"
-                          },
-                          "format": {
-                            "type": "string",
-                            "description": "is not used in the processes"
-                          },
-                          "language": {
-                            "type": "string",
-                            "description": "is not used in the processes"
-                          },
-                          "relatedLots": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            }
-                          },
-                          "relatedConfirmations": {
-                            "type": "array",
-                            "description": "is not used in the processes",
-                            "items": {
-                              "type": "string"
-                            }
-                          }
-                        },
-                        "required": [
-                          "id"
-                        ]
-                      }
-                    },
-                    "relatedLots": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "requirementResponses": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "title": {
-                            "type": "string",
-                            "description": "is not used in the processes"
-                          },
-                          "description": {
-                            "type": "string",
-                            "description": "is not used in the processes"
-                          },
-                          "value": {
-                            "oneOf": [
-                              {
-                                "type": "string"
-                              },
-                              {
-                                "type": "number"
-                              },
-                              {
-                                "type": "integer"
-                              },
-                              {
-                                "type": "boolean"
-                              }
-                            ]
-                          },
-                          "period": {
-                            "type": "object",
-                            "properties": {
-                              "startDate": {
-                                "type": "string",
-                                "format": "date-time"
-                              },
-                              "endDate": {
-                                "type": "string",
-                                "format": "date-time"
-                              },
-                              "maxExtentDate": {
-                                "type": "string",
-                                "format": "date-time",
-                                "description": "is not used in the processes"
-                              },
-                              "durationInDays": {
-                                "type": "number",
-                                "description": "is not used in the processes"
-                              }
-                            }
-                          },
-                          "relatedItem": {
-                            "type": "string"
-                          },
-                          "relatedTenderer": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "name": {
-                                  "type": "string"
-                                },
-                                "identifier": {
-                                  "type": "object",
-                                  "properties": {
-                                    "scheme": {
-                                      "type": "string"
-                                    },
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "legalName": {
-                                      "type": "string"
-                                    },
-                                    "uri": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "scheme",
-                                    "id"
-                                  ]
-                                },
-                                "address": {
-                                  "type": "object",
-                                  "description": "is not used in the processes",
-                                  "properties": {
-                                    "streetAddress": {
-                                      "type": "string"
-                                    },
-                                    "postalCode": {
-                                      "type": "string"
-                                    },
-                                    "addressDetails": {
-                                      "type": "object",
-                                      "properties": {
-                                        "country": {
-                                          "type": "object",
-                                          "properties": {
-                                            "scheme": {
-                                              "type": "string"
-                                            },
-                                            "id": {
-                                              "type": "string"
-                                            },
-                                            "description": {
-                                              "type": "string"
-                                            },
-                                            "uri": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "scheme",
-                                            "id"
-                                          ]
-                                        },
-                                        "region": {
-                                          "type": "object",
-                                          "properties": {
-                                            "scheme": {
-                                              "type": "string"
-                                            },
-                                            "id": {
-                                              "type": "string"
-                                            },
-                                            "description": {
-                                              "type": "string"
-                                            },
-                                            "uri": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "scheme",
-                                            "id"
-                                          ]
-                                        },
-                                        "locality": {
-                                          "type": "object",
-                                          "properties": {
-                                            "scheme": {
-                                              "type": "string"
-                                            },
-                                            "id": {
-                                              "type": "string"
-                                            },
-                                            "description": {
-                                              "type": "string"
-                                            },
-                                            "uri": {
-                                              "type": "string"
-                                            }
-                                          },
-                                          "required": [
-                                            "scheme",
-                                            "id",
-                                            "description"
-                                          ]
-                                        }
-                                      }
-                                    }
-                                  }
-                                },
-                                "additionalIdentifiers": {
-                                  "type": "array",
-                                  "description": "is not used in the processes",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "id": {
-                                        "type": "string"
-                                      },
-                                      "legalName": {
-                                        "type": "string"
-                                      },
-                                      "scheme": {
-                                        "type": "string"
-                                      },
-                                      "uri": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "required": [
-                                      "id",
-                                      "scheme"
-                                    ]
-                                  }
-                                },
-                                "contactPoint": {
-                                  "type": "object",
-                                  "description": "is not used in the processes",
-                                  "properties": {
-                                    "name": {
-                                      "type": "string"
-                                    },
-                                    "email": {
-                                      "type": "string"
-                                    },
-                                    "telephone": {
-                                      "type": "string"
-                                    },
-                                    "faxNumber": {
-                                      "type": "string"
-                                    },
-                                    "url": {
-                                      "type": "string"
-                                    }
-                                  }
-                                },
-                                "details": {
-                                  "type": "object",
-                                  "description": "is not used in the processes",
-                                  "properties": {
-                                    "typeOfSupplier": {
-                                      "type": "string"
-                                    },
-                                    "typeOfBuyer": {
-                                      "type": "string"
-                                    },
-                                    "mainEconomicActivities": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "scheme": {
-                                            "type": "string"
-                                          },
-                                          "id": {
-                                            "type": "string"
-                                          },
-                                          "description": {
-                                            "type": "string"
-                                          },
-                                          "uri": {
-                                            "type": "string"
-                                          }
-                                        }
-                                      }
-                                    },
-                                    "mainGeneralActivity": {
-                                      "type": "string"
-                                    },
-                                    "mainSectoralActivity": {
-                                      "type": "string"
-                                    },
-                                    "permits": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "id": {
-                                            "type": "string"
-                                          },
-                                          "scheme": {
-                                            "type": "string"
-                                          },
-                                          "url": {
-                                            "type": "string"
-                                          },
-                                          "permitDetails": {
-                                            "type": "object",
-                                            "properties": {
-                                              "issuedBy": {
-                                                "type": "object",
-                                                "properties": {
-                                                  "id": {
-                                                    "type": "string"
-                                                  },
-                                                  "name": {
-                                                    "type": "string"
-                                                  }
-                                                },
-                                                "required": [
-                                                  "id"
-                                                ]
-                                              },
-                                              "issuedThought": {
-                                                "type": "object",
-                                                "properties": {
-                                                  "id": {
-                                                    "type": "string"
-                                                  },
-                                                  "name": {
-                                                    "type": "string"
-                                                  }
-                                                },
-                                                "required": [
-                                                  "id"
-                                                ]
-                                              },
-                                              "validityPeriod": {
-                                                "type": "object",
-                                                "properties": {
-                                                  "startDate": {
-                                                    "type": "string",
-                                                    "format": "date-time"
-                                                  },
-                                                  "endDate": {
-                                                    "type": "string",
-                                                    "format": "date-time"
-                                                  },
-                                                  "maxExtentDate": {
-                                                    "type": "string",
-                                                    "format": "date-time"
-                                                  },
-                                                  "durationInDays": {
-                                                    "type": [
-                                                      "string",
-                                                      "number"
-                                                    ]
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        },
-                                        "required": [
-                                          "id"
-                                        ]
-                                      }
-                                    },
-                                    "bankAccounts": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "description": {
-                                            "type": "string"
-                                          },
-                                          "bankName": {
-                                            "type": "string"
-                                          },
-                                          "address": {
-                                            "type": "object",
-                                            "properties": {
-                                              "streetAddress": {
-                                                "type": "string"
-                                              },
-                                              "postalCode": {
-                                                "type": "string"
-                                              },
-                                              "addressDetails": {
-                                                "type": "object",
-                                                "properties": {
-                                                  "country": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                      "id": {
-                                                        "type": "string"
-                                                      },
-                                                      "description": {
-                                                        "type": "string"
-                                                      },
-                                                      "scheme": {
-                                                        "type": "string"
-                                                      },
-                                                      "uri": {
-                                                        "type": "string"
-                                                      }
-                                                    },
-                                                    "required": [
-                                                      "id",
-                                                      "scheme"
-                                                    ]
-                                                  },
-                                                  "region": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                      "id": {
-                                                        "type": "string"
-                                                      },
-                                                      "description": {
-                                                        "type": "string"
-                                                      },
-                                                      "scheme": {
-                                                        "type": "string"
-                                                      },
-                                                      "uri": {
-                                                        "type": "string"
-                                                      }
-                                                    },
-                                                    "required": [
-                                                      "id",
-                                                      "scheme"
-                                                    ]
-                                                  },
-                                                  "locality": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                      "id": {
-                                                        "type": "string"
-                                                      },
-                                                      "description": {
-                                                        "type": "string"
-                                                      },
-                                                      "scheme": {
-                                                        "type": "string"
-                                                      },
-                                                      "uri": {
-                                                        "type": "string"
-                                                      }
-                                                    },
-                                                    "required": [
-                                                      "id",
-                                                      "description",
-                                                      "scheme"
-                                                    ]
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          },
-                                          "identifier": {
-                                            "type": "object",
-                                            "properties": {
-                                              "scheme": {
-                                                "type": "string"
-                                              },
-                                              "id": {
-                                                "type": "string"
-                                              }
-                                            },
-                                            "required": [
-                                              "id"
-                                            ]
-                                          },
-                                          "accountIdentification": {
-                                            "type": "object",
-                                            "properties": {
-                                              "scheme": {
-                                                "type": "string"
-                                              },
-                                              "id": {
-                                                "type": "string"
-                                              }
-                                            }
-                                          },
-                                          "additionalAccountIdentifiers": {
-                                            "type": "array",
-                                            "items": {
-                                              "type": "object",
-                                              "properties": {
-                                                "scheme": {
-                                                  "type": "string"
-                                                },
-                                                "id": {
-                                                  "type": "string"
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    },
-                                    "legalForm": {
-                                      "type": "object",
-                                      "properties": {
-                                        "scheme": {
-                                          "type": "string"
-                                        },
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "description": {
-                                          "type": "string"
-                                        },
-                                        "uri": {
-                                          "type": "string"
-                                        }
-                                      },
-                                      "required": [
-                                        "scheme",
-                                        "id",
-                                        "description"
-                                      ]
-                                    },
-                                    "isACentralPurchasingBody": {
-                                      "type": "boolean",
-                                      "description": "is not used in the processes"
-                                    },
-                                    "nutsCode": {
-                                      "type": "string",
-                                      "description": "is not used in the processes"
-                                    },
-                                    "scale": {
-                                      "type": "string"
-                                    }
-                                  }
-                                },
-                                "buyerProfile": {
-                                  "type": "string",
-                                  "description": "is not used in the processes"
-                                },
-                                "persones": {
-                                  "type": "array",
-                                  "description": "is not used in the processes",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "id": {
-                                        "type": "string"
-                                      },
-                                      "title": {
-                                        "type": "string"
-                                      },
-                                      "name": {
-                                        "type": "string"
-                                      },
-                                      "identifier": {
-                                        "type": "object",
-                                        "required": [
-                                          "scheme",
-                                          "id"
-                                        ],
-                                        "properties": {
-                                          "scheme": {
-                                            "type": "string"
-                                          },
-                                          "id": {
-                                            "type": "string"
-                                          },
-                                          "legalName": {
-                                            "type": "string"
-                                          },
-                                          "uri": {
-                                            "type": "string"
-                                          }
-                                        }
-                                      },
-                                      "businessFunctions": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "object",
-                                          "properties": {
-                                            "id": {
-                                              "type": "string"
-                                            },
-                                            "type": {
-                                              "type": "string"
-                                            },
-                                            "jobTitle": {
-                                              "type": "string"
-                                            },
-                                            "period": {
-                                              "type": "object",
-                                              "properties": {
-                                                "startDate": {
-                                                  "type": "string",
-                                                  "format": "date-time"
-                                                },
-                                                "endDate": {
-                                                  "type": "string",
-                                                  "format": "date-time"
-                                                },
-                                                " maxExtentDate": {
-                                                  "type": "string",
-                                                  "format": "date-time"
-                                                },
-                                                "durationInDays": {
-                                                  "type": "number"
-                                                }
-                                              }
-                                            },
-                                            "documents": {
-                                              "type": "array",
-                                              "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                  "id": {
-                                                    "type": "string"
-                                                  },
-                                                  "documentType": {
-                                                    "type": "string"
-                                                  },
-                                                  "title": {
-                                                    "type": "string"
-                                                  },
-                                                  "description": {
-                                                    "type": "string"
-                                                  },
-                                                  "url": {
-                                                    "type": "string"
-                                                  },
-                                                  "datePublished": {
-                                                    "type": "string",
-                                                    "format": "date-time"
-                                                  },
-                                                  "dateModified": {
-                                                    "type": "string",
-                                                    "format": "date-time"
-                                                  }
-                                                },
-                                                "required": [
-                                                  "id"
-                                                ]
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    },
-                                    "required": [
-                                      "id",
-                                      "title",
-                                      "name",
-                                      "identifier"
-                                    ]
-                                  }
-                                }
-                              },
-                              "required": [
-                                "id"
-                              ]
-                            }
-                          },
-                          "requirement": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "title": {
-                                "type": "string",
-                                "description": "is not used in the processes"
-                              }
-                            },
-                            "required": [
-                              "id"
-                            ]
-                          },
-                          "evidences": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "title": {
-                                  "type": "string"
-                                },
-                                "description": {
-                                  "type": "string"
-                                },
-                                "relatedDocument": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "id"
-                                  ]
-                                }
-                              }
-                            }
                           },
                           "responder": {
                             "type": "object",
@@ -7647,6 +6891,12 @@
                         "required": [
                           "id"
                         ]
+                      }
+                    },
+                    "relatedLots": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
                       }
                     }
                   },
@@ -8263,26 +7513,21 @@
                             "type": "string"
                           },
                           "formerValue": {
-                          "description": "is not used in the processes",
-                          "oneOf": [
-                            {
-                              "type": "string",
-                              "properties": {}
-                            },
-                            {
-                              "type": "number",
-                              "properties": {}
-                            },
-                            {
-                              "type": "integer",
-                              "properties": {}
-                            },
-                            {
-                              "type": "boolean",
-                              "properties": {}
-                            }
-                          ]
-                        }
+                            "oneOf": [
+                              {
+                                "type": "string"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "boolean"
+                              }
+                            ]
+                          }
                         }
                       }
                     },
@@ -9547,19 +8792,11 @@
                       "relatedPerson": {
                         "type": "object",
                         "properties": {
-                          "": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "id"
-                            ]
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
                           }
                         }
                       }
@@ -9568,6 +8805,9 @@
                       "id"
                     ]
                   }
+                },
+                "lotId": {
+                  "type": "string"
                 }
               },
               "required": [
