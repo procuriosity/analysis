@@ -1,8 +1,11 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "w6q9qu81nei1p"
+  },
   "info": {
-    "title": "checkTenderState",
-    "version": "1.10"
+    "title": "setStateBySettingsForTender",
+    "version": "1.0"
   },
   "servers": [
     {
@@ -12,7 +15,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Tender State",
+        "summary": "Set State By Settings For Tender",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -20,7 +23,48 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "tender"
+                          ],
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "status",
+                                "statusDetails"
+                              ],
+                              "properties": {
+                                "status": {
+                                  "type": "string",
+                                  "enum": [
+                                    "active"
+                                  ]
+                                },
+                                "statusDetails": {
+                                  "type": "string",
+                                  "enum": [
+                                    "tendering"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
                 }
               }
             }
@@ -56,10 +100,10 @@
                           "pmd": {
                             "type": "string",
                             "enum": [
-                              "CF",
-                              "TEST_CF",
                               "OF",
-                              "TEST_OF"
+                              "TEST_OF",
+                              "CF",
+                              "TEST_CF"
                             ]
                           },
                           "country": {
@@ -68,17 +112,6 @@
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "submitBidInPcr",
-                              "pcrProtocol",
-                              "withdrawPcrProtocol",
-                              "completeSourcing",
-                              "withdrawBid",
-                              "awardConsideration",
-                              "createConfirmationResponseBySupplier",
-                              "nextStepAfterSuppliersConfirmation",
-                              "applyConfirmations",
-                              "createEnquiry",
-                              "evaluateAward",
                               "addAnswer"
                             ]
                           }
@@ -95,7 +128,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkTenderState"
+                          "setStateBySettingsForTender"
                         ]
                       }
                     }
@@ -104,7 +137,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       }
     }
   },
