@@ -1,0 +1,178 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "h9t57yks2e4s9"
+  },
+  "info": {
+    "title": "extendTenderPeriod",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9061"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Extend Tender Period",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "tender"
+                          ],
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "tenderPeriod"
+                              ],
+                              "properties": {
+                                "tenderPeriod": {
+                                  "type": "object",
+                                  "required": [
+                                    "startDate",
+                                    "endDate"
+                                  ],
+                                  "properties": {
+                                    "startDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "endDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "pmd",
+                          "country",
+                          "operationType",
+                          "date"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "OT",
+                              "TEST_OT",
+                              "SV",
+                              "TEST_SV",
+                              "MV",
+                              "TEST_MV"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "addAnswer"
+                            ]
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "enquiryPeriod"
+                            ],
+                            "properties": {
+                              "enquiryPeriod": {
+                                "type": "object",
+                                "required": [
+                                  "endDate"
+                                ],
+                                "properties": {
+                                  "endDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "extendTenderPeriod"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
