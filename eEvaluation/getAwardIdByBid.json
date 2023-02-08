@@ -1,18 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkBidState",
-    "version": "1.03"
+    "title": "getAwardIdByBid",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9061"
+      "url": "http://{host}:9081"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Bid State",
+        "summary": "Get Award Id By Bid",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -20,7 +20,41 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "awards"
+                          ],
+                          "properties": {
+                            "awards": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
                 }
               }
             }
@@ -42,10 +76,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "bids",
-                          "pmd",
-                          "country",
-                          "operationType"
+                          "bids"
                         ],
                         "properties": {
                           "cpid": {
@@ -75,41 +106,6 @@
                                 }
                               }
                             }
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "OT",
-                              "SV",
-                              "MV",
-                              "GPA",
-                              "RT",
-                              "CF",
-                              "OF",
-                              "TEST_OT",
-                              "TEST_OT",
-                              "TEST_MV",
-                              "TEST_GPA",
-                              "TEST_RT",
-                              "TEST_CF",
-                              "TEST_OF",
-                              "RFQ",
-                              "TEST_RFQ",
-                              "MC",
-                              "TEST_MC",
-                              "DCO",
-                              "TEST_DCO"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "withdrawBid",
-                              "updateBidDocuments"
-                            ]
                           }
                         }
                       }
@@ -124,7 +120,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkBidState"
+                          "getAwardIdByBid"
                         ]
                       }
                     }
