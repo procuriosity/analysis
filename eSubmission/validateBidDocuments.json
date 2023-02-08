@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkBidState",
-    "version": "1.03"
+    "title": "validateBidDocuments",
+    "version": "1.0"
   },
   "servers": [
     {
@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Bid State",
+        "summary": "Validate Bid Documents",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -42,10 +42,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "bids",
-                          "pmd",
-                          "country",
-                          "operationType"
+                          "bids"
                         ],
                         "properties": {
                           "cpid": {
@@ -67,49 +64,54 @@
                                   "properties": {
                                     "id": {
                                       "type": "string"
+                                    },
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "title": {
+                                            "type": "string"
+                                          },
+                                          "documentType": {
+                                            "type": "string",
+                                            "enum": [
+                                              "submissionDocuments",
+                                              "illustration",
+                                              "x_commercialOffer",
+                                              "\"x_qualificationDocuments",
+                                              "x_eligibilityDocuments",
+                                              "x_technicalDocuments"
+                                            ]
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "relatedLots": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "title",
+                                          "documentType"
+                                        ]
+                                      }
                                     }
                                   },
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "documents"
                                   ]
                                 }
                               }
                             }
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "OT",
-                              "SV",
-                              "MV",
-                              "GPA",
-                              "RT",
-                              "CF",
-                              "OF",
-                              "TEST_OT",
-                              "TEST_OT",
-                              "TEST_MV",
-                              "TEST_GPA",
-                              "TEST_RT",
-                              "TEST_CF",
-                              "TEST_OF",
-                              "RFQ",
-                              "TEST_RFQ",
-                              "MC",
-                              "TEST_MC",
-                              "DCO",
-                              "TEST_DCO"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "withdrawBid",
-                              "updateBidDocuments"
-                            ]
                           }
                         }
                       }
@@ -124,7 +126,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkBidState"
+                          "validateBidDocuments"
                         ]
                       }
                     }

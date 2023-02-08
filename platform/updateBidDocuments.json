@@ -1,0 +1,162 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "updateBidDocuments",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/do/document/bid/{cpid}/{ocid}/{bidId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process cpid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "tender process ocid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "bidId",
+          "in": "path",
+          "required": true,
+          "description": "bid id"
+        }
+      ],
+      "post": {
+        "summary": "Update Bid Documents",
+        "operationId": "post-users-userId",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "description": "bearer {access_token}"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "transaction id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "bid token",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "data type in request body",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "bid": {
+                        "type": "object",
+                        "required": [
+                          "documents"
+                        ],
+                        "properties": {
+                          "documents": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "documentType": {
+                                  "type": "string",
+                                  "enum": [
+                                    "submissionDocuments",
+                                    "illustration",
+                                    "x_commercialOffer",
+                                    "\"x_qualificationDocuments",
+                                    "x_eligibilityDocuments",
+                                    "x_technicalDocuments"
+                                  ]
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "relatedLots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "title",
+                                "documentType"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "bid"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": ""
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
