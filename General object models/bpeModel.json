@@ -975,7 +975,10 @@
                   "suspended",
                   "tendering",
                   "unsuccessful",
-                  "withdrawn"
+                  "withdrawn",
+                  "notMet",
+                  "partiallyMet",
+                  "met"
                 ]
               },
               "criteria": {
@@ -1472,11 +1475,23 @@
                     },
                     "status": {
                       "type": "string",
-                      "minLength": 1
+                      "minLength": 1,
+                      "enum": [
+                        "unsuccessful",
+                        "planning",
+                        "active",
+                        "complete",
+                        "cancelled"
+                      ]
                     },
                     "statusDetails": {
                       "type": "string",
-                      "minLength": 1
+                      "minLength": 1,
+                      "enum": [
+                        "notAwarded",
+                        "empty",
+                        "awarded"
+                      ]
                     },
                     "value": {
                       "type": "object",
@@ -3754,11 +3769,30 @@
                 "description": {
                   "type": "string"
                 },
-                "status": {
-                  "type": "string"
+                 "status": {
+                  "type": "string",
+                  "enum": [
+                    "unsuccessful",
+                    "pending",
+                    "active"
+                  ]
                 },
                 "statusDetails": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "rejectedTenderer",
+                    "awardedTenderer",
+                    "empty",
+                    "active",
+                    "unsuccessful",
+                    "awaiting",
+                    "consideration",
+                    "lotCancelled",
+                    "lackOfSubmissions",
+                    "lackOfQualifications",
+                    "noOffersReceived",
+                    "basedOnHumanDecision"
+                  ]
                 },
                 "date": {
                   "type": "string",
@@ -6947,7 +6981,10 @@
                         "type": "string"
                       },
                       "documentType": {
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                          "evaluationReports"
+                        ]
                       },
                       "title": {
                         "type": "string"
