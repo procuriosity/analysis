@@ -12,7 +12,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Finalize Lot",
+        "summary": "Finalize Lots",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -36,13 +36,9 @@
                             "tender": {
                               "type": "object",
                               "required": [
-                                "id",
                                 "lots"
                               ],
                               "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
                                 "status": {
                                   "type": "string",
                                   "enum": [
@@ -51,7 +47,11 @@
                                   ]
                                 },
                                 "statusDetails": {
-                                  "type": "string"
+                                  "type": "string",
+                                  "enum": [
+                                    "partiallyMet",
+                                    "notMet"
+                                  ]
                                 },
                                 "lots": {
                                   "type": "array",
@@ -68,7 +68,10 @@
                                         ]
                                       },
                                       "statusDetails": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "enum": [
+                                          "notAwarded"
+                                        ]
                                       }
                                     },
                                     "required": [
@@ -153,7 +156,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "finalizeLot"
+                          "finalizeLots"
                         ]
                       }
                     }
