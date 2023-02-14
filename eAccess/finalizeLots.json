@@ -1,18 +1,21 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "90e824d500296"
+  },
   "info": {
-    "title": "updateCanDocuments",
+    "title": "finalizeLots",
     "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9151"
+      "url": "http://{host}:9031"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Update Can Documents",
+        "summary": "Finalize Lots",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -30,58 +33,57 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "cpid",
-                            "ocid",
-                            "contracts"
+                            "tender"
                           ],
                           "properties": {
-                            "cpid": {
-                              "$ref": "../models/cpid.v1.json"
-                            },
-                            "ocid": {
-                              "$ref": "../models/ocid.v1.json"
-                            },
-                            "contracts": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "documents": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "title": {
-                                          "type": "string"
-                                        },
-                                        "documentType": {
-                                          "type": "string",
-                                          "enum": [
-                                            "evaluationReports"
-                                          ]
-                                        },
-                                        "description": {
-                                          "type": "string"
-                                        }
-                                      },
-                                      "required": [
-                                        "id",
-                                        "title",
-                                        "documentType"
-                                      ]
-                                    }
-                                  }
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "lots"
+                              ],
+                              "properties": {
+                                "status": {
+                                  "type": "string",
+                                  "enum": [
+                                    "unsuccessful",
+                                    "complete"
+                                  ]
                                 },
-                                "required": [
-                                  "id",
-                                  "documents"
-                                ]
+                                "statusDetails": {
+                                  "type": "string",
+                                  "enum": [
+                                    "partiallyMet",
+                                    "notMet"
+                                  ]
+                                },
+                                "lots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "status": {
+                                        "type": "string",
+                                        "enum": [
+                                          "unsuccessful"
+                                        ]
+                                      },
+                                      "statusDetails": {
+                                        "type": "string",
+                                        "enum": [
+                                          "notAwarded"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "status",
+                                      "statusDetails"
+                                    ]
+                                  }
+                                }
                               }
                             }
                           }
@@ -113,7 +115,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "contracts"
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -122,38 +124,23 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "contracts": {
+                          "tender": {
                             "type": "object",
                             "required": [
-                              "id",
-                              "documents"
+                              "lots"
                             ],
                             "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "documents": {
+                              "lots": {
                                 "type": "array",
                                 "items": {
                                   "type": "object",
                                   "properties": {
                                     "id": {
                                       "type": "string"
-                                    },
-                                    "title": {
-                                      "type": "string"
-                                    },
-                                    "documentType": {
-                                      "type": "string"
-                                    },
-                                    "description": {
-                                      "type": "string"
                                     }
                                   },
                                   "required": [
-                                    "id",
-                                    "title",
-                                    "documentType"
+                                    "id"
                                   ]
                                 }
                               }
@@ -172,7 +159,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "updateCanDocuments"
+                          "finalizeLots"
                         ]
                       }
                     }
@@ -181,8 +168,7 @@
               }
             }
           }
-        },
-        "description": ""
+        }
       }
     }
   },
