@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createQualification",
-    "version": "1.02"
+    "version": "1.03"
   },
   "servers": [
     {
@@ -32,41 +32,51 @@
                           "items": {
                             "type": "object",
                             "properties": {
-                              "id": {
-                                "type": "string",
-                                "format": "uuid"
-                              },
-                              "status": {
-                                "type": "string",
-                                "enum": [
-                                  "pending"
-                                ]
-                              },
-                              "relatedSubmission": {
-                                "type": "string",
-                                "format": "uuid"
-                              },
-                              "date": {
-                                "type": "string",
-                                "format": "date-time"
-                              },
-                              "scoring": {
-                                "type": "number",
-                                "description": "приведенный коэффициент",
-                                "minimum": 0.001,
-                                "maximum": 1
-                              },
-                              "token": {
-                                "type": "string",
-                                "format": "uuid"
+                              "qualifications": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    },
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "pending"
+                                      ]
+                                    },
+                                    "relatedSubmission": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    },
+                                    "date": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "scoring": {
+                                      "type": "number",
+                                      "minimum": 0.001,
+                                      "maximum": 1
+                                    },
+                                    "token": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "status",
+                                    "relatedSubmission",
+                                    "date",
+                                    "token"
+                                  ]
+                                }
                               }
                             },
                             "required": [
-                              "id",
-                              "status",
-                              "relatedSubmission",
-                              "date",
-                              "token"
+                              "qualifications"
                             ]
                           }
                         }
@@ -110,8 +120,8 @@
                           "ocid",
                           "date",
                           "owner",
-                          "submissions",
-                          "tender"
+                          "tender",
+                          "submissions"
                         ],
                         "properties": {
                           "cpid": {
@@ -128,27 +138,6 @@
                           "owner": {
                             "type": "string",
                             "format": "uuid"
-                          },
-                          "submissions": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string",
-                                  "format": "uuid"
-                                },
-                                "requirementResponses": {
-                                  "type": "array",
-                                  "items": {
-                                    "$ref": "../models/requirementResponseShortRelCandidateWithoutEvidences.v1.json"
-                                  }
-                                }
-                              },
-                              "required": [
-                                "id"
-                              ]
-                            }
                           },
                           "tender": {
                             "type": "object",
@@ -283,6 +272,34 @@
                                     "relatesTo",
                                     "requirementGroups",
                                     "classification"
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "submissions": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "requirementResponses": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "../models/requirementResponseShortRelatedCandidate.v1.json"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
                                   ]
                                 }
                               }

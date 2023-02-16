@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "findSubmissions",
-    "version": "1.03"
+    "version": "1.04"
   },
   "servers": [
     {
@@ -28,82 +28,93 @@
                       "type": "object",
                       "properties": {
                         "result": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string",
-                                "format": "uuid"
-                              },
-                              "requirementResponses": {
-                                "type": "array",
-                                "items": {
-                                  "$ref": "../models/requirementResponseShortRelatedCandidate.v1.json"
-                                }
-                              },
-                              "candidates": {
-                                "type": "array",
-                                "items": {
-                                  "$ref": "../models/organizationSupplierFull.v1.json"
-                                }
-                              },
-                              "documents": {
-                                "type": "array",
-                                "items": {
-                                  "$ref": "../models/documents_object.v1.json"
-                                }
-                              },
-                              "status": {
-                                "type": "string",
-                                "enum": [
-                                  "pending",
-                                  "valid"
-                                ]
-                              },
-                              "date": {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            },
-                            "required": [
-                              "id",
-                              "candidates",
-                              "status",
-                              "date"
-                            ]
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "result": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "documents": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "documentType": {
-                                      "type": "string",
-                                      "enum": [
-                                        "illustration",
-                                        "submissionDocuments",
-                                        "x_qualificationDocuments",
-                                        "x_eligibilityDocuments",
-                                        "x_technicalDocuments"
-                                      ]
-                                    }
+                          "type": "object",
+                          "properties": {
+                            "submissions": {
+                              "type": "object",
+                              "required": [
+                                "details"
+                              ],
+                              "properties": {
+                                "details": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "format": "uuid"
+                                      },
+                                      "date": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                      },
+                                      "status": {
+                                        "type": "string",
+                                        "enum": [
+                                          "pending",
+                                          "valid"
+                                        ]
+                                      },
+                                      "candidates": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "../models/organizationSupplierFull.v1.json"
+                                        }
+                                      },
+                                      "requirementResponses": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "../models/requirementResponseShortRelatedCandidate.v1.json"
+                                        }
+                                      },
+                                      "documents": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "title": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "documentType": {
+                                              "type": "string",
+                                              "enum": [
+                                                "illustration",
+                                                "submissionDocuments",
+                                                "x_qualificationDocuments",
+                                                "x_eligibilityDocuments",
+                                                "x_technicalDocuments"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "title",
+                                            "documentType"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "date",
+                                      "status",
+                                      "candidates"
+                                    ]
                                   }
                                 }
                               }
                             }
-                          }
+                          },
+                          "required": [
+                            "submissions"
+                          ]
                         }
                       }
                     }
