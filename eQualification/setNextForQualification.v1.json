@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "setNextForQualification",
-    "version": "1.04"
+    "version": "1.05"
   },
   "servers": [
     {
@@ -207,22 +207,30 @@
                             "$ref": "../models/ocid.v1.json"
                           },
                           "submissions": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "date": {
-                                  "type": "string",
-                                  "format": "date-time"
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "date": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "date"
+                                  ]
                                 }
-                              },
-                              "required": [
-                                "id",
-                                "date"
-                              ]
+                              }
                             }
                           },
                           "tender": {
