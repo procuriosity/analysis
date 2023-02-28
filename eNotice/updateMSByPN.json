@@ -1,0 +1,90 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "6yjezd5hg9lxs"
+  },
+  "info": {
+    "title": "UpdateMSByPN",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9041",
+      "description": "Notice"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "parameters": [],
+      "post": {
+        "summary": "Update MS By PN",
+        "operationId": "post-command-release",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "updateMSByPN"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "action"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "data",
+                          "date"
+                        ],
+                        "properties": {
+                          "data": {
+                            "type": "string",
+                            "description": "Все данные из таблицы NoticeQueue строки data"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
