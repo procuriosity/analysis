@@ -1,0 +1,124 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "u42mp082zce2m"
+  },
+  "info": {
+    "title": "agreedMetrics",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/agreedMetrics": {
+      "options": {
+        "summary": "Agreed Metrics",
+        "operationId": "options-agreedMetrics",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "contracts": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "agreedMetrics": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "observations": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "notes": {
+                                      "type": "string"
+                                    },
+                                    "measure": {
+                                      "type": [
+                                        "string",
+                                        "number",
+                                        "integer",
+                                        "boolean"
+                                      ]
+                                    },
+                                    "unit": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "name",
+                                        "scheme"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "notes",
+                                    "measure"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "title",
+                              "description",
+                              "observations"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "agreedMetrics"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "contracts"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
