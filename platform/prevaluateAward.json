@@ -1,0 +1,125 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "7hmn9ad3pl34t"
+  },
+  "info": {
+    "title": "prevaluateAward",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/do/prevaluation/award/{cpid}/{ocid}/{awardId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "awardId",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Prevaluate Award",
+        "operationId": "post-do-consideration-cpid-ocid",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "transaction id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "data type in request body",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "award token",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "award": {
+                    "type": "object",
+                    "required": [
+                      "statusDetails"
+                    ],
+                    "properties": {
+                      "statusDetails": {
+                        "type": "string",
+                        "enum": [
+                          "pass",
+                          "fail"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "award"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
