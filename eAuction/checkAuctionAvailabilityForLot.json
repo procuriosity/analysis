@@ -1,19 +1,22 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "8g74mhxudlwg0"
+  },
   "info": {
-    "title": "checkLotsState",
-    "version": "1.16",
+    "title": "checkAuctionAvailabilityForLot",
+    "version": "1.0",
     "description": ""
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9191"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Lots State",
+        "summary": "Check Auction Availability For Lot",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -21,13 +24,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    }
+                  ]
                 }
               }
             }
           }
         },
-        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -44,9 +50,6 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "pmd",
-                          "country",
-                          "operationType",
                           "tender"
                         ],
                         "properties": {
@@ -55,64 +58,6 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "description": "",
-                            "enum": [
-                              "DA",
-                              "TEST_DA",
-                              "DC",
-                              "TEST_DC",
-                              "NP",
-                              "TEST_NP",
-                              "CD",
-                              "TEST_CD",
-                              "IP",
-                              "TEST_IP",
-                              "GPA",
-                              "TEST_GPA",
-                              "RT",
-                              "TEST_RT",
-                              "OT",
-                              "TEST_OT",
-                              "SV",
-                              "TEST_SV",
-                              "MV",
-                              "TEST_MV",
-                              "RFQ",
-                              "TEST_RFQ",
-                              "MC",
-                              "TEST_MC",
-                              "DCO",
-                              "TEST_DCO"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "createAward",
-                              "updateAward",
-                              "divideLot",
-                              "submitBid",
-                              "declareNonConflictOfInterest",
-                              "awardConsideration",
-                              "tenderOrLotAmendmentConfirmation",
-                              "createRfq",
-                              "createMC",
-                              "createEnquiry",
-                              "awardQualification",
-                              "evaluateAward",
-                              "protocol",
-                              "cancelLot",
-                              "cancelTender",
-                              "сancelAmendment",
-                              "confirmAmendment",
-                              "prevaluateAward"
-                            ]
                           },
                           "tender": {
                             "type": "object",
@@ -149,7 +94,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkLotsState"
+                          "checkAuctionAvailabilityForLot"
                         ]
                       }
                     }
