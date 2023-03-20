@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "saveAuctions",
-    "version": "1.0",
+    "version": "1.01",
     "description": ""
   },
   "servers": [
@@ -21,7 +21,94 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "tender"
+                          ],
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "electronicAuctions"
+                              ],
+                              "properties": {
+                                "electronicAuctions": {
+                                  "type": "object",
+                                  "required": [
+                                    "details"
+                                  ],
+                                  "properties": {
+                                    "details": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "relatedLot": {
+                                            "type": "string"
+                                          },
+                                          "status": {
+                                            "type": "string",
+                                            "enum": [
+                                              "pending"
+                                            ]
+                                          },
+                                          "electronicAuctionModalities": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "eligibleMinimumDifference": {
+                                                  "type": "object",
+                                                  "required": [
+                                                    "currency",
+                                                    "amount"
+                                                  ],
+                                                  "properties": {
+                                                    "currency": {
+                                                      "type": "string"
+                                                    },
+                                                    "amount": {
+                                                      "type": "number"
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "required": [
+                                                "eligibleMinimumDifference"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "relatedLot",
+                                          "electronicAuctionModalities"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
                 }
               }
             }
