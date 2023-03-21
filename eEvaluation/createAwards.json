@@ -5,7 +5,7 @@
   },
   "info": {
     "title": "createAwards",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -397,7 +397,8 @@
                           "ocid",
                           "date",
                           "owner",
-                          "bids"
+                          "bids",
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -632,6 +633,49 @@
                                     "relatedLots",
                                     "tenderers"
                                   ]
+                                }
+                              }
+                            }
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "electronicAuctions"
+                            ],
+                            "properties": {
+                              "electronicAuctions": {
+                                "type": "object",
+                                "required": [
+                                  "details"
+                                ],
+                                "properties": {
+                                  "details": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "status": {
+                                          "type": "string",
+                                          "enum": [
+                                            "active",
+                                            "cancelled",
+                                            "withdrawn"
+                                          ]
+                                        },
+                                        "relatedLot": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "status",
+                                        "relatedLot"
+                                      ]
+                                    }
+                                  }
                                 }
                               }
                             }
