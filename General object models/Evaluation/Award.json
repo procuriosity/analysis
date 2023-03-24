@@ -377,6 +377,78 @@
                             "currency"
                           ]
                         },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "unit": {
+                                "type": "object",
+                                "properties": {
+                                  "value": {
+                                    "type": "object",
+                                    "required": [
+                                      "amount",
+                                      "currency"
+                                    ],
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      },
+                                      "currency": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "value",
+                                  "id",
+                                  "name"
+                                ]
+                              },
+                              "classification": {
+                                "type": "object",
+                                "required": [
+                                  "id",
+                                  "scheme",
+                                  "description"
+                                ],
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "scheme": {
+                                    "type": "string",
+                                    "enum": [
+                                      "CPV"
+                                    ]
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "quantity": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "classification",
+                              "quantity"
+                            ]
+                          }
+                        },
                         "requirementResponses": {
                           "type": "array",
                           "description": "ответ от PE o Декларации об отсутствии конфликта интересов. отсутствует у неуспешного",
@@ -485,7 +557,8 @@
                         "id",
                         "date",
                         "status",
-                        "relatedLots"
+                        "relatedLots",
+                        "items"
                       ]
                     }
                   },
