@@ -10,7 +10,7 @@
     }
   ],
   "paths": {
-    "update/award/{cpid}/{ocid}/{awardId}": {
+    "update/award/{cpid}/{ocid}/{awardId} - NP": {
       "parameters": [
         {
           "schema": {
@@ -19,7 +19,7 @@
           "name": "cpid",
           "in": "path",
           "required": true,
-          "description": "идентификатор тендерного процесса"
+          "description": "tender process cpid "
         },
         {
           "schema": {
@@ -28,7 +28,7 @@
           "name": "ocid",
           "in": "path",
           "required": true,
-          "description": "идентификатор стадии тендерного процесса"
+          "description": "tender process ocid"
         },
         {
           "schema": {
@@ -37,7 +37,7 @@
           "name": "awardId",
           "in": "path",
           "required": true,
-          "description": "id award"
+          "description": "award id"
         }
       ],
       "post": {
@@ -57,6 +57,9 @@
                     "properties": {
                       "award": {
                         "type": "object",
+                        "required": [
+                          "suppliers"
+                        ],
                         "properties": {
                           "internalId": {
                             "type": "string"
@@ -287,20 +290,6 @@
                                 "documentType"
                               ]
                             }
-                          },
-                          "items": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "id"
-                              ]
-                            }
                           }
                         }
                       }
@@ -323,7 +312,7 @@
             },
             "in": "header",
             "name": "Authorization",
-            "description": "Bearer {access_token}",
+            "description": "bearer {access_token}",
             "required": true
           },
           {
@@ -332,7 +321,7 @@
             },
             "in": "header",
             "name": "X-OPERATION-ID",
-            "description": "ID транзакции",
+            "description": "transaction id",
             "required": true
           },
           {
@@ -341,7 +330,7 @@
             },
             "in": "header",
             "name": "Content-Type",
-            "description": "тип данных в теле запроса",
+            "description": "data type in request body",
             "required": true
           },
           {
@@ -350,11 +339,588 @@
             },
             "in": "header",
             "name": "X-TOKEN",
-            "description": "токен award",
+            "description": "award token",
             "required": true
           }
         ],
-        "description": ""
+        "description": "for stage = NP (pmd = DA, NP, CD, DC, IP)",
+        "tags": [
+          "NP"
+        ]
+      }
+    },
+    "/update/award/{cpid}/{ocid}/{awardId} - PC": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process cpid "
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "tender process ocid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "awardId",
+          "in": "path",
+          "required": true,
+          "description": "award id"
+        }
+      ],
+      "post": {
+        "summary": "Update Award",
+        "operationId": "post-update-award-cpid-ocid-awardId---PC",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "transaction id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "description": "data type in request body"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "award token",
+            "required": true
+          }
+        ],
+        "tags": [
+          "PC"
+        ],
+        "description": "for stage = PC (pmd = OF, CF)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "award": {
+                    "type": "object",
+                    "properties": {
+                      "internalId": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "documents": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "documentType": {
+                              "type": "string",
+                              "enum": [
+                                "awardNotice",
+                                "evaluationReports",
+                                "contractDraft",
+                                "winningBid",
+                                "complaints",
+                                "bidders",
+                                "conflictOfInterest",
+                                "cancellationDetails",
+                                "submissionDocuments",
+                                "contractArrangements",
+                                "contractSchedule",
+                                "shortlistedFirms"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "documentType"
+                          ]
+                        }
+                      },
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "award"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/update/award/{cpid}/{ocid}/{awardId} - EV, TP, MC": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process cpid "
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "tender process ocid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "awardId",
+          "in": "path",
+          "required": true,
+          "description": "award id"
+        }
+      ],
+      "post": {
+        "summary": "Update Award",
+        "operationId": "post-update-award-cpid-ocid-awardId---EV,-TP,-MC",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "description": "for stage = EV (pmd = OT, SV, MV), TP (pmd = GPA, RT), MC (pmd = MC)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "award": {
+                    "type": "object",
+                    "properties": {
+                      "weightedValue": {
+                        "type": "object",
+                        "properties": {
+                          "amount": {
+                            "type": "number"
+                          },
+                          "currency": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "amount",
+                          "currency"
+                        ]
+                      },
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "unit": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "value"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "object",
+                                  "required": [
+                                    "amount",
+                                    "currency"
+                                  ],
+                                  "properties": {
+                                    "amount": {
+                                      "type": "number"
+                                    },
+                                    "currency": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "unit"
+                          ]
+                        }
+                      },
+                      "requirementResponses": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "type": [
+                                "string",
+                                "number",
+                                "integer",
+                                "boolean"
+                              ]
+                            },
+                            "requirement": {
+                              "type": "object",
+                              "required": [
+                                "id"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "evidences": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "../models/evidences.v1.json"
+                              }
+                            },
+                            "period": {
+                              "type": "object",
+                              "properties": {
+                                "startDate": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "endDate": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              },
+                              "required": [
+                                "startDate",
+                                "endDate"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "value",
+                            "requirement"
+                          ]
+                        }
+                      },
+                      "documents": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "documentType": {
+                              "type": "string",
+                              "enum": [
+                                "awardNotice",
+                                "evaluationReports",
+                                "contractDraft",
+                                "winningBid",
+                                "complaints",
+                                "bidders",
+                                "conflictOfInterest",
+                                "cancellationDetails",
+                                "submissionDocuments",
+                                "contractArrangements",
+                                "contractSchedule",
+                                "shortlistedFirms"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "documentType"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "award"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update/award/{cpid}/{ocid}/{awardId} - RQ": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process cpid "
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "tender process ocid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "awardId",
+          "in": "path",
+          "required": true,
+          "description": "award id"
+        }
+      ],
+      "post": {
+        "summary": "Update Award",
+        "operationId": "post-update-award-cpid-ocid-awardId---RQ",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "description": "for stage = RQ (pmd = PFQ)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "award": {
+                    "type": "object",
+                    "properties": {
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "unit": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "value"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "object",
+                                  "required": [
+                                    "amount",
+                                    "currency"
+                                  ],
+                                  "properties": {
+                                    "amount": {
+                                      "type": "number"
+                                    },
+                                    "currency": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "unit"
+                          ]
+                        }
+                      },
+                      "requirementResponses": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "type": [
+                                "string",
+                                "number",
+                                "integer",
+                                "boolean"
+                              ]
+                            },
+                            "requirement": {
+                              "type": "object",
+                              "required": [
+                                "id"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "evidences": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "../models/evidences.v1.json"
+                              }
+                            },
+                            "period": {
+                              "type": "object",
+                              "properties": {
+                                "startDate": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "endDate": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              },
+                              "required": [
+                                "startDate",
+                                "endDate"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "value",
+                            "requirement"
+                          ]
+                        }
+                      },
+                      "documents": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "documentType": {
+                                  "type": "string",
+                                  "enum": [
+                                    "awardNotice",
+                                    "evaluationReports",
+                                    "contractDraft",
+                                    "winningBid",
+                                    "complaints",
+                                    "bidders",
+                                    "conflictOfInterest",
+                                    "cancellationDetails",
+                                    "submissionDocuments",
+                                    "contractArrangements",
+                                    "contractSchedule",
+                                    "shortlistedFirms"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "title",
+                                "documentType"
+                              ]
+                            }
+                          }
+                    }
+                  }
+                },
+                "required": [
+                  "award"
+                ]
+              }
+            }
+          }
+        }
       }
     }
   },
