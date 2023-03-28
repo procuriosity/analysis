@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateAwardData",
-    "version": "1.05",
+    "version": "1.06",
     "description": ""
   },
   "servers": [
@@ -43,10 +43,10 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "tender",
-                          "awards",
                           "operationType",
-                          "pmd"
+                          "pmd",
+                          "tender",
+                          "awards"
                         ],
                         "properties": {
                           "cpid": {
@@ -55,12 +55,90 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "createAward",
+                              "updateAward"
+                            ]
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "DA",
+                              "NP",
+                              "CD",
+                              "DC",
+                              "IP",
+                              "TEST_DA",
+                              "TEST_NP",
+                              "TEST_CD",
+                              "TEST_DC",
+                              "TEST_IP",
+                              "CF",
+                              "OF",
+                              "TEST_OF",
+                              "TEST_CF",
+                              "OT",
+                              "TEST_OT",
+                              "SV",
+                              "TEST_SV",
+                              "MV",
+                              "TEST_MV",
+                              "GPA",
+                              "TEST_GPA",
+                              "RT",
+                              "TEST_RT",
+                              "RFQ",
+                              "TEST_RFQ",
+                              "MC",
+                              "TEST_MC"
+                            ]
+                          },
+                          "mdm": {
+                            "type": "object",
+                            "properties": {
+                              "registrationSchemes": {
+                                "type": "array",
+                                "description": "схемы регистрации компаний для стран, где эти компании (suppliers) зарегистрированы",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "country": {
+                                      "type": "string"
+                                    },
+                                    "schemes": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "country",
+                                    "schemes"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "registrationSchemes"
+                            ]
+                          },
                           "tender": {
                             "type": "object",
                             "required": [
+                              "awardCriteriaDetails",
                               "lots"
                             ],
                             "properties": {
+                              "awardCriteriaDetails": {
+                                "type": "string",
+                                "enum": [
+                                  "automated",
+                                  "manual"
+                                ]
+                              },
                               "lots": {
                                 "type": "array",
                                 "items": {
@@ -87,6 +165,86 @@
                                   },
                                   "required": [
                                     "id"
+                                  ]
+                                }
+                              },
+                              "criteria": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "relatesTo": {
+                                      "type": "string",
+                                      "enum": [
+                                        "tender",
+                                        "lot",
+                                        "item",
+                                        "tenderer"
+                                      ]
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "requirementGroups": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "requirements": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "dataType": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "integer",
+                                                    "string",
+                                                    "boolean",
+                                                    "number"
+                                                  ]
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "dataType"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "requirements"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "relatesTo",
+                                    "classification",
+                                    "requirementGroups"
                                   ]
                                 }
                               }
@@ -435,10 +593,110 @@
                                     "properties": {
                                       "id": {
                                         "type": "string"
+                                      },
+                                      "unit": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "value": {
+                                            "type": "object",
+                                            "required": [
+                                              "amount",
+                                              "currency"
+                                            ],
+                                            "properties": {
+                                              "amount": {
+                                                "type": "number"
+                                              },
+                                              "currency": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "value"
+                                        ]
                                       }
                                     },
                                     "required": [
                                       "id"
+                                    ]
+                                  }
+                                },
+                                "weightedValue": {
+                                  "type": "object",
+                                  "properties": {
+                                    "amount": {
+                                      "type": "number"
+                                    },
+                                    "currency": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "amount",
+                                    "currency"
+                                  ]
+                                },
+                                "requirementResponses": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "value": {
+                                        "type": [
+                                          "string",
+                                          "number",
+                                          "integer",
+                                          "boolean"
+                                        ]
+                                      },
+                                      "requirement": {
+                                        "type": "object",
+                                        "required": [
+                                          "id"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "evidences": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "../models/evidences.v1.json"
+                                        }
+                                      },
+                                      "period": {
+                                        "type": "object",
+                                        "properties": {
+                                          "startDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          },
+                                          "endDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        },
+                                        "required": [
+                                          "startDate",
+                                          "endDate"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "value",
+                                      "requirement"
                                     ]
                                   }
                                 }
@@ -447,43 +705,6 @@
                                 "id"
                               ]
                             }
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "createAward",
-                              "updateAward"
-                            ]
-                          },
-                          "mdm": {
-                            "type": "object",
-                            "properties": {
-                              "registrationSchemes": {
-                                "type": "array",
-                                "description": "схемы регистрации компаний для стран, где эти компании (suppliers) зарегистрированы",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "country": {
-                                      "type": "string"
-                                    },
-                                    "schemes": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "string"
-                                      }
-                                    }
-                                  },
-                                  "required": [
-                                    "country",
-                                    "schemes"
-                                  ]
-                                }
-                              }
-                            },
-                            "required": [
-                              "registrationSchemes"
-                            ]
                           },
                           "bids": {
                             "type": "object",
@@ -516,25 +737,6 @@
                             },
                             "required": [
                               "details"
-                            ]
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "DA",
-                              "NP",
-                              "CD",
-                              "DC",
-                              "IP",
-                              "TEST_DA",
-                              "TEST_NP",
-                              "TEST_CD",
-                              "TEST_DC",
-                              "TEST_IP",
-                              "CF",
-                              "OF",
-                              "TEST_OF",
-                              "TEST_CF"
                             ]
                           }
                         }
