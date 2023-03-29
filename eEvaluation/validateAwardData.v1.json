@@ -88,11 +88,7 @@
                               "GPA",
                               "TEST_GPA",
                               "RT",
-                              "TEST_RT",
-                              "RFQ",
-                              "TEST_RFQ",
-                              "MC",
-                              "TEST_MC"
+                              "TEST_RT"
                             ]
                           },
                           "mdm": {
@@ -643,79 +639,6 @@
                                   ]
                                 },
                                 "requirementResponses": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "value": {
-                              "type": [
-                                "string",
-                                "number",
-                                "integer",
-                                "boolean"
-                              ]
-                            },
-                            "requirement": {
-                              "type": "object",
-                              "required": [
-                                "id"
-                              ],
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                }
-                              }
-                            },
-                            "relatedTenderer": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "id"
-                              ]
-                            },
-                            "responder": {
-                              "type": "object",
-                              "properties": {
-                                "title": {
-                                  "type": "string",
-                                  "enum": [
-                                    "Mr.",
-                                    "Ms.",
-                                    "Mrs.",
-                                    "Mr.",
-                                    "Ms.",
-                                    "Mrs."
-                                  ]
-                                },
-                                "name": {
-                                  "type": "string"
-                                },
-                                "identifier": {
-                                  "type": "object",
-                                  "required": [
-                                    "id",
-                                    "scheme"
-                                  ],
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "scheme": {
-                                      "type": "string"
-                                    },
-                                    "uri": {
-                                      "type": "string"
-                                    }
-                                  }
-                                },
-                                "businessFunctions": {
                                   "type": "array",
                                   "items": {
                                     "type": "object",
@@ -723,89 +646,162 @@
                                       "id": {
                                         "type": "string"
                                       },
-                                      "type": {
-                                        "type": "string",
-                                        "enum": [
-                                          "chairman",
-                                          "procurmentOfficer",
-                                          "contactPoint",
-                                          "technicalEvaluator",
-                                          "technicalOpener",
-                                          "priceOpener",
-                                          "priceEvaluator"
+                                      "value": {
+                                        "type": [
+                                          "string",
+                                          "number",
+                                          "integer",
+                                          "boolean"
                                         ]
                                       },
-                                      "jobTitle": {
-                                        "type": "string"
-                                      },
-                                      "period": {
+                                      "requirement": {
                                         "type": "object",
                                         "required": [
-                                          "startDate"
+                                          "id"
                                         ],
                                         "properties": {
-                                          "startDate": {
-                                            "type": "string",
-                                            "format": "date-time"
+                                          "id": {
+                                            "type": "string"
                                           }
                                         }
                                       },
-                                      "documents": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "object",
-                                          "properties": {
-                                            "id": {
-                                              "type": "string"
-                                            },
-                                            "title": {
-                                              "type": "string"
-                                            },
-                                            "documentType": {
-                                              "type": "string",
-                                              "enum": [
-                                                "regulatoryDocument"
-                                              ]
-                                            },
-                                            "description": {
-                                              "type": "string"
+                                      "relatedTenderer": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id"
+                                        ]
+                                      },
+                                      "responder": {
+                                        "type": "object",
+                                        "properties": {
+                                          "title": {
+                                            "type": "string",
+                                            "enum": [
+                                              "Mr.",
+                                              "Ms.",
+                                              "Mrs.",
+                                              "Mr.",
+                                              "Ms.",
+                                              "Mrs."
+                                            ]
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          },
+                                          "identifier": {
+                                            "type": "object",
+                                            "required": [
+                                              "id",
+                                              "scheme"
+                                            ],
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "scheme": {
+                                                "type": "string"
+                                              },
+                                              "uri": {
+                                                "type": "string"
+                                              }
                                             }
                                           },
-                                          "required": [
-                                            "id",
-                                            "title",
-                                            "documentType"
-                                          ]
-                                        }
+                                          "businessFunctions": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "type": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "chairman",
+                                                    "procurmentOfficer",
+                                                    "contactPoint",
+                                                    "technicalEvaluator",
+                                                    "technicalOpener",
+                                                    "priceOpener",
+                                                    "priceEvaluator"
+                                                  ]
+                                                },
+                                                "jobTitle": {
+                                                  "type": "string"
+                                                },
+                                                "period": {
+                                                  "type": "object",
+                                                  "required": [
+                                                    "startDate"
+                                                  ],
+                                                  "properties": {
+                                                    "startDate": {
+                                                      "type": "string",
+                                                      "format": "date-time"
+                                                    }
+                                                  }
+                                                },
+                                                "documents": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "title": {
+                                                        "type": "string"
+                                                      },
+                                                      "documentType": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                          "regulatoryDocument"
+                                                        ]
+                                                      },
+                                                      "description": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "id",
+                                                      "title",
+                                                      "documentType"
+                                                    ]
+                                                  }
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "type",
+                                                "jobTitle",
+                                                "period"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "title",
+                                          "name",
+                                          "identifier",
+                                          "businessFunctions"
+                                        ]
+                                      },
+                                      "description": {
+                                        "type": "string"
                                       }
                                     },
                                     "required": [
                                       "id",
-                                      "type",
-                                      "jobTitle",
-                                      "period"
+                                      "value",
+                                      "requirement"
                                     ]
                                   }
                                 }
-                              },
-                              "required": [
-                                "title",
-                                "name",
-                                "identifier",
-                                "businessFunctions"
-                              ]
-                            },
-                            "description": {
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "id",
-                            "value",
-                            "requirement"
-                          ]
-                        }
-                      }
                               },
                               "required": [
                                 "id"
