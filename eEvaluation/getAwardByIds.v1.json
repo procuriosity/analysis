@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "getAwardByIds",
-    "version": "1.06"
+    "version": "1.07"
   },
   "servers": [
     {
@@ -59,7 +59,9 @@
                                     "enum": [
                                       "empty",
                                       "awaiting",
-                                      "consideration"
+                                      "consideration",
+                                      "qualified",
+                                      "disqualified"
                                     ]
                                   },
                                   "description": {
@@ -406,12 +408,110 @@
                                       "properties": {
                                         "id": {
                                           "type": "string"
+                                        },
+                                        "unit": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            },
+                                            "value": {
+                                              "type": "object",
+                                              "properties": {
+                                                "amount": {
+                                                  "type": "number"
+                                                },
+                                                "currency": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "amount",
+                                                "currency"
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "name"
+                                          ]
+                                        },
+                                        "classification": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "scheme",
+                                            "description"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string",
+                                              "enum": [
+                                                "CPV"
+                                              ]
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "additionalClassifications": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "scheme": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "CPVS"
+                                                ]
+                                              },
+                                              "description": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "scheme",
+                                              "description"
+                                            ]
+                                          }
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "quantity": {
+                                          "type": "number"
                                         }
                                       },
                                       "required": [
                                         "id"
                                       ]
                                     }
+                                  },
+                                  "weightedValue": {
+                                    "type": "object",
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      },
+                                      "currency": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "amount",
+                                      "currency"
+                                    ]
                                   }
                                 },
                                 "required": [
