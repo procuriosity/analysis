@@ -1,0 +1,212 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "x3aixywah1yg4"
+  },
+  "info": {
+    "title": "updateAwardValuesFromAuction",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9081"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Update Award Values From Auction",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "awards"
+                          ],
+                          "properties": {
+                            "awards": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "object",
+                                    "required": [
+                                      "amount"
+                                    ],
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      }
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "value"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "bids",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "bids": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "electronicAuctions"
+                            ],
+                            "properties": {
+                              "electronicAuctions": {
+                                "type": "object",
+                                "required": [
+                                  "details"
+                                ],
+                                "properties": {
+                                  "details": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "electronicAuctionResult": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "relatedBid": {
+                                                "type": "string"
+                                              },
+                                              "value": {
+                                                "type": "object",
+                                                "required": [
+                                                  "amount"
+                                                ],
+                                                "properties": {
+                                                  "amount": {
+                                                    "type": "number"
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            "required": [
+                                              "relatedBid",
+                                              "value"
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "electronicAuctionResult"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "updateAwardValuesFromAuction"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
