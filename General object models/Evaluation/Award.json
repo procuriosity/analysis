@@ -390,10 +390,6 @@
                                 "properties": {
                                   "value": {
                                     "type": "object",
-                                    "required": [
-                                      "amount",
-                                      "currency"
-                                    ],
                                     "properties": {
                                       "amount": {
                                         "type": "number"
@@ -401,7 +397,11 @@
                                       "currency": {
                                         "type": "string"
                                       }
-                                    }
+                                    },
+                                    "required": [
+                                      "amount",
+                                      "currency"
+                                    ]
                                   },
                                   "id": {
                                     "type": "string"
@@ -450,7 +450,7 @@
                         },
                         "requirementResponses": {
                           "type": "array",
-                          "description": "ответ от PE o Декларации об отсутствии конфликта интересов. отсутствует у неуспешного",
+                          "description": "ответ от PE o Декларации об отсутствии конфликта интересов. отсутствует у неуспешного.\nИли reqResponses на критерии тендера от PE (для EV, TP)",
                           "items": {
                             "type": "object",
                             "properties": {
@@ -501,14 +501,15 @@
                                     "type": "string"
                                   }
                                 }
+                              },
+                              "description": {
+                                "type": "string"
                               }
                             },
                             "required": [
                               "id",
                               "value",
-                              "relatedTenderer",
-                              "requirement",
-                              "responder"
+                              "requirement"
                             ]
                           }
                         },
