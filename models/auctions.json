@@ -1,0 +1,96 @@
+{
+  "title": "auctions",
+  "x-stoplight": {
+    "id": "rs96drtvfxdwl"
+  },
+  "type": "object",
+  "description": "",
+  "properties": {
+    "details": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "relatedLot": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "auctionBreakdown": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "relatedModalities": {
+                  "type": "string"
+                },
+                "rounds": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "internalId": {
+                        "type": "string",
+                        "description": "round execution turn"
+                      },
+                      "eligibleMinDifference": {
+                        "type": "object",
+                        "required": [
+                          "value"
+                        ],
+                        "properties": {
+                          "value": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "roundPeriod": {
+                        "type": "object",
+                        "required": [
+                          "duration"
+                        ],
+                        "properties": {
+                          "duration": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "internalId",
+                      "eligibleMinDifference",
+                      "roundPeriod"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "relatedModalities",
+                "rounds"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "relatedLot"
+        ]
+      }
+    }
+  },
+  "required": [
+    "details"
+  ]
+}

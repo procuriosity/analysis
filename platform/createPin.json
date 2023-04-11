@@ -310,58 +310,8 @@
                               ]
                             }
                           },
-                          "electronicAuctions": {
-                            "type": "object",
-                            "properties": {
-                              "details": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "relatedLot": {
-                                      "type": "string"
-                                    },
-                                    "electronicAuctionModalities": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "eligibleMinimumDifference": {
-                                            "type": "object",
-                                            "required": [
-                                              "amount",
-                                              "currency"
-                                            ],
-                                            "properties": {
-                                              "amount": {
-                                                "type": "number"
-                                              },
-                                              "currency": {
-                                                "type": "string"
-                                              }
-                                            }
-                                          }
-                                        },
-                                        "required": [
-                                          "eligibleMinimumDifference"
-                                        ]
-                                      }
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "relatedLot",
-                                    "electronicAuctionModalities"
-                                  ]
-                                }
-                              }
-                            },
-                            "required": [
-                              "details"
-                            ]
+                          "auctions": {
+                            "$ref": "../models/auctions.json"
                           },
                           "procuringEntity": {
                             "type": "object",
@@ -1145,6 +1095,45 @@
                                 "GPA"
                               ]
                             }
+                          },
+                          "procurementMethodModalitiesDetails": {
+                            "type": "object",
+                            "properties": {
+                              "electronicAuction": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "modalities": {
+                                      "type": "object",
+                                      "required": [
+                                        "auctionDirection"
+                                      ],
+                                      "properties": {
+                                        "auctionDirection": {
+                                          "type": "string",
+                                          "enum": [
+                                            "ascending",
+                                            "descending",
+                                            "random"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "modalities"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "electronicAuction"
+                            ]
                           }
                         }
                       }
@@ -1158,7 +1147,8 @@
                 "type": "object"
               }
             }
-          }
+          },
+          "description": ""
         },
         "tags": [
           "MD"
@@ -1480,58 +1470,8 @@
                               ]
                             }
                           },
-                          "electronicAuctions": {
-                            "type": "object",
-                            "properties": {
-                              "details": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "relatedLot": {
-                                      "type": "string"
-                                    },
-                                    "electronicAuctionModalities": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "eligibleMinimumDifference": {
-                                            "type": "object",
-                                            "required": [
-                                              "amount",
-                                              "currency"
-                                            ],
-                                            "properties": {
-                                              "amount": {
-                                                "type": "number"
-                                              },
-                                              "currency": {
-                                                "type": "string"
-                                              }
-                                            }
-                                          }
-                                        },
-                                        "required": [
-                                          "eligibleMinimumDifference"
-                                        ]
-                                      }
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "relatedLot",
-                                    "electronicAuctionModalities"
-                                  ]
-                                }
-                              }
-                            },
-                            "required": [
-                              "details"
-                            ]
+                          "auctions": {
+                            "$ref": "../models/auctions.json"
                           },
                           "procuringEntity": {
                             "type": "object",
@@ -2311,6 +2251,45 @@
                                 "GPA"
                               ]
                             }
+                          },
+                          "procurementMethodModalitiesDetails": {
+                            "type": "object",
+                            "properties": {
+                              "electronicAuction": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "modalities": {
+                                      "type": "object",
+                                      "required": [
+                                        "auctionDirection"
+                                      ],
+                                      "properties": {
+                                        "auctionDirection": {
+                                          "type": "string",
+                                          "enum": [
+                                            "ascending",
+                                            "descending",
+                                            "random"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "modalities"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "electronicAuction"
+                            ]
                           }
                         }
                       }
