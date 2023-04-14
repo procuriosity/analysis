@@ -34,16 +34,16 @@
                             "tender": {
                               "type": "object",
                               "required": [
-                                "electronicAuctions"
+                                "auctions"
                               ],
                               "properties": {
-                                "electronicAuctions": {
+                                "auctions": {
+                                  "$ref": "../models/auctions.json"
+                                },
+                                "procurementMethodModalitiesDetails": {
                                   "type": "object",
-                                  "required": [
-                                    "details"
-                                  ],
                                   "properties": {
-                                    "details": {
+                                    "electronicAuction": {
                                       "type": "array",
                                       "items": {
                                         "type": "object",
@@ -51,44 +51,28 @@
                                           "id": {
                                             "type": "string"
                                           },
-                                          "relatedLot": {
-                                            "type": "string"
-                                          },
-                                          "electronicAuctionModalities": {
-                                            "type": "array",
-                                            "items": {
-                                              "type": "object",
-                                              "properties": {
-                                                "eligibleMinimumDifference": {
-                                                  "type": "object",
-                                                  "required": [
-                                                    "amount",
-                                                    "currency"
-                                                  ],
-                                                  "properties": {
-                                                    "amount": {
-                                                      "type": "number"
-                                                    },
-                                                    "currency": {
-                                                      "type": "string"
-                                                    }
-                                                  }
-                                                }
-                                              },
-                                              "required": [
-                                                "eligibleMinimumDifference"
-                                              ]
+                                          "modalities": {
+                                            "type": "object",
+                                            "required": [
+                                              "auctionDirection"
+                                            ],
+                                            "properties": {
+                                              "auctionDirection": {
+                                                "type": "string"
+                                              }
                                             }
                                           }
                                         },
                                         "required": [
                                           "id",
-                                          "relatedLot",
-                                          "electronicAuctionModalities"
+                                          "modalities"
                                         ]
                                       }
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "electronicAuction"
+                                  ]
                                 }
                               }
                             }
@@ -96,6 +80,50 @@
                           "required": [
                             "tender"
                           ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "properties": {
+                                "auctions": {
+                                  "type": "object",
+                                  "properties": {
+                                    "details": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "auctionBreakdown": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "relatedModalities": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "ascending",
+                                                    "descending",
+                                                    "random"
+                                                  ]
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     }
