@@ -1,7 +1,10 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "051c2a5018ae2"
+  },
   "info": {
-    "title": "findAuctions",
+    "title": "saveAuctions",
     "version": "1.02",
     "description": ""
   },
@@ -13,7 +16,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Find Auctions",
+        "summary": "Save Auctions",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -30,6 +33,9 @@
                       "properties": {
                         "result": {
                           "type": "object",
+                          "required": [
+                            "tender"
+                          ],
                           "properties": {
                             "tender": {
                               "type": "object",
@@ -58,7 +64,12 @@
                                             ],
                                             "properties": {
                                               "auctionDirection": {
-                                                "type": "string"
+                                                "type": "string",
+                                                "enum": [
+                                                  "ascending",
+                                                  "descending",
+                                                  "random"
+                                                ]
                                               }
                                             }
                                           }
@@ -76,12 +87,12 @@
                                 }
                               }
                             }
-                          },
-                          "required": [
-                            "tender"
-                          ]
+                          }
                         }
-                      }
+                      },
+                      "required": [
+                        "result"
+                      ]
                     },
                     {
                       "type": "object",
@@ -100,18 +111,19 @@
                                       "items": {
                                         "type": "object",
                                         "properties": {
+                                          "status": {
+                                            "type": "string",
+                                            "enum": [
+                                              "pending"
+                                            ]
+                                          },
                                           "auctionBreakdown": {
                                             "type": "array",
                                             "items": {
                                               "type": "object",
                                               "properties": {
                                                 "relatedModalities": {
-                                                  "type": "string",
-                                                  "enum": [
-                                                    "ascending",
-                                                    "descending",
-                                                    "random"
-                                                  ]
+                                                  "type": "string"
                                                 }
                                               }
                                             }
@@ -148,7 +160,8 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -160,21 +173,49 @@
                           "tender": {
                             "type": "object",
                             "required": [
-                              "lots"
+                              "auctions"
                             ],
                             "properties": {
-                              "lots": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
+                              "auctions": {
+                                "$ref": "../models/auctions.json"
+                              },
+                              "procurementMethodModalitiesDetails": {
+                                "type": "object",
+                                "required": [
+                                  "electronicAuction"
+                                ],
+                                "properties": {
+                                  "electronicAuction": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "modalities": {
+                                          "type": "object",
+                                          "required": [
+                                            "auctionDirection"
+                                          ],
+                                          "properties": {
+                                            "auctionDirection": {
+                                              "type": "string",
+                                              "enum": [
+                                                "ascending",
+                                                "descending",
+                                                "random"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "modalities"
+                                      ]
                                     }
-                                  },
-                                  "required": [
-                                    "id"
-                                  ]
+                                  }
                                 }
                               }
                             }
@@ -192,7 +233,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "findAuctions"
+                          "saveAuctions"
                         ]
                       }
                     }

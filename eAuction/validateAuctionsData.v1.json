@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateAuctionsData",
-    "version": "1.07",
+    "version": "1.08",
     "description": ""
   },
   "servers": [
@@ -90,17 +90,17 @@
                           "tender": {
                             "type": "object",
                             "required": [
-                              "electronicAuctions",
+                              "auctions",
                               "lots"
                             ],
                             "properties": {
-                              "electronicAuctions": {
+                              "auctions": {
+                                "$ref": "../models/auctions.json"
+                              },
+                              "procurementMethodModalitiesDetails": {
                                 "type": "object",
-                                "required": [
-                                  "details"
-                                ],
                                 "properties": {
-                                  "details": {
+                                  "electronicAuction": {
                                     "type": "array",
                                     "items": {
                                       "type": "object",
@@ -108,39 +108,33 @@
                                         "id": {
                                           "type": "string"
                                         },
-                                        "relatedLot": {
-                                          "type": "string"
-                                        },
-                                        "electronicAuctionModalities": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": "object",
-                                            "properties": {
-                                              "eligibleMinimumDifference": {
-                                                "type": "object",
-                                                "properties": {
-                                                  "currency": {
-                                                    "type": "string"
-                                                  },
-                                                  "amount": {
-                                                    "type": "number"
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "required": [
-                                              "eligibleMinimumDifference"
-                                            ]
+                                        "modalities": {
+                                          "type": "object",
+                                          "required": [
+                                            "auctionDirection"
+                                          ],
+                                          "properties": {
+                                            "auctionDirection": {
+                                              "type": "string",
+                                              "enum": [
+                                                "ascending",
+                                                "descending",
+                                                "random"
+                                              ]
+                                            }
                                           }
                                         }
                                       },
                                       "required": [
                                         "id",
-                                        "electronicAuctionModalities"
+                                        "modalities"
                                       ]
                                     }
                                   }
-                                }
+                                },
+                                "required": [
+                                  "electronicAuction"
+                                ]
                               },
                               "lots": {
                                 "type": "array",
@@ -152,33 +146,20 @@
                                     },
                                     "value": {
                                       "type": "object",
-                                      "description": "для operationType = createRfq",
                                       "properties": {
                                         "amount": {
                                           "type": "number"
-                                        },
-                                        "currency": {
-                                          "type": "string"
                                         }
-                                      }
+                                      },
+                                      "required": [
+                                        "amount"
+                                      ]
                                     }
                                   },
                                   "required": [
                                     "id"
                                   ]
                                 }
-                              },
-                              "value": {
-                                "type": "object",
-                                "description": "для operationType = createPcr",
-                                "properties": {
-                                  "currency": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "currency"
-                                ]
                               }
                             }
                           }
