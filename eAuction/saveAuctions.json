@@ -1,0 +1,252 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "051c2a5018ae2"
+  },
+  "info": {
+    "title": "saveAuctions",
+    "version": "1.02",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9191"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Save Auctions",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "tender"
+                          ],
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "auctions"
+                              ],
+                              "properties": {
+                                "auctions": {
+                                  "$ref": "../models/auctions.json"
+                                },
+                                "procurementMethodModalitiesDetails": {
+                                  "type": "object",
+                                  "properties": {
+                                    "electronicAuction": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "modalities": {
+                                            "type": "object",
+                                            "required": [
+                                              "auctionDirection"
+                                            ],
+                                            "properties": {
+                                              "auctionDirection": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "ascending",
+                                                  "descending",
+                                                  "random"
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "modalities"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "electronicAuction"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "properties": {
+                                "auctions": {
+                                  "type": "object",
+                                  "properties": {
+                                    "details": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "status": {
+                                            "type": "string",
+                                            "enum": [
+                                              "pending"
+                                            ]
+                                          },
+                                          "auctionBreakdown": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "relatedModalities": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "auctions"
+                            ],
+                            "properties": {
+                              "auctions": {
+                                "$ref": "../models/auctions.json"
+                              },
+                              "procurementMethodModalitiesDetails": {
+                                "type": "object",
+                                "required": [
+                                  "electronicAuction"
+                                ],
+                                "properties": {
+                                  "electronicAuction": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "modalities": {
+                                          "type": "object",
+                                          "required": [
+                                            "auctionDirection"
+                                          ],
+                                          "properties": {
+                                            "auctionDirection": {
+                                              "type": "string",
+                                              "enum": [
+                                                "ascending",
+                                                "descending",
+                                                "random"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "modalities"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "saveAuctions"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
