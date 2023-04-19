@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "0u4i848g90vep"
+  },
+  "info": {
+    "title": "Auction",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [],
+  "paths": {
+    "/model": {
+      "options": {
+        "summary": "Auction",
+        "operationId": "options-model",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "cpid": {
+                        "$ref": "../../models/cpid.v1.json"
+                      },
+                      "ocid": {
+                        "$ref": "../../models/ocid.v1.json"
+                      },
+                      "tender": {
+                        "type": "object",
+                        "required": [
+                          "auctions"
+                        ],
+                        "properties": {
+                          "auctions": {
+                            "$ref": "../../models/auctions.json"
+                          },
+                          "procurementMethodModalitiesDetails": {
+                            "type": "object",
+                            "properties": {
+                              "electronicAuction": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "modalities": {
+                                      "type": "object",
+                                      "required": [
+                                        "auctionDirection"
+                                      ],
+                                      "properties": {
+                                        "auctionDirection": {
+                                          "type": "string",
+                                          "enum": [
+                                            "ascending",
+                                            "descending",
+                                            "random"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "modalities"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "electronicAuction"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "cpid",
+                      "ocid",
+                      "tender"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "tender": {
+                        "type": "object",
+                        "properties": {
+                          "auctions": {
+                            "type": "object",
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "pending"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "description": "Expenditure Item"
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
