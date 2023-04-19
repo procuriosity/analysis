@@ -45,6 +45,7 @@
                                   "properties": {
                                     "electronicAuction": {
                                       "type": "array",
+                                      "maxItems": 1,
                                       "items": {
                                         "type": "object",
                                         "properties": {
@@ -58,7 +59,12 @@
                                             ],
                                             "properties": {
                                               "auctionDirection": {
-                                                "type": "string"
+                                                "type": "string",
+                                                "enum": [
+                                                  "ascending",
+                                                  "descending",
+                                                  "random"
+                                                ]
                                               }
                                             }
                                           }
@@ -106,15 +112,13 @@
                                               "type": "object",
                                               "properties": {
                                                 "relatedModalities": {
-                                                  "type": "string",
-                                                  "enum": [
-                                                    "ascending",
-                                                    "descending",
-                                                    "random"
-                                                  ]
+                                                  "type": "string"
                                                 }
                                               }
                                             }
+                                          },
+                                          "status": {
+                                            "type": "string"
                                           }
                                         }
                                       }
