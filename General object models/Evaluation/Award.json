@@ -415,6 +415,9 @@
                                   "name"
                                 ]
                               },
+                              "quantity": {
+                                "type": "number"
+                              },
                               "classification": {
                                 "type": "object",
                                 "required": [
@@ -437,14 +440,39 @@
                                   }
                                 }
                               },
-                              "quantity": {
-                                "type": "number"
+                              "additionalClassifications": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string",
+                                      "enum": [
+                                        "CPVS"
+                                      ]
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "scheme",
+                                    "description"
+                                  ]
+                                }
+                              },
+                              "description": {
+                                "type": "string"
                               }
                             },
                             "required": [
                               "id",
-                              "classification",
-                              "quantity"
+                              "quantity",
+                              "classification"
                             ]
                           }
                         },
@@ -467,14 +495,14 @@
                               },
                               "relatedTenderer": {
                                 "type": "object",
-                                "required": [
-                                  "id"
-                                ],
                                 "properties": {
                                   "id": {
                                     "type": "string"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "id"
+                                ]
                               },
                               "requirement": {
                                 "type": "object",
@@ -489,10 +517,6 @@
                               },
                               "responder": {
                                 "type": "object",
-                                "required": [
-                                  "id",
-                                  "name"
-                                ],
                                 "properties": {
                                   "id": {
                                     "type": "string"
@@ -500,7 +524,11 @@
                                   "name": {
                                     "type": "string"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "id",
+                                  "name"
+                                ]
                               },
                               "description": {
                                 "type": "string"
