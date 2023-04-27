@@ -94,44 +94,13 @@
                               "lots"
                             ],
                             "properties": {
-                              "procurementMethodModalitiesDetails": {
-                                "type": "object",
-                                "properties": {
-                                  "electronicAuction": {
-                                    "type": "array",
-                                    "maxItems": 1,
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "modalities": {
-                                          "type": "object",
-                                          "required": [
-                                            "auctionDirection"
-                                          ],
-                                          "properties": {
-                                            "auctionDirection": {
-                                              "type": "string",
-                                              "enum": [
-                                                "ascending",
-                                                "descending",
-                                                "random"
-                                              ]
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "required": [
-                                        "id",
-                                        "modalities"
-                                      ]
-                                    }
-                                  }
-                                },
-                                "required": [
-                                  "electronicAuction"
+                              "awardCriteria": {
+                                "type": "string",
+                                "enum": [
+                                  "priceOnly",
+                                  "ratedCriteria",
+                                  "qualityOnly",
+                                  "costOnly"
                                 ]
                               },
                               "lots": {
@@ -147,6 +116,9 @@
                                     "id"
                                   ]
                                 }
+                              },
+                              "procurementMethodModalitiesDetails": {
+                                "$ref": "../models/procurementMethodModalitiesDetails.json"
                               }
                             }
                           },
