@@ -1,0 +1,53 @@
+{
+  "type": "object",
+  "x-stoplight": {
+    "id": "pyf1my6hw7u9n"
+  },
+  "title": "procurementMethodModalitiesDetails",
+  "examples": [],
+  "properties": {
+    "electronicAuction": {
+      "type": "object",
+      "required": [
+        "id",
+        "modalities"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "modalities": {
+          "type": "object",
+          "required": [
+            "auctionDirection"
+          ],
+          "properties": {
+            "auctionDirection": {
+              "type": "string",
+              "enum": [
+                "ascending",
+                "descending",
+                "random"
+              ]
+            },
+            "auctionAwardCriteria": {
+              "type": "array",
+              "maxItems": 1,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "priceOnly",
+                  "qualityOnly",
+                  "ratedCriteria"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "electronicAuction"
+  ]
+}
