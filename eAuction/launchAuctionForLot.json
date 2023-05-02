@@ -33,6 +33,12 @@
                       "properties": {
                         "result": {
                           "type": "object",
+                          "required": [
+                            "tender",
+                            "watchers",
+                            "bids",
+                            "auctions"
+                          ],
                           "properties": {
                             "tender": {
                               "type": "object",
@@ -41,6 +47,7 @@
                                 "title",
                                 "awardCriteria",
                                 "awardCriteriaDetails",
+                                "procurementMethodModalities",
                                 "lots",
                                 "items",
                                 "procurementMethodModalitiesDetails"
@@ -422,7 +429,8 @@
                                               "disclosureCategory",
                                               "auctionSubmissionOrder",
                                               "auctionDirection",
-                                              "auctionAwardCriteria"
+                                              "auctionAwardCriteria",
+                                              "checkpoint"
                                             ],
                                             "properties": {
                                               "auctionMethod": {
@@ -473,6 +481,12 @@
                                                     "submissionTimeAsc"
                                                   ]
                                                 }
+                                              },
+                                              "checkpoint": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "roundEnd"
+                                                ]
                                               }
                                             }
                                           }
@@ -801,15 +815,12 @@
                                 }
                               }
                             }
-                          },
-                          "required": [
-                            "tender",
-                            "watchers",
-                            "bids",
-                            "auctions"
-                          ]
+                          }
                         }
-                      }
+                      },
+                      "required": [
+                        "result"
+                      ]
                     }
                   ]
                 }
@@ -853,6 +864,7 @@
                               "title",
                               "awardCriteria",
                               "awardCriteriaDetails",
+                              "procurementMethodModalities",
                               "lots",
                               "items"
                             ],
