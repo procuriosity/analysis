@@ -59,9 +59,43 @@
                                             "enum": [
                                               "priceOnly",
                                               "qualityOnly",
-                                              "ratedCriteria"
+                                              "ratedCriteria",
+                                              "submissionTimeAsc"
                                             ]
                                           }
+                                        },
+                                        "auctionMethod": {
+                                          "type": "string",
+                                          "enum": [
+                                            "hardClose"
+                                          ]
+                                        },
+                                        "auctionMethodDetails": {
+                                          "type": "string",
+                                          "enum": [
+                                            "open"
+                                          ]
+                                        },
+                                        "disclosureCategory": {
+                                          "type": "string",
+                                          "enum": [
+                                            "groupParticipants"
+                                          ]
+                                        },
+                                        "auctionSubmissionOrder": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string",
+                                            "enum": [
+                                              "random"
+                                            ]
+                                          }
+                                        },
+                                        "checkpoint": {
+                                          "type": "string",
+                                          "enum": [
+                                            "roundEnd"
+                                          ]
                                         }
                                       }
                                     }
@@ -109,6 +143,29 @@
                                     "unsuccessful",
                                     "complete"
                                   ]
+                                },
+                                "auctionPeriod": {
+                                  "type": "object",
+                                  "properties": {
+                                    "startDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
+                                  },
+                                  "required": [
+                                    "startDate"
+                                  ]
+                                },
+                                "auctionBreakdown": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "relatedModalities": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
                                 }
                               }
                             }
