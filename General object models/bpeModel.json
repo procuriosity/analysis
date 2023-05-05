@@ -3753,9 +3753,43 @@
                                 "enum": [
                                   "priceOnly",
                                   "qualityOnly",
-                                  "ratedCriteria"
+                                  "ratedCriteria",
+                                  "submissionTimeAsc"
                                 ]
                               }
+                            },
+                            "auctionMethod": {
+                              "type": "string",
+                              "enum": [
+                                "hardClose"
+                              ]
+                            },
+                            "auctionMethodDetails": {
+                              "type": "string",
+                              "enum": [
+                                "open"
+                              ]
+                            },
+                            "disclosureCategory": {
+                              "type": "string",
+                              "enum": [
+                                "groupParticipants"
+                              ]
+                            },
+                            "auctionSubmissionOrder": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "random"
+                                ]
+                              }
+                            },
+                            "checkpoint": {
+                              "type": "string",
+                              "enum": [
+                                "roundEnd"
+                              ]
                             }
                           }
                         }
@@ -10366,7 +10400,12 @@
                     "status": {
                       "type": "string",
                       "enum": [
-                        "pending"
+                        "pending",
+                        "active",
+                        "withdrawn",
+                        "cancelled",
+                        "unsuccessful",
+                        "complete"
                       ]
                     },
                     "description": {
@@ -10418,13 +10457,22 @@
                                       "type": "object",
                                       "properties": {
                                         "id": {
-                                          "type": "string"
+                                          "type": "string",
+                                          "enum": [
+                                            "percent"
+                                          ]
                                         },
                                         "scheme": {
-                                          "type": "string"
+                                          "type": "string",
+                                          "enum": [
+                                            "UNCEFACT"
+                                          ]
                                         },
                                         "name": {
-                                          "type": "string"
+                                          "type": "string",
+                                          "enum": [
+                                            "percent"
+                                          ]
                                         }
                                       }
                                     }
@@ -10448,6 +10496,15 @@
                         "required": [
                           "id"
                         ]
+                      }
+                    },
+                    "auctionPeriod": {
+                      "type": "object",
+                      "properties": {
+                        "startDate": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
                       }
                     }
                   },
