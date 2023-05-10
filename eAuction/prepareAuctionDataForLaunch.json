@@ -4,7 +4,7 @@
     "id": "5m55bn3ui0wii"
   },
   "info": {
-    "title": "launchAuctionForLot",
+    "title": "prepareAuctionDataForLaunch",
     "version": "1.0",
     "description": ""
   },
@@ -16,7 +16,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Launch Auction For Lot",
+        "summary": "Prepare Auction Data For Launch",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -37,7 +37,8 @@
                             "tender",
                             "watchers",
                             "bids",
-                            "auctions"
+                            "auctions",
+                            "auctionLinks"
                           ],
                           "properties": {
                             "tender": {
@@ -590,6 +591,38 @@
                                   }
                                 }
                               }
+                            },
+                            "auctionLinks": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "owner": {
+                                    "type": "string"
+                                  },
+                                  "links": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "relatedBid": {
+                                          "type": "string"
+                                        },
+                                        "url": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "url"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "owner",
+                                  "links"
+                                ]
+                              }
                             }
                           }
                         }
@@ -621,7 +654,8 @@
                           "country",
                           "tender",
                           "parties",
-                          "bids"
+                          "bids",
+                          "auctions"
                         ],
                         "properties": {
                           "cpid": {
@@ -915,6 +949,41 @@
                                 }
                               }
                             }
+                          },
+                          "auctions": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "auctionPeriod": {
+                                      "type": "object",
+                                      "required": [
+                                        "startDate"
+                                      ],
+                                      "properties": {
+                                        "startDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "auctionPeriod"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }
@@ -929,7 +998,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "launchAuctionForLot"
+                          "prepareAuctionDataForLaunch"
                         ]
                       }
                     }
