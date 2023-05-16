@@ -1,0 +1,721 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "sru49kxtg8v2v"
+  },
+  "info": {
+    "title": "updateAuctionResult",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9191"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Update Auction Result",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "auctions",
+                            "tender"
+                          ],
+                          "properties": {
+                            "auctions": {
+                              "type": "object",
+                              "required": [
+                                "details"
+                              ],
+                              "properties": {
+                                "details": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "relatedLot": {
+                                        "type": "string"
+                                      },
+                                      "auctionPeriod": {
+                                        "type": "object",
+                                        "required": [
+                                          "startDate",
+                                          "endDate"
+                                        ],
+                                        "properties": {
+                                          "startDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          },
+                                          "endDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        }
+                                      },
+                                      "auctionBreakdown": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "auctionProgress": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "relatedRound": {
+                                                    "type": "string"
+                                                  },
+                                                  "roundPeriod": {
+                                                    "type": "object",
+                                                    "required": [
+                                                      "startDate",
+                                                      "endDate"
+                                                    ],
+                                                    "properties": {
+                                                      "startDate": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                      },
+                                                      "endDate": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                      }
+                                                    }
+                                                  },
+                                                  "bids": {
+                                                    "type": "array",
+                                                    "items": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "id": {
+                                                          "type": "string"
+                                                        },
+                                                        "date": {
+                                                          "type": "string",
+                                                          "format": "date-time"
+                                                        },
+                                                        "value": {
+                                                          "type": "object",
+                                                          "required": [
+                                                            "amount",
+                                                            "currency"
+                                                          ],
+                                                          "properties": {
+                                                            "amount": {
+                                                              "type": "number"
+                                                            },
+                                                            "currency": {
+                                                              "type": "string"
+                                                            }
+                                                          }
+                                                        },
+                                                        "items": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "id": {
+                                                                "type": "string"
+                                                              },
+                                                              "unit": {
+                                                                "type": "object",
+                                                                "required": [
+                                                                  "id",
+                                                                  "value"
+                                                                ],
+                                                                "properties": {
+                                                                  "id": {
+                                                                    "type": "string"
+                                                                  },
+                                                                  "value": {
+                                                                    "type": "object",
+                                                                    "required": [
+                                                                      "amount",
+                                                                      "currency"
+                                                                    ],
+                                                                    "properties": {
+                                                                      "amount": {
+                                                                        "type": "number"
+                                                                      },
+                                                                      "currency": {
+                                                                        "type": "string"
+                                                                      }
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            },
+                                                            "required": [
+                                                              "id",
+                                                              "unit"
+                                                            ]
+                                                          }
+                                                        },
+                                                        "requirementResponses": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "id": {
+                                                                "type": "string"
+                                                              },
+                                                              "value": {
+                                                                "type": [
+                                                                  "string",
+                                                                  "number",
+                                                                  "integer",
+                                                                  "boolean"
+                                                                ]
+                                                              },
+                                                              "requirement": {
+                                                                "type": "object",
+                                                                "required": [
+                                                                  "id"
+                                                                ],
+                                                                "properties": {
+                                                                  "id": {
+                                                                    "type": "string"
+                                                                  }
+                                                                }
+                                                              }
+                                                            },
+                                                            "required": [
+                                                              "id",
+                                                              "value",
+                                                              "requirement"
+                                                            ]
+                                                          }
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "id",
+                                                        "date",
+                                                        "value"
+                                                      ]
+                                                    }
+                                                  }
+                                                },
+                                                "required": [
+                                                  "relatedRound",
+                                                  "roundPeriod",
+                                                  "bids"
+                                                ]
+                                              }
+                                            },
+                                            "relatedModalities": {
+                                              "type": "string"
+                                            },
+                                            "rounds": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "internalId": {
+                                                    "type": "number",
+                                                    "description": "round execution turn"
+                                                  },
+                                                  "roundPeriod": {
+                                                    "type": "object",
+                                                    "required": [
+                                                      "duration"
+                                                    ],
+                                                    "properties": {
+                                                      "duration": {
+                                                        "type": "string",
+                                                        "pattern": "^(PT)[0-9_](M)$"
+                                                      }
+                                                    }
+                                                  },
+                                                  "auctionThreshold": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "estimatedValue",
+                                                      "tendererCurrentOffer",
+                                                      "tendererLowestOffer",
+                                                      "tendererHighestOffer",
+                                                      "currentLowestOffer",
+                                                      "currentHighestOffer",
+                                                      "initialLowestOffer",
+                                                      "groupWinningOffer",
+                                                      "initialHighestOffer"
+                                                    ]
+                                                  },
+                                                  "eligibleMinDifference": {
+                                                    "type": "object",
+                                                    "required": [
+                                                      "value",
+                                                      "unit"
+                                                    ],
+                                                    "properties": {
+                                                      "value": {
+                                                        "type": "number"
+                                                      },
+                                                      "unit": {
+                                                        "type": "object",
+                                                        "required": [
+                                                          "id",
+                                                          "scheme",
+                                                          "name"
+                                                        ],
+                                                        "properties": {
+                                                          "id": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                              "percent"
+                                                            ]
+                                                          },
+                                                          "scheme": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                              "UNCEFACT"
+                                                            ]
+                                                          },
+                                                          "name": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                              "percent"
+                                                            ]
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "required": [
+                                                  "id",
+                                                  "internalId",
+                                                  "roundPeriod",
+                                                  "auctionThreshold",
+                                                  "eligibleMinDifference"
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "auctionProgress",
+                                            "relatedModalities",
+                                            "rounds"
+                                          ]
+                                        }
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "status": {
+                                        "type": "string",
+                                        "enum": [
+                                          "complete"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "relatedLot",
+                                      "auctionPeriod",
+                                      "auctionBreakdown",
+                                      "status"
+                                    ]
+                                  }
+                                }
+                              }
+                            },
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "procurementMethodModalitiesDetails"
+                              ],
+                              "properties": {
+                                "procurementMethodModalitiesDetails": {
+                                  "type": "object",
+                                  "required": [
+                                    "electronicAuction"
+                                  ],
+                                  "properties": {
+                                    "electronicAuction": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "modalities": {
+                                            "type": "object",
+                                            "required": [
+                                              "auctionMethod",
+                                              "auctionMethodDetails",
+                                              "disclosureCategory",
+                                              "auctionSubmissionOrder",
+                                              "auctionDirection",
+                                              "auctionAwardCriteria",
+                                              "checkpoint"
+                                            ],
+                                            "properties": {
+                                              "auctionMethod": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "hardClose"
+                                                ]
+                                              },
+                                              "auctionMethodDetails": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "open"
+                                                ]
+                                              },
+                                              "disclosureCategory": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "groupParticipants"
+                                                ]
+                                              },
+                                              "auctionSubmissionOrder": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "random"
+                                                  ]
+                                                }
+                                              },
+                                              "auctionDirection": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "ascending",
+                                                  "descending",
+                                                  "random"
+                                                ]
+                                              },
+                                              "auctionAwardCriteria": {
+                                                "type": "array",
+                                                "minItems": 2,
+                                                "maxItems": 2,
+                                                "items": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "priceOnly",
+                                                    "qualityOnly",
+                                                    "ratedCriteria",
+                                                    "submissionTimeAsc"
+                                                  ]
+                                                }
+                                              },
+                                              "checkpoint": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "roundEnd"
+                                                ]
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "modalities"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "auctions"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "auctions": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "relatedLot": {
+                                      "type": "string"
+                                    },
+                                    "auctionPeriod": {
+                                      "type": "object",
+                                      "required": [
+                                        "startDate",
+                                        "endDate"
+                                      ],
+                                      "properties": {
+                                        "startDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        },
+                                        "endDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        }
+                                      }
+                                    },
+                                    "auctionBreakdown": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "auctionProgress": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "relatedRound": {
+                                                  "type": "string"
+                                                },
+                                                "roundPeriod": {
+                                                  "type": "object",
+                                                  "required": [
+                                                    "startDate",
+                                                    "endDate"
+                                                  ],
+                                                  "properties": {
+                                                    "startDate": {
+                                                      "type": "string",
+                                                      "format": "date-time"
+                                                    },
+                                                    "endDate": {
+                                                      "type": "string",
+                                                      "format": "date-time"
+                                                    }
+                                                  }
+                                                },
+                                                "bids": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "date": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                      },
+                                                      "value": {
+                                                        "type": "object",
+                                                        "required": [
+                                                          "amount",
+                                                          "currency"
+                                                        ],
+                                                        "properties": {
+                                                          "amount": {
+                                                            "type": "number"
+                                                          },
+                                                          "currency": {
+                                                            "type": "string"
+                                                          }
+                                                        }
+                                                      },
+                                                      "items": {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "id": {
+                                                              "type": "string"
+                                                            },
+                                                            "unit": {
+                                                              "type": "object",
+                                                              "required": [
+                                                                "id",
+                                                                "value"
+                                                              ],
+                                                              "properties": {
+                                                                "id": {
+                                                                  "type": "string"
+                                                                },
+                                                                "value": {
+                                                                  "type": "object",
+                                                                  "required": [
+                                                                    "amount",
+                                                                    "currency"
+                                                                  ],
+                                                                  "properties": {
+                                                                    "amount": {
+                                                                      "type": "number"
+                                                                    },
+                                                                    "currency": {
+                                                                      "type": "string"
+                                                                    }
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          },
+                                                          "required": [
+                                                            "id",
+                                                            "unit"
+                                                          ]
+                                                        }
+                                                      },
+                                                      "requirementResponses": {
+                                                        "type": "array",
+                                                        "items": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "id": {
+                                                              "type": "string"
+                                                            },
+                                                            "value": {
+                                                              "type": [
+                                                                "string",
+                                                                "number",
+                                                                "integer",
+                                                                "boolean"
+                                                              ]
+                                                            },
+                                                            "requirement": {
+                                                              "type": "object",
+                                                              "required": [
+                                                                "id"
+                                                              ],
+                                                              "properties": {
+                                                                "id": {
+                                                                  "type": "string"
+                                                                }
+                                                              }
+                                                            }
+                                                          },
+                                                          "required": [
+                                                            "id",
+                                                            "value",
+                                                            "requirement"
+                                                          ]
+                                                        }
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "id",
+                                                      "date",
+                                                      "value"
+                                                    ]
+                                                  }
+                                                }
+                                              },
+                                              "required": [
+                                                "relatedRound",
+                                                "roundPeriod",
+                                                "bids"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "auctionProgress"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "relatedLot",
+                                    "auctionPeriod",
+                                    "auctionBreakdown"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "updateAuctionsResult"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
