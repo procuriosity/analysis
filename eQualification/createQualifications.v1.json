@@ -28,56 +28,52 @@
                       "type": "object",
                       "properties": {
                         "result": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "qualifications": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string",
-                                      "format": "uuid"
-                                    },
-                                    "status": {
-                                      "type": "string",
-                                      "enum": [
-                                        "pending"
-                                      ]
-                                    },
-                                    "relatedSubmission": {
-                                      "type": "string",
-                                      "format": "uuid"
-                                    },
-                                    "date": {
-                                      "type": "string",
-                                      "format": "date-time"
-                                    },
-                                    "scoring": {
-                                      "type": "number",
-                                      "minimum": 0.001,
-                                      "maximum": 1
-                                    },
-                                    "token": {
-                                      "type": "string",
-                                      "format": "uuid"
-                                    }
+                          "type": "object",
+                          "required": [
+                            "qualifications"
+                          ],
+                          "properties": {
+                            "qualifications": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid"
                                   },
-                                  "required": [
-                                    "id",
-                                    "status",
-                                    "relatedSubmission",
-                                    "date",
-                                    "token"
-                                  ]
-                                }
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "pending"
+                                    ]
+                                  },
+                                  "relatedSubmission": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                  },
+                                  "date": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "scoring": {
+                                    "type": "number"
+                                  },
+                                  "token": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "status",
+                                  "relatedSubmission",
+                                  "date",
+                                  "scoring",
+                                  "token"
+                                ]
                               }
-                            },
-                            "required": [
-                              "qualifications"
-                            ]
+                            }
                           }
                         }
                       },
