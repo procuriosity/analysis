@@ -324,6 +324,126 @@
                                           ]
                                         }
                                       },
+                                      "auctionResults": {
+                                        "type": "object",
+                                        "required": [
+                                          "bids"
+                                        ],
+                                        "properties": {
+                                          "bids": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "date": {
+                                                  "type": "string",
+                                                  "format": "date-time"
+                                                },
+                                                "value": {
+                                                  "type": "object",
+                                                  "required": [
+                                                    "amount",
+                                                    "currency"
+                                                  ],
+                                                  "properties": {
+                                                    "amount": {
+                                                      "type": "number"
+                                                    },
+                                                    "currency": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                },
+                                                "items": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "unit": {
+                                                        "type": "object",
+                                                        "required": [
+                                                          "id",
+                                                          "value"
+                                                        ],
+                                                        "properties": {
+                                                          "id": {
+                                                            "type": "string"
+                                                          },
+                                                          "value": {
+                                                            "type": "object",
+                                                            "required": [
+                                                              "amount",
+                                                              "currency"
+                                                            ],
+                                                            "properties": {
+                                                              "amount": {
+                                                                "type": "number"
+                                                              },
+                                                              "currency": {
+                                                                "type": "string"
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "id",
+                                                      "unit"
+                                                    ]
+                                                  }
+                                                },
+                                                "requirementResponses": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "value": {
+                                                        "type": [
+                                                          "string",
+                                                          "number",
+                                                          "integer",
+                                                          "boolean"
+                                                        ]
+                                                      },
+                                                      "requirement": {
+                                                        "type": "object",
+                                                        "required": [
+                                                          "id"
+                                                        ],
+                                                        "properties": {
+                                                          "id": {
+                                                            "type": "string"
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "id",
+                                                      "value",
+                                                      "requirement"
+                                                    ]
+                                                  }
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "date",
+                                                "value"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      },
                                       "description": {
                                         "type": "string"
                                       },
@@ -339,6 +459,7 @@
                                       "relatedLot",
                                       "auctionPeriod",
                                       "auctionBreakdown",
+                                      "auctionResults",
                                       "status"
                                     ]
                                   }
@@ -576,13 +697,134 @@
                                           "auctionProgress"
                                         ]
                                       }
+                                    },
+                                    "auctionResults": {
+                                      "type": "object",
+                                      "required": [
+                                        "bids"
+                                      ],
+                                      "properties": {
+                                        "bids": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "date": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              },
+                                              "value": {
+                                                "type": "object",
+                                                "required": [
+                                                  "amount",
+                                                  "currency"
+                                                ],
+                                                "properties": {
+                                                  "amount": {
+                                                    "type": "number"
+                                                  },
+                                                  "currency": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              },
+                                              "items": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "id": {
+                                                      "type": "string"
+                                                    },
+                                                    "unit": {
+                                                      "type": "object",
+                                                      "required": [
+                                                        "id",
+                                                        "value"
+                                                      ],
+                                                      "properties": {
+                                                        "id": {
+                                                          "type": "string"
+                                                        },
+                                                        "value": {
+                                                          "type": "object",
+                                                          "required": [
+                                                            "amount",
+                                                            "currency"
+                                                          ],
+                                                          "properties": {
+                                                            "amount": {
+                                                              "type": "number"
+                                                            },
+                                                            "currency": {
+                                                              "type": "string"
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "id",
+                                                    "unit"
+                                                  ]
+                                                }
+                                              },
+                                              "requirementResponses": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "id": {
+                                                      "type": "string"
+                                                    },
+                                                    "value": {
+                                                      "type": [
+                                                        "string",
+                                                        "number",
+                                                        "integer",
+                                                        "boolean"
+                                                      ]
+                                                    },
+                                                    "requirement": {
+                                                      "type": "object",
+                                                      "required": [
+                                                        "id"
+                                                      ],
+                                                      "properties": {
+                                                        "id": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "id",
+                                                    "value",
+                                                    "requirement"
+                                                  ]
+                                                }
+                                              }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "date",
+                                              "value"
+                                            ]
+                                          }
+                                        }
+                                      }
                                     }
                                   },
                                   "required": [
                                     "id",
                                     "relatedLot",
                                     "auctionPeriod",
-                                    "auctionBreakdown"
+                                    "auctionBreakdown",
+                                    "auctionResults"
                                   ]
                                 }
                               }
