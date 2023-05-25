@@ -34,14 +34,14 @@
                             "tender": {
                               "type": "object",
                               "required": [
-                                "auctions"
+                                "procurementMethodModalitiesDetails"
                               ],
                               "properties": {
-                                "auctions": {
-                                  "$ref": "../models/auctions.json"
-                                },
                                 "procurementMethodModalitiesDetails": {
                                   "type": "object",
+                                  "required": [
+                                    "electronicAuction"
+                                  ],
                                   "properties": {
                                     "electronicAuction": {
                                       "type": "array",
@@ -63,7 +63,7 @@
                                                 "enum": [
                                                   "ascending",
                                                   "descending",
-                                                  "random"
+                                                  "any"
                                                 ]
                                               }
                                             }
@@ -75,16 +75,16 @@
                                         ]
                                       }
                                     }
-                                  },
-                                  "required": [
-                                    "electronicAuction"
-                                  ]
+                                  }
                                 }
                               }
+                            },
+                            "auctions": {
+                              "$ref": "../models/auctions.json"
                             }
                           },
                           "required": [
-                            "tender"
+                            "auctions"
                           ]
                         }
                       }
@@ -95,36 +95,31 @@
                         "result": {
                           "type": "object",
                           "properties": {
-                            "tender": {
+                            "auctions": {
                               "type": "object",
                               "properties": {
-                                "auctions": {
-                                  "type": "object",
-                                  "properties": {
-                                    "details": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "auctionBreakdown": {
-                                            "type": "array",
-                                            "items": {
-                                              "type": "object",
-                                              "properties": {
-                                                "relatedModalities": {
-                                                  "type": "string"
-                                                }
-                                              }
+                                "details": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "auctionBreakdown": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "relatedModalities": {
+                                              "type": "string"
                                             }
-                                          },
-                                          "status": {
-                                            "type": "string",
-                                            "enum": [
-                                              "cancelled",
-                                              "withdrawn"
-                                            ]
                                           }
                                         }
+                                      },
+                                      "status": {
+                                        "type": "string",
+                                        "enum": [
+                                          "cancelled",
+                                          "withdrawn"
+                                        ]
                                       }
                                     }
                                   }
