@@ -33,9 +33,6 @@
                           "properties": {
                             "tender": {
                               "type": "object",
-                              "required": [
-                                "procurementMethodModalitiesDetails"
-                              ],
                               "properties": {
                                 "procurementMethodModalitiesDetails": {
                                   "type": "object",
@@ -54,9 +51,6 @@
                                           },
                                           "modalities": {
                                             "type": "object",
-                                            "required": [
-                                              "auctionDirection"
-                                            ],
                                             "properties": {
                                               "auctionDirection": {
                                                 "type": "string",
@@ -65,6 +59,18 @@
                                                   "descending",
                                                   "any"
                                                 ]
+                                              },
+                                              "auctionAwardCriteria": {
+                                                "type": "array",
+                                                "enum": [
+                                                  "priceOnly",
+                                                  "qualityOnly",
+                                                  "ratedCriteria"
+                                                ],
+                                                "maxItems": 1,
+                                                "items": {
+                                                  "type": "string"
+                                                }
                                               }
                                             }
                                           }
@@ -77,7 +83,10 @@
                                     }
                                   }
                                 }
-                              }
+                              },
+                              "required": [
+                                "procurementMethodModalitiesDetails"
+                              ]
                             },
                             "auctions": {
                               "$ref": "../models/auctions.json"
