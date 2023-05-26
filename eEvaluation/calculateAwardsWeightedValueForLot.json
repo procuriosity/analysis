@@ -335,9 +335,6 @@
                           },
                           "bids": {
                             "type": "object",
-                            "required": [
-                              "details"
-                            ],
                             "properties": {
                               "details": {
                                 "type": "array",
@@ -389,7 +386,10 @@
                                   ]
                                 }
                               }
-                            }
+                            },
+                            "required": [
+                              "details"
+                            ]
                           },
                           "auctions": {
                             "type": "object",
@@ -402,60 +402,67 @@
                                     "id": {
                                       "type": "string"
                                     },
-                                    "bids": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "id": {
-                                            "type": "string"
-                                          },
-                                          "requirementResponses": {
-                                            "type": "array",
-                                            "items": {
-                                              "type": "object",
-                                              "properties": {
-                                                "id": {
-                                                  "type": "string"
-                                                },
-                                                "value": {
-                                                  "type": [
-                                                    "string",
-                                                    "number",
-                                                    "integer",
-                                                    "boolean"
-                                                  ]
-                                                },
-                                                "requirement": {
+                                    "auctionResults": {
+                                      "type": "object",
+                                      "properties": {
+                                        "bids": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "requirementResponses": {
+                                                "type": "array",
+                                                "items": {
                                                   "type": "object",
-                                                  "required": [
-                                                    "id"
-                                                  ],
                                                   "properties": {
                                                     "id": {
                                                       "type": "string"
+                                                    },
+                                                    "value": {
+                                                      "type": [
+                                                        "string",
+                                                        "number",
+                                                        "integer",
+                                                        "boolean"
+                                                      ]
+                                                    },
+                                                    "requirement": {
+                                                      "type": "object",
+                                                      "required": [
+                                                        "id"
+                                                      ],
+                                                      "properties": {
+                                                        "id": {
+                                                          "type": "string"
+                                                        }
+                                                      }
                                                     }
-                                                  }
+                                                  },
+                                                  "required": [
+                                                    "id",
+                                                    "value",
+                                                    "requirement"
+                                                  ]
                                                 }
-                                              },
-                                              "required": [
-                                                "id",
-                                                "value",
-                                                "requirement"
-                                              ]
-                                            }
+                                              }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "requirementResponses"
+                                            ]
                                           }
-                                        },
-                                        "required": [
-                                          "id",
-                                          "requirementResponses"
-                                        ]
-                                      }
+                                        }
+                                      },
+                                      "required": [
+                                        "bids"
+                                      ]
                                     }
                                   },
                                   "required": [
-                                    "id",
-                                    "bids"
+                                    "id"
                                   ]
                                 }
                               }
