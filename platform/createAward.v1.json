@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "createAward",
+    "title": "createAwardMDProd",
     "version": "1.0"
   },
   "servers": [
@@ -326,7 +326,355 @@
               }
             }
           }
+        },
+        "tags": [
+          "createAward"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "cpid "
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "ocid"
         }
+      ]
+    },
+    "/do/award/{cpid}/{ocid}  for MD prod": {
+      "post": {
+        "summary": "Create Award MD Prod",
+        "operationId": "post-do",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "ID транзакции",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "description": "тип данных в теле запроса"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "токен tender",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lotId",
+            "description": "id лота в отношении которого создается award",
+            "required": true
+          }
+        ],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "award": {
+                        "type": "object",
+                        "required": [
+                          "value",
+                          "suppliers"
+                        ],
+                        "properties": {
+                          "internalId": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "object",
+                            "required": [
+                              "currency"
+                            ],
+                            "properties": {
+                              "amount": {
+                                "type": "number"
+                              },
+                              "currency": {
+                                "type": "string"
+                              },
+                              "amountNet": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "suppliers": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string"
+                                },
+                                "identifier": {
+                                  "$ref": "../models/identifier.v1.json"
+                                },
+                                "additionalIdentifiers": {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "../models/identifier.v1.json"
+                                  }
+                                },
+                                "address": {
+                                  "$ref": "../models/addressRequest.v1.json"
+                                },
+                                "contactPoint": {
+                                  "$ref": "../models/contact_point.v1.json"
+                                },
+                                "persones": {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "../models/person_request.v1.json"
+                                  }
+                                },
+                                "details": {
+                                  "type": "object",
+                                  "required": [
+                                    "scale"
+                                  ],
+                                  "properties": {
+                                    "typeOfSupplier": {
+                                      "type": "string",
+                                      "enum": [
+                                        "company",
+                                        "individual"
+                                      ]
+                                    },
+                                    "mainEconomicActivities": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "uri": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "scheme",
+                                          "description"
+                                        ]
+                                      }
+                                    },
+                                    "scale": {
+                                      "type": "string",
+                                      "enum": [
+                                        "micro",
+                                        "sme",
+                                        "large"
+                                      ]
+                                    },
+                                    "permits": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "scheme": {
+                                            "type": "string"
+                                          },
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "url": {
+                                            "type": "string"
+                                          },
+                                          "permitDetails": {
+                                            "type": "object",
+                                            "required": [
+                                              "issuedBy",
+                                              "issuedThought",
+                                              "validityPeriod"
+                                            ],
+                                            "properties": {
+                                              "issuedBy": {
+                                                "type": "object",
+                                                "required": [
+                                                  "id",
+                                                  "name"
+                                                ],
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "name": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              },
+                                              "issuedThought": {
+                                                "type": "object",
+                                                "required": [
+                                                  "id",
+                                                  "name"
+                                                ],
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "name": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              },
+                                              "validityPeriod": {
+                                                "type": "object",
+                                                "required": [
+                                                  "startDate"
+                                                ],
+                                                "properties": {
+                                                  "startDate": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                  },
+                                                  "endDate": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "scheme",
+                                          "id",
+                                          "permitDetails"
+                                        ]
+                                      }
+                                    },
+                                    "bankAccounts": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "../models/bankAccount.v1.json"
+                                      }
+                                    },
+                                    "legalForm": {
+                                      "$ref": "../models/legalForm.v1.json"
+                                    }
+                                  }
+                                }
+                              },
+                              "required": [
+                                "name",
+                                "identifier",
+                                "address",
+                                "contactPoint",
+                                "details"
+                              ]
+                            }
+                          },
+                          "documents": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "documentType": {
+                                  "type": "string",
+                                  "enum": [
+                                    "awardNotice",
+                                    "evaluationReports",
+                                    "contractDraft",
+                                    "winningBid",
+                                    "complaints",
+                                    "bidders",
+                                    "conflictOfInterest",
+                                    "cancellationDetails",
+                                    "submissionDocuments",
+                                    "contractArrangements",
+                                    "contractSchedule",
+                                    "shortlistedFirms"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "title",
+                                "documentType"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "award"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "tags": [
+          "createAwardMDProd"
+        ]
       },
       "parameters": [
         {
