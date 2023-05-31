@@ -56,10 +56,14 @@
                           ],
                           "properties": {
                             "amount": {
-                              "type": "string"
+                              "type": "number"
                             },
                             "currency": {
                               "type": "string"
+                            },
+                            "amountNet": {
+                              "type": "number",
+                              "description": "only for MD Prod"
                             }
                           }
                         },
@@ -376,6 +380,51 @@
                               "id",
                               "title",
                               "documentType"
+                            ]
+                          }
+                        },
+                        "items": {
+                          "type": "array",
+                          "description": "only for MD Prod",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "unit": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "object",
+                                    "required": [
+                                      "amount",
+                                      "currency"
+                                    ],
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      },
+                                      "currency": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "value"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id"
                             ]
                           }
                         }
