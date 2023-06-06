@@ -7,40 +7,43 @@
   "examples": [],
   "properties": {
     "electronicAuction": {
-      "type": "object",
-      "required": [
-        "id",
-        "modalities"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "modalities": {
-          "type": "object",
-          "properties": {
-            "auctionDirection": {
-              "type": "string",
-              "enum": [
-                "ascending",
-                "descending",
-                "any"
-              ]
-            },
-            "auctionAwardCriteria": {
-              "type": "array",
-              "maxItems": 1,
-              "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "modalities": {
+            "type": "object",
+            "properties": {
+              "auctionDirection": {
                 "type": "string",
                 "enum": [
-                  "priceOnly",
-                  "qualityOnly",
-                  "ratedCriteria"
+                  "ascending",
+                  "descending",
+                  "any"
                 ]
+              },
+              "auctionAwardCriteria": {
+                "type": "array",
+                "maxItems": 1,
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "priceOnly",
+                    "qualityOnly",
+                    "ratedCriteria"
+                  ]
+                }
               }
             }
           }
-        }
+        },
+        "required": [
+          "id",
+          "modalities"
+        ]
       }
     }
   },
