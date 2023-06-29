@@ -38,6 +38,7 @@
                             "properties": {
                               "electronicAuction": {
                                 "type": "array",
+                                "maxItems": 1,
                                 "items": {
                                   "type": "object",
                                   "properties": {
@@ -118,6 +119,170 @@
                       },
                       "auctions": {
                         "$ref": "../../models/auctions.json"
+                      },
+                      "bids": {
+                        "type": "object",
+                        "properties": {
+                          "details": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "date": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                "relatedLot": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "object",
+                                  "required": [
+                                    "amount",
+                                    "currency"
+                                  ],
+                                  "properties": {
+                                    "amount": {
+                                      "type": "number"
+                                    },
+                                    "currency": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "unit": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          },
+                                          "value": {
+                                            "type": "object",
+                                            "required": [
+                                              "amount",
+                                              "currency"
+                                            ],
+                                            "properties": {
+                                              "amount": {
+                                                "type": "number"
+                                              },
+                                              "currency": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "name",
+                                          "value"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ]
+                                  }
+                                },
+                                "sign": {
+                                  "type": "string",
+                                  "format": "uuid"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "date",
+                                "relatedLot",
+                                "value",
+                                "items",
+                                "sign"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "details"
+                        ]
+                      },
+                      "watchers": {
+                        "type": "object",
+                        "properties": {
+                          "restrictions": {
+                            "type": "boolean"
+                          },
+                          "details": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "relatedLot": {
+                                  "type": "string"
+                                },
+                                "sign": {
+                                  "type": "string",
+                                  "format": "uuid"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "relatedLot",
+                                "sign"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "restrictions"
+                        ]
+                      },
+                      "auctionLinks": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "owner": {
+                              "type": "string"
+                            },
+                            "links": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "relatedBid": {
+                                    "type": "string"
+                                  },
+                                  "url": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "url"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "owner",
+                            "links"
+                          ]
+                        }
                       }
                     },
                     "required": [
