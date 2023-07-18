@@ -1,0 +1,160 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "j413ro3w6h7fl"
+  },
+  "info": {
+    "title": "findFrameworkSignForLot",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031"
+    }
+  ],
+  "paths": {
+    "command": {
+      "parameters": [],
+      "post": {
+        "summary": "Find Framework Sign For Lot",
+        "operationId": "post-users-userId",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "tender"
+                          ],
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "lots"
+                              ],
+                              "properties": {
+                                "lots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "techniques": {
+                                        "type": "object",
+                                        "required": [
+                                          "hasFrameworkAgreement"
+                                        ],
+                                        "properties": {
+                                          "hasFrameworkAgreement": {
+                                            "type": "boolean"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "techniques"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "lots"
+                            ],
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "getFrameworkSign"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
