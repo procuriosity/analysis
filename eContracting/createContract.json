@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createContract",
-    "version": "1.04"
+    "version": "1.05"
   },
   "servers": [
     {
@@ -30,15 +30,22 @@
                         "result": {
                           "type": "object",
                           "required": [
+                            "ocid",
+                            "token",
                             "contracts",
                             "tender",
                             "awards",
-                            "token",
                             "relatedProcesses",
-                            "ocid",
                             "parties"
                           ],
                           "properties": {
+                            "ocid": {
+                              "$ref": "../models/ocid.v1.json"
+                            },
+                            "token": {
+                              "type": "string",
+                              "format": "uuid"
+                            },
                             "contracts": {
                               "type": "array",
                               "items": {
@@ -283,8 +290,36 @@
                                         "id": {
                                           "type": "string"
                                         },
-                                        "internalId": {
-                                          "type": "string"
+                                        "unit": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "name",
+                                            "value"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "name": {
+                                              "type": "string"
+                                            },
+                                            "value": {
+                                              "type": "object",
+                                              "required": [
+                                                "amount",
+                                                "currency"
+                                              ],
+                                              "properties": {
+                                                "amount": {
+                                                  "type": "number"
+                                                },
+                                                "currency": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
                                         },
                                         "classification": {
                                           "type": "object",
@@ -298,7 +333,10 @@
                                               "type": "string"
                                             },
                                             "scheme": {
-                                              "type": "string"
+                                              "type": "string",
+                                              "enum": [
+                                                "CPV"
+                                              ]
                                             },
                                             "description": {
                                               "type": "string"
@@ -314,7 +352,10 @@
                                                 "type": "string"
                                               },
                                               "scheme": {
-                                                "type": "string"
+                                                "type": "string",
+                                                "enum": [
+                                                  "CPVS"
+                                                ]
                                               },
                                               "description": {
                                                 "type": "string"
@@ -330,35 +371,15 @@
                                         "quantity": {
                                           "type": "number"
                                         },
-                                        "unit": {
-                                          "type": "object",
-                                          "required": [
-                                            "id",
-                                            "name"
-                                          ],
-                                          "properties": {
-                                            "id": {
-                                              "type": "string"
-                                            },
-                                            "name": {
-                                              "type": "string"
-                                            }
-                                          }
-                                        },
                                         "description": {
-                                          "type": "string"
-                                        },
-                                        "relatedLot": {
                                           "type": "string"
                                         }
                                       },
                                       "required": [
                                         "id",
-                                        "classification",
-                                        "quantity",
                                         "unit",
-                                        "description",
-                                        "relatedLot"
+                                        "classification",
+                                        "quantity"
                                       ]
                                     }
                                   }
@@ -371,10 +392,6 @@
                                   "items"
                                 ]
                               }
-                            },
-                            "token": {
-                              "type": "string",
-                              "format": "uuid"
                             },
                             "relatedProcesses": {
                               "type": "array",
@@ -416,9 +433,6 @@
                                   "uri"
                                 ]
                               }
-                            },
-                            "ocid": {
-                              "$ref": "../models/ocid.v1.json"
                             },
                             "parties": {
                               "type": "array",
@@ -768,17 +782,58 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "tender",
-                          "awards",
+                          "relatedOcid",
                           "date",
                           "pmd",
-                          "parties",
-                          "relatedOcid",
-                          "owner"
+                          "owner",
+                          "tender",
+                          "awards",
+                          "parties"
                         ],
                         "properties": {
                           "cpid": {
                             "$ref": "../models/cpid.v1.json"
+                          },
+                          "relatedOcid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "RFQ",
+                              "TEST_RFQ",
+                              "OT",
+                              "MV",
+                              "SV",
+                              "GPA",
+                              "RT",
+                              "TEST_OT",
+                              "TEST_MV",
+                              "TEST_SV",
+                              "TEST_GPA",
+                              "TEST_RT",
+                              "DA",
+                              "NP",
+                              "CD",
+                              "DC",
+                              "IP",
+                              "TEST_DA",
+                              "TEST_NP",
+                              "TEST_CD",
+                              "TEST_DC",
+                              "TEST_IP",
+                              "MC",
+                              "TEST_MC",
+                              "DCO",
+                              "TEST_DCO"
+                            ]
+                          },
+                          "owner": {
+                            "type": "string"
                           },
                           "tender": {
                             "type": "object",
@@ -787,8 +842,7 @@
                               "procurementMethod",
                               "procurementMethodDetails",
                               "mainProcurementCategory",
-                              "lots",
-                              "items"
+                              "lots"
                             ],
                             "properties": {
                               "classification": {
@@ -860,93 +914,6 @@
                                     "id",
                                     "title",
                                     "placeOfPerformance"
-                                  ]
-                                }
-                              },
-                              "items": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "internalId": {
-                                      "type": "string"
-                                    },
-                                    "classification": {
-                                      "type": "object",
-                                      "required": [
-                                        "id",
-                                        "scheme",
-                                        "description"
-                                      ],
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "scheme": {
-                                          "type": "string"
-                                        },
-                                        "description": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    },
-                                    "additionalClassifications": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "id": {
-                                            "type": "string"
-                                          },
-                                          "scheme": {
-                                            "type": "string"
-                                          },
-                                          "description": {
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "id",
-                                          "scheme",
-                                          "description"
-                                        ]
-                                      }
-                                    },
-                                    "quantity": {
-                                      "type": "number"
-                                    },
-                                    "unit": {
-                                      "type": "object",
-                                      "required": [
-                                        "id",
-                                        "name"
-                                      ],
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "name": {
-                                          "type": "string"
-                                        }
-                                      }
-                                    },
-                                    "description": {
-                                      "type": "string"
-                                    },
-                                    "relatedLot": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "classification",
-                                    "quantity",
-                                    "unit",
-                                    "description",
-                                    "relatedLot"
                                   ]
                                 }
                               },
@@ -1054,50 +1021,114 @@
                                       "title"
                                     ]
                                   }
+                                },
+                                "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "unit": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "name",
+                                          "value"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          },
+                                          "value": {
+                                            "type": "object",
+                                            "required": [
+                                              "amount",
+                                              "currency"
+                                            ],
+                                            "properties": {
+                                              "amount": {
+                                                "type": "number"
+                                              },
+                                              "currency": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "classification": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "scheme",
+                                          "description"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string",
+                                            "enum": [
+                                              "CPV"
+                                            ]
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "additionalClassifications": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string",
+                                            "enum": [
+                                              "CPVS"
+                                            ]
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "scheme",
+                                          "description"
+                                        ]
+                                      },
+                                      "quantity": {
+                                        "type": "number"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "unit",
+                                      "classification",
+                                      "quantity"
+                                    ]
+                                  }
                                 }
                               },
                               "required": [
                                 "id",
                                 "value",
                                 "relatedLots",
-                                "suppliers"
+                                "suppliers",
+                                "items"
                               ]
                             }
-                          },
-                          "date": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "RFQ",
-                              "TEST_RFQ",
-                              "OT",
-                              "MV",
-                              "SV",
-                              "GPA",
-                              "RT",
-                              "TEST_OT",
-                              "TEST_MV",
-                              "TEST_SV",
-                              "TEST_GPA",
-                              "TEST_RT",
-                              "DA",
-                              "NP",
-                              "CD",
-                              "DC",
-                              "IP",
-                              "TEST_DA",
-                              "TEST_NP",
-                              "TEST_CD",
-                              "TEST_DC",
-                              "TEST_IP",
-                              "MC",
-                              "TEST_MC",
-                              "DCO",
-                              "TEST_DCO"
-                            ]
                           },
                           "parties": {
                             "type": "array",
@@ -1418,12 +1449,6 @@
                                 "roles"
                               ]
                             }
-                          },
-                          "relatedOcid": {
-                            "$ref": "../models/ocid.v1.json"
-                          },
-                          "owner": {
-                            "type": "string"
                           }
                         }
                       }
