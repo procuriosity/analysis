@@ -1,10 +1,10 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "1v28918898506"
+    "id": "q0cn0nclmlchb"
   },
   "info": {
-    "title": "getLotIdsByContract",
+    "title": "Finalize Cans By Contract",
     "version": "1.0"
   },
   "servers": [
@@ -15,7 +15,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Get Lot Ids By Contract",
+        "summary": "Finalize Cans By Contract",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -33,29 +33,44 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "tender"
+                            "contracts"
                           ],
                           "properties": {
-                            "tender": {
-                              "type": "object",
-                              "required": [
-                                "lots"
-                              ],
-                              "properties": {
-                                "lots": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "id": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "required": [
-                                      "id"
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "enum": [
+                                      "active"
                                     ]
+                                  },
+                                  "statusDetails": {
+                                    "type": "string",
+                                    "enum": [
+                                      "issued"
+                                    ]
+                                  },
+                                  "awardId": {
+                                    "type": "string"
+                                  },
+                                  "lotId": {
+                                    "type": "string"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "id",
+                                  "status",
+                                  "statusDetails",
+                                  "awardId",
+                                  "lotId"
+                                ]
                               }
                             }
                           }
@@ -87,7 +102,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "contracts"
+                          "relatedCpid",
+                          "relatedOcid"
                         ],
                         "properties": {
                           "cpid": {
@@ -96,19 +112,11 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "contracts": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "id"
-                              ]
-                            }
+                          "relatedCpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "relatedOcid": {
+                            "$ref": "../models/ocid.v1.json"
                           }
                         }
                       }
@@ -123,7 +131,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getLotIdsByContract"
+                          "finalizeCansByContract"
                         ]
                       }
                     }
