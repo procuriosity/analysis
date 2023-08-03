@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "finalizeLot",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -64,7 +64,8 @@
                                       "status": {
                                         "type": "string",
                                         "enum": [
-                                          "unsuccessful"
+                                          "unsuccessful",
+                                          "complete"
                                         ]
                                       },
                                       "statusDetails": {
@@ -112,6 +113,7 @@
                         "required": [
                           "cpid",
                           "ocid",
+                          "operationType",
                           "tender"
                         ],
                         "properties": {
@@ -120,6 +122,13 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "confirmCan",
+                              "activateContract"
+                            ]
                           },
                           "tender": {
                             "type": "object",
