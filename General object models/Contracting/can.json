@@ -99,6 +99,46 @@
                       "token": {
                         "type": "string",
                         "format": "uuid"
+                      },
+                      "relatedProcesses": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "format": "uuid",
+                              "description": "идентификатор relatedProcess"
+                            },
+                            "relationship": {
+                              "type": "array",
+                              "description": "тип связи",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "x_contracting"
+                                ]
+                              }
+                            },
+                            "scheme": {
+                              "type": "string",
+                              "example": "ocid"
+                            },
+                            "identifier": {
+                              "type": "string"
+                            },
+                            "uri": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "relationship",
+                            "scheme",
+                            "identifier",
+                            "uri"
+                          ]
+                        }
                       }
                     },
                     "required": [
