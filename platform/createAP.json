@@ -1,0 +1,218 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "r4kvpzdckwapr"
+  },
+  "info": {
+    "title": "createAP",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/do/ap": {
+      "post": {
+        "summary": "Create Aggregated Plan",
+        "operationId": "post-do-fa",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "country",
+            "required": true,
+            "description": "country code according ISO 3166 alpha-2 standard"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "OF",
+                "TEST_OF",
+                "CF",
+                "TEST_CF"
+              ]
+            },
+            "in": "query",
+            "name": "pmd",
+            "required": true,
+            "description": "procurement method details"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "testMode",
+            "description": "test entity creation flag "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "description": "Bearer {access_token}"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "required": true,
+            "description": "transaction id"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "description": "data type in request body"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lang",
+            "required": true,
+            "description": "language code according ISO 639-1 standard"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tender": {
+                    "type": "object",
+                    "required": [
+                      "title",
+                      "description",
+                      "legalBasis",
+                      "classification",
+                      "value",
+                      "tenderPeriod",
+                      "contractPeriod",
+                      "procuringEntity"
+                    ],
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "legalBasis": {
+                        "type": "string",
+                        "enum": [
+                          "DIRECTIVE_2014_23_EU",
+                          "DIRECTIVE_2014_24_EU",
+                          "DIRECTIVE_2014_25_EU",
+                          "REGULATION_966_2012",
+                          "NATIONAL_PROCUREMENT_LAW",
+                          "DIRECTIVE_2009_81_EC"
+                        ]
+                      },
+                      "procurementMethodRationale": {
+                        "type": "string"
+                      },
+                      "classification": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "scheme"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "scheme": {
+                            "type": "string",
+                            "enum": [
+                              "CPV"
+                            ]
+                          }
+                        }
+                      },
+                      "value": {
+                        "type": "object",
+                        "required": [
+                          "currency"
+                        ],
+                        "properties": {
+                          "currency": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "tenderPeriod": {
+                        "type": "object",
+                        "required": [
+                          "startDate"
+                        ],
+                        "properties": {
+                          "startDate": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "contractPeriod": {
+                        "type": "object",
+                        "description": "duration of the planned Framework Agreement",
+                        "required": [
+                          "startDate",
+                          "endDate"
+                        ],
+                        "properties": {
+                          "startDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "endDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      },
+                      "procuringEntity": {
+                        "$ref": "../models/organizationWithoutPersonesRequest.v1.json"
+                      },
+                      "documents": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "../models/documents_object.v1.json"
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "tender"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
