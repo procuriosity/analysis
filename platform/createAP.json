@@ -190,8 +190,137 @@
                         }
                       },
                       "procuringEntity": {
-                        "$ref": "../models/organizationWithoutPersonesRequest.v1.json"
-                      },
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "identifier": {
+                                "$ref": "../models/identifier.v1.json"
+                              },
+                              "additionalIdentifiers": {
+                                "type": "array",
+                                "items": {
+                                  "$ref": "../models/identifier.v1.json"
+                                }
+                              },
+                              "address": {
+                                "$ref": "../models/addressRequest.v1.json"
+                              },
+                              "contactPoint": {
+                                "$ref": "../models/contact_point.v1.json"
+                              },
+                              "persones": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "title": {
+                                      "type": "string",
+                                      "enum": [
+                                        "Mr.",
+                                        "Ms.",
+                                        "Mrs."
+                                      ]
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "identifier": {
+                                      "$ref": "../models/identifierPerson.v1.json"
+                                    },
+                                    "businessFunctions": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "type": {
+                                            "type": "string",
+                                            "enum": [
+                                              "chairman",
+                                              "contactPoint",
+                                              "technicalOpener",
+                                              "priceOpener",
+                                              "priceEvaluator",
+                                              "technicalEvaluator",
+                                              "procurementOfficer"
+                                            ]
+                                          },
+                                          "jobTitle": {
+                                            "type": "string"
+                                          },
+                                          "period": {
+                                            "type": "object",
+                                            "required": [
+                                              "startDate"
+                                            ],
+                                            "properties": {
+                                              "startDate": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              }
+                                            }
+                                          },
+                                          "documents": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "title": {
+                                                  "type": "string"
+                                                },
+                                                "documentType": {
+                                                  "type": "string",
+                                                  "enum": [
+                                                    "regulatoryDocument"
+                                                  ]
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "title",
+                                                "documentType"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "type",
+                                          "jobTitle",
+                                          "period"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "title",
+                                    "name",
+                                    "identifier",
+                                    "businessFunctions"
+                                  ]
+                                }
+                              },
+                              "details": {
+                                "$ref": "../models/organization_details.json"
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "identifier",
+                              "address",
+                              "contactPoint"
+                            ]
+                          },
                       "documents": {
                         "type": "array",
                         "items": {
@@ -206,24 +335,24 @@
                             "documentType": {
                               "type": "string",
                               "enum": [
-                                    "tenderNotice",
-                                    "biddingDocuments",
-                                    "technicalSpecifications",
-                                    "evaluationCriteria",
-                                    "clarifications",
-                                    "eligibilityCriteria",
-                                    "riskProvisions",
-                                    "billOfQuantity",
-                                    "conflictOfInterest",
-                                    "procurementPlan",
-                                    "contractDraft",
-                                    "complaints",
-                                    "illustration",
-                                    "cancellationDetails",
-                                    "evaluationReports",
-                                    "shortlistedFirms",
-                                    "contractArrangements",
-                                    "contractGuarantees"
+                                "tenderNotice",
+                                "biddingDocuments",
+                                "technicalSpecifications",
+                                "evaluationCriteria",
+                                "clarifications",
+                                "eligibilityCriteria",
+                                "riskProvisions",
+                                "billOfQuantity",
+                                "conflictOfInterest",
+                                "procurementPlan",
+                                "contractDraft",
+                                "complaints",
+                                "illustration",
+                                "cancellationDetails",
+                                "evaluationReports",
+                                "shortlistedFirms",
+                                "contractArrangements",
+                                "contractGuarantees"
                               ]
                             },
                             "description": {
