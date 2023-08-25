@@ -90,7 +90,10 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "pmd",
+                          "country",
+                          "operationType"
                         ],
                         "properties": {
                           "cpid": {
@@ -124,15 +127,15 @@
                             "properties": {
                               "enquiryPeriod": {
                                 "type": "object",
-                                "required": [
-                                  "endDate"
-                                ],
                                 "properties": {
                                   "endDate": {
                                     "type": "string",
                                     "format": "date-time"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "endDate"
+                                ]
                               },
                               "tenderPeriod": {
                                 "type": "object",
@@ -147,6 +150,31 @@
                                 ]
                               }
                             }
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "CF",
+                              "TEST_CF",
+                              "OF",
+                              "TEST_OF",
+                              "SV",
+                              "TEST_SV",
+                              "MV",
+                              "TEST_MV",
+                              "OT",
+                              "TEST_OT",
+                              "RT",
+                              "TEST_RT",
+                              "GPA",
+                              "TEST_GPA"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string"
                           }
                         }
                       }
