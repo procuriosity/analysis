@@ -146,10 +146,18 @@
                                             "country": {
                                               "type": "object",
                                               "required": [
-                                                "id"
+                                                "id",
+                                                "description",
+                                                "scheme"
                                               ],
                                               "properties": {
                                                 "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
                                                   "type": "string"
                                                 }
                                               }
@@ -157,10 +165,18 @@
                                             "region": {
                                               "type": "object",
                                               "required": [
-                                                "id"
+                                                "id",
+                                                "description",
+                                                "scheme"
                                               ],
                                               "properties": {
                                                 "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
                                                   "type": "string"
                                                 }
                                               }
@@ -273,7 +289,84 @@
                                   "type": "string"
                                 },
                                 "deliveryAddress": {
-                                  "$ref": "../models/deliveryAddress.v1.json"
+                                  "type": "object",
+                                  "properties": {
+                                    "streetAddress": {
+                                      "type": "string"
+                                    },
+                                    "postalCode": {
+                                      "type": "string"
+                                    },
+                                    "addressDetails": {
+                                      "type": "object",
+                                      "required": [
+                                        "country",
+                                        "region"
+                                      ],
+                                      "properties": {
+                                        "country": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "description",
+                                            "scheme"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "region": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "description",
+                                            "scheme"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "locality": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "description",
+                                            "scheme"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "addressDetails"
+                                  ]
                                 }
                               },
                               "required": [
@@ -300,24 +393,24 @@
                                 "documentType": {
                                   "type": "string",
                                   "enum": [
-                                "tenderNotice",
-                                "biddingDocuments",
-                                "technicalSpecifications",
-                                "evaluationCriteria",
-                                "clarifications",
-                                "eligibilityCriteria",
-                                "riskProvisions",
-                                "billOfQuantity",
-                                "conflictOfInterest",
-                                "procurementPlan",
-                                "contractDraft",
-                                "complaints",
-                                "illustration",
-                                "cancellationDetails",
-                                "evaluationReports",
-                                "shortlistedFirms",
-                                "contractArrangements",
-                                "contractGuarantees"
+                                    "tenderNotice",
+                                    "biddingDocuments",
+                                    "technicalSpecifications",
+                                    "evaluationCriteria",
+                                    "clarifications",
+                                    "eligibilityCriteria",
+                                    "riskProvisions",
+                                    "billOfQuantity",
+                                    "conflictOfInterest",
+                                    "procurementPlan",
+                                    "contractDraft",
+                                    "complaints",
+                                    "illustration",
+                                    "cancellationDetails",
+                                    "evaluationReports",
+                                    "shortlistedFirms",
+                                    "contractArrangements",
+                                    "contractGuarantees"
                                   ]
                                 },
                                 "description": {
