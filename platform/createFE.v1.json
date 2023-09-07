@@ -19,7 +19,7 @@
           "name": "cpid",
           "in": "path",
           "required": true,
-          "description": "cpid контрактного процесса на основании которого создается FE"
+          "description": "AP cpid "
         },
         {
           "schema": {
@@ -28,7 +28,7 @@
           "name": "ocid",
           "in": "path",
           "required": true,
-          "description": "ocid AP на основании которого создается FE"
+          "description": "AP ocid"
         }
       ],
       "post": {
@@ -94,7 +94,10 @@
                             "type": "array",
                             "items": {
                               "type": "string",
-                              "example": "electronicAuction"
+                              "example": "electronicAuction",
+                              "enum": [
+                                "electronicAuction"
+                              ]
                             }
                           },
                           "procurementMethodRationale": {
@@ -377,23 +380,43 @@
                             "items": {
                               "type": "object",
                               "properties": {
-                                "documentType": {
-                                  "type": "string"
-                                },
                                 "id": {
                                   "type": "string"
                                 },
                                 "title": {
                                   "type": "string"
                                 },
+                                "documentType": {
+                                  "type": "string",
+                                  "enum": [
+                                    "tenderNotice",
+                                    "biddingDocuments",
+                                    "technicalSpecifications",
+                                    "evaluationCriteria",
+                                    "clarifications",
+                                    "eligibilityCriteria",
+                                    "riskProvisions",
+                                    "billOfQuantity",
+                                    "conflictOfInterest",
+                                    "procurementPlan",
+                                    "contractDraft",
+                                    "complaints",
+                                    "illustration",
+                                    "cancellationDetails",
+                                    "evaluationReports",
+                                    "shortlistedFirms",
+                                    "contractArrangements",
+                                    "contractGuarantees"
+                                  ]
+                                },
                                 "description": {
                                   "type": "string"
                                 }
                               },
                               "required": [
-                                "documentType",
                                 "id",
-                                "title"
+                                "title",
+                                "documentType"
                               ]
                             }
                           }
@@ -427,7 +450,7 @@
             },
             "in": "header",
             "name": "X-OPERATION-ID",
-            "description": "ID транзакции",
+            "description": "transaction id",
             "required": true
           },
           {
@@ -436,7 +459,7 @@
             },
             "in": "header",
             "name": "Content-Type",
-            "description": "тип данных в теле запроса",
+            "description": "data type in request body",
             "required": true
           },
           {
@@ -445,7 +468,7 @@
             },
             "in": "header",
             "name": "X-TOKEN",
-            "description": "токен Aggregated Plan",
+            "description": "AP token",
             "required": true
           }
         ],
