@@ -13,7 +13,381 @@
     }
   ],
   "paths": {
-    "/do/ap": {
+    "/do/ap - LT": {
+      "post": {
+        "summary": "Create Aggregated Plan",
+        "operationId": "post-do-fa",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "country",
+            "required": true,
+            "description": "country code according ISO 3166 alpha-2 standard"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "OF",
+                "TEST_OF",
+                "CF",
+                "TEST_CF"
+              ]
+            },
+            "in": "query",
+            "name": "pmd",
+            "required": true,
+            "description": "procurement method details"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "testMode",
+            "description": "test entity creation flag "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "description": "Bearer {access_token}"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "required": true,
+            "description": "transaction id"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "description": "data type in request body"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lang",
+            "required": true,
+            "description": "language code according ISO 639-1 standard"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tender": {
+                    "type": "object",
+                    "required": [
+                      "title",
+                      "description",
+                      "legalBasis",
+                      "classification",
+                      "value",
+                      "tenderPeriod",
+                      "contractPeriod",
+                      "procuringEntity"
+                    ],
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "legalBasis": {
+                        "type": "string",
+                        "enum": [
+                          "32009L0081",
+                          "32014L0023",
+                          "32014L0024",
+                          "32014L0025",
+                          "other"
+                        ]
+                      },
+                      "procurementMethodRationale": {
+                        "type": "string"
+                      },
+                      "classification": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "scheme"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "scheme": {
+                            "type": "string",
+                            "enum": [
+                              "CPV"
+                            ]
+                          }
+                        }
+                      },
+                      "value": {
+                        "type": "object",
+                        "required": [
+                          "currency"
+                        ],
+                        "properties": {
+                          "currency": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "tenderPeriod": {
+                        "type": "object",
+                        "required": [
+                          "startDate"
+                        ],
+                        "properties": {
+                          "startDate": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "contractPeriod": {
+                        "type": "object",
+                        "description": "duration of the planned Framework Agreement",
+                        "required": [
+                          "startDate",
+                          "endDate"
+                        ],
+                        "properties": {
+                          "startDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "endDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      },
+                      "procuringEntity": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "identifier": {
+                            "$ref": "../models/identifier.v1.json"
+                          },
+                          "additionalIdentifiers": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "../models/identifier.v1.json"
+                            }
+                          },
+                          "address": {
+                            "$ref": "../models/addressRequest.v1.json"
+                          },
+                          "contactPoint": {
+                            "$ref": "../models/contact_point.v1.json"
+                          },
+                          "persones": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "title": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Mr.",
+                                    "Ms.",
+                                    "Mrs."
+                                  ]
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "identifier": {
+                                  "$ref": "../models/identifierPerson.v1.json"
+                                },
+                                "businessFunctions": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "type": "string",
+                                        "enum": [
+                                          "chairman",
+                                          "contactPoint",
+                                          "technicalOpener",
+                                          "priceOpener",
+                                          "priceEvaluator",
+                                          "technicalEvaluator",
+                                          "procurementOfficer"
+                                        ]
+                                      },
+                                      "jobTitle": {
+                                        "type": "string"
+                                      },
+                                      "period": {
+                                        "type": "object",
+                                        "required": [
+                                          "startDate"
+                                        ],
+                                        "properties": {
+                                          "startDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        }
+                                      },
+                                      "documents": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "title": {
+                                              "type": "string"
+                                            },
+                                            "documentType": {
+                                              "type": "string",
+                                              "enum": [
+                                                "regulatoryDocument"
+                                              ]
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "title",
+                                            "documentType"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "type",
+                                      "jobTitle",
+                                      "period"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "title",
+                                "name",
+                                "identifier",
+                                "businessFunctions"
+                              ]
+                            }
+                          },
+                          "details": {
+                            "$ref": "../models/organization_details.json"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "identifier",
+                          "address",
+                          "contactPoint"
+                        ]
+                      },
+                      "documents": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "documentType": {
+                              "type": "string",
+                              "enum": [
+                                "tenderNotice",
+                                "biddingDocuments",
+                                "technicalSpecifications",
+                                "evaluationCriteria",
+                                "clarifications",
+                                "eligibilityCriteria",
+                                "riskProvisions",
+                                "billOfQuantity",
+                                "conflictOfInterest",
+                                "procurementPlan",
+                                "contractDraft",
+                                "complaints",
+                                "illustration",
+                                "cancellationDetails",
+                                "evaluationReports",
+                                "shortlistedFirms",
+                                "contractArrangements",
+                                "contractGuarantees",
+                                "meetingWithTenderersProtocol",
+                                "qualificationCriteria",
+                                "eligibilityCriteria",
+                                "tenderForm",
+                                "other"
+                              ]
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "documentType"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "tender"
+                ]
+              }
+            }
+          }
+        },
+        "description": "Create AP for LT",
+        "tags": [
+          "LT"
+        ]
+      },
+      "parameters": []
+    },
+    "/do/ap - MD": {
       "post": {
         "summary": "Create Aggregated Plan",
         "operationId": "post-do-fa",
@@ -190,137 +564,137 @@
                         }
                       },
                       "procuringEntity": {
-                            "type": "object",
-                            "properties": {
-                              "name": {
-                                "type": "string"
-                              },
-                              "identifier": {
-                                "$ref": "../models/identifier.v1.json"
-                              },
-                              "additionalIdentifiers": {
-                                "type": "array",
-                                "items": {
-                                  "$ref": "../models/identifier.v1.json"
-                                }
-                              },
-                              "address": {
-                                "$ref": "../models/addressRequest.v1.json"
-                              },
-                              "contactPoint": {
-                                "$ref": "../models/contact_point.v1.json"
-                              },
-                              "persones": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "title": {
-                                      "type": "string",
-                                      "enum": [
-                                        "Mr.",
-                                        "Ms.",
-                                        "Mrs."
-                                      ]
-                                    },
-                                    "name": {
-                                      "type": "string"
-                                    },
-                                    "identifier": {
-                                      "$ref": "../models/identifierPerson.v1.json"
-                                    },
-                                    "businessFunctions": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "id": {
-                                            "type": "string"
-                                          },
-                                          "type": {
-                                            "type": "string",
-                                            "enum": [
-                                              "chairman",
-                                              "contactPoint",
-                                              "technicalOpener",
-                                              "priceOpener",
-                                              "priceEvaluator",
-                                              "technicalEvaluator",
-                                              "procurementOfficer"
-                                            ]
-                                          },
-                                          "jobTitle": {
-                                            "type": "string"
-                                          },
-                                          "period": {
-                                            "type": "object",
-                                            "required": [
-                                              "startDate"
-                                            ],
-                                            "properties": {
-                                              "startDate": {
-                                                "type": "string",
-                                                "format": "date-time"
-                                              }
-                                            }
-                                          },
-                                          "documents": {
-                                            "type": "array",
-                                            "items": {
-                                              "type": "object",
-                                              "properties": {
-                                                "id": {
-                                                  "type": "string"
-                                                },
-                                                "title": {
-                                                  "type": "string"
-                                                },
-                                                "documentType": {
-                                                  "type": "string",
-                                                  "enum": [
-                                                    "regulatoryDocument"
-                                                  ]
-                                                },
-                                                "description": {
-                                                  "type": "string"
-                                                }
-                                              },
-                                              "required": [
-                                                "id",
-                                                "title",
-                                                "documentType"
-                                              ]
-                                            }
-                                          }
-                                        },
-                                        "required": [
-                                          "id",
-                                          "type",
-                                          "jobTitle",
-                                          "period"
-                                        ]
-                                      }
-                                    }
-                                  },
-                                  "required": [
-                                    "title",
-                                    "name",
-                                    "identifier",
-                                    "businessFunctions"
-                                  ]
-                                }
-                              },
-                              "details": {
-                                "$ref": "../models/organization_details.json"
-                              }
-                            },
-                            "required": [
-                              "name",
-                              "identifier",
-                              "address",
-                              "contactPoint"
-                            ]
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
                           },
+                          "identifier": {
+                            "$ref": "../models/identifier.v1.json"
+                          },
+                          "additionalIdentifiers": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "../models/identifier.v1.json"
+                            }
+                          },
+                          "address": {
+                            "$ref": "../models/addressRequest.v1.json"
+                          },
+                          "contactPoint": {
+                            "$ref": "../models/contact_point.v1.json"
+                          },
+                          "persones": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "title": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Mr.",
+                                    "Ms.",
+                                    "Mrs."
+                                  ]
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "identifier": {
+                                  "$ref": "../models/identifierPerson.v1.json"
+                                },
+                                "businessFunctions": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "type": "string",
+                                        "enum": [
+                                          "chairman",
+                                          "contactPoint",
+                                          "technicalOpener",
+                                          "priceOpener",
+                                          "priceEvaluator",
+                                          "technicalEvaluator",
+                                          "procurementOfficer"
+                                        ]
+                                      },
+                                      "jobTitle": {
+                                        "type": "string"
+                                      },
+                                      "period": {
+                                        "type": "object",
+                                        "required": [
+                                          "startDate"
+                                        ],
+                                        "properties": {
+                                          "startDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        }
+                                      },
+                                      "documents": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "title": {
+                                              "type": "string"
+                                            },
+                                            "documentType": {
+                                              "type": "string",
+                                              "enum": [
+                                                "regulatoryDocument"
+                                              ]
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "title",
+                                            "documentType"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "type",
+                                      "jobTitle",
+                                      "period"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "title",
+                                "name",
+                                "identifier",
+                                "businessFunctions"
+                              ]
+                            }
+                          },
+                          "details": {
+                            "$ref": "../models/organization_details.json"
+                          }
+                        },
+                        "required": [
+                          "name",
+                          "identifier",
+                          "address",
+                          "contactPoint"
+                        ]
+                      },
                       "documents": {
                         "type": "array",
                         "items": {
@@ -375,7 +749,11 @@
               }
             }
           }
-        }
+        },
+        "description": "Create AP for MD",
+        "tags": [
+          "MD"
+        ]
       },
       "parameters": []
     }
