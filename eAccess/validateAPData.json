@@ -17,18 +17,6 @@
       "post": {
         "summary": "Validate AP Data",
         "operationId": "post-command",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "../models/response_command.v1.json"
-                }
-              }
-            }
-          }
-        },
         "requestBody": {
           "content": {
             "application/json": {
@@ -151,7 +139,12 @@
                                   "DIRECTIVE_2014_25_EU",
                                   "REGULATION_966_2012",
                                   "NATIONAL_PROCUREMENT_LAW",
-                                  "DIRECTIVE_2009_81_EC"
+                                  "DIRECTIVE_2009_81_EC",
+                                  "32009L0081",
+                                  "32014L0023",
+                                  "32014L0024",
+                                  "32014L0025",
+                                  "other"
                                 ]
                               },
                               "procurementMethodRationale": {
@@ -357,7 +350,12 @@
                                         "evaluationReports",
                                         "shortlistedFirms",
                                         "contractArrangements",
-                                        "contractGuarantees"
+                                        "contractGuarantees",
+                                        "meetingWithTenderersProtocol",
+                                        "qualificationCriteria",
+                                        "eligibilityCriteria",
+                                        "tenderForm",
+                                        "other"
                                       ]
                                     },
                                     "description": {
@@ -392,6 +390,62 @@
                     }
                   }
                 ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "cpid",
+                            "ocid",
+                            "tender"
+                          ],
+                          "properties": {
+                            "cpid": {
+                              "$ref": "../models/cpid.v1.json"
+                            },
+                            "ocid": {
+                              "$ref": "../models/ocid.v1.json"
+                            },
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "id"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
               }
             }
           }
