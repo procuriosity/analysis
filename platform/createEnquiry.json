@@ -96,7 +96,86 @@
                                 }
                               },
                               "address": {
-                                "$ref": "../models/addressRequest.v1.json"
+                                "type": "object",
+                                "required": [
+                                  "addressDetails"
+                                ],
+                                "properties": {
+                                  "streetAddress": {
+                                    "type": "string",
+                                    "description": "is required for MD"
+                                  },
+                                  "postalCode": {
+                                    "type": "string"
+                                  },
+                                  "addressDetails": {
+                                    "type": "object",
+                                    "required": [
+                                      "country"
+                                    ],
+                                    "properties": {
+                                      "country": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "description",
+                                          "scheme"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "region": {
+                                        "type": "object",
+                                        "description": "is required for MD",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "description",
+                                          "scheme"
+                                        ]
+                                      },
+                                      "locality": {
+                                        "type": "object",
+                                        "description": "is required for MD",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "description",
+                                          "scheme"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
                               },
                               "contactPoint": {
                                 "$ref": "../models/contact_point.v1.json"
