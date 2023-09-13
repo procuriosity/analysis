@@ -15,7 +15,86 @@
       }
     },
     "address": {
-      "$ref": "./addressRequest.v1.json"
+      "type": "object",
+      "required": [
+        "addressDetails"
+      ],
+      "properties": {
+        "streetAddress": {
+          "type": "string",
+          "description": "is required for MD"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "addressDetails": {
+          "type": "object",
+          "required": [
+            "country"
+          ],
+          "properties": {
+            "country": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "is required for LT"
+                },
+                "scheme": {
+                  "type": "string",
+                  "description": "is required for LT"
+                }
+              }
+            },
+            "region": {
+              "type": "object",
+              "description": "is required for MD",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "is required for LT"
+                },
+                "scheme": {
+                  "type": "string",
+                  "description": "is required for LT"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "locality": {
+              "type": "object",
+              "description": "is required for MD",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "is required for LT"
+                },
+                "scheme": {
+                  "type": "string",
+                  "description": "is required for LT"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "contactPoint": {
       "$ref": "./contact_point.v1.json"
