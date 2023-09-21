@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "amendFE",
-    "version": "1.01",
+    "version": "1.0",
     "description": ""
   },
   "servers": [
@@ -20,7 +20,7 @@
           "name": "cpid",
           "in": "path",
           "required": true,
-          "description": "cpid Framework Establishment"
+          "description": "FE cpid "
         },
         {
           "schema": {
@@ -29,15 +29,15 @@
           "name": "ocid",
           "in": "path",
           "required": true,
-          "description": "ocid Framework Establishment"
+          "description": "FE ocid"
         }
       ],
       "post": {
         "summary": "Amend FE",
         "operationId": "post-amend-fe-cpid-ocid",
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         },
         "parameters": [
@@ -56,7 +56,7 @@
             },
             "in": "header",
             "name": "X-OPERATION-ID",
-            "description": "ID транзакции",
+            "description": "transaction id",
             "required": true
           },
           {
@@ -65,7 +65,7 @@
             },
             "in": "header",
             "name": "Content-Type",
-            "description": "тип данных в теле запроса",
+            "description": "data type in request body",
             "required": true
           },
           {
@@ -74,7 +74,7 @@
             },
             "in": "header",
             "name": "X-TOKEN",
-            "description": "токен Framework Establishment",
+            "description": "FE token",
             "required": true
           }
         ],
@@ -109,6 +109,9 @@
                       "tender": {
                         "type": "object",
                         "properties": {
+                          "procurementMethodRationale": {
+                            "type": "string"
+                          },
                           "procuringEntity": {
                             "type": "object",
                             "properties": {
@@ -226,35 +229,55 @@
                             "items": {
                               "type": "object",
                               "properties": {
-                                "documentType": {
-                                  "type": "string"
-                                },
                                 "id": {
                                   "type": "string"
                                 },
                                 "title": {
                                   "type": "string"
                                 },
+                                "documentType": {
+                                  "type": "string",
+                                  "enum": [
+                                    "tenderNotice",
+                                    "biddingDocuments",
+                                    "technicalSpecifications",
+                                    "evaluationCriteria",
+                                    "clarifications",
+                                    "eligibilityCriteria",
+                                    "riskProvisions",
+                                    "billOfQuantity",
+                                    "conflictOfInterest",
+                                    "procurementPlan",
+                                    "contractDraft",
+                                    "complaints",
+                                    "illustration",
+                                    "cancellationDetails",
+                                    "evaluationReports",
+                                    "shortlistedFirms",
+                                    "contractArrangements",
+                                    "contractGuarantees",
+                                    "meetingWithTenderersProtocol",
+                                    "qualificationCriteria",
+                                    "tenderForm",
+                                    "other"
+                                  ]
+                                },
                                 "description": {
                                   "type": "string"
                                 }
                               },
                               "required": [
-                                "documentType",
                                 "id",
-                                "title"
+                                "title",
+                                "documentType"
                               ]
                             }
-                          },
-                          "procurementMethodRationale": {
-                            "type": "string"
                           }
                         }
                       }
                     },
                     "required": [
-                      "preQualification",
-                      "tender"
+                      "preQualification"
                     ]
                   }
                 ],
