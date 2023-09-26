@@ -1,5 +1,8 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "4yrp03mq2qzij"
+  },
   "info": {
     "title": "APforFA",
     "version": "1.0"
@@ -8,7 +11,7 @@
   "paths": {
     "/model": {
       "options": {
-        "summary": "Aggregated Plan (v1)",
+        "summary": "Aggregated Plan (v2)",
         "operationId": "options-model",
         "requestBody": {
           "content": {
@@ -29,11 +32,13 @@
                     "type": "object",
                     "required": [
                       "id",
+                      "date",
                       "status",
                       "statusDetails",
                       "title",
                       "description",
                       "classification",
+                      "legalBasis",
                       "value",
                       "acceleratedProcedure",
                       "designContest",
@@ -42,21 +47,24 @@
                       "procedureOutsourcing",
                       "framework",
                       "dynamicPurchasingSystem",
-                      "legalBasis",
                       "procurementMethod",
                       "procurementMethodDetails",
                       "mainProcurementCategory",
                       "eligibilityCriteria",
                       "tenderPeriod",
                       "contractPeriod",
-                      "requiresElectronicCatalogue",
                       "submissionMethod",
                       "submissionMethodRationale",
-                      "submissionMethodDetails"
+                      "submissionMethodDetails",
+                      "procuringEntity"
                     ],
                     "properties": {
                       "id": {
                         "type": "string"
+                      },
+                      "date": {
+                        "type": "string",
+                        "format": "date-time"
                       },
                       "status": {
                         "type": "string",
@@ -94,6 +102,22 @@
                             "type": "string"
                           }
                         }
+                      },
+                      "legalBasis": {
+                        "type": "string",
+                        "enum": [
+                          "DIRECTIVE_2014_23_EU",
+                          "DIRECTIVE_2014_24_EU",
+                          "DIRECTIVE_2014_25_EU",
+                          "REGULATION_966_2012",
+                          "NATIONAL_PROCUREMENT_LAW",
+                          "DIRECTIVE_2009_81_EC",
+                          "32009L0081",
+                          "32014L0023",
+                          "32014L0024",
+                          "32014L0025",
+                          "other"
+                        ]
                       },
                       "value": {
                         "type": "object",
@@ -179,7 +203,8 @@
                         ],
                         "properties": {
                           "isAFramework": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "default": true
                           }
                         }
                       },
@@ -193,17 +218,6 @@
                             "type": "boolean"
                           }
                         }
-                      },
-                      "legalBasis": {
-                        "type": "string",
-                        "enum": [
-                          "DIRECTIVE_2014_23_EU",
-                          "DIRECTIVE_2014_24_EU",
-                          "DIRECTIVE_2014_25_EU",
-                          "REGULATION_966_2012",
-                          "NATIONAL_PROCUREMENT_LAW",
-                          "DIRECTIVE_2009_81_EC"
-                        ]
                       },
                       "procurementMethod": {
                         "type": "string",
@@ -257,9 +271,6 @@
                           }
                         }
                       },
-                      "requiresElectronicCatalogue": {
-                        "type": "boolean"
-                      },
                       "submissionMethod": {
                         "type": "array",
                         "items": {
@@ -278,59 +289,19 @@
                       "submissionMethodDetails": {
                         "type": "string"
                       },
-                      "documents": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "title": {
-                              "type": "string"
-                            },
-                            "description": {
-                              "type": "string"
-                            },
-                            "documentType": {
-                              "type": "string",
-                              "enum": [
-                                "tenderNotice",
-                                "biddingDocuments",
-                                "technicalSpecifications",
-                                "evaluationCriteria",
-                                "clarifications",
-                                "eligibilityCriteria",
-                                "riskProvisions",
-                                "billOfQuantity",
-                                "conflictOfInterest",
-                                "procurementPlan",
-                                "contractDraft",
-                                "complaints",
-                                "illustration",
-                                "cancellationDetails",
-                                "evaluationReports",
-                                "shortlistedFirms",
-                                "contractArrangements",
-                                "contractGuarantees",
-                                "meetingWithTenderersProtocol",
-                                "qualificationCriteria",
-                                "tenderForm",
-                                "other"
-                              ]
-                            },
-                            "relatedLots": {
-                              "type": "array",
-                              "items": {
-                                "type": "string"
-                              }
-                            }
+                      "procuringEntity": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
                           },
-                          "required": [
-                            "id",
-                            "title",
-                            "documentType"
-                          ]
+                          "name": {
+                            "type": "string"
+                          }
                         }
                       },
                       "lots": {
@@ -341,7 +312,7 @@
                             "id": {
                               "type": "string"
                             },
-                            "internalId\"": {
+                            "internalId": {
                               "type": "string"
                             },
                             "title": {
@@ -349,6 +320,13 @@
                             },
                             "description": {
                               "type": "string"
+                            },
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "planning",
+                                "cancelled"
+                              ]
                             },
                             "placeOfPerformance": {
                               "type": "object",
@@ -360,27 +338,13 @@
                               "required": [
                                 "address"
                               ]
-                            },
-                            "status": {
-                              "type": "string",
-                              "enum": [
-                                "planning",
-                                "cancelled"
-                              ]
-                            },
-                            "statusDetails": {
-                              "type": "string",
-                              "enum": [
-                                "empty"
-                              ]
                             }
                           },
                           "required": [
                             "id",
                             "title",
                             "description",
-                            "status",
-                            "statusDetails"
+                            "status"
                           ]
                         }
                       },
@@ -474,8 +438,60 @@
                           ]
                         }
                       },
-                      "": {
-                        "type": "string"
+                      "documents": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "documentType": {
+                              "type": "string",
+                              "enum": [
+                                "tenderNotice",
+                                "biddingDocuments",
+                                "technicalSpecifications",
+                                "evaluationCriteria",
+                                "clarifications",
+                                "eligibilityCriteria",
+                                "riskProvisions",
+                                "billOfQuantity",
+                                "conflictOfInterest",
+                                "procurementPlan",
+                                "contractDraft",
+                                "complaints",
+                                "illustration",
+                                "cancellationDetails",
+                                "evaluationReports",
+                                "shortlistedFirms",
+                                "contractArrangements",
+                                "contractGuarantees",
+                                "meetingWithTenderersProtocol",
+                                "qualificationCriteria",
+                                "tenderForm",
+                                "other"
+                              ]
+                            },
+                            "relatedLots": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "documentType"
+                          ]
+                        }
                       }
                     }
                   },
@@ -510,8 +526,8 @@
                           "items": {
                             "type": "string",
                             "enum": [
-                              "centralPurchasingBody",
-                              "client"
+                              "client",
+                              "procuringEntity"
                             ]
                           }
                         },
@@ -558,6 +574,9 @@
                                 "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
                                 "WATER"
                               ]
+                            },
+                            "buyerProfile": {
+                              "type": "string"
                             }
                           }
                         }
@@ -588,7 +607,8 @@
                           "items": {
                             "type": "string",
                             "enum": [
-                              "x_scope"
+                              "x_scope",
+                              "framework"
                             ]
                           }
                         },
@@ -625,7 +645,8 @@
               }
             },
             "description": "Aggregated Plan (for Framework Agreement)"
-          }
+          },
+          "description": ""
         },
         "description": "AP for FA"
       },

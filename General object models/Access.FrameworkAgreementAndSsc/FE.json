@@ -1,5 +1,8 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "df9ohdrzt7zfi"
+  },
   "info": {
     "title": "frameworkEstablishment",
     "version": "1.0"
@@ -8,7 +11,7 @@
   "paths": {
     "/model": {
       "options": {
-        "summary": "Framework Establishment (v1)",
+        "summary": "Framework Establishment (v2)",
         "operationId": "options-model",
         "requestBody": {
           "content": {
@@ -16,17 +19,27 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "cpid": {
+                    "$ref": "../../models/cpid.v1.json"
+                  },
+                  "ocid": {
+                    "$ref": "../../models/ocid.v1.json"
+                  },
+                  "token": {
+                    "type": "string",
+                    "description": "token FE"
+                  },
                   "tender": {
                     "type": "object",
                     "required": [
                       "id",
-                      "title",
-                      "description",
+                      "date",
                       "status",
                       "statusDetails",
                       "classification",
                       "otherCriteria",
                       "value",
+                      "legalBasis",
                       "acceleratedProcedure",
                       "designContest",
                       "electronicWorkflows",
@@ -38,9 +51,9 @@
                       "framework",
                       "dynamicPurchasingSystem",
                       "requiresElectronicCatalogue",
-                      "legalBasis",
                       "procurementMethod",
                       "procurementMethodDetails",
+                      "mainProcurementCategory",
                       "eligibilityCriteria",
                       "contractPeriod",
                       "procuringEntity"
@@ -49,11 +62,9 @@
                       "id": {
                         "type": "string"
                       },
-                      "title": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
+                      "date": {
+                        "type": "string",
+                        "format": "date-time"
                       },
                       "status": {
                         "type": "string",
@@ -132,6 +143,22 @@
                             "type": "string"
                           }
                         }
+                      },
+                      "legalBasis": {
+                        "type": "string",
+                        "enum": [
+                          "DIRECTIVE_2014_23_EU",
+                          "DIRECTIVE_2014_24_EU",
+                          "DIRECTIVE_2014_25_EU",
+                          "REGULATION_966_2012",
+                          "NATIONAL_PROCUREMENT_LAW",
+                          "DIRECTIVE_2009_81_EC",
+                          "32009L0081",
+                          "32014L0023",
+                          "32014L0024",
+                          "32014L0025",
+                          "other"
+                        ]
                       },
                       "acceleratedProcedure": {
                         "type": "object",
@@ -222,7 +249,8 @@
                         ],
                         "properties": {
                           "isAFramework": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "default": true
                           }
                         }
                       },
@@ -239,17 +267,6 @@
                       },
                       "requiresElectronicCatalogue": {
                         "type": "boolean"
-                      },
-                      "legalBasis": {
-                        "type": "string",
-                        "enum": [
-                          "DIRECTIVE_2014_23_EU",
-                          "DIRECTIVE_2014_24_EU",
-                          "DIRECTIVE_2014_25_EU",
-                          "REGULATION_966_2012",
-                          "NATIONAL_PROCUREMENT_LAW",
-                          "DIRECTIVE_2009_81_EC"
-                        ]
                       },
                       "procurementMethod": {
                         "type": "string"
@@ -355,7 +372,8 @@
                             "source": {
                               "type": "string",
                               "enum": [
-                                "tenderer"
+                                "tenderer",
+                                "procuringEntity"
                               ]
                             },
                             "relatesTo": {
@@ -556,55 +574,8 @@
                             "title"
                           ]
                         }
-                      },
-                      "": {
-                        "type": "string"
                       }
                     }
-                  },
-                  "relatedProcesses": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "description": "идентификатор relatedProcess"
-                        },
-                        "relationship": {
-                          "type": "string",
-                          "description": "тип связи",
-                          "enum": [
-                            "x_pcr",
-                            "parent",
-                            "aggregatePlanning"
-                          ]
-                        },
-                        "scheme": {
-                          "type": "string",
-                          "description": "ocid"
-                        },
-                        "identifier": {
-                          "type": "string",
-                          "description": "ocid сущности, на которую создан relatedProcess/cpid - для связи с MS"
-                        },
-                        "uri": {
-                          "type": "string",
-                          "description": "путь к сущности, на которую создан relatedProcess"
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "relationship",
-                        "scheme",
-                        "identifier",
-                        "uri"
-                      ]
-                    }
-                  },
-                  "token": {
-                    "type": "string",
-                    "description": "token FE"
                   },
                   "parties": {
                     "type": "array",
@@ -789,6 +760,9 @@
                                 "\"URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES\"",
                                 "\"WATER\""
                               ]
+                            },
+                            "buyerProfile": {
+                              "type": "string"
                             }
                           }
                         }
@@ -802,13 +776,55 @@
                         "roles"
                       ]
                     }
+                  },
+                  "relatedProcesses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "идентификатор relatedProcess"
+                        },
+                        "relationship": {
+                          "type": "string",
+                          "description": "тип связи",
+                          "enum": [
+                            "x_pcr",
+                            "parent",
+                            "aggregatePlanning"
+                          ]
+                        },
+                        "scheme": {
+                          "type": "string",
+                          "description": "ocid"
+                        },
+                        "identifier": {
+                          "type": "string",
+                          "description": "ocid сущности, на которую создан relatedProcess/cpid - для связи с MS"
+                        },
+                        "uri": {
+                          "type": "string",
+                          "description": "путь к сущности, на которую создан relatedProcess"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "relationship",
+                        "scheme",
+                        "identifier",
+                        "uri"
+                      ]
+                    }
                   }
                 },
                 "required": [
-                  "tender",
-                  "relatedProcesses",
+                  "cpid",
+                  "ocid",
                   "token",
-                  "parties"
+                  "tender",
+                  "parties",
+                  "relatedProcesses"
                 ]
               }
             },
