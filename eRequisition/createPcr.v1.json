@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "createPcr",
-    "version": "1.09",
+    "version": "1.10",
     "description": ""
   },
   "servers": [
@@ -586,24 +586,28 @@
                                       "documentType": {
                                         "type": "string",
                                         "enum": [
-                                          "tenderNotice",
-                                          "biddingDocuments",
-                                          "technicalSpecifications",
-                                          "evaluationCriteria",
-                                          "clarifications",
-                                          "eligibilityCriteria",
-                                          "riskProvisions",
-                                          "billOfQuantity",
-                                          "conflictOfInterest",
-                                          "procurementPlan",
-                                          "contractDraft",
-                                          "complaints",
-                                          "illustration",
-                                          "cancellationDetails",
-                                          "evaluationReports",
-                                          "shortlistedFirms",
-                                          "contractArrangements",
-                                          "contractGuarantees"
+                                    "tenderNotice",
+                                    "biddingDocuments",
+                                    "technicalSpecifications",
+                                    "evaluationCriteria",
+                                    "clarifications",
+                                    "eligibilityCriteria",
+                                    "riskProvisions",
+                                    "billOfQuantity",
+                                    "conflictOfInterest",
+                                    "procurementPlan",
+                                    "contractDraft",
+                                    "complaints",
+                                    "illustration",
+                                    "cancellationDetails",
+                                    "evaluationReports",
+                                    "shortlistedFirms",
+                                    "contractArrangements",
+                                    "contractGuarantees",
+                                    "meetingWithTenderersProtocol",
+                                    "qualificationCriteria",
+                                    "tenderForm",
+                                    "other"
                                         ]
                                       },
                                       "relatedLots": {
@@ -746,15 +750,33 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "tender",
+                          "ocid",
                           "date",
                           "stateFE",
                           "owner",
-                          "ocid"
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
                             "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "stateFE": {
+                            "type": "string",
+                            "enum": [
+                              "submission",
+                              "evaluation"
+                            ],
+                            "description": "status Details of FE"
+                          },
+                          "owner": {
+                            "type": "string"
                           },
                           "tender": {
                             "type": "object",
@@ -1226,24 +1248,28 @@
                                     "documentType": {
                                       "type": "string",
                                       "enum": [
-                                        "tenderNotice",
-                                        "biddingDocuments",
-                                        "technicalSpecifications",
-                                        "evaluationCriteria",
-                                        "clarifications",
-                                        "eligibilityCriteria",
-                                        "riskProvisions",
-                                        "billOfQuantity",
-                                        "conflictOfInterest",
-                                        "procurementPlan",
-                                        "contractDraft",
-                                        "complaints",
-                                        "illustration",
-                                        "cancellationDetails",
-                                        "evaluationReports",
-                                        "shortlistedFirms",
-                                        "contractArrangements",
-                                        "contractGuarantee"
+                                    "tenderNotice",
+                                    "biddingDocuments",
+                                    "technicalSpecifications",
+                                    "evaluationCriteria",
+                                    "clarifications",
+                                    "eligibilityCriteria",
+                                    "riskProvisions",
+                                    "billOfQuantity",
+                                    "conflictOfInterest",
+                                    "procurementPlan",
+                                    "contractDraft",
+                                    "complaints",
+                                    "illustration",
+                                    "cancellationDetails",
+                                    "evaluationReports",
+                                    "shortlistedFirms",
+                                    "contractArrangements",
+                                    "contractGuarantees",
+                                    "meetingWithTenderersProtocol",
+                                    "qualificationCriteria",
+                                    "tenderForm",
+                                    "other"
                                       ]
                                     },
                                     "relatedLots": {
@@ -1317,24 +1343,6 @@
                                 ]
                               }
                             }
-                          },
-                          "date": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "stateFE": {
-                            "type": "string",
-                            "enum": [
-                              "submission",
-                              "evaluation"
-                            ],
-                            "description": "status Details of FE"
-                          },
-                          "owner": {
-                            "type": "string"
-                          },
-                          "ocid": {
-                            "$ref": "../models/ocid.v1.json"
                           }
                         }
                       }
