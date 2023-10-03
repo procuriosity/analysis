@@ -32,54 +32,63 @@
                       "properties": {
                         "result": {
                           "type": "object",
-                          "required": [
-                            "relatedProcesses"
-                          ],
                           "properties": {
-                            "relatedProcesses": {
+                            "contracts": {
                               "type": "array",
                               "items": {
                                 "type": "object",
                                 "properties": {
                                   "id": {
-                                    "type": "string",
-                                    "description": "идентификатор relatedProcess",
-                                    "format": "uuid"
+                                    "type": "string"
                                   },
-                                  "relationship": {
+                                  "relatedProcesses": {
                                     "type": "array",
-                                    "description": "тип связи",
                                     "items": {
-                                      "type": "string",
-                                      "enum": [
-                                        "x_contracting"
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "relationship": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string",
+                                            "enum": [
+                                              "x_contracting"
+                                            ]
+                                          }
+                                        },
+                                        "scheme": {
+                                          "type": "string",
+                                          "example": "ocid"
+                                        },
+                                        "identifier": {
+                                          "type": "string"
+                                        },
+                                        "uri": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "relationship",
+                                        "scheme",
+                                        "identifier",
+                                        "uri"
                                       ]
                                     }
-                                  },
-                                  "scheme": {
-                                    "type": "string",
-                                    "example": "ocid",
-                                    "description": "ocid"
-                                  },
-                                  "identifier": {
-                                    "type": "string",
-                                    "description": "ocid сущности, на которую создан relatedProcess"
-                                  },
-                                  "uri": {
-                                    "type": "string",
-                                    "description": "путь к сущности, на которую создан relatedProcess"
                                   }
                                 },
                                 "required": [
                                   "id",
-                                  "relationship",
-                                  "scheme",
-                                  "identifier",
-                                  "uri"
+                                  "relatedProcesses"
                                 ]
                               }
                             }
-                          }
+                          },
+                          "required": [
+                            "contracts"
+                          ]
                         }
                       }
                     }
