@@ -1,19 +1,21 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "q3qtd0gx8u0te"
+  },
   "info": {
-    "title": "AnalyzeBidsForEvaluation",
-    "version": "1.01",
-    "description": ""
+    "title": "determineUnsuccessfulLots",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9081"
+      "url": "http://{host}:9271"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Analyze Bids For Evaluation",
+        "summary": "Determine Unsuccessful Lots",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -31,13 +33,13 @@
                         "result": {
                           "type": "object",
                           "properties": {
-                            "bids": {
+                            "tender": {
                               "type": "object",
                               "required": [
-                                "details"
+                                "lots"
                               ],
                               "properties": {
-                                "details": {
+                                "lots": {
                                   "type": "array",
                                   "items": {
                                     "type": "object",
@@ -45,10 +47,17 @@
                                       "id": {
                                         "type": "string",
                                         "format": "uuid"
+                                      },
+                                      "status": {
+                                        "type": "string",
+                                        "enum": [
+                                          "unsuccessful"
+                                        ]
                                       }
                                     },
                                     "required": [
-                                      "id"
+                                      "id",
+                                      "status"
                                     ]
                                   }
                                 }
@@ -56,7 +65,7 @@
                             }
                           },
                           "required": [
-                            "bids"
+                            "tender"
                           ]
                         }
                       }
@@ -78,64 +87,20 @@
                   {
                     "type": "object",
                     "properties": {
-                      "action": {
-                        "type": "string",
-                        "enum": [
-                          "analyzeBidsForEvaluation"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "action"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
                       "params": {
                         "type": "object",
                         "required": [
-                          "country",
-                          "pmd",
-                          "operationType",
+                          "cpid",
+                          "ocid",
                           "tender",
                           "bids"
                         ],
                         "properties": {
-                          "country": {
-                            "type": "string"
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
                           },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "OT",
-                              "TEST_OT",
-                              "SV",
-                              "TEST_SV",
-                              "MV",
-                              "TEST_MV",
-                              "RT",
-                              "TEST_RT",
-                              "GPA",
-                              "TEST_GPA",
-                              "RFQ",
-                              "TEST_RFQ",
-                              "MC",
-                              "TEST_MC",
-                              "DCO",
-                              "TEST_DCO",
-                              "OF",
-                              "TEST_OF",
-                              "CF",
-                              "TEST_CF"
-                            ]
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "tenderPeriodEnd",
-                              "tenderPeriodEndInPcr"
-                            ]
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
                           },
                           "tender": {
                             "type": "object",
@@ -175,7 +140,7 @@
                                       "type": "string",
                                       "format": "uuid"
                                     },
-                                    "ralatedLots": {
+                                    "relatedLots": {
                                       "type": "array",
                                       "items": {
                                         "type": "string"
@@ -184,7 +149,7 @@
                                   },
                                   "required": [
                                     "id",
-                                    "ralatedLots"
+                                    "relatedLots"
                                   ]
                                 }
                               }
@@ -196,6 +161,17 @@
                     "required": [
                       "params"
                     ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "determineUnsuccessfulLots"
+                        ]
+                      }
+                    }
                   }
                 ]
               }
@@ -204,5 +180,8 @@
         }
       }
     }
+  },
+  "components": {
+    "schemas": {}
   }
 }
