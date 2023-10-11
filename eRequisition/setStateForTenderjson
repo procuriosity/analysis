@@ -1,21 +1,21 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "3309524574a44"
+    "id": "j4ibrbu4y4nnp"
   },
   "info": {
-    "title": "getLotIds",
+    "title": "setStateBySettingsForTender",
     "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9271"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Get Lot Ids",
+        "summary": "Set State By Settings For Tender",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -39,22 +39,21 @@
                             "tender": {
                               "type": "object",
                               "required": [
-                                "lots"
+                                "status",
+                                "statusDetails"
                               ],
                               "properties": {
-                                "lots": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "id": {
-                                        "type": "string"
-                                      }
-                                    },
-                                    "required": [
-                                      "id"
-                                    ]
-                                  }
+                                "status": {
+                                  "type": "string",
+                                  "enum": [
+                                    "active"
+                                  ]
+                                },
+                                "statusDetails": {
+                                  "type": "string",
+                                  "enum": [
+                                    "tendering"
+                                  ]
                                 }
                               }
                             }
@@ -71,7 +70,6 @@
             }
           }
         },
-        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -87,7 +85,10 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "pmd",
+                          "country",
+                          "operationType"
                         ],
                         "properties": {
                           "cpid": {
@@ -96,47 +97,23 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "state": {
-                            "oneOf": [
-                              {
-                                "properties": {
-                                  "status": {
-                                    "type": "string"
-                                  },
-                                  "statusDetails": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "status",
-                                  "statusDetails"
-                                ]
-                              },
-                              {
-                                "properties": {
-                                  "status": {
-                                    "type": "string",
-                                    "enum": [
-                                      "active"
-                                    ]
-                                  }
-                                },
-                                "required": [
-                                  "status"
-                                ]
-                              },
-                              {
-                                "properties": {
-                                  "statusDetails": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "statusDetails"
-                                ]
-                              }
-                            ],
-                            "type": "object"
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "OF",
+                              "TEST_OF",
+                              "CF",
+                              "TEST_CF"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "addAnswer"
+                            ]
                           }
                         }
                       }
@@ -151,7 +128,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "getLotIds"
+                          "setStateBySettingsForTender"
                         ]
                       }
                     }
@@ -160,7 +137,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       }
     }
   },
