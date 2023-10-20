@@ -1,18 +1,21 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "gx74e7czuv84r"
+  },
   "info": {
-    "title": "finalizeAwards",
-    "version": "1.03"
+    "title": "findCANsWithState",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9081"
+      "url": "http://{host}:9151"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Finalize Awards",
+        "summary": "Find CANs With State",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -29,11 +32,8 @@
                       "properties": {
                         "result": {
                           "type": "object",
-                          "required": [
-                            "awards"
-                          ],
                           "properties": {
-                            "awards": {
+                            "contracts": {
                               "type": "array",
                               "items": {
                                 "type": "object",
@@ -44,36 +44,25 @@
                                   "status": {
                                     "type": "string",
                                     "enum": [
-                                      "unsuccessful",
-                                      "active"
+                                      "pending"
                                     ]
                                   },
                                   "statusDetails": {
-                                    "type": "string",
-                                    "enum": [
-                                      "basedOnHumanDecision",
-                                      "rejectedTenderer",
-                                      "awarded",
-                                      "notAwarded"
-                                    ]
-                                  },
-                                  "relatedBid": {
                                     "type": "string"
                                   }
                                 },
                                 "required": [
                                   "id",
-                                  "status",
-                                  "statusDetails"
+                                  "status"
                                 ]
                               }
                             }
-                          }
+                          },
+                          "required": [
+                            "contracts"
+                          ]
                         }
-                      },
-                      "required": [
-                        "result"
-                      ]
+                      }
                     }
                   ]
                 }
@@ -87,56 +76,58 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "../models/request_command.v1.json"
+                    "$ref": "../models/request_extended_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "findCANsWithState"
+                        ]
+                      }
+                    }
                   },
                   {
                     "type": "object",
                     "properties": {
                       "params": {
                         "type": "object",
-                        "required": [
-                          "cpid",
-                          "ocid",
-                          "operationType"
-                        ],
                         "properties": {
-                          "cpid": {
-                            "$ref": "../models/cpid.v1.json"
-                          },
-                          "ocid": {
-                            "$ref": "../models/ocid.v1.json"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "applyConfirmations",
-                              "confirmCan",
-                              "activateContract"
-                            ]
-                          },
-                          "contracts": {
+                          "states": {
                             "type": "array",
                             "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
+                              "oneOf": [
+                                {
+                                  "properties": {
+                                    "status": {
+                                      "type": "string"
+                                    },
+                                    "statusDetails": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "status",
+                                    "statusDetails"
+                                  ]
                                 },
-                                "awardId": {
-                                  "type": "string"
-                                },
-                                "status": {
-                                  "type": "string",
-                                  "enum": [
-                                    "pending",
-                                    "active"
+                                {
+                                  "properties": {
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "pending"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "status"
                                   ]
                                 }
-                              },
-                              "required": [
-                                "id",
-                                "awardId"
-                              ]
+                              ],
+                              "type": "object"
                             }
                           },
                           "tender": {
@@ -163,20 +154,6 @@
                           }
                         }
                       }
-                    },
-                    "required": [
-                      "params"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "action": {
-                        "type": "string",
-                        "enum": [
-                          "finalizeAwards"
-                        ]
-                      }
                     }
                   }
                 ]
@@ -186,8 +163,5 @@
         }
       }
     }
-  },
-  "components": {
-    "schemas": {}
   }
 }
