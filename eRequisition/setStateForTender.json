@@ -1,10 +1,10 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "j4ibrbu4y4nnp"
+    "id": "ff3k0bhno5jjw"
   },
   "info": {
-    "title": "setStateBySettingsForTender",
+    "title": "setStateForTender",
     "version": "1.0"
   },
   "servers": [
@@ -15,7 +15,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Set State By Settings For Tender",
+        "summary": "Set State For Tender",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -46,13 +46,16 @@
                                 "status": {
                                   "type": "string",
                                   "enum": [
-                                    "active"
+                                    "active",
+                                    "unsuccessful"
                                   ]
                                 },
                                 "statusDetails": {
                                   "type": "string",
                                   "enum": [
-                                    "tendering"
+                                    "suspended",
+                                    "lackOfBids",
+                                    "awarding"
                                   ]
                                 }
                               }
@@ -86,9 +89,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "pmd",
-                          "country",
-                          "operationType"
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -97,23 +98,29 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "OF",
-                              "TEST_OF",
-                              "CF",
-                              "TEST_CF"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "addAnswer"
-                            ]
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "status",
+                              "statusDetails"
+                            ],
+                            "properties": {
+                              "status": {
+                                "type": "string",
+                                "enum": [
+                                  "active",
+                                  "unsuccessful"
+                                ]
+                              },
+                              "statusDetails": {
+                                "type": "string",
+                                "enum": [
+                                  "suspended",
+                                  "lackOfBids",
+                                  "awarding"
+                                ]
+                              }
+                            }
                           }
                         }
                       }
@@ -128,7 +135,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "setStateBySettingsForTender"
+                          "setStateForTender"
                         ]
                       }
                     }
