@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "finalizeLots",
-    "version": "1.01"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -35,9 +35,6 @@
                           "properties": {
                             "tender": {
                               "type": "object",
-                              "required": [
-                                "lots"
-                              ],
                               "properties": {
                                 "status": {
                                   "type": "string",
@@ -88,10 +85,7 @@
                             }
                           }
                         }
-                      },
-                      "required": [
-                        "result"
-                      ]
+                      }
                     }
                   ]
                 }
@@ -152,6 +146,28 @@
                                   ]
                                 }
                               }
+                            }
+                          },
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "type": "string",
+                                  "enum": [
+                                    "pending",
+                                    "active"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "status"
+                              ]
                             }
                           }
                         }
