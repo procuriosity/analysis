@@ -95,41 +95,6 @@
                       "params": {
                         "type": "object",
                         "properties": {
-                          "states": {
-                            "type": "array",
-                            "items": {
-                              "oneOf": [
-                                {
-                                  "properties": {
-                                    "status": {
-                                      "type": "string"
-                                    },
-                                    "statusDetails": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "status",
-                                    "statusDetails"
-                                  ]
-                                },
-                                {
-                                  "properties": {
-                                    "status": {
-                                      "type": "string",
-                                      "enum": [
-                                        "pending"
-                                      ]
-                                    }
-                                  },
-                                  "required": [
-                                    "status"
-                                  ]
-                                }
-                              ],
-                              "type": "object"
-                            }
-                          },
                           "tender": {
                             "type": "object",
                             "properties": {
@@ -151,8 +116,20 @@
                             "required": [
                               "lots"
                             ]
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "pending"
+                            ]
+                          },
+                          "statusDetails": {
+                            "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "status"
+                        ]
                       }
                     }
                   }
