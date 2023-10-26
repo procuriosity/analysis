@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateTenderDataFromPin",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -229,6 +229,46 @@
                                     "documentType"
                                   ]
                                 }
+                              },
+                              "lots": {
+                                "type": "array",
+                                "description": "for pmd = OT, SV, MV,",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "tenderPeriod": {
+                                      "type": "object",
+                                      "required": [
+                                        "endDate"
+                                      ],
+                                      "properties": {
+                                        "endDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "tenderPeriod"
+                                  ]
+                                }
+                              },
+                              "tenderPeriod": {
+                                "type": "object",
+                                "properties": {
+                                  "endDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                },
+                                "required": [
+                                  "endDate"
+                                ]
                               }
                             }
                           }
