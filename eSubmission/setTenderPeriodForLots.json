@@ -1,0 +1,270 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "9oks0id9ussgd"
+  },
+  "info": {
+    "title": "setTenderPeriodForLots",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9061"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Set Tender Period For Lots",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "tender"
+                          ],
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "lots"
+                              ],
+                              "properties": {
+                                "lots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "tenderPeriod": {
+                                        "type": "object",
+                                        "required": [
+                                          "startDate",
+                                          "endDate"
+                                        ],
+                                        "properties": {
+                                          "startDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          },
+                                          "endDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "tenderPeriod"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              },
+              "multipart/form-data": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "response": {
+                          "$ref": "../models/response_command.v1.json"
+                        },
+                        "tender": {
+                          "type": "object",
+                          "required": [
+                            "lots"
+                          ],
+                          "properties": {
+                            "lots": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "tenderPeriod"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "tenderPeriod": {
+                                  "type": "object",
+                                  "required": [
+                                    "startDate",
+                                    "endDate"
+                                  ],
+                                  "properties": {
+                                    "startDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    },
+                                    "endDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "response",
+                        "tender"
+                      ]
+                    }
+                  ],
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "date",
+                          "tender",
+                          "pmd",
+                          "country",
+                          "operationType"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "lots"
+                            ],
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "tenderPeriod": {
+                                      "type": "object",
+                                      "required": [
+                                        "endDate"
+                                      ],
+                                      "properties": {
+                                        "endDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "tenderPeriod"
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "OT",
+                              "TEST_OT",
+                              "SV",
+                              "TEST_SV",
+                              "MV",
+                              "TEST_MV"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "createTenderFromPlan"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "setTenderPeriodForLots"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
