@@ -1,19 +1,21 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "jg34s3hr64mgd"
+  },
   "info": {
-    "title": "checkLotsState",
-    "version": "1.19",
-    "description": ""
+    "title": "startAwardPeriodForLots",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9031"
+      "url": "http://{host}:9081"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Lots State",
+        "summary": "Start Award Period For Lots",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -21,13 +23,67 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "tender"
+                          ],
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "lots"
+                              ],
+                              "properties": {
+                                "lots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "awardPeriod": {
+                                        "type": "object",
+                                        "required": [
+                                          "startDate"
+                                        ],
+                                        "properties": {
+                                          "startDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "awardPeriod"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
                 }
               }
             }
           }
         },
-        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -44,9 +100,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "pmd",
-                          "country",
-                          "operationType",
+                          "date",
                           "tender"
                         ],
                         "properties": {
@@ -56,65 +110,9 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "pmd": {
+                          "date": {
                             "type": "string",
-                            "enum": [
-                              "DA",
-                              "TEST_DA",
-                              "DC",
-                              "TEST_DC",
-                              "NP",
-                              "TEST_NP",
-                              "CD",
-                              "TEST_CD",
-                              "IP",
-                              "TEST_IP",
-                              "GPA",
-                              "TEST_GPA",
-                              "RT",
-                              "TEST_RT",
-                              "OT",
-                              "TEST_OT",
-                              "SV",
-                              "TEST_SV",
-                              "MV",
-                              "TEST_MV",
-                              "RFQ",
-                              "TEST_RFQ",
-                              "MC",
-                              "TEST_MC",
-                              "DCO",
-                              "TEST_DCO"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "createAward",
-                              "updateAward",
-                              "divideLot",
-                              "submitBid",
-                              "declareNonConflictOfInterest",
-                              "awardConsideration",
-                              "tenderOrLotAmendmentConfirmation",
-                              "createRfq",
-                              "createMC",
-                              "createEnquiry",
-                              "awardQualification",
-                              "evaluateAward",
-                              "protocol",
-                              "cancelLot",
-                              "cancelTender",
-                              "cancelAmendment",
-                              "confirmAmendment",
-                              "preEvaluateAward",
-                              "intermediateProtocol",
-                              "auctionPeriodEnd",
-                              "weightValueForAwards"
-                            ]
+                            "format": "date-time"
                           },
                           "tender": {
                             "type": "object",
@@ -151,7 +149,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkLotsState"
+                          "setAwardPeriodEndForLots"
                         ]
                       }
                     }
