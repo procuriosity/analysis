@@ -1,8 +1,11 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "u4gofp6a7xgjd"
+  },
   "info": {
-    "title": "AnalyzeBidsForEvaluation",
-    "version": "1.02",
+    "title": "Start Award Period For Lots",
+    "version": "1.0",
     "description": ""
   },
   "servers": [
@@ -13,7 +16,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Analyze Bids For Evaluation",
+        "summary": "Start Award Period For Lots",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -30,36 +33,51 @@
                       "properties": {
                         "result": {
                           "type": "object",
+                          "required": [
+                            "tender"
+                          ],
                           "properties": {
-                            "bids": {
+                            "tender": {
                               "type": "object",
                               "required": [
-                                "details"
+                                "lots"
                               ],
                               "properties": {
-                                "details": {
+                                "lots": {
                                   "type": "array",
                                   "items": {
                                     "type": "object",
                                     "properties": {
                                       "id": {
-                                        "type": "string",
-                                        "format": "uuid"
+                                        "type": "string"
+                                      },
+                                      "awardPeriod": {
+                                        "type": "object",
+                                        "required": [
+                                          "startDate"
+                                        ],
+                                        "properties": {
+                                          "startDate": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        }
                                       }
                                     },
                                     "required": [
-                                      "id"
+                                      "id",
+                                      "awardPeriod"
                                     ]
                                   }
                                 }
                               }
                             }
-                          },
-                          "required": [
-                            "bids"
-                          ]
+                          }
                         }
-                      }
+                      },
+                      "required": [
+                        "result"
+                      ]
                     }
                   ]
                 }
@@ -81,7 +99,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "analyzeBidsForEvaluation"
+                          "startAwardPeriodForLots"
                         ]
                       }
                     },
@@ -95,48 +113,25 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "country",
-                          "pmd",
-                          "operationType",
-                          "tender",
-                          "bids"
+                          "cpid",
+                          "ocid",
+                          "date",
+                          "tender"
                         ],
                         "properties": {
-                          "country": {
-                            "type": "string"
-                          },
-                          "pmd": {
+                          "cpid": {
                             "type": "string",
-                            "enum": [
-                              "OT",
-                              "TEST_OT",
-                              "SV",
-                              "TEST_SV",
-                              "MV",
-                              "TEST_MV",
-                              "RT",
-                              "TEST_RT",
-                              "GPA",
-                              "TEST_GPA",
-                              "RFQ",
-                              "TEST_RFQ",
-                              "MC",
-                              "TEST_MC",
-                              "DCO",
-                              "TEST_DCO",
-                              "OF",
-                              "TEST_OF",
-                              "CF",
-                              "TEST_CF"
-                            ]
+                            "example": "ocds-b3wdp1-MD-1580458690892",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-[0-9]{13}$"
                           },
-                          "operationType": {
+                          "ocid": {
                             "type": "string",
-                            "enum": [
-                              "tenderPeriodEnd",
-                              "tenderPeriodEndInPcr",
-                              "tenderPeriodEndForLots"
-                            ]
+                            "example": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-([0-9]{13})\\-([A-Z]{2})\\-([0-9]{13})$"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
                           },
                           "tender": {
                             "type": "object",
@@ -150,42 +145,11 @@
                                   "type": "object",
                                   "properties": {
                                     "id": {
-                                      "type": "string",
-                                      "format": "uuid"
+                                      "type": "string"
                                     }
                                   },
                                   "required": [
                                     "id"
-                                  ]
-                                }
-                              }
-                            }
-                          },
-                          "bids": {
-                            "type": "object",
-                            "required": [
-                              "details"
-                            ],
-                            "properties": {
-                              "details": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string",
-                                      "format": "uuid"
-                                    },
-                                    "ralatedLots": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "string"
-                                      }
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "ralatedLots"
                                   ]
                                 }
                               }
