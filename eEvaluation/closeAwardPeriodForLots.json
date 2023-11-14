@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "dh4vbsmunvw4e"
+    "id": "u4gofp6a7xgjd"
   },
   "info": {
     "title": "Close Award Period For Lots",
@@ -16,7 +16,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Close Award Period For Lots",
+        "summary": "Start Award Period For Lots",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -54,10 +54,10 @@
                                       "awardPeriod": {
                                         "type": "object",
                                         "required": [
-                                          "endDate"
+                                          "startDate"
                                         ],
                                         "properties": {
-                                          "endDate": {
+                                          "startDate": {
                                             "type": "string",
                                             "format": "date-time"
                                           }
@@ -74,7 +74,10 @@
                             }
                           }
                         }
-                      }
+                      },
+                      "required": [
+                        "result"
+                      ]
                     }
                   ]
                 }
@@ -112,15 +115,28 @@
                         "required": [
                           "cpid",
                           "ocid",
+                          "operationType",
                           "date",
                           "tender"
                         ],
                         "properties": {
                           "cpid": {
-                            "$ref": "../models/cpid.v1.json"
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-[0-9]{13}$"
                           },
                           "ocid": {
-                            "$ref": "../models/ocid.v1.json"
+                            "type": "string",
+                            "example": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896",
+                            "pattern": "^([a-z]{4})\\-([a-z0-9]{6})\\-([A-Z]{2})\\-([0-9]{13})\\-([A-Z]{2})\\-([0-9]{13})$"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "confirmCan",
+                              "confirmAmendment",
+                              "activateContract"
+                            ]
                           },
                           "date": {
                             "type": "string",
@@ -139,10 +155,30 @@
                                   "properties": {
                                     "id": {
                                       "type": "string"
+                                    },
+                                    "status": {
+                                      "type": "string",
+                                      "enum": [
+                                        "complete",
+                                        "unsuccessful",
+                                        "cancelled"
+                                      ]
+                                    },
+                                    "statusDetails": {
+                                      "type": "string",
+                                      "enum": [
+                                        "contracted",
+                                        "notAwarded",
+                                        "fundsLimitation",
+                                        "needCancellation",
+                                        "terminalError"
+                                      ]
                                     }
                                   },
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "status",
+                                    "statusDetails"
                                   ]
                                 }
                               }
