@@ -1,22 +1,21 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "9oks0id9ussgd"
+    "id": "8wjomyotllsv8"
   },
   "info": {
-    "title": "setTenderPeriodForLots",
-    "version": "1.02",
-    "description": ""
+    "title": "updateEnquiryPeriodEndForLots",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9061"
+      "url": "http://{host}:9071"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Set Tender Period For Lots",
+        "summary": "Update Enquiry Period End For Lots",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -45,14 +44,26 @@
                               "properties": {
                                 "lots": {
                                   "type": "array",
+                                  "x-stoplight": {
+                                    "id": "gen6fsnnk4tco"
+                                  },
                                   "items": {
+                                    "x-stoplight": {
+                                      "id": "1od0tw5lo112v"
+                                    },
                                     "type": "object",
                                     "properties": {
                                       "id": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "59elc0p2y1lrs"
+                                        }
                                       },
-                                      "tenderPeriod": {
+                                      "enquiryPeriod": {
                                         "type": "object",
+                                        "x-stoplight": {
+                                          "id": "rtz5ohuqueugz"
+                                        },
                                         "required": [
                                           "startDate",
                                           "endDate"
@@ -60,10 +71,16 @@
                                         "properties": {
                                           "startDate": {
                                             "type": "string",
+                                            "x-stoplight": {
+                                              "id": "gcp7d2ptag71j"
+                                            },
                                             "format": "date-time"
                                           },
                                           "endDate": {
                                             "type": "string",
+                                            "x-stoplight": {
+                                              "id": "nrxval1zvhd2q"
+                                            },
                                             "format": "date-time"
                                           }
                                         }
@@ -71,7 +88,7 @@
                                     },
                                     "required": [
                                       "id",
-                                      "tenderPeriod"
+                                      "enquiryPeriod"
                                     ]
                                   }
                                 }
@@ -86,70 +103,11 @@
                     }
                   ]
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "../models/response_command.v1.json"
-                }
-              },
-              "multipart/form-data": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "properties": {
-                        "response": {
-                          "$ref": "../models/response_command.v1.json"
-                        },
-                        "tender": {
-                          "type": "object",
-                          "required": [
-                            "lots"
-                          ],
-                          "properties": {
-                            "lots": {
-                              "type": "object",
-                              "required": [
-                                "id",
-                                "tenderPeriod"
-                              ],
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "tenderPeriod": {
-                                  "type": "object",
-                                  "required": [
-                                    "startDate",
-                                    "endDate"
-                                  ],
-                                  "properties": {
-                                    "startDate": {
-                                      "type": "string",
-                                      "format": "date-time"
-                                    },
-                                    "endDate": {
-                                      "type": "string",
-                                      "format": "date-time"
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "required": [
-                        "response",
-                        "tender"
-                      ]
-                    }
-                  ],
-                  "type": "object"
-                }
               }
             }
           }
         },
+        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -166,10 +124,10 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "tender",
                           "pmd",
                           "country",
-                          "operationType"
+                          "operationType",
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -177,6 +135,26 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "SV",
+                              "TEST_SV",
+                              "MV",
+                              "TEST_MV",
+                              "OT",
+                              "TEST_OT"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "updateLots"
+                            ]
                           },
                           "tender": {
                             "type": "object",
@@ -186,14 +164,26 @@
                             "properties": {
                               "lots": {
                                 "type": "array",
+                                "x-stoplight": {
+                                  "id": "boclszo7o8yqf"
+                                },
                                 "items": {
+                                  "x-stoplight": {
+                                    "id": "b55bfw54sd15j"
+                                  },
                                   "type": "object",
                                   "properties": {
                                     "id": {
-                                      "type": "string"
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "pxy1eikt3fobe"
+                                      }
                                     },
                                     "tenderPeriod": {
                                       "type": "object",
+                                      "x-stoplight": {
+                                        "id": "twa9cbdahk9uw"
+                                      },
                                       "required": [
                                         "startDate",
                                         "endDate"
@@ -202,12 +192,15 @@
                                         "startDate": {
                                           "type": "string",
                                           "x-stoplight": {
-                                            "id": "67a2shrjtpd9i"
+                                            "id": "4e6kg0rcecbm2"
                                           },
                                           "format": "date-time"
                                         },
                                         "endDate": {
                                           "type": "string",
+                                          "x-stoplight": {
+                                            "id": "tru81imtpe0ka"
+                                          },
                                           "format": "date-time"
                                         }
                                       }
@@ -220,28 +213,6 @@
                                 }
                               }
                             }
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "OT",
-                              "TEST_OT",
-                              "SV",
-                              "TEST_SV",
-                              "MV",
-                              "TEST_MV"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "createTenderFromPlan",
-                              "passageConfirmation",
-                              "updateLots"
-                            ]
                           }
                         }
                       }
@@ -256,7 +227,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "setTenderPeriodForLots"
+                          "updateEnquiryPeriodEndForLots"
                         ]
                       }
                     }
