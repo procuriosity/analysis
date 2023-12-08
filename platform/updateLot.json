@@ -4,7 +4,7 @@
     "id": "3jgv3y5n1d80c"
   },
   "info": {
-    "title": "updateLots",
+    "title": "updateLot",
     "version": "1.0",
     "description": ""
   },
@@ -14,7 +14,7 @@
     }
   ],
   "paths": {
-    "/amend/lots/{cpid}/{ocid}": {
+    "/amend/lot/{cpid}/{ocid}/{lotId}": {
       "parameters": [
         {
           "schema": {
@@ -69,10 +69,19 @@
           "name": "X-TOKEN",
           "description": "PN token",
           "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "lotId",
+          "in": "path",
+          "required": true,
+          "description": "lot Id"
         }
       ],
       "post": {
-        "summary": "Update Lots",
+        "summary": "Update Lot",
         "operationId": "post-do-cn-cpid-ocidOpenPN",
         "responses": {
           "202": {
@@ -124,74 +133,38 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "properties": {
-                      "tender": {
-                        "type": "object",
-                        "required": [
-                          "lots"
-                        ],
-                        "properties": {
-                          "lots": {
-                            "type": "array",
-                            "x-stoplight": {
-                              "id": "dutwyloa9hgw7"
-                            },
-                            "items": {
-                              "x-stoplight": {
-                                "id": "kzgqxl2vd7k42"
-                              },
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string",
-                                  "x-stoplight": {
-                                    "id": "ckwxh7qqvutme"
-                                  }
-                                },
-                                "tenderPeriod": {
-                                  "type": "object",
-                                  "x-stoplight": {
-                                    "id": "fdnmfyv8nj21i"
-                                  },
-                                  "required": [
-                                    "startDate",
-                                    "endDate"
-                                  ],
-                                  "properties": {
-                                    "startDate": {
-                                      "type": "string",
-                                      "x-stoplight": {
-                                        "id": "6bekifg1zp6k1"
-                                      },
-                                      "format": "date-time"
-                                    },
-                                    "endDate": {
-                                      "type": "string",
-                                      "x-stoplight": {
-                                        "id": "5ytihn0irzxcj"
-                                      },
-                                      "format": "date-time"
-                                    }
-                                  }
-                                }
-                              },
-                              "required": [
-                                "id",
-                                "tenderPeriod"
-                              ]
-                            }
-                          }
-                        }
-                      }
+                "type": "object",
+                "properties": {
+                  "tenderPeriod": {
+                    "type": "object",
+                    "x-stoplight": {
+                      "id": "cmk117h5212mo"
                     },
                     "required": [
-                      "tender"
-                    ]
+                      "startDate",
+                      "endDate"
+                    ],
+                    "properties": {
+                      "startDate": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "2b1lwt1vr7kpd"
+                        },
+                        "format": "date-time"
+                      },
+                      "endDate": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "ztc6n5bfz3ope"
+                        },
+                        "format": "date-time"
+                      }
+                    }
                   }
-                ],
-                "type": "object"
+                },
+                "required": [
+                  "tenderPeriod"
+                ]
               }
             }
           },
