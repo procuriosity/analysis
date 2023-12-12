@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "findCriteriaTargetsConversions",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -36,7 +36,162 @@
                                 "criteria": {
                                   "type": "array",
                                   "items": {
-                                    "$ref": "../models/criteriaRequest.json"
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "title": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "relatesTo": {
+                                        "type": "string",
+                                        "enum": [
+                                          "lot",
+                                          "item",
+                                          "tender"
+                                        ]
+                                      },
+                                      "relatedItem": {
+                                        "type": "string"
+                                      },
+                                      "requirementGroups": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "requirements": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "title": {
+                                                    "type": "string"
+                                                  },
+                                                  "description": {
+                                                    "type": "string"
+                                                  },
+                                                  "dataType": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "integer",
+                                                      "string",
+                                                      "boolean",
+                                                      "number"
+                                                    ]
+                                                  },
+                                                  "period": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "startDate": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                      },
+                                                      "endDate": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "startDate",
+                                                      "endDate"
+                                                    ]
+                                                  },
+                                                  "expectedValue": {
+                                                    "type": [
+                                                      "string",
+                                                      "number",
+                                                      "integer",
+                                                      "boolean"
+                                                    ]
+                                                  },
+                                                  "minValue": {
+                                                    "type": [
+                                                      "number",
+                                                      "integer"
+                                                    ]
+                                                  },
+                                                  "maxValue": {
+                                                    "type": [
+                                                      "number",
+                                                      "integer"
+                                                    ]
+                                                  },
+                                                  "eligibleEvidences": {
+                                                    "type": "array",
+                                                    "items": {
+                                                      "$ref": "../models/eligibleEvidences.v1.json"
+                                                    }
+                                                  },
+                                                  "status": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "active"
+                                                    ]
+                                                  },
+                                                  "datePublished": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "id",
+                                                  "title",
+                                                  "dataType",
+                                                  "status",
+                                                  "datePublished"
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "requirements"
+                                          ]
+                                        }
+                                      },
+                                      "source": {
+                                        "type": "string",
+                                        "enum": [
+                                          "tenderer"
+                                        ]
+                                      },
+                                      "classification": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "scheme"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "title",
+                                      "relatesTo",
+                                      "requirementGroups",
+                                      "source",
+                                      "classification"
+                                    ]
                                   }
                                 },
                                 "conversions": {
@@ -74,7 +229,8 @@
                                               "type": [
                                                 "number",
                                                 "integer",
-                                                "boolean"
+                                                "boolean",
+                                                "string"
                                               ]
                                             },
                                             "coefficient": {
@@ -201,7 +357,10 @@
                                 }
                               }
                             }
-                          }
+                          },
+                          "required": [
+                            "tender"
+                          ]
                         }
                       }
                     }
