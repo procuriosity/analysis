@@ -28,15 +28,33 @@
                   "tender": {
                     "type": "object",
                     "required": [
-                      "lots",
-                      "items",
-                      "tenderPeriod",
                       "title",
                       "description",
+                      "tenderPeriod",
+                      "lots",
+                      "items",
                       "awardCriteria",
                       "awardCriteriaDetails"
                     ],
                     "properties": {
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "tenderPeriod": {
+                        "type": "object",
+                        "required": [
+                          "endDate"
+                        ],
+                        "properties": {
+                          "endDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      },
                       "lots": {
                         "type": "array",
                         "items": {
@@ -68,10 +86,6 @@
                             },
                             "contractPeriod": {
                               "type": "object",
-                              "required": [
-                                "startDate",
-                                "endDate"
-                              ],
                               "properties": {
                                 "startDate": {
                                   "type": "string",
@@ -102,7 +116,6 @@
                             "id",
                             "title",
                             "value",
-                            "contractPeriod",
                             "placeOfPerformance"
                           ]
                         }
@@ -146,86 +159,6 @@
                             "relatedLot"
                           ]
                         }
-                      },
-                      "tenderPeriod": {
-                        "type": "object",
-                        "required": [
-                          "endDate"
-                        ],
-                        "properties": {
-                          "endDate": {
-                            "type": "string",
-                            "format": "date-time"
-                          }
-                        }
-                      },
-                      "electronicAuctions": {
-                        "type": "object",
-                        "properties": {
-                          "details": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "relatedLot": {
-                                  "type": "string"
-                                },
-                                "electronicAuctionModalities": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "eligibleMinimumDifference": {
-                                        "type": "object",
-                                        "required": [
-                                          "amount",
-                                          "currency"
-                                        ],
-                                        "properties": {
-                                          "amount": {
-                                            "type": "number"
-                                          },
-                                          "currency": {
-                                            "type": "string"
-                                          }
-                                        }
-                                      }
-                                    },
-                                    "required": [
-                                      "eligibleMinimumDifference"
-                                    ]
-                                  }
-                                }
-                              },
-                              "required": [
-                                "id",
-                                "relatedLot",
-                                "electronicAuctionModalities"
-                              ]
-                            }
-                          }
-                        },
-                        "required": [
-                          "details"
-                        ]
-                      },
-                      "procurementMethodModalities": {
-                        "type": "array",
-                        "items": {
-                          "type": "string",
-                          "enum": [
-                            "electronicAuction"
-                          ]
-                        }
-                      },
-                      "title": {
-                        "type": "string"
-                      },
-                      "description": {
-                        "type": "string"
                       },
                       "awardCriteria": {
                         "type": "string",
@@ -311,8 +244,68 @@
                             "title"
                           ]
                         }
+                      },
+                      "procurementMethodModalities": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "electronicAuction"
+                          ]
+                        }
+                      },
+                      "procurementMethodModalitiesDetails": {
+                        "type": "object",
+                        "properties": {
+                          "electronicAuction": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "modalities": {
+                                  "type": "object",
+                                  "properties": {
+                                    "auctionDirection": {
+                                      "type": "string",
+                                      "enum": [
+                                        "ascending",
+                                        "descending",
+                                        "any"
+                                      ]
+                                    },
+                                    "auctionAwardCriteria": {
+                                      "type": "array",
+                                      "maxItems": 1,
+                                      "items": {
+                                        "type": "string",
+                                        "enum": [
+                                          "priceOnly",
+                                          "qualityOnly",
+                                          "ratedCriteria"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "modalities"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "electronicAuction"
+                        ]
                       }
                     }
+                  },
+                  "auctions": {
+                    "$ref": "../models/auctions.json"
                   }
                 },
                 "required": [
