@@ -202,7 +202,6 @@
                                 "title",
                                 "description",
                                 "legalBasis",
-                                "contractPeriod",
                                 "classification",
                                 "procurementMethod",
                                 "procurementMethodDetails",
@@ -265,10 +264,6 @@
                                       },
                                       "contractPeriod": {
                                         "type": "object",
-                                        "required": [
-                                          "startDate",
-                                          "endDate"
-                                        ],
                                         "properties": {
                                           "startDate": {
                                             "type": "string",
@@ -314,7 +309,6 @@
                                       "title",
                                       "status",
                                       "value",
-                                      "contractPeriod",
                                       "placeOfPerformance",
                                       "variants"
                                     ]
@@ -386,32 +380,6 @@
                                     ]
                                   }
                                 },
-                                "electronicAuctions": {
-                                  "type": "object",
-                                  "properties": {
-                                    "details": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "id": {
-                                            "type": "string"
-                                          },
-                                          "relatedLot": {
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "id",
-                                          "relatedLot"
-                                        ]
-                                      }
-                                    }
-                                  },
-                                  "required": [
-                                    "details"
-                                  ]
-                                },
                                 "procurementMethodModalities": {
                                   "type": "array",
                                   "items": {
@@ -462,15 +430,16 @@
                                     "DIRECTIVE_2014_25_EU",
                                     "REGULATION_966_2012",
                                     "NATIONAL_PROCUREMENT_LAW",
-                                    "DIRECTIVE_2009_81_EC"
+                                    "DIRECTIVE_2009_81_EC",
+                                    "32009L0081",
+                                    "32014L0023",
+                                    "32014L0024",
+                                    "32014L0025",
+                                    "other"
                                   ]
                                 },
                                 "contractPeriod": {
                                   "type": "object",
-                                  "required": [
-                                    "startDate",
-                                    "endDate"
-                                  ],
                                   "properties": {
                                     "startDate": {
                                       "type": "string",
@@ -723,6 +692,47 @@
                                   "roles"
                                 ]
                               }
+                            },
+                            "auctions": {
+                              "type": "object",
+                              "x-stoplight": {
+                                "id": "0zmo4vznk2nz5"
+                              },
+                              "properties": {
+                                "details": {
+                                  "type": "array",
+                                  "x-stoplight": {
+                                    "id": "pps4la3qfrvc7"
+                                  },
+                                  "items": {
+                                    "x-stoplight": {
+                                      "id": "6ggiriyr06l0t"
+                                    },
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "tfoaa6ajhhdls"
+                                        }
+                                      },
+                                      "relatedLot": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "vuh6dia1sm61f"
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "relatedLot"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "details"
+                              ]
                             }
                           }
                         }
@@ -771,15 +781,21 @@
                           "tender": {
                             "type": "object",
                             "required": [
-                              "lots",
-                              "items",
                               "title",
                               "description",
+                              "lots",
+                              "items",
                               "classification",
                               "awardCriteria",
                               "awardCriteriaDetails"
                             ],
                             "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
                               "lots": {
                                 "type": "array",
                                 "items": {
@@ -810,10 +826,6 @@
                                     },
                                     "contractPeriod": {
                                       "type": "object",
-                                      "required": [
-                                        "startDate",
-                                        "endDate"
-                                      ],
                                       "properties": {
                                         "startDate": {
                                           "type": "string",
@@ -844,7 +856,6 @@
                                     "id",
                                     "title",
                                     "value",
-                                    "contractPeriod",
                                     "placeOfPerformance"
                                   ]
                                 }
@@ -914,32 +925,6 @@
                                   ]
                                 }
                               },
-                              "electronicAuctions": {
-                                "type": "object",
-                                "properties": {
-                                  "details": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "relatedLot": {
-                                          "type": "string"
-                                        }
-                                      },
-                                      "required": [
-                                        "id",
-                                        "relatedLot"
-                                      ]
-                                    }
-                                  }
-                                },
-                                "required": [
-                                  "details"
-                                ]
-                              },
                               "procurementMethodModalities": {
                                 "type": "array",
                                 "items": {
@@ -948,12 +933,6 @@
                                     "electronicAuction"
                                   ]
                                 }
-                              },
-                              "title": {
-                                "type": "string"
-                              },
-                              "description": {
-                                "type": "string"
                               },
                               "classification": {
                                 "type": "object",
@@ -1075,6 +1054,47 @@
                           },
                           "additionalOcid": {
                             "$ref": "../models/ocid.v1.json"
+                          },
+                          "auctions": {
+                            "type": "object",
+                            "x-stoplight": {
+                              "id": "11rwpgapjysy6"
+                            },
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "x-stoplight": {
+                                  "id": "kycy4n3ihg7mg"
+                                },
+                                "items": {
+                                  "x-stoplight": {
+                                    "id": "td0b21mdmd6t3"
+                                  },
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "s85mj0vb94jr5"
+                                      }
+                                    },
+                                    "relatedLot": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "am0acjyf4v6b5"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "relatedLot"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "details"
+                            ]
                           }
                         }
                       }
