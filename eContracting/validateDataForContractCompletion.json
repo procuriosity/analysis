@@ -1,0 +1,168 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "4t1pdmvbag8s1"
+  },
+  "info": {
+    "title": "validateDataForContractCompletion",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9151"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Validate Data For Contract Completion",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "contracts"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "statusDetails": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "kitignlwle7dm"
+                                  },
+                                  "enum": [
+                                    "met",
+                                    "notMet",
+                                    "partiallyMet",
+                                    "partiallyNotMet"
+                                  ]
+                                },
+                                "implementation": {
+                                  "type": "object",
+                                  "x-stoplight": {
+                                    "id": "b8191e8bi4d30"
+                                  },
+                                  "required": [
+                                    "endDate"
+                                  ],
+                                  "properties": {
+                                    "endDate": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "uj1rrh407pjba"
+                                      },
+                                      "format": "date-time"
+                                    },
+                                    "endDateDetails": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "emptqfdo2wrw4"
+                                      }
+                                    },
+                                    "finalValue": {
+                                      "type": "object",
+                                      "x-stoplight": {
+                                        "id": "q8eaitcrdadll"
+                                      },
+                                      "properties": {
+                                        "amount": {
+                                          "type": "number",
+                                          "x-stoplight": {
+                                            "id": "4mps7w4iqab42"
+                                          }
+                                        },
+                                        "currency": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "hhiu3txzaonv7"
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "amount",
+                                        "currency"
+                                      ]
+                                    },
+                                    "finalValueDetails": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "g7g4n26h6dq35"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "statusDetails",
+                                "implementation"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validateDataForContractCompletion"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
