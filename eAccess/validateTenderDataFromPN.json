@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateTenderDataFromPN",
-    "version": "1.03"
+    "version": "1.06"
   },
   "servers": [
     {
@@ -436,17 +436,16 @@
                                       "type": "string"
                                     },
                                     "title": {
-                                      "type": "string"
+                                      "type": "string",
+                                      "description": "is required for complete lot structure"
                                     },
                                     "description": {
-                                      "type": "string"
+                                      "type": "string",
+                                      "description": "is required for complete lot structure"
                                     },
                                     "value": {
                                       "type": "object",
-                                      "required": [
-                                        "amount",
-                                        "currency"
-                                      ],
+                                      "description": "is required for complete lot structure",
                                       "properties": {
                                         "amount": {
                                           "type": "number"
@@ -454,7 +453,11 @@
                                         "currency": {
                                           "type": "string"
                                         }
-                                      }
+                                      },
+                                      "required": [
+                                        "amount",
+                                        "currency"
+                                      ]
                                     },
                                     "contractPeriod": {
                                       "type": "object",
@@ -471,9 +474,7 @@
                                     },
                                     "placeOfPerformance": {
                                       "type": "object",
-                                      "required": [
-                                        "address"
-                                      ],
+                                      "description": "is required for complete lot structure",
                                       "properties": {
                                         "address": {
                                           "$ref": "../models/addressRequest.v1.json"
@@ -481,7 +482,10 @@
                                         "description": {
                                           "type": "string"
                                         }
-                                      }
+                                      },
+                                      "required": [
+                                        "address"
+                                      ]
                                     },
                                     "hasOptions": {
                                       "type": "boolean"
@@ -645,14 +649,113 @@
                                           "$ref": "../models/frameworkAgreement.json"
                                         }
                                       }
+                                    },
+                                    "electronicWorkflows": {
+                                      "type": "object",
+                                      "properties": {
+                                        "useOrdering": {
+                                          "type": "boolean"
+                                        },
+                                        "acceptInvoicing": {
+                                          "type": "boolean"
+                                        },
+                                        "usePayment": {
+                                          "type": "boolean"
+                                        }
+                                      }
+                                    },
+                                    "otherRequirements": {
+                                      "type": "object",
+                                      "properties": {
+                                        "reservedParticipation": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string",
+                                            "enum": [
+                                              "shelteredWorkshop",
+                                              "publicServiceMissionOrganization"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "subcontractingTerms": {
+                                      "type": "object",
+                                      "properties": {
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "minimumPercentage": {
+                                          "type": "number"
+                                        },
+                                        "maximumPercentage": {
+                                          "type": "number"
+                                        }
+                                      }
+                                    },
+                                    "submissionTerms": {
+                                      "type": "object",
+                                      "properties": {
+                                        "languages": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "electronicCataloguePolicy": {
+                                          "type": "string"
+                                        },
+                                        "variantPolicy": {
+                                          "type": "string"
+                                        },
+                                        "bidValidityPeriod": {
+                                          "type": "object",
+                                          "properties": {
+                                            "duration": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "depositsGuarantees": {
+                                          "type": "string"
+                                        },
+                                        "subcontractingIndication": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "coveredBy": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string",
+                                        "enum": [
+                                          "GPA"
+                                        ]
+                                      }
+                                    },
+                                    "tenderPeriod": {
+                                      "type": "object",
+                                      "properties": {
+                                        "startDate": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "8yzgi0inqjpzr"
+                                          },
+                                          "format": "date-time"
+                                        },
+                                        "endDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        }
+                                      },
+                                      "required": [
+                                        "startDate",
+                                        "endDate"
+                                      ]
                                     }
                                   },
                                   "required": [
-                                    "id",
-                                    "title",
-                                    "description",
-                                    "value",
-                                    "placeOfPerformance"
+                                    "id"
                                   ]
                                 }
                               },
@@ -696,7 +799,8 @@
                                           "scheme": {
                                             "type": "string",
                                             "enum": [
-                                              "CPVS"
+                                              "CPVS",
+                                              "CPV"
                                             ]
                                           }
                                         },
@@ -768,7 +872,11 @@
                                         "evaluationReports",
                                         "shortlistedFirms",
                                         "contractArrangements",
-                                        "contractGuarantees"
+                                        "contractGuarantees",
+                                        "meetingWithTenderersProtocol",
+                                        "qualificationCriteria",
+                                        "tenderForm",
+                                        "other"
                                       ]
                                     },
                                     "description": {
@@ -932,6 +1040,18 @@
                                 },
                                 "required": [
                                   "electronicAuction"
+                                ]
+                              },
+                              "tenderPeriod": {
+                                "type": "object",
+                                "properties": {
+                                  "endDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                },
+                                "required": [
+                                  "endDate"
                                 ]
                               }
                             }
@@ -1665,6 +1785,89 @@
                                           "$ref": "../models/frameworkAgreement.json"
                                         }
                                       }
+                                    },
+                                    "electronicWorkflows": {
+                                      "type": "object",
+                                      "properties": {
+                                        "useOrdering": {
+                                          "type": "boolean"
+                                        },
+                                        "acceptInvoicing": {
+                                          "type": "boolean"
+                                        },
+                                        "usePayment": {
+                                          "type": "boolean"
+                                        }
+                                      }
+                                    },
+                                    "otherRequirements": {
+                                      "type": "object",
+                                      "properties": {
+                                        "reservedParticipation": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string",
+                                            "enum": [
+                                              "shelteredWorkshop",
+                                              "publicServiceMissionOrganization"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "subcontractingTerms": {
+                                      "type": "object",
+                                      "properties": {
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "minimumPercentage": {
+                                          "type": "number"
+                                        },
+                                        "maximumPercentage": {
+                                          "type": "number"
+                                        }
+                                      }
+                                    },
+                                    "submissionTerms": {
+                                      "type": "object",
+                                      "properties": {
+                                        "languages": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "electronicCataloguePolicy": {
+                                          "type": "string"
+                                        },
+                                        "variantPolicy": {
+                                          "type": "string"
+                                        },
+                                        "bidValidityPeriod": {
+                                          "type": "object",
+                                          "properties": {
+                                            "duration": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "depositsGuarantees": {
+                                          "type": "string"
+                                        },
+                                        "subcontractingIndication": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "coveredBy": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string",
+                                        "enum": [
+                                          "GPA"
+                                        ]
+                                      }
                                     }
                                   },
                                   "required": [
@@ -1716,7 +1919,8 @@
                                           "scheme": {
                                             "type": "string",
                                             "enum": [
-                                              "CPVS"
+                                              "CPVS",
+                                              "CPV"
                                             ]
                                           }
                                         },
@@ -1788,7 +1992,11 @@
                                         "evaluationReports",
                                         "shortlistedFirms",
                                         "contractArrangements",
-                                        "contractGuarantees"
+                                        "contractGuarantees",
+                                        "meetingWithTenderersProtocol",
+                                        "qualificationCriteria",
+                                        "tenderForm",
+                                        "other"
                                       ]
                                     },
                                     "description": {
@@ -2527,6 +2735,89 @@
                                           "$ref": "../models/frameworkAgreement.json"
                                         }
                                       }
+                                    },
+                                    "electronicWorkflows": {
+                                      "type": "object",
+                                      "properties": {
+                                        "useOrdering": {
+                                          "type": "boolean"
+                                        },
+                                        "acceptInvoicing": {
+                                          "type": "boolean"
+                                        },
+                                        "usePayment": {
+                                          "type": "boolean"
+                                        }
+                                      }
+                                    },
+                                    "otherRequirements": {
+                                      "type": "object",
+                                      "properties": {
+                                        "reservedParticipation": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string",
+                                            "enum": [
+                                              "shelteredWorkshop",
+                                              "publicServiceMissionOrganization"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "subcontractingTerms": {
+                                      "type": "object",
+                                      "properties": {
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "minimumPercentage": {
+                                          "type": "number"
+                                        },
+                                        "maximumPercentage": {
+                                          "type": "number"
+                                        }
+                                      }
+                                    },
+                                    "submissionTerms": {
+                                      "type": "object",
+                                      "properties": {
+                                        "languages": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "electronicCataloguePolicy": {
+                                          "type": "string"
+                                        },
+                                        "variantPolicy": {
+                                          "type": "string"
+                                        },
+                                        "bidValidityPeriod": {
+                                          "type": "object",
+                                          "properties": {
+                                            "duration": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "depositsGuarantees": {
+                                          "type": "string"
+                                        },
+                                        "subcontractingIndication": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "coveredBy": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string",
+                                        "enum": [
+                                          "GPA"
+                                        ]
+                                      }
                                     }
                                   },
                                   "required": [
@@ -2578,7 +2869,8 @@
                                           "scheme": {
                                             "type": "string",
                                             "enum": [
-                                              "CPVS"
+                                              "CPVS",
+                                              "CPV"
                                             ]
                                           }
                                         },
@@ -2650,7 +2942,11 @@
                                         "evaluationReports",
                                         "shortlistedFirms",
                                         "contractArrangements",
-                                        "contractGuarantees"
+                                        "contractGuarantees",
+                                        "meetingWithTenderersProtocol",
+                                        "qualificationCriteria",
+                                        "tenderForm",
+                                        "other"
                                       ]
                                     },
                                     "description": {

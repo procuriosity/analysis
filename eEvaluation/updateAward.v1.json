@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "updateAward",
-    "version": "1.04"
+    "version": "1.05"
   },
   "servers": [
     {
@@ -414,10 +414,6 @@
                                             },
                                             "value": {
                                               "type": "object",
-                                              "required": [
-                                                "amount",
-                                                "currency"
-                                              ],
                                               "properties": {
                                                 "amount": {
                                                   "type": "number"
@@ -425,7 +421,11 @@
                                                 "currency": {
                                                   "type": "string"
                                                 }
-                                              }
+                                              },
+                                              "required": [
+                                                "amount",
+                                                "currency"
+                                              ]
                                             },
                                             "name": {
                                               "type": "string"
@@ -608,8 +608,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "awards",
-                          "pmd"
+                          "pmd",
+                          "awards"
                         ],
                         "properties": {
                           "cpid": {
@@ -617,6 +617,37 @@
                           },
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "DA",
+                              "NP",
+                              "CD",
+                              "DC",
+                              "IP",
+                              "TEST_DA",
+                              "TEST_NP",
+                              "TEST_CD",
+                              "TEST_DC",
+                              "TEST_IP",
+                              "CF",
+                              "OF",
+                              "TEST_OF",
+                              "TEST_CF",
+                              "OT",
+                              "TEST_OT",
+                              "SV",
+                              "TEST_SV",
+                              "MV",
+                              "TEST_MV",
+                              "GPA",
+                              "TEST_GPA",
+                              "RT",
+                              "TEST_RT",
+                              "MC",
+                              "TEST_MC"
+                            ]
                           },
                           "awards": {
                             "type": "array",
@@ -1078,35 +1109,6 @@
                                 "id"
                               ]
                             }
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "DA",
-                              "NP",
-                              "CD",
-                              "DC",
-                              "IP",
-                              "TEST_DA",
-                              "TEST_NP",
-                              "TEST_CD",
-                              "TEST_DC",
-                              "TEST_IP",
-                              "CF",
-                              "OF",
-                              "TEST_OF",
-                              "TEST_CF",
-                              "OT",
-                              "TEST_OT",
-                              "SV",
-                              "TEST_SV",
-                              "MV",
-                              "TEST_MV",
-                              "GPA",
-                              "TEST_GPA",
-                              "RT",
-                              "TEST_RT"
-                            ]
                           }
                         }
                       }

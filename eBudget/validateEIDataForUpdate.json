@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateEIDataForUpdate",
-    "version": "1.0",
+    "version": "1.02",
     "description": ""
   },
   "servers": [
@@ -145,7 +145,8 @@
                                           "scheme": {
                                             "type": "string",
                                             "enum": [
-                                              "CPVS"
+                                              "CPVS",
+                                              "CPV"
                                             ]
                                           }
                                         },
@@ -171,9 +172,6 @@
                                     },
                                     "deliveryAddress": {
                                       "type": "object",
-                                      "required": [
-                                        "addressDetails"
-                                      ],
                                       "properties": {
                                         "streetAddress": {
                                           "type": "string"
@@ -184,8 +182,7 @@
                                         "addressDetails": {
                                           "type": "object",
                                           "required": [
-                                            "country",
-                                            "region"
+                                            "country"
                                           ],
                                           "properties": {
                                             "country": {
@@ -247,7 +244,10 @@
                                             }
                                           }
                                         }
-                                      }
+                                      },
+                                      "required": [
+                                        "addressDetails"
+                                      ]
                                     }
                                   },
                                   "required": [
@@ -255,10 +255,27 @@
                                     "description",
                                     "classification",
                                     "quantity",
-                                    "unit",
-                                    "deliveryAddress"
+                                    "unit"
                                   ]
                                 }
+                              },
+                              "classification": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "scheme": {
+                                    "type": "string",
+                                    "enum": [
+                                      "CPV"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "scheme"
+                                ]
                               }
                             }
                           }

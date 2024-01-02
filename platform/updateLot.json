@@ -1,0 +1,181 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "3jgv3y5n1d80c"
+  },
+  "info": {
+    "title": "updateLot",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/amend/lot/{cpid}/{ocid}/{lotId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process identifier"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "tender ocid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "in": "header",
+          "name": "Authorization",
+          "description": "bearer {access_token}",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "in": "header",
+          "required": true,
+          "name": "X-OPERATION-ID",
+          "description": "transaction id"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "in": "header",
+          "name": "Content-Type",
+          "required": true,
+          "description": "data type in request body"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "in": "header",
+          "name": "X-TOKEN",
+          "description": "PN token",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "lotId",
+          "in": "path",
+          "required": true,
+          "description": "lot Id"
+        }
+      ],
+      "post": {
+        "summary": "Update Lot",
+        "operationId": "post-do-cn-cpid-ocidOpenPN",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "required": true,
+            "name": "X-OPERATION-ID",
+            "description": "transaction id"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "description": "data type in request body"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "tender token",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tenderPeriod": {
+                    "type": "object",
+                    "x-stoplight": {
+                      "id": "cmk117h5212mo"
+                    },
+                    "required": [
+                      "startDate",
+                      "endDate"
+                    ],
+                    "properties": {
+                      "startDate": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "2b1lwt1vr7kpd"
+                        },
+                        "format": "date-time"
+                      },
+                      "endDate": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "ztc6n5bfz3ope"
+                        },
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "tenderPeriod"
+                ]
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": "update lots for pmd = OT, SV, MV",
+        "x-internal": true
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

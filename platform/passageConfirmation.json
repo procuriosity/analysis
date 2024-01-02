@@ -100,6 +100,7 @@
                     "properties": {
                       "preQualification": {
                         "type": "object",
+                        "description": "is required for pmd = GPA, RT",
                         "properties": {
                           "period": {
                             "type": "object",
@@ -127,18 +128,7 @@
                         "properties": {
                           "tenderPeriod": {
                             "type": "object",
-                            "required": [
-                              "endDate"
-                            ],
-                            "properties": {
-                              "endDate": {
-                                "type": "string",
-                                "format": "date-time"
-                              }
-                            }
-                          },
-                          "enquiryPeriod": {
-                            "type": "object",
+                            "description": "for pmd = OT, SV, MV",
                             "properties": {
                               "endDate": {
                                 "type": "string",
@@ -148,11 +138,57 @@
                             "required": [
                               "endDate"
                             ]
+                          },
+                          "enquiryPeriod": {
+                            "type": "object",
+                            "description": "is required for pmd = OT, SV, MV only for MD",
+                            "properties": {
+                              "endDate": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            },
+                            "required": [
+                              "endDate"
+                            ]
+                          },
+                          "lots": {
+                            "type": "array",
+                            "description": "for pmd = OT, SV, MV in LT",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "tenderPeriod": {
+                                  "type": "object",
+                                  "required": [
+                                    "startDate",
+                                    "endDate"
+                                  ],
+                                  "properties": {
+                                    "startDate": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "m4w2kgmihoilv"
+                                      },
+                                      "format": "date-time"
+                                    },
+                                    "endDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "tenderPeriod"
+                              ]
+                            }
                           }
-                        },
-                        "required": [
-                          "tenderPeriod"
-                        ]
+                        }
                       }
                     }
                   }

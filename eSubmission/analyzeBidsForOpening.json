@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "analyzeBidsForOpening",
-    "version": "1.0"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -301,6 +301,12 @@
                                             "unit": {
                                               "type": "object",
                                               "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "name": {
+                                                  "type": "string"
+                                                },
                                                 "value": {
                                                   "type": "object",
                                                   "required": [
@@ -315,18 +321,12 @@
                                                       "type": "string"
                                                     }
                                                   }
-                                                },
-                                                "id": {
-                                                  "type": "string"
-                                                },
-                                                "name": {
-                                                  "type": "string"
                                                 }
                                               },
                                               "required": [
-                                                "value",
                                                 "id",
-                                                "name"
+                                                "name",
+                                                "value"
                                               ]
                                             },
                                             "classification": {
@@ -536,13 +536,19 @@
                               "MC",
                               "TEST_MC",
                               "DCO",
-                              "TEST_DCO"
+                              "TEST_DCO",
+                              "OF",
+                              "TEST_OF",
+                              "CF",
+                              "TEST_CF"
                             ]
                           },
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "tenderPeriodEnd"
+                              "tenderPeriodEnd",
+                              "tenderPeriodEndInPcr",
+                              "tenderPeriodEndForLots"
                             ]
                           },
                           "cpid": {

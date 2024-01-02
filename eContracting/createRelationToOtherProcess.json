@@ -5,7 +5,7 @@
   },
   "info": {
     "title": "createRelationToOtherProcess",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -33,46 +33,61 @@
                         "result": {
                           "type": "object",
                           "required": [
-                            "relatedProcesses"
+                            "contracts"
                           ],
                           "properties": {
-                            "relatedProcesses": {
+                            "contracts": {
                               "type": "array",
                               "items": {
                                 "type": "object",
                                 "properties": {
                                   "id": {
-                                    "type": "string",
-                                    "format": "uuid",
-                                    "description": "идентификатор relatedProcess"
+                                    "type": "string"
                                   },
-                                  "relationship": {
+                                  "relatedProcesses": {
                                     "type": "array",
-                                    "description": "тип связи",
                                     "items": {
-                                      "type": "string",
-                                      "enum": [
-                                        "x_contracting"
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "format": "uuid"
+                                        },
+                                        "relationship": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string",
+                                            "enum": [
+                                              "x_contracting"
+                                            ]
+                                          }
+                                        },
+                                        "scheme": {
+                                          "type": "string",
+                                          "enum": [
+                                            "ocid"
+                                          ]
+                                        },
+                                        "identifier": {
+                                          "type": "string"
+                                        },
+                                        "uri": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "relationship",
+                                        "scheme",
+                                        "identifier",
+                                        "uri"
                                       ]
                                     }
-                                  },
-                                  "scheme": {
-                                    "type": "string",
-                                    "example": "ocid"
-                                  },
-                                  "identifier": {
-                                    "type": "string"
-                                  },
-                                  "uri": {
-                                    "type": "string"
                                   }
                                 },
                                 "required": [
                                   "id",
-                                  "relationship",
-                                  "scheme",
-                                  "identifier",
-                                  "uri"
+                                  "relatedProcesses"
                                 ]
                               }
                             }

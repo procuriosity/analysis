@@ -40,23 +40,55 @@
                       "params": {
                         "type": "object",
                         "required": [
-                          "tender",
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "date",
+                          "tender"
                         ],
                         "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "date": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "57zf53l59a3wg"
+                            },
+                            "format": "date-time"
+                          },
                           "tender": {
                             "type": "object",
                             "required": [
-                              "lots",
-                              "tenderPeriod",
                               "title",
                               "description",
+                              "tenderPeriod",
+                              "lots",
                               "items",
                               "awardCriteria",
                               "awardCriteriaDetails"
                             ],
                             "properties": {
+                              "title": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "tenderPeriod": {
+                                "type": "object",
+                                "required": [
+                                  "endDate"
+                                ],
+                                "properties": {
+                                  "endDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                }
+                              },
                               "lots": {
                                 "type": "array",
                                 "items": {
@@ -87,10 +119,6 @@
                                     },
                                     "contractPeriod": {
                                       "type": "object",
-                                      "required": [
-                                        "startDate",
-                                        "endDate"
-                                      ],
                                       "properties": {
                                         "startDate": {
                                           "type": "string",
@@ -115,69 +143,70 @@
                                           "$ref": "../models/addressRequest.v1.json"
                                         }
                                       }
+                                    },
+                                    "awardCriteria": {
+                                  "type": "object",
+                                  "properties": {
+                                    "weightingDescription": {
+                                      "type": "string",
+                                      "enum": [
+                                        "ISZF",
+                                        "ARGITEK",
+                                        "KUIPER_2"
+                                      ]
+                                    },
+                                    "criteria": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "type": {
+                                            "type": "string",
+                                            "enum": [
+                                              "quality",
+                                              "cost",
+                                              "price"
+                                            ]
+                                          },
+                                          "numbers": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "number": {
+                                                  "type": "number"
+                                                },
+                                                "weight": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "number",
+                                                "weight"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "type",
+                                          "numbers"
+                                        ]
+                                      }
                                     }
+                                  },
+                                  "required": [
+                                    "weightingDescription",
+                                    "criteria"
+                                  ]
+                                }
                                   },
                                   "required": [
                                     "id",
                                     "title",
                                     "value",
-                                    "contractPeriod",
                                     "placeOfPerformance"
                                   ]
                                 }
-                              },
-                              "tenderPeriod": {
-                                "type": "object",
-                                "required": [
-                                  "endDate"
-                                ],
-                                "properties": {
-                                  "endDate": {
-                                    "type": "string",
-                                    "format": "date-time"
-                                  }
-                                }
-                              },
-                              "electronicAuctions": {
-                                "type": "object",
-                                "properties": {
-                                  "details": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "relatedLot": {
-                                          "type": "string"
-                                        }
-                                      },
-                                      "required": [
-                                        "id",
-                                        "relatedLot"
-                                      ]
-                                    }
-                                  }
-                                },
-                                "required": [
-                                  "details"
-                                ]
-                              },
-                              "procurementMethodModalities": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string",
-                                  "enum": [
-                                    "electronicAuction"
-                                  ]
-                                }
-                              },
-                              "title": {
-                                "type": "string"
-                              },
-                              "description": {
-                                "type": "string"
                               },
                               "items": {
                                 "type": "array",
@@ -215,6 +244,15 @@
                                     "id",
                                     "quantity",
                                     "relatedLot"
+                                  ]
+                                }
+                              },
+                              "procurementMethodModalities": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "electronicAuction"
                                   ]
                                 }
                               },
@@ -280,7 +318,11 @@
                                         "evaluationReports",
                                         "shortlistedFirms",
                                         "contractArrangements",
-                                        "contractGuarantees"
+                                        "contractGuarantees",
+                                        "meetingWithTenderersProtocol",
+                                        "qualificationCriteria",
+                                        "tenderForm",
+                                        "other"
                                       ]
                                     },
                                     "title": {
@@ -302,14 +344,76 @@
                                     "title"
                                   ]
                                 }
+                              },
+                              "procurementMethodModalitiesDetails": {
+                                "type": "object",
+                                "x-stoplight": {
+                                  "id": "strx8kjr2w9al"
+                                },
+                                "properties": {
+                                  "electronicAuction": {
+                                    "type": "array",
+                                    "x-stoplight": {
+                                      "id": "ih74oe2rtw2l9"
+                                    },
+                                    "items": {
+                                      "x-stoplight": {
+                                        "id": "0ihy4xtnx44if"
+                                      },
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "c2a0uctuoegaf"
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "electronicAuction"
+                                ]
                               }
                             }
                           },
-                          "cpid": {
-                            "$ref": "../models/cpid.v1.json"
-                          },
-                          "ocid": {
-                            "$ref": "../models/ocid.v1.json"
+                          "auctions": {
+                            "type": "object",
+                            "x-stoplight": {
+                              "id": "wd748fb7ea3ed"
+                            },
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "x-stoplight": {
+                                  "id": "r9xqk1jy7erg6"
+                                },
+                                "items": {
+                                  "x-stoplight": {
+                                    "id": "905o6sjfpfi06"
+                                  },
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "dgaq7ajrez77z"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "details"
+                            ]
                           }
                         }
                       }

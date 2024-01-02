@@ -75,10 +75,11 @@
                                 "eligibilityCriteria",
                                 "tenderPeriod",
                                 "contractPeriod",
-                                "requiresElectronicCatalogue",
+                                "procuringEntity",
                                 "submissionMethod",
                                 "submissionMethodRationale",
-                                "submissionMethodDetails"
+                                "submissionMethodDetails",
+                                "date"
                               ],
                               "properties": {
                                 "id": {
@@ -205,7 +206,8 @@
                                   ],
                                   "properties": {
                                     "isAFramework": {
-                                      "type": "boolean"
+                                      "type": "boolean",
+                                      "default": true
                                     }
                                   }
                                 },
@@ -228,7 +230,12 @@
                                     "DIRECTIVE_2014_25_EU",
                                     "REGULATION_966_2012",
                                     "NATIONAL_PROCUREMENT_LAW",
-                                    "DIRECTIVE_2009_81_EC"
+                                    "DIRECTIVE_2009_81_EC",
+                                    "32009L0081",
+                                    "32014L0023",
+                                    "32014L0024",
+                                    "32014L0025",
+                                    "other"
                                   ]
                                 },
                                 "procurementMethod": {
@@ -283,8 +290,20 @@
                                     }
                                   }
                                 },
-                                "requiresElectronicCatalogue": {
-                                  "type": "boolean"
+                                "procuringEntity": {
+                                  "type": "object",
+                                  "required": [
+                                    "id",
+                                    "name"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    }
+                                  }
                                 },
                                 "submissionMethod": {
                                   "type": "array",
@@ -312,7 +331,7 @@
                                       "id": {
                                         "type": "string"
                                       },
-                                      "internalId\"": {
+                                      "internalId": {
                                         "type": "string"
                                       },
                                       "status": {
@@ -320,12 +339,6 @@
                                         "enum": [
                                           "planning",
                                           "cancelled"
-                                        ]
-                                      },
-                                      "statusDetails": {
-                                        "type": "string",
-                                        "enum": [
-                                          "empty"
                                         ]
                                       },
                                       "title": {
@@ -349,7 +362,6 @@
                                     "required": [
                                       "id",
                                       "status",
-                                      "statusDetails",
                                       "title",
                                       "description"
                                     ]
@@ -479,7 +491,11 @@
                                           "evaluationReports",
                                           "shortlistedFirms",
                                           "contractArrangements",
-                                          "contractGuarantees"
+                                          "contractGuarantees",
+                                          "meetingWithTenderersProtocol",
+                                          "qualificationCriteria",
+                                          "tenderForm",
+                                          "other"
                                         ]
                                       },
                                       "relatedLots": {
@@ -495,6 +511,10 @@
                                       "documentType"
                                     ]
                                   }
+                                },
+                                "date": {
+                                  "type": "string",
+                                  "format": "date-time"
                                 }
                               }
                             },
@@ -529,8 +549,8 @@
                                     "items": {
                                       "type": "string",
                                       "enum": [
-                                        "centralPurchasingBody",
-                                        "client"
+                                        "client",
+                                        "procuringEntity"
                                       ]
                                     }
                                   },
@@ -577,6 +597,9 @@
                                           "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
                                           "WATER"
                                         ]
+                                      },
+                                      "buyerProfile": {
+                                        "type": "string"
                                       }
                                     }
                                   }
@@ -606,7 +629,11 @@
                                       "x_scope"
                                     ],
                                     "items": {
-                                      "type": "string"
+                                      "type": "string",
+                                      "enum": [
+                                        "framework",
+                                        "x_scope"
+                                      ]
                                     }
                                   },
                                   "scheme": {

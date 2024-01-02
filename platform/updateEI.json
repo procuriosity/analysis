@@ -134,7 +134,8 @@
                                       "scheme": {
                                         "type": "string",
                                         "enum": [
-                                          "CPVS"
+                                          "CPVS",
+                                          "CPV"
                                         ]
                                       }
                                     },
@@ -389,7 +390,8 @@
                                       "scheme": {
                                         "type": "string",
                                         "enum": [
-                                          "CPVS"
+                                          "CPVS",
+                                          "CPV"
                                         ]
                                       }
                                     },
@@ -415,9 +417,6 @@
                                 },
                                 "deliveryAddress": {
                                   "type": "object",
-                                  "required": [
-                                    "addressDetails"
-                                  ],
                                   "properties": {
                                     "streetAddress": {
                                       "type": "string"
@@ -428,8 +427,7 @@
                                     "addressDetails": {
                                       "type": "object",
                                       "required": [
-                                        "country",
-                                        "region"
+                                        "country"
                                       ],
                                       "properties": {
                                         "country": {
@@ -491,7 +489,10 @@
                                         }
                                       }
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "addressDetails"
+                                  ]
                                 }
                               },
                               "required": [
@@ -499,10 +500,27 @@
                                 "description",
                                 "classification",
                                 "quantity",
-                                "unit",
-                                "deliveryAddress"
+                                "unit"
                               ]
                             }
+                          },
+                          "classification": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "scheme": {
+                                "type": "string",
+                                "enum": [
+                                  "CPV"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "scheme"
+                            ]
                           }
                         }
                       }

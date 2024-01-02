@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "checkPeriod",
-    "version": "1.0"
+    "version": "1.01"
   },
   "servers": [
     {
@@ -42,7 +42,8 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "date"
+                          "date",
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -54,6 +55,28 @@
                           "date": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "lots"
+                            ],
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }

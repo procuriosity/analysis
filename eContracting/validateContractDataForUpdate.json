@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateContractDataForUpdate",
-    "version": "1.01"
+    "version": "1.02"
   },
   "servers": [
     {
@@ -43,6 +43,9 @@
                           "cpid",
                           "ocid",
                           "date",
+                          "country",
+                          "pmd",
+                          "operationType",
                           "planning",
                           "contracts",
                           "awards"
@@ -57,6 +60,46 @@
                           "date": {
                             "type": "string",
                             "format": "date-time"
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "OT",
+                              "SV",
+                              "MV",
+                              "GPA",
+                              "RT",
+                              "RFQ",
+                              "MC",
+                              "DCO",
+                              "DA",
+                              "NP",
+                              "CD",
+                              "DC",
+                              "IP",
+                              "TEST_OT",
+                              "TEST_SV",
+                              "TEST_MV",
+                              "TEST_GPA",
+                              "TEST_RT",
+                              "TEST_RFQ",
+                              "TEST_MC",
+                              "TEST_DCO",
+                              "TEST_DA",
+                              "TEST_NP",
+                              "TEST_CD",
+                              "TEST_DC",
+                              "TEST_IP"
+                            ]
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "updateContract"
+                            ]
                           },
                           "planning": {
                             "type": "object",
@@ -455,7 +498,8 @@
                                           "cancellationDetails",
                                           "submissionDocuments",
                                           "contractArrangements",
-                                          "contractSchedule"
+                                          "contractSchedule",
+                                          "shortlistedFirms"
                                         ]
                                       },
                                       "title": {

@@ -139,9 +139,6 @@
                     "properties": {
                       "tender": {
                         "type": "object",
-                        "required": [
-                          "tenderPeriod"
-                        ],
                         "properties": {
                           "awardCriteria": {
                             "type": "string",
@@ -161,15 +158,15 @@
                           },
                           "tenderPeriod": {
                             "type": "object",
-                            "required": [
-                              "endDate"
-                            ],
                             "properties": {
                               "endDate": {
                                 "type": "string",
                                 "format": "date-time"
                               }
-                            }
+                            },
+                            "required": [
+                              "endDate"
+                            ]
                           },
                           "enquiryPeriod": {
                             "type": "object",
@@ -478,17 +475,16 @@
                                   "type": "string"
                                 },
                                 "title": {
-                                  "type": "string"
+                                  "type": "string",
+                                  "description": "is required for complete lot structure"
                                 },
                                 "description": {
-                                  "type": "string"
+                                  "type": "string",
+                                  "description": "is required for complete lot structure"
                                 },
                                 "value": {
                                   "type": "object",
-                                  "required": [
-                                    "amount",
-                                    "currency"
-                                  ],
+                                  "description": "is required for complete lot structure",
                                   "properties": {
                                     "amount": {
                                       "type": "number"
@@ -496,7 +492,11 @@
                                     "currency": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "amount",
+                                    "currency"
+                                  ]
                                 },
                                 "contractPeriod": {
                                   "type": "object",
@@ -513,17 +513,97 @@
                                 },
                                 "placeOfPerformance": {
                                   "type": "object",
-                                  "required": [
-                                    "address"
-                                  ],
+                                  "description": "is required for complete lot structure",
                                   "properties": {
                                     "address": {
-                                      "$ref": "../models/addressRequest.v1.json"
+                                      "type": "object",
+                                      "required": [
+                                        "addressDetails"
+                                      ],
+                                      "properties": {
+                                        "streetAddress": {
+                                          "type": "string",
+                                          "description": "is required for MD"
+                                        },
+                                        "postalCode": {
+                                          "type": "string"
+                                        },
+                                        "addressDetails": {
+                                          "type": "object",
+                                          "required": [
+                                            "country"
+                                          ],
+                                          "properties": {
+                                            "country": {
+                                              "type": "object",
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "region": {
+                                              "type": "object",
+                                              "description": "is required for MD",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ]
+                                            },
+                                            "locality": {
+                                              "type": "object",
+                                              "description": "is required for MD",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
                                     },
                                     "description": {
                                       "type": "string"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "address"
+                                  ]
                                 },
                                 "hasOptions": {
                                   "type": "boolean"
@@ -687,14 +767,113 @@
                                       "$ref": "../models/frameworkAgreement.json"
                                     }
                                   }
+                                },
+                                "electronicWorkflows": {
+                                  "type": "object",
+                                  "properties": {
+                                    "useOrdering": {
+                                      "type": "boolean"
+                                    },
+                                    "acceptInvoicing": {
+                                      "type": "boolean"
+                                    },
+                                    "usePayment": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                },
+                                "otherRequirements": {
+                                  "type": "object",
+                                  "properties": {
+                                    "reservedParticipation": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string",
+                                        "enum": [
+                                          "shelteredWorkshop",
+                                          "publicServiceMissionOrganization"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                },
+                                "subcontractingTerms": {
+                                  "type": "object",
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "minimumPercentage": {
+                                      "type": "number"
+                                    },
+                                    "maximumPercentage": {
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "submissionTerms": {
+                                  "type": "object",
+                                  "properties": {
+                                    "languages": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "electronicCataloguePolicy": {
+                                      "type": "string"
+                                    },
+                                    "variantPolicy": {
+                                      "type": "string"
+                                    },
+                                    "bidValidityPeriod": {
+                                      "type": "object",
+                                      "properties": {
+                                        "duration": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "depositsGuarantees": {
+                                      "type": "string"
+                                    },
+                                    "subcontractingIndication": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "coveredBy": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "enum": [
+                                      "GPA"
+                                    ]
+                                  }
+                                },
+                                "tenderPeriod": {
+                                  "type": "object",
+                                  "properties": {
+                                    "startDate": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "7ytiatidbet86"
+                                      },
+                                      "format": "date-time"
+                                    },
+                                    "endDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
+                                  },
+                                  "required": [
+                                    "startDate",
+                                    "endDate"
+                                  ]
                                 }
                               },
                               "required": [
-                                "id",
-                                "title",
-                                "description",
-                                "value",
-                                "placeOfPerformance"
+                                "id"
                               ]
                             }
                           },
@@ -738,7 +917,8 @@
                                       "scheme": {
                                         "type": "string",
                                         "enum": [
-                                          "CPVS"
+                                          "CPVS",
+                                          "CPV"
                                         ]
                                       }
                                     },
@@ -810,7 +990,11 @@
                                     "evaluationReports",
                                     "shortlistedFirms",
                                     "contractArrangements",
-                                    "contractGuarantees"
+                                    "contractGuarantees",
+                                    "meetingWithTenderersProtocol",
+                                    "qualificationCriteria",
+                                    "tenderForm",
+                                    "other"
                                   ]
                                 },
                                 "description": {
@@ -1516,7 +1700,86 @@
                                   ],
                                   "properties": {
                                     "address": {
-                                      "$ref": "../models/addressRequest.v1.json"
+                                      "type": "object",
+                                      "required": [
+                                        "addressDetails"
+                                      ],
+                                      "properties": {
+                                        "streetAddress": {
+                                          "type": "string",
+                                          "description": "is required for MD"
+                                        },
+                                        "postalCode": {
+                                          "type": "string"
+                                        },
+                                        "addressDetails": {
+                                          "type": "object",
+                                          "required": [
+                                            "country"
+                                          ],
+                                          "properties": {
+                                            "country": {
+                                              "type": "object",
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "region": {
+                                              "type": "object",
+                                              "description": "is required for MD",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ]
+                                            },
+                                            "locality": {
+                                              "type": "object",
+                                              "description": "is required for MD",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
                                     },
                                     "description": {
                                       "type": "string"
@@ -1685,6 +1948,89 @@
                                       "$ref": "../models/frameworkAgreement.json"
                                     }
                                   }
+                                },
+                                "electronicWorkflows": {
+                                  "type": "object",
+                                  "properties": {
+                                    "useOrdering": {
+                                      "type": "boolean"
+                                    },
+                                    "acceptInvoicing": {
+                                      "type": "boolean"
+                                    },
+                                    "usePayment": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                },
+                                "otherRequirements": {
+                                  "type": "object",
+                                  "properties": {
+                                    "reservedParticipation": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string",
+                                        "enum": [
+                                          "shelteredWorkshop",
+                                          "publicServiceMissionOrganization"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                },
+                                "subcontractingTerms": {
+                                  "type": "object",
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "minimumPercentage": {
+                                      "type": "number"
+                                    },
+                                    "maximumPercentage": {
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "submissionTerms": {
+                                  "type": "object",
+                                  "properties": {
+                                    "languages": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "electronicCataloguePolicy": {
+                                      "type": "string"
+                                    },
+                                    "variantPolicy": {
+                                      "type": "string"
+                                    },
+                                    "bidValidityPeriod": {
+                                      "type": "object",
+                                      "properties": {
+                                        "duration": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "depositsGuarantees": {
+                                      "type": "string"
+                                    },
+                                    "subcontractingIndication": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "coveredBy": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "enum": [
+                                      "GPA"
+                                    ]
+                                  }
                                 }
                               },
                               "required": [
@@ -1736,7 +2082,8 @@
                                       "scheme": {
                                         "type": "string",
                                         "enum": [
-                                          "CPVS"
+                                          "CPVS",
+                                          "CPV"
                                         ]
                                       }
                                     },
@@ -1808,7 +2155,11 @@
                                     "evaluationReports",
                                     "shortlistedFirms",
                                     "contractArrangements",
-                                    "contractGuarantees"
+                                    "contractGuarantees",
+                                    "meetingWithTenderersProtocol",
+                                    "qualificationCriteria",
+                                    "tenderForm",
+                                    "other"
                                   ]
                                 },
                                 "description": {
@@ -2356,7 +2707,86 @@
                                   ],
                                   "properties": {
                                     "address": {
-                                      "$ref": "../models/addressRequest.v1.json"
+                                      "type": "object",
+                                      "required": [
+                                        "addressDetails"
+                                      ],
+                                      "properties": {
+                                        "streetAddress": {
+                                          "type": "string",
+                                          "description": "is required for MD"
+                                        },
+                                        "postalCode": {
+                                          "type": "string"
+                                        },
+                                        "addressDetails": {
+                                          "type": "object",
+                                          "required": [
+                                            "country"
+                                          ],
+                                          "properties": {
+                                            "country": {
+                                              "type": "object",
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "region": {
+                                              "type": "object",
+                                              "description": "is required for MD",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ]
+                                            },
+                                            "locality": {
+                                              "type": "object",
+                                              "description": "is required for MD",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
                                     },
                                     "description": {
                                       "type": "string"
@@ -2525,6 +2955,89 @@
                                       "$ref": "../models/frameworkAgreement.json"
                                     }
                                   }
+                                },
+                                "electronicWorkflows": {
+                                  "type": "object",
+                                  "properties": {
+                                    "useOrdering": {
+                                      "type": "boolean"
+                                    },
+                                    "acceptInvoicing": {
+                                      "type": "boolean"
+                                    },
+                                    "usePayment": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                },
+                                "otherRequirements": {
+                                  "type": "object",
+                                  "properties": {
+                                    "reservedParticipation": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string",
+                                        "enum": [
+                                          "shelteredWorkshop",
+                                          "publicServiceMissionOrganization"
+                                        ]
+                                      }
+                                    }
+                                  }
+                                },
+                                "subcontractingTerms": {
+                                  "type": "object",
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "minimumPercentage": {
+                                      "type": "number"
+                                    },
+                                    "maximumPercentage": {
+                                      "type": "number"
+                                    }
+                                  }
+                                },
+                                "submissionTerms": {
+                                  "type": "object",
+                                  "properties": {
+                                    "languages": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "electronicCataloguePolicy": {
+                                      "type": "string"
+                                    },
+                                    "variantPolicy": {
+                                      "type": "string"
+                                    },
+                                    "bidValidityPeriod": {
+                                      "type": "object",
+                                      "properties": {
+                                        "duration": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "depositsGuarantees": {
+                                      "type": "string"
+                                    },
+                                    "subcontractingIndication": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "coveredBy": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "enum": [
+                                      "GPA"
+                                    ]
+                                  }
                                 }
                               },
                               "required": [
@@ -2576,7 +3089,8 @@
                                       "scheme": {
                                         "type": "string",
                                         "enum": [
-                                          "CPVS"
+                                          "CPVS",
+                                          "CPV"
                                         ]
                                       }
                                     },
@@ -2648,7 +3162,11 @@
                                     "evaluationReports",
                                     "shortlistedFirms",
                                     "contractArrangements",
-                                    "contractGuarantees"
+                                    "contractGuarantees",
+                                    "meetingWithTenderersProtocol",
+                                    "qualificationCriteria",
+                                    "tenderForm",
+                                    "other"
                                   ]
                                 },
                                 "description": {
@@ -3238,7 +3756,11 @@
                                     "evaluationReports",
                                     "shortlistedFirms",
                                     "contractArrangements",
-                                    "contractGuarantees"
+                                    "contractGuarantees",
+                                    "meetingWithTenderersProtocol",
+                                    "qualificationCriteria",
+                                    "tenderForm",
+                                    "other"
                                   ]
                                 },
                                 "description": {
@@ -3550,7 +4072,11 @@
                                     "evaluationReports",
                                     "shortlistedFirms",
                                     "contractArrangements",
-                                    "contractGuarantees"
+                                    "contractGuarantees",
+                                    "meetingWithTenderersProtocol",
+                                    "qualificationCriteria",
+                                    "tenderForm",
+                                    "other"
                                   ]
                                 },
                                 "description": {
@@ -3785,7 +4311,11 @@
                                     "evaluationReports",
                                     "shortlistedFirms",
                                     "contractArrangements",
-                                    "contractGuarantees"
+                                    "contractGuarantees",
+                                    "meetingWithTenderersProtocol",
+                                    "qualificationCriteria",
+                                    "tenderForm",
+                                    "other"
                                   ]
                                 },
                                 "description": {
@@ -4031,7 +4561,11 @@
                                 "evaluationReports",
                                 "shortlistedFirms",
                                 "contractArrangements",
-                                "contractGuarantees"
+                                "contractGuarantees",
+                                "meetingWithTenderersProtocol",
+                                "qualificationCriteria",
+                                "tenderForm",
+                                "other"
                               ]
                             },
                             "description": {

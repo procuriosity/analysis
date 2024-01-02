@@ -1,21 +1,21 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "vfyl4ycifp29p"
+    "id": "np03ifsm2s0c1"
   },
   "info": {
-    "title": "validateAnswerData",
+    "title": "verifyTenderPeriodEndForLots",
     "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9071"
+      "url": "http://{host}:9061"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Validate Answer Data",
+        "summary": "Verify Tender Period End For Lots",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -23,7 +23,30 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "../models/response_command.v1.json"
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "tenderPeriodExpired"
+                          ],
+                          "properties": {
+                            "tenderPeriodExpired": {
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
                 }
               }
             }
@@ -45,6 +68,7 @@
                         "required": [
                           "cpid",
                           "ocid",
+                          "date",
                           "tender"
                         ],
                         "properties": {
@@ -54,27 +78,27 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
                           "tender": {
                             "type": "object",
                             "required": [
-                              "enquiries"
+                              "lots"
                             ],
                             "properties": {
-                              "enquiries": {
+                              "lots": {
                                 "type": "array",
                                 "items": {
                                   "type": "object",
                                   "properties": {
                                     "id": {
                                       "type": "string"
-                                    },
-                                    "answer": {
-                                      "type": "string"
                                     }
                                   },
                                   "required": [
-                                    "id",
-                                    "answer"
+                                    "id"
                                   ]
                                 }
                               }
@@ -93,7 +117,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "validateAnswerData"
+                          "verifyTenderPeriodForLots"
                         ]
                       }
                     }

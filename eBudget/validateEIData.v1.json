@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validateEIData",
-    "version": "1.02",
+    "version": "1.04",
     "description": ""
   },
   "servers": [
@@ -243,7 +243,8 @@
                                           "scheme": {
                                             "type": "string",
                                             "enum": [
-                                              "CPVS"
+                                              "CPVS",
+                                              "CPV"
                                             ]
                                           }
                                         },
@@ -269,9 +270,6 @@
                                     },
                                     "deliveryAddress": {
                                       "type": "object",
-                                      "required": [
-                                        "addressDetails"
-                                      ],
                                       "properties": {
                                         "streetAddress": {
                                           "type": "string"
@@ -282,8 +280,7 @@
                                         "addressDetails": {
                                           "type": "object",
                                           "required": [
-                                            "country",
-                                            "region"
+                                            "country"
                                           ],
                                           "properties": {
                                             "country": {
@@ -345,7 +342,10 @@
                                             }
                                           }
                                         }
-                                      }
+                                      },
+                                      "required": [
+                                        "addressDetails"
+                                      ]
                                     }
                                   },
                                   "required": [
@@ -353,8 +353,7 @@
                                     "description",
                                     "classification",
                                     "quantity",
-                                    "unit",
-                                    "deliveryAddress"
+                                    "unit"
                                   ]
                                 }
                               }

@@ -4,8 +4,8 @@
     "id": "cbee712d53169"
   },
   "info": {
-    "title": "setEnquiryPeriod",
-    "version": "1.0"
+    "title": "updateEnquiryPeriodEnd",
+    "version": "1.02"
   },
   "servers": [
     {
@@ -90,7 +90,12 @@
                         "type": "object",
                         "required": [
                           "cpid",
-                          "ocid"
+                          "ocid",
+                          "pmd",
+                          "country",
+                          "operationType",
+                          "date",
+                          "owner"
                         ],
                         "properties": {
                           "cpid": {
@@ -124,15 +129,15 @@
                             "properties": {
                               "enquiryPeriod": {
                                 "type": "object",
-                                "required": [
-                                  "endDate"
-                                ],
                                 "properties": {
                                   "endDate": {
                                     "type": "string",
                                     "format": "date-time"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "endDate"
+                                ]
                               },
                               "tenderPeriod": {
                                 "type": "object",
@@ -147,6 +152,59 @@
                                 ]
                               }
                             }
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "CF",
+                              "TEST_CF",
+                              "OF",
+                              "TEST_OF",
+                              "SV",
+                              "TEST_SV",
+                              "MV",
+                              "TEST_MV",
+                              "OT",
+                              "TEST_OT",
+                              "RT",
+                              "TEST_RT",
+                              "GPA",
+                              "TEST_GPA",
+                              "RFQ",
+                              "TEST_RFQ",
+                              "MC",
+                              "TEST_MC",
+                              "DCO",
+                              "TEST_DCO",
+                              "DA",
+                              "TEST_DA",
+                              "NP",
+                              "TEST_NP",
+                              "CD",
+                              "TEST_CD",
+                              "DC",
+                              "TEST_DC",
+                              "IP",
+                              "TEST_IP"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "updatePN",
+                              "updateTender",
+                              "amendFE"
+                            ]
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "owner": {
+                            "type": "string"
                           }
                         }
                       }

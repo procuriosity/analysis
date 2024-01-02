@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "updateAP",
-    "version": "1.02"
+    "version": "1.0"
   },
   "servers": [
     {
@@ -10,7 +10,7 @@
     }
   ],
   "paths": {
-    "/do/ap/{cpid}/{ocid}": {
+    "/do/ap/{cpid}/{ocid} - MD": {
       "post": {
         "summary": "Update AP",
         "operationId": "post-do-fa",
@@ -26,7 +26,8 @@
             },
             "in": "header",
             "name": "Authorization",
-            "required": true
+            "required": true,
+            "description": "bearer {access_token}"
           },
           {
             "schema": {
@@ -34,7 +35,8 @@
             },
             "in": "header",
             "name": "X-OPERATION-ID",
-            "required": true
+            "required": true,
+            "description": "transaction id"
           },
           {
             "schema": {
@@ -42,7 +44,8 @@
             },
             "in": "header",
             "name": "Content-Type",
-            "required": true
+            "required": true,
+            "description": "data type in request body"
           },
           {
             "schema": {
@@ -51,7 +54,7 @@
             "in": "header",
             "name": "X-TOKEN",
             "required": true,
-            "description": "токен AP"
+            "description": "AP token"
           }
         ],
         "requestBody": {
@@ -89,6 +92,17 @@
                                 "format": "date-time"
                               }
                             }
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "currency"
+                            ]
                           },
                           "lots": {
                             "type": "array",
@@ -132,10 +146,18 @@
                                             "country": {
                                               "type": "object",
                                               "required": [
-                                                "id"
+                                                "id",
+                                                "description",
+                                                "scheme"
                                               ],
                                               "properties": {
                                                 "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
                                                   "type": "string"
                                                 }
                                               }
@@ -143,10 +165,18 @@
                                             "region": {
                                               "type": "object",
                                               "required": [
-                                                "id"
+                                                "id",
+                                                "description",
+                                                "scheme"
                                               ],
                                               "properties": {
                                                 "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
                                                   "type": "string"
                                                 }
                                               }
@@ -201,11 +231,18 @@
                                 "classification": {
                                   "type": "object",
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "scheme"
                                   ],
                                   "properties": {
                                     "id": {
                                       "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string",
+                                      "enum": [
+                                        "CPV"
+                                      ]
                                     }
                                   }
                                 },
@@ -216,10 +253,18 @@
                                     "properties": {
                                       "id": {
                                         "type": "string"
+                                      },
+                                      "scheme": {
+                                        "type": "string",
+                                        "enum": [
+                                          "CPVS",
+                                          "CPV"
+                                        ]
                                       }
                                     },
                                     "required": [
-                                      "id"
+                                      "id",
+                                      "scheme"
                                     ]
                                   }
                                 },
@@ -244,7 +289,84 @@
                                   "type": "string"
                                 },
                                 "deliveryAddress": {
-                                  "$ref": "../models/deliveryAddress.v1.json"
+                                  "type": "object",
+                                  "properties": {
+                                    "streetAddress": {
+                                      "type": "string"
+                                    },
+                                    "postalCode": {
+                                      "type": "string"
+                                    },
+                                    "addressDetails": {
+                                      "type": "object",
+                                      "required": [
+                                        "country",
+                                        "region"
+                                      ],
+                                      "properties": {
+                                        "country": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "description",
+                                            "scheme"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "region": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "description",
+                                            "scheme"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "locality": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "description",
+                                            "scheme"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "addressDetails"
+                                  ]
                                 }
                               },
                               "required": [
@@ -260,18 +382,52 @@
                           "documents": {
                             "type": "array",
                             "items": {
-                              "$ref": "../models/documents_object.v1.json"
-                            }
-                          },
-                          "value": {
-                            "type": "object",
-                            "required": [
-                              "currency"
-                            ],
-                            "properties": {
-                              "currency": {
-                                "type": "string"
-                              }
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "documentType": {
+                                  "type": "string",
+                                  "enum": [
+                                    "tenderNotice",
+                                    "biddingDocuments",
+                                    "technicalSpecifications",
+                                    "evaluationCriteria",
+                                    "clarifications",
+                                    "eligibilityCriteria",
+                                    "riskProvisions",
+                                    "billOfQuantity",
+                                    "conflictOfInterest",
+                                    "procurementPlan",
+                                    "contractDraft",
+                                    "complaints",
+                                    "illustration",
+                                    "cancellationDetails",
+                                    "evaluationReports",
+                                    "shortlistedFirms",
+                                    "contractArrangements",
+                                    "contractGuarantees"
+                                  ]
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "relatedLots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "title",
+                                "documentType"
+                              ]
                             }
                           }
                         }
@@ -280,29 +436,6 @@
                     "required": [
                       "tender"
                     ]
-                  },
-                  {
-                    "properties": {
-                      "tender": {
-                        "type": "object",
-                        "properties": {
-                          "documents": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "relatedLots": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "string"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
                   }
                 ],
                 "type": "object"
@@ -310,7 +443,11 @@
             }
           },
           "description": ""
-        }
+        },
+        "description": "update AP for MD*",
+        "tags": [
+          "MD"
+        ]
       },
       "parameters": [
         {
@@ -319,7 +456,8 @@
           },
           "name": "cpid",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "tender process cpid "
         },
         {
           "schema": {
@@ -327,7 +465,470 @@
           },
           "name": "ocid",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "tender process ocid"
+        }
+      ]
+    },
+    "/do/ap/{cpid}/{ocid} - LT": {
+      "post": {
+        "summary": "Update AP",
+        "operationId": "post-do-fa",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "description": "bearer {access_token}"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "required": true,
+            "description": "transaction id"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "description": "data type in request body"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "required": true,
+            "description": "AP token"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "tender": {
+                        "type": "object",
+                        "required": [
+                          "title",
+                          "description",
+                          "tenderPeriod"
+                        ],
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "procurementMethodRationale": {
+                            "type": "string"
+                          },
+                          "tenderPeriod": {
+                            "type": "object",
+                            "required": [
+                              "startDate"
+                            ],
+                            "properties": {
+                              "startDate": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            }
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "currency"
+                            ]
+                          },
+                          "lots": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "internalId": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "placeOfPerformance": {
+                                  "type": "object",
+                                  "properties": {
+                                    "address": {
+                                      "type": "object",
+                                      "required": [
+                                        "addressDetails"
+                                      ],
+                                      "properties": {
+                                        "streetAddress": {
+                                          "type": "string"
+                                        },
+                                        "postalCode": {
+                                          "type": "string"
+                                        },
+                                        "addressDetails": {
+                                          "type": "object",
+                                          "required": [
+                                            "country"
+                                          ],
+                                          "properties": {
+                                            "country": {
+                                              "type": "object",
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "region": {
+                                              "type": "object",
+                                              "required": [
+                                                "id",
+                                                "description",
+                                                "scheme"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "locality": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "scheme",
+                                                "description"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "address"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "title",
+                                "description"
+                              ]
+                            }
+                          },
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "internalId": {
+                                  "type": "string"
+                                },
+                                "classification": {
+                                  "type": "object",
+                                  "required": [
+                                    "id",
+                                    "scheme"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string",
+                                      "enum": [
+                                        "CPV"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "additionalClassifications": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "scheme": {
+                                        "type": "string",
+                                        "enum": [
+                                          "CPVS",
+                                          "CPV"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "scheme"
+                                    ]
+                                  }
+                                },
+                                "quantity": {
+                                  "type": "number"
+                                },
+                                "unit": {
+                                  "type": "object",
+                                  "required": [
+                                    "id"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "relatedLot": {
+                                  "type": "string"
+                                },
+                                "deliveryAddress": {
+                                  "type": "object",
+                                  "properties": {
+                                    "streetAddress": {
+                                      "type": "string"
+                                    },
+                                    "postalCode": {
+                                      "type": "string"
+                                    },
+                                    "addressDetails": {
+                                      "type": "object",
+                                      "required": [
+                                        "country"
+                                      ],
+                                      "properties": {
+                                        "country": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "description",
+                                            "scheme"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "region": {
+                                          "type": "object",
+                                          "required": [
+                                            "id",
+                                            "description",
+                                            "scheme"
+                                          ],
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "locality": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "description",
+                                            "scheme"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "addressDetails"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "classification",
+                                "quantity",
+                                "unit",
+                                "description",
+                                "relatedLot"
+                              ]
+                            }
+                          },
+                          "documents": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "documentType": {
+                                  "type": "string",
+                                  "enum": [
+                                    "tenderNotice",
+                                    "biddingDocuments",
+                                    "technicalSpecifications",
+                                    "evaluationCriteria",
+                                    "clarifications",
+                                    "eligibilityCriteria",
+                                    "riskProvisions",
+                                    "billOfQuantity",
+                                    "conflictOfInterest",
+                                    "procurementPlan",
+                                    "contractDraft",
+                                    "complaints",
+                                    "illustration",
+                                    "cancellationDetails",
+                                    "evaluationReports",
+                                    "shortlistedFirms",
+                                    "contractArrangements",
+                                    "contractGuarantees",
+                                    "meetingWithTenderersProtocol",
+                                    "qualificationCriteria",
+                                    "tenderForm",
+                                    "other"
+                                  ]
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "relatedLots": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "title",
+                                "documentType"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "tender"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": "update AP for LT",
+        "tags": [
+          "LT"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process cpid "
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "tender process ocid"
         }
       ]
     }

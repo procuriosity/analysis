@@ -1,0 +1,162 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "8tbezqp0j6ku4"
+  },
+  "info": {
+    "title": "validateTenderPeriodForLots",
+    "version": "1.02",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9061"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Validate Tender Period For Lots",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "date",
+                          "country",
+                          "pmd",
+                          "operationType",
+                          "tender"
+                        ],
+                        "properties": {
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "country": {
+                            "type": "string",
+                            "example": "LT"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "OT",
+                              "TEST_OT",
+                              "MV",
+                              "TEST_MV",
+                              "SV",
+                              "TEST_SV"
+                            ]
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "createTenderFromPlan",
+                              "passageConfirmation",
+                              "updateLot"
+                            ]
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "lots"
+                            ],
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "tenderPeriod": {
+                                      "type": "object",
+                                      "required": [
+                                        "startDate",
+                                        "endDate"
+                                      ],
+                                      "properties": {
+                                        "startDate": {
+                                          "type": "string",
+                                          "format": "date-time",
+                                          "x-stoplight": {
+                                            "id": "e00qplzr706kq"
+                                          }
+                                        },
+                                        "endDate": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "sko69pk64weiw"
+                                          },
+                                          "format": "date-time"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "tenderPeriod"
+                                  ]
+                                }
+                              }
+                            }
+                          },
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validateTenderPeriodForLots"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

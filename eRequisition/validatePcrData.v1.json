@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "validatePcrData",
-    "version": "1.07",
+    "version": "1.08",
     "description": ""
   },
   "servers": [
@@ -54,10 +54,10 @@
                               "title",
                               "description",
                               "classification",
-                              "lots",
                               "awardCriteria",
                               "awardCriteriaDetails",
-                              "mainProcurementCategory"
+                              "mainProcurementCategory",
+                              "lots"
                             ],
                             "properties": {
                               "title": {
@@ -80,6 +80,40 @@
                                     "type": "string"
                                   }
                                 }
+                              },
+                              "procurementMethodModalities": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "enum": [
+                                    "requiresElectronicCatalogue",
+                                    "electronicAuction"
+                                  ]
+                                }
+                              },
+                              "awardCriteria": {
+                                "type": "string",
+                                "enum": [
+                                  "priceOnly",
+                                  "costOnly",
+                                  "qualityOnly",
+                                  "ratedCriteria"
+                                ]
+                              },
+                              "awardCriteriaDetails": {
+                                "type": "string",
+                                "enum": [
+                                  "automated",
+                                  "manual"
+                                ]
+                              },
+                              "mainProcurementCategory": {
+                                "type": "string",
+                                "enum": [
+                                  "goods",
+                                  "works",
+                                  "services"
+                                ]
                               },
                               "lots": {
                                 "type": "array",
@@ -175,103 +209,6 @@
                                     "classification",
                                     "unit",
                                     "relatedLot"
-                                  ]
-                                }
-                              },
-                              "targets": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "title": {
-                                      "type": "string"
-                                    },
-                                    "relatesTo": {
-                                      "type": "string",
-                                      "enum": [
-                                        "lot",
-                                        "item"
-                                      ]
-                                    },
-                                    "relatedItem": {
-                                      "type": "string"
-                                    },
-                                    "observations": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "id": {
-                                            "type": "string"
-                                          },
-                                          "period": {
-                                            "type": "object",
-                                            "properties": {
-                                              "startDate": {
-                                                "type": "string",
-                                                "format": "date-time"
-                                              },
-                                              "endDate": {
-                                                "type": "string",
-                                                "format": "date-time"
-                                              }
-                                            }
-                                          },
-                                          "measure": {
-                                            "type": [
-                                              "string",
-                                              "number",
-                                              "integer",
-                                              "boolean"
-                                            ]
-                                          },
-                                          "unit": {
-                                            "type": "object",
-                                            "required": [
-                                              "id"
-                                            ],
-                                            "properties": {
-                                              "id": {
-                                                "type": "string"
-                                              }
-                                            }
-                                          },
-                                          "dimensions": {
-                                            "type": "object",
-                                            "properties": {
-                                              "requirementClassIdPR": {
-                                                "type": "string"
-                                              }
-                                            },
-                                            "required": [
-                                              "requirementClassIdPR"
-                                            ]
-                                          },
-                                          "notes": {
-                                            "type": "string"
-                                          },
-                                          "relatedRequirementId": {
-                                            "type": "string"
-                                          }
-                                        },
-                                        "required": [
-                                          "id",
-                                          "measure",
-                                          "unit",
-                                          "notes"
-                                        ]
-                                      }
-                                    }
-                                  },
-                                  "required": [
-                                    "id",
-                                    "title",
-                                    "relatesTo",
-                                    "relatedItem",
-                                    "observations"
                                   ]
                                 }
                               },
@@ -449,7 +386,8 @@
                                             "type": [
                                               "number",
                                               "integer",
-                                              "boolean"
+                                              "boolean",
+                                              "string"
                                             ]
                                           },
                                           "id": {
@@ -476,13 +414,100 @@
                                   ]
                                 }
                               },
-                              "procurementMethodModalities": {
+                              "targets": {
                                 "type": "array",
                                 "items": {
-                                  "type": "string",
-                                  "enum": [
-                                    "requiresElectronicCatalogue",
-                                    "electronicAuction"
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "title": {
+                                      "type": "string"
+                                    },
+                                    "relatesTo": {
+                                      "type": "string",
+                                      "enum": [
+                                        "lot",
+                                        "item"
+                                      ]
+                                    },
+                                    "relatedItem": {
+                                      "type": "string"
+                                    },
+                                    "observations": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "period": {
+                                            "type": "object",
+                                            "properties": {
+                                              "startDate": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              },
+                                              "endDate": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              }
+                                            }
+                                          },
+                                          "measure": {
+                                            "type": [
+                                              "string",
+                                              "number",
+                                              "integer",
+                                              "boolean"
+                                            ]
+                                          },
+                                          "unit": {
+                                            "type": "object",
+                                            "required": [
+                                              "id"
+                                            ],
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "dimensions": {
+                                            "type": "object",
+                                            "properties": {
+                                              "requirementClassIdPR": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "required": [
+                                              "requirementClassIdPR"
+                                            ]
+                                          },
+                                          "notes": {
+                                            "type": "string"
+                                          },
+                                          "relatedRequirementId": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "measure",
+                                          "unit",
+                                          "notes"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "title",
+                                    "relatesTo",
+                                    "relatedItem",
+                                    "observations"
                                   ]
                                 }
                               },
@@ -517,7 +542,11 @@
                                         "evaluationReports",
                                         "shortlistedFirms",
                                         "contractArrangements",
-                                        "contractGuarantees"
+                                        "contractGuarantees",
+                                        "meetingWithTenderersProtocol",
+                                        "qualificationCriteria",
+                                        "tenderForm",
+                                        "other"
                                       ]
                                     },
                                     "description": {
@@ -536,30 +565,6 @@
                                     "documentType"
                                   ]
                                 }
-                              },
-                              "awardCriteria": {
-                                "type": "string",
-                                "enum": [
-                                  "priceOnly",
-                                  "costOnly",
-                                  "qualityOnly",
-                                  "ratedCriteria"
-                                ]
-                              },
-                              "awardCriteriaDetails": {
-                                "type": "string",
-                                "enum": [
-                                  "automated",
-                                  "manual"
-                                ]
-                              },
-                              "mainProcurementCategory": {
-                                "type": "string",
-                                "enum": [
-                                  "goods",
-                                  "works",
-                                  "services"
-                                ]
                               },
                               "electronicAuctions": {
                                 "type": "object",

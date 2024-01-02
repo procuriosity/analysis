@@ -1,0 +1,246 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "8wjomyotllsv8"
+  },
+  "info": {
+    "title": "updateEnquiryPeriodEndForLots",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9071"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Update Enquiry Period End For Lots",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "tender"
+                          ],
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "lots"
+                              ],
+                              "properties": {
+                                "lots": {
+                                  "type": "array",
+                                  "x-stoplight": {
+                                    "id": "gen6fsnnk4tco"
+                                  },
+                                  "items": {
+                                    "x-stoplight": {
+                                      "id": "1od0tw5lo112v"
+                                    },
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "59elc0p2y1lrs"
+                                        }
+                                      },
+                                      "enquiryPeriod": {
+                                        "type": "object",
+                                        "x-stoplight": {
+                                          "id": "rtz5ohuqueugz"
+                                        },
+                                        "required": [
+                                          "startDate",
+                                          "endDate"
+                                        ],
+                                        "properties": {
+                                          "startDate": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                              "id": "gcp7d2ptag71j"
+                                            },
+                                            "format": "date-time"
+                                          },
+                                          "endDate": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                              "id": "nrxval1zvhd2q"
+                                            },
+                                            "format": "date-time"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "enquiryPeriod"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "pmd",
+                          "country",
+                          "operationType",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "SV",
+                              "TEST_SV",
+                              "MV",
+                              "TEST_MV",
+                              "OT",
+                              "TEST_OT"
+                            ]
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "updateLot"
+                            ]
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "lots"
+                            ],
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "x-stoplight": {
+                                  "id": "boclszo7o8yqf"
+                                },
+                                "items": {
+                                  "x-stoplight": {
+                                    "id": "b55bfw54sd15j"
+                                  },
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "pxy1eikt3fobe"
+                                      }
+                                    },
+                                    "tenderPeriod": {
+                                      "type": "object",
+                                      "x-stoplight": {
+                                        "id": "twa9cbdahk9uw"
+                                      },
+                                      "required": [
+                                        "startDate",
+                                        "endDate"
+                                      ],
+                                      "properties": {
+                                        "startDate": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "4e6kg0rcecbm2"
+                                          },
+                                          "format": "date-time"
+                                        },
+                                        "endDate": {
+                                          "type": "string",
+                                          "x-stoplight": {
+                                            "id": "tru81imtpe0ka"
+                                          },
+                                          "format": "date-time"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "tenderPeriod"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "updateEnquiryPeriodEndForLots"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

@@ -1,0 +1,840 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "df9ohdrzt7zfi"
+  },
+  "info": {
+    "title": "frameworkEstablishment",
+    "version": "1.0"
+  },
+  "servers": [],
+  "paths": {
+    "/model": {
+      "options": {
+        "summary": "Framework Establishment (v2)",
+        "operationId": "options-model",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cpid": {
+                    "$ref": "../../models/cpid.v1.json"
+                  },
+                  "ocid": {
+                    "$ref": "../../models/ocid.v1.json"
+                  },
+                  "token": {
+                    "type": "string",
+                    "description": "token FE"
+                  },
+                  "tender": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "date",
+                      "status",
+                      "statusDetails",
+                      "classification",
+                      "otherCriteria",
+                      "value",
+                      "legalBasis",
+                      "acceleratedProcedure",
+                      "designContest",
+                      "electronicWorkflows",
+                      "jointProcurement",
+                      "submissionMethod",
+                      "submissionMethodRationale",
+                      "submissionMethodDetails",
+                      "procedureOutsourcing",
+                      "framework",
+                      "dynamicPurchasingSystem",
+                      "requiresElectronicCatalogue",
+                      "procurementMethod",
+                      "procurementMethodDetails",
+                      "mainProcurementCategory",
+                      "eligibilityCriteria",
+                      "contractPeriod",
+                      "procuringEntity"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "date": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "active",
+                          "cancelled"
+                        ]
+                      },
+                      "statusDetails": {
+                        "type": "string",
+                        "enum": [
+                          "submission",
+                          "evaluation",
+                          "qualificationStandstill",
+                          "fundsLimitation",
+                          "needCancellation",
+                          "terminalError"
+                        ]
+                      },
+                      "classification": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "scheme",
+                          "description"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "scheme": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "otherCriteria": {
+                        "type": "object",
+                        "required": [
+                          "qualificationSystemMethods",
+                          "reductionCriteria"
+                        ],
+                        "properties": {
+                          "qualificationSystemMethods": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "automated",
+                                "manual"
+                              ]
+                            }
+                          },
+                          "reductionCriteria": {
+                            "type": "string",
+                            "enum": [
+                              "scoring",
+                              "none"
+                            ]
+                          }
+                        }
+                      },
+                      "value": {
+                        "type": "object",
+                        "required": [
+                          "amount",
+                          "currency"
+                        ],
+                        "properties": {
+                          "amount": {
+                            "type": "number"
+                          },
+                          "currency": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "legalBasis": {
+                        "type": "string",
+                        "enum": [
+                          "DIRECTIVE_2014_23_EU",
+                          "DIRECTIVE_2014_24_EU",
+                          "DIRECTIVE_2014_25_EU",
+                          "REGULATION_966_2012",
+                          "NATIONAL_PROCUREMENT_LAW",
+                          "DIRECTIVE_2009_81_EC",
+                          "32009L0081",
+                          "32014L0023",
+                          "32014L0024",
+                          "32014L0025",
+                          "other"
+                        ]
+                      },
+                      "acceleratedProcedure": {
+                        "type": "object",
+                        "required": [
+                          "isAcceleratedProcedure"
+                        ],
+                        "properties": {
+                          "isAcceleratedProcedure": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "designContest": {
+                        "type": "object",
+                        "required": [
+                          "serviceContractAward"
+                        ],
+                        "properties": {
+                          "serviceContractAward": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "electronicWorkflows": {
+                        "type": "object",
+                        "required": [
+                          "useOrdering",
+                          "usePayment",
+                          "acceptInvoicing"
+                        ],
+                        "properties": {
+                          "useOrdering": {
+                            "type": "boolean"
+                          },
+                          "usePayment": {
+                            "type": "boolean"
+                          },
+                          "acceptInvoicing": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "jointProcurement": {
+                        "type": "object",
+                        "required": [
+                          "isJointProcurement"
+                        ],
+                        "properties": {
+                          "isJointProcurement": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "submissionMethod": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": "electronicSubmission",
+                          "enum": [
+                            "electronicSubmission"
+                          ]
+                        }
+                      },
+                      "submissionMethodRationale": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "submissionMethodDetails": {
+                        "type": "string"
+                      },
+                      "procedureOutsourcing": {
+                        "type": "object",
+                        "required": [
+                          "procedureOutsourced"
+                        ],
+                        "properties": {
+                          "procedureOutsourced": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "framework": {
+                        "type": "object",
+                        "required": [
+                          "isAFramework"
+                        ],
+                        "properties": {
+                          "isAFramework": {
+                            "type": "boolean",
+                            "default": true
+                          }
+                        }
+                      },
+                      "dynamicPurchasingSystem": {
+                        "type": "object",
+                        "required": [
+                          "hasDynamicPurchasingSystem"
+                        ],
+                        "properties": {
+                          "hasDynamicPurchasingSystem": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "requiresElectronicCatalogue": {
+                        "type": "boolean"
+                      },
+                      "procurementMethod": {
+                        "type": "string"
+                      },
+                      "procurementMethodDetails": {
+                        "type": "string"
+                      },
+                      "mainProcurementCategory": {
+                        "type": "string",
+                        "enum": [
+                          "goods",
+                          "works",
+                          "services"
+                        ]
+                      },
+                      "eligibilityCriteria": {
+                        "type": "string"
+                      },
+                      "contractPeriod": {
+                        "type": "object",
+                        "required": [
+                          "startDate",
+                          "endDate"
+                        ],
+                        "properties": {
+                          "startDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "endDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      },
+                      "procurementMethodModalities": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "electronicAuction"
+                          ]
+                        }
+                      },
+                      "secondStage": {
+                        "type": "object",
+                        "properties": {
+                          "minimumCandidates": {
+                            "type": "number"
+                          },
+                          "maximumCandidates": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "procurementMethodRationale": {
+                        "type": "string"
+                      },
+                      "procuringEntity": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "criteria": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "classification": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "scheme"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "scheme": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "source": {
+                              "type": "string",
+                              "enum": [
+                                "tenderer",
+                                "procuringEntity"
+                              ]
+                            },
+                            "relatesTo": {
+                              "type": "string",
+                              "enum": [
+                                "tenderer"
+                              ]
+                            },
+                            "requirementGroups": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "requirements": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "status": {
+                                          "type": "string",
+                                          "enum": [
+                                            "active"
+                                          ]
+                                        },
+                                        "datePublished": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "dataType": {
+                                          "type": [
+                                            "string",
+                                            "number",
+                                            "integer",
+                                            "boolean"
+                                          ]
+                                        },
+                                        "period": {
+                                          "type": "object",
+                                          "properties": {
+                                            "startDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            },
+                                            "endDate": {
+                                              "type": "string",
+                                              "format": "date-time"
+                                            }
+                                          },
+                                          "required": [
+                                            "startDate",
+                                            "endDate"
+                                          ]
+                                        },
+                                        "expectedValue": {
+                                          "type": [
+                                            "string",
+                                            "number",
+                                            "integer",
+                                            "boolean"
+                                          ]
+                                        },
+                                        "minValue": {
+                                          "type": [
+                                            "number",
+                                            "integer"
+                                          ]
+                                        },
+                                        "maxValue": {
+                                          "type": [
+                                            "number",
+                                            "integer"
+                                          ]
+                                        },
+                                        "eligibleEvidences": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "title": {
+                                                "type": "string"
+                                              },
+                                              "description": {
+                                                "type": "string"
+                                              },
+                                              "type": {
+                                                "type": "string"
+                                              },
+                                              "relatedDocument": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "id"
+                                                ]
+                                              }
+                                            },
+                                            "required": [
+                                              "id",
+                                              "title",
+                                              "type"
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "status",
+                                        "datePublished",
+                                        "title",
+                                        "dataType"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "requirements"
+                                ]
+                              }
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "title",
+                            "classification",
+                            "source",
+                            "relatesTo",
+                            "requirementGroups"
+                          ]
+                        }
+                      },
+                      "documents": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "documentType": {
+                              "type": "string",
+                              "enum": [
+                                "tenderNotice",
+                                "biddingDocuments",
+                                "technicalSpecifications",
+                                "evaluationCriteria",
+                                "clarifications",
+                                "eligibilityCriteria",
+                                "riskProvisions",
+                                "billOfQuantity",
+                                "conflictOfInterest",
+                                "procurementPlan",
+                                "contractDraft",
+                                "complaints",
+                                "illustration",
+                                "cancellationDetails",
+                                "evaluationReports",
+                                "shortlistedFirms",
+                                "contractArrangements",
+                                "contractGuarantees",
+                                "meetingWithTenderersProtocol",
+                                "qualificationCriteria",
+                                "tenderForm",
+                                "other"
+                              ]
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "documentType",
+                            "title"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "parties": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "identifier": {
+                          "$ref": "../../models/identifier.v1.json"
+                        },
+                        "additionalIdentifiers": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "../../models/identifier.v1.json"
+                          }
+                        },
+                        "address": {
+                          "$ref": "../../models/address.v1.json"
+                        },
+                        "contactPoint": {
+                          "$ref": "../../models/contact_point.v1.json"
+                        },
+                        "persones": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string",
+                                "enum": [
+                                  "Mr.",
+                                  "Ms.",
+                                  "Mrs."
+                                ]
+                              },
+                              "identifier": {
+                                "$ref": "../../models/identifierPerson.v1.json"
+                              },
+                              "businessFunctions": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "type": {
+                                      "type": "string",
+                                      "enum": [
+                                        "chairman",
+                                        "contactPoint",
+                                        "technicalOpener",
+                                        "priceOpener",
+                                        "priceEvaluator",
+                                        "technicalEvaluator",
+                                        "procurementOfficer"
+                                      ]
+                                    },
+                                    "jobTitle": {
+                                      "type": "string"
+                                    },
+                                    "period": {
+                                      "type": "object",
+                                      "required": [
+                                        "startDate"
+                                      ],
+                                      "properties": {
+                                        "startDate": {
+                                          "type": "string",
+                                          "format": "date-time"
+                                        }
+                                      }
+                                    },
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "documentType": {
+                                            "type": "string",
+                                            "enum": [
+                                              "regulatoryDocument"
+                                            ]
+                                          },
+                                          "title": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "documentType",
+                                          "title"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "type",
+                                    "jobTitle",
+                                    "period"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "name",
+                              "title",
+                              "identifier",
+                              "businessFunctions"
+                            ]
+                          }
+                        },
+                        "roles": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "procuringEntity",
+                              "buyer"
+                            ]
+                          }
+                        },
+                        "details": {
+                          "type": "object",
+                          "properties": {
+                            "typeOfBuyer": {
+                              "type": "string",
+                              "enum": [
+                                "\"BODY_PUBLIC\"",
+                                "\"EU_INSTITUTION\"",
+                                "\"MINISTRY\"",
+                                "\"NATIONAL_AGENCY\"",
+                                "\"REGIONAL_AGENCY\"",
+                                "\"REGIONAL_AUTHORITY\""
+                              ]
+                            },
+                            "mainGeneralActivity": {
+                              "type": "string",
+                              "enum": [
+                                "\"DEFENCE\"",
+                                "\"ECONOMIC_AND_FINANCIAL_AFFAIRS\"",
+                                "\"EDUCATION\"",
+                                "\"ENVIRONMENT\"",
+                                "\"GENERAL_PUBLIC_SERVICES\"",
+                                "\"HEALTH\"",
+                                "\"HOUSING_AND_COMMUNITY_AMENITIES\"",
+                                "\"PUBLIC_ORDER_AND_SAFETY\"",
+                                "\"RECREATION_CULTURE_AND_RELIGION\"",
+                                "\"SOCIAL_PROTECTION\""
+                              ]
+                            },
+                            "mainSectoralActivity": {
+                              "type": "string",
+                              "enum": [
+                                "\"AIRPORT_RELATED_ACTIVITIES\"",
+                                "\"ELECTRICITY\"",
+                                "\"EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL\"",
+                                "\"EXPLORATION_EXTRACTION_GAS_OIL\"",
+                                "\"PORT_RELATED_ACTIVITIES\"",
+                                "\"POSTAL_SERVICES\"",
+                                "\"PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT\"",
+                                "\"RAILWAY_SERVICES\"",
+                                "\"URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES\"",
+                                "\"WATER\""
+                              ]
+                            },
+                            "buyerProfile": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name",
+                        "identifier",
+                        "address",
+                        "contactPoint",
+                        "roles"
+                      ]
+                    }
+                  },
+                  "relatedProcesses": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "идентификатор relatedProcess"
+                        },
+                        "relationship": {
+                          "type": "string",
+                          "description": "тип связи",
+                          "enum": [
+                            "x_pcr",
+                            "parent",
+                            "aggregatePlanning"
+                          ]
+                        },
+                        "scheme": {
+                          "type": "string",
+                          "description": "ocid"
+                        },
+                        "identifier": {
+                          "type": "string",
+                          "description": "ocid сущности, на которую создан relatedProcess/cpid - для связи с MS"
+                        },
+                        "uri": {
+                          "type": "string",
+                          "description": "путь к сущности, на которую создан relatedProcess"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "relationship",
+                        "scheme",
+                        "identifier",
+                        "uri"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "cpid",
+                  "ocid",
+                  "token",
+                  "tender",
+                  "parties",
+                  "relatedProcesses"
+                ]
+              }
+            },
+            "description": "Framework Establishment (for Framework Agreement)"
+          }
+        }
+      },
+      "components": {
+        "schemas": {}
+      }
+    }
+  }
+}

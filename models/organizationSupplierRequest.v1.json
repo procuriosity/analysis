@@ -15,7 +15,86 @@
       }
     },
     "address": {
-      "$ref": "./addressRequest.v1.json"
+      "type": "object",
+      "required": [
+        "addressDetails"
+      ],
+      "properties": {
+        "streetAddress": {
+          "type": "string",
+          "description": "is required for MD"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "addressDetails": {
+          "type": "object",
+          "required": [
+            "country"
+          ],
+          "properties": {
+            "country": {
+              "type": "object",
+              "required": [
+                "id",
+                "description",
+                "scheme"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "scheme": {
+                  "type": "string"
+                }
+              }
+            },
+            "region": {
+              "type": "object",
+              "description": "is required for MD",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "scheme": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "description",
+                "scheme"
+              ]
+            },
+            "locality": {
+              "type": "object",
+              "description": "is required for MD",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "scheme": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "description",
+                "scheme"
+              ]
+            }
+          }
+        }
+      }
     },
     "contactPoint": {
       "$ref": "./contact_point.v1.json"
@@ -55,11 +134,157 @@
           "description": "классификация категории организации"
         },
         "bankAccounts": {
-          "type": "array",
-          "items": {
-            "$ref": "./bankAccount.v1.json"
-          }
-        },
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "bankName": {
+                                            "type": "string"
+                                          },
+                                          "address": {
+                                            "type": "object",
+                                            "required": [
+                                              "addressDetails"
+                                            ],
+                                            "properties": {
+                                              "streetAddress": {
+                                                "type": "string",
+                                                "description": "is required for MD"
+                                              },
+                                              "postalCode": {
+                                                "type": "string"
+                                              },
+                                              "addressDetails": {
+                                                "type": "object",
+                                                "required": [
+                                                  "country"
+                                                ],
+                                                "properties": {
+                                                  "country": {
+                                                    "type": "object",
+                                                    "required": [
+                                                      "id",
+                                                      "description",
+                                                      "scheme"
+                                                    ],
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "description": {
+                                                        "type": "string"
+                                                      },
+                                                      "scheme": {
+                                                        "type": "string"
+                                                      }
+                                                    }
+                                                  },
+                                                  "region": {
+                                                    "type": "object",
+                                                    "description": "is required for MD",
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "description": {
+                                                        "type": "string"
+                                                      },
+                                                      "scheme": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "id",
+                                                      "description",
+                                                      "scheme"
+                                                    ]
+                                                  },
+                                                  "locality": {
+                                                    "type": "object",
+                                                    "description": "is required for MD",
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string"
+                                                      },
+                                                      "description": {
+                                                        "type": "string"
+                                                      },
+                                                      "scheme": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "id",
+                                                      "description",
+                                                      "scheme"
+                                                    ]
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "identifier": {
+                                            "type": "object",
+                                            "required": [
+                                              "id",
+                                              "scheme"
+                                            ],
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "scheme": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "accountIdentification": {
+                                            "type": "object",
+                                            "required": [
+                                              "id",
+                                              "scheme"
+                                            ],
+                                            "properties": {
+                                              "id": {
+                                                "type": "string"
+                                              },
+                                              "scheme": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "additionalAccountIdentifiers": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "scheme"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "description",
+                                          "bankName",
+                                          "address",
+                                          "identifier",
+                                          "accountIdentification",
+                                          "additionalAccountIdentifiers"
+                                        ]
+                                      }
+                                    },
         "legalForm": {
           "$ref": "./legalForm.v1.json"
         }
