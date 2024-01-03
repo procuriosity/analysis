@@ -42,7 +42,8 @@
                             "id": "82smjoc0oy3rf"
                           },
                           "required": [
-                            "contracts"
+                            "contracts",
+                            "relatedProcesses"
                           ],
                           "properties": {
                             "contracts": {
@@ -142,6 +143,44 @@
                                   "status",
                                   "statusDetails",
                                   "implementation"
+                                ]
+                              }
+                            },
+                            "relatedProcesses": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                  },
+                                  "relationship": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "enum": [
+                                        "x_evaluation"
+                                      ]
+                                    }
+                                  },
+                                  "scheme": {
+                                    "type": "string",
+                                    "example": "ocid"
+                                  },
+                                  "identifier": {
+                                    "type": "string"
+                                  },
+                                  "uri": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "relationship",
+                                  "scheme",
+                                  "identifier",
+                                  "uri"
                                 ]
                               }
                             }
