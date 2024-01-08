@@ -13,7 +13,7 @@
     }
   ],
   "paths": {
-    "/completion/contract/{cpid}/{ocid}": {
+    "/termination/contract/{cpid}/{ocid}": {
       "post": {
         "summary": "Contract Termination",
         "operationId": "post-com",
@@ -58,19 +58,6 @@
             "name": "X-TOKEN",
             "description": "contract token",
             "required": true
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "partiallyComplete",
-                "notComplete"
-              ]
-            },
-            "in": "query",
-            "name": "completionStatus ",
-            "description": "status of contract completion",
-            "required": true
           }
         ],
         "description": "",
@@ -84,11 +71,22 @@
                     "type": "object",
                     "required": [
                       "id",
+                      "statusDetails",
                       "implementation"
                     ],
                     "properties": {
                       "id": {
                         "type": "string"
+                      },
+                      "statusDetails": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "djdwchl2x41gm"
+                        },
+                        "enum": [
+                          "partiallyComplete",
+                          "notComplete"
+                        ]
                       },
                       "implementation": {
                         "type": "object",

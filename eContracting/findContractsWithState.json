@@ -79,10 +79,6 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "../models/request_extended_command.v1.json"
-                  },
-                  {
-                    "type": "object",
                     "properties": {
                       "action": {
                         "type": "string",
@@ -93,11 +89,13 @@
                     }
                   },
                   {
-                    "type": "object",
                     "properties": {
                       "params": {
                         "type": "object",
                         "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
                           "status": {
                             "type": "string",
                             "enum": [
@@ -109,12 +107,14 @@
                           }
                         },
                         "required": [
+                          "cpid",
                           "status"
                         ]
                       }
                     }
                   }
-                ]
+                ],
+                "type": "object"
               }
             }
           }
