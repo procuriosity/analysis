@@ -58,19 +58,6 @@
             "name": "X-TOKEN",
             "description": "contract token",
             "required": true
-          },
-          {
-            "schema": {
-              "type": "string",
-              "enum": [
-                "complete",
-                "partiallyComplete"
-              ]
-            },
-            "in": "query",
-            "name": "completionStatus ",
-            "description": "status of contract completion",
-            "required": true
           }
         ],
         "description": "",
@@ -84,11 +71,22 @@
                     "type": "object",
                     "required": [
                       "id",
+                      "statusDetails",
                       "implementation"
                     ],
                     "properties": {
                       "id": {
                         "type": "string"
+                      },
+                      "statusDetails": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "0bhh4h6e9lvwm"
+                        },
+                        "enum": [
+                          "partiallyComplete",
+                          "complete"
+                        ]
                       },
                       "implementation": {
                         "type": "object",
