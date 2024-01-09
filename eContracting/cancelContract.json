@@ -1,0 +1,176 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "s8bo8zgmrooxo"
+  },
+  "info": {
+    "title": "cancelContract",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9151"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Cancel Contract",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "x-stoplight": {
+                        "id": "sp3npt28ua5wv"
+                      },
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "x-stoplight": {
+                            "id": "82smjoc0oy3rf"
+                          },
+                          "required": [
+                            "contracts"
+                          ],
+                          "properties": {
+                            "contracts": {
+                              "type": "array",
+                              "x-stoplight": {
+                                "id": "mxs9zdl0ru0cr"
+                              },
+                              "items": {
+                                "x-stoplight": {
+                                  "id": "bsecacj2ekict"
+                                },
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "h1fiik6kiajh5"
+                                    }
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "1whct35cmugvl"
+                                    },
+                                    "enum": [
+                                      "cancelled"
+                                    ]
+                                  },
+                                  "statusDetails": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "mp8g5fxq0yv63"
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "status",
+                                  "statusDetails"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "contracts"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "statusDetails": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "kitignlwle7dm"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "statusDetails"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "cancelContract"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
