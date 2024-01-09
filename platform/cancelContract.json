@@ -13,7 +13,7 @@
     }
   ],
   "paths": {
-    "/cancel/contract/{cpid}/{ocid}/{contractId}": {
+    "/cancel/contract/{cpid}/{ocid}": {
       "parameters": [
         {
           "schema": {
@@ -32,14 +32,6 @@
           "in": "path",
           "required": true,
           "description": "contract process ocid"
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "contractId",
-          "in": "path",
-          "required": true
         }
       ],
       "post": {
@@ -95,51 +87,39 @@
                 "allOf": [
                   {
                     "properties": {
-                      "amendment": {
-                        "type": "object",
-                        "required": [
-                          "rationale"
-                        ],
-                        "properties": {
-                          "rationale": {
-                            "type": "string"
+                      "contracts": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "7wpfhehcj89lz"
+                        },
+                        "items": {
+                          "x-stoplight": {
+                            "id": "louqaunaqziwd"
                           },
-                          "description": {
-                            "type": "string"
-                          },
-                          "documents": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string"
-                                },
-                                "title": {
-                                  "type": "string"
-                                },
-                                "documentType": {
-                                  "type": "string",
-                                  "enum": [
-                                    "cancellationDetails"
-                                  ]
-                                },
-                                "description": {
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "id",
-                                "title",
-                                "documentType"
-                              ]
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "x-stoplight": {
+                                "id": "tc5q8xzyspp0u"
+                              }
+                            },
+                            "statusDetails": {
+                              "type": "string",
+                              "x-stoplight": {
+                                "id": "5csu3nxc0rehg"
+                              }
                             }
-                          }
+                          },
+                          "required": [
+                            "id",
+                            "statusDetails"
+                          ]
                         }
                       }
                     },
                     "required": [
-                      "amendment"
+                      "contracts"
                     ]
                   }
                 ],
