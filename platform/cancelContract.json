@@ -1,0 +1,131 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "nb4pd2hlrt1er"
+  },
+  "info": {
+    "title": "cancelContract",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/cancel/contract/{cpid}/{ocid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process cpid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "contract process ocid"
+        }
+      ],
+      "post": {
+        "summary": "Cancel Contract",
+        "operationId": "post-cancel-plan-cpid-ocid",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "transaction id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "AC/PO token",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "description": "data type in request body"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "contract": {
+                        "type": "object",
+                        "x-stoplight": {
+                          "id": "7wpfhehcj89lz"
+                        },
+                        "required": [
+                          "id",
+                          "statusDetails"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "5i337rlyahpgx"
+                            }
+                          },
+                          "statusDetails": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "5nb6xwqnk5ti1"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "contract"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
