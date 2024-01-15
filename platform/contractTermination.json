@@ -13,7 +13,7 @@
     }
   ],
   "paths": {
-    "/termination/contract/{cpid}/{ocid}": {
+    "/terminate/contract/{cpid}/{ocid}": {
       "post": {
         "summary": "Contract Termination",
         "operationId": "post-com",
@@ -72,7 +72,8 @@
                     "required": [
                       "id",
                       "statusDetails",
-                      "implementation"
+                      "implementation",
+                      "justification"
                     ],
                     "properties": {
                       "id": {
@@ -142,6 +143,23 @@
                           }
                         }
                       },
+                      "justification": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "5khyuf79vgocg"
+                        },
+                        "enum": [
+                          "1",
+                          "2",
+                          "3"
+                        ]
+                      },
+                      "justificationDetails": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "hsnr7px8ohmut"
+                        }
+                      },
                       "documents": {
                         "type": "array",
                         "x-stoplight": {
@@ -163,7 +181,10 @@
                               "type": "string",
                               "x-stoplight": {
                                 "id": "bzfpdni0v0obw"
-                              }
+                              },
+                              "enum": [
+                                "cancellationDetails"
+                              ]
                             },
                             "title": {
                               "type": "string",
