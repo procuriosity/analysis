@@ -4,7 +4,7 @@
     "id": "clnuphk4mrz7e"
   },
   "info": {
-    "title": "validateDataForContractTermination",
+    "title": "validateDataForTerminateContract",
     "version": "1.0"
   },
   "servers": [
@@ -15,7 +15,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Validate Data For Contract Termination",
+        "summary": "Validate Data For Terminate Contract",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -126,6 +126,23 @@
                                     }
                                   }
                                 },
+                                "justification": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "a0ij1xdv33gwd"
+                                  },
+                                  "enum": [
+                                    "1",
+                                    "2",
+                                    "3"
+                                  ]
+                                },
+                                "justificationDetails": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "x9s23w1artmy8"
+                                  }
+                                },
                                 "documents": {
                                   "type": "array",
                                   "x-stoplight": {
@@ -147,7 +164,10 @@
                                         "type": "string",
                                         "x-stoplight": {
                                           "id": "gl6ox0m97o299"
-                                        }
+                                        },
+                                        "enum": [
+                                          "cancellationDetails"
+                                        ]
                                       },
                                       "title": {
                                         "type": "string",
@@ -173,7 +193,8 @@
                               "required": [
                                 "id",
                                 "statusDetails",
-                                "implementation"
+                                "implementation",
+                                "justification"
                               ]
                             }
                           }
@@ -190,7 +211,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "validateDataForContractTermination"
+                          "validateDataForTerminateContract"
                         ]
                       }
                     }

@@ -4,7 +4,7 @@
     "id": "6aef7u6f1jwou"
   },
   "info": {
-    "title": "contractTermination",
+    "title": "terminateContract",
     "version": "1.0"
   },
   "servers": [
@@ -15,7 +15,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Contract Termination",
+        "summary": "Terminate Contract",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -157,7 +157,10 @@
                                           "type": "string",
                                           "x-stoplight": {
                                             "id": "3c4zde8104njn"
-                                          }
+                                          },
+                                          "enum": [
+                                            "cancellationDetails"
+                                          ]
                                         },
                                         "title": {
                                           "type": "string",
@@ -178,13 +181,31 @@
                                         "title"
                                       ]
                                     }
+                                  },
+                                  "justification": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "9u6vm8x5h8pzl"
+                                    },
+                                    "enum": [
+                                      "1",
+                                      "2",
+                                      "3"
+                                    ]
+                                  },
+                                  "justificationDetails": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                      "id": "mckubxcaq1zon"
+                                    }
                                   }
                                 },
                                 "required": [
                                   "id",
                                   "status",
                                   "statusDetails",
-                                  "implementation"
+                                  "implementation",
+                                  "justification"
                                 ]
                               }
                             },
@@ -336,6 +357,23 @@
                                     }
                                   }
                                 },
+                                "justification": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "ergpmrpc6toud"
+                                  },
+                                  "enum": [
+                                    "1",
+                                    "2",
+                                    "3"
+                                  ]
+                                },
+                                "justificationDetails": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "k7ejptcpyes4g"
+                                  }
+                                },
                                 "documents": {
                                   "type": "array",
                                   "x-stoplight": {
@@ -357,7 +395,10 @@
                                         "type": "string",
                                         "x-stoplight": {
                                           "id": "1hhw9tp6vrrc9"
-                                        }
+                                        },
+                                        "enum": [
+                                          "cancellationDetails"
+                                        ]
                                       },
                                       "title": {
                                         "type": "string",
@@ -383,7 +424,8 @@
                               "required": [
                                 "id",
                                 "statusDetails",
-                                "implementation"
+                                "implementation",
+                                "justification"
                               ]
                             }
                           }
@@ -400,7 +442,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "contractTermination"
+                          "terminateContract"
                         ]
                       }
                     }
