@@ -1,10 +1,10 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "6b1j1y9qla102"
+    "id": "rjlsn4owl3c14"
   },
   "info": {
-    "title": "contractCompletion",
+    "title": "terminateContract",
     "version": "1.0"
   },
   "servers": [
@@ -13,9 +13,9 @@
     }
   ],
   "paths": {
-    "/complete/contract/{cpid}/{ocid}": {
+    "/terminate/contract/{cpid}/{ocid}": {
       "post": {
-        "summary": "Contract Completion",
+        "summary": "Terminate Contract",
         "operationId": "post-com",
         "responses": {
           "202": {
@@ -72,7 +72,8 @@
                     "required": [
                       "id",
                       "statusDetails",
-                      "implementation"
+                      "implementation",
+                      "justification"
                     ],
                     "properties": {
                       "id": {
@@ -81,11 +82,11 @@
                       "statusDetails": {
                         "type": "string",
                         "x-stoplight": {
-                          "id": "0bhh4h6e9lvwm"
+                          "id": "djdwchl2x41gm"
                         },
                         "enum": [
                           "partiallyComplete",
-                          "complete"
+                          "notComplete"
                         ]
                       },
                       "implementation": {
@@ -140,6 +141,23 @@
                               "id": "jmenhc3k34exh"
                             }
                           }
+                        }
+                      },
+                      "justification": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "5khyuf79vgocg"
+                        },
+                        "enum": [
+                          "1",
+                          "2",
+                          "3"
+                        ]
+                      },
+                      "justificationDetails": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "hsnr7px8ohmut"
                         }
                       },
                       "documents": {
