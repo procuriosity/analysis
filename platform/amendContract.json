@@ -72,11 +72,78 @@
                   "contract": {
                     "type": "object",
                     "required": [
-                      "id"
+                      "id",
+                      "amendment"
                     ],
                     "properties": {
                       "id": {
                         "type": "string"
+                      },
+                      "amendment": {
+                        "type": "object",
+                        "x-stoplight": {
+                          "id": "zmmlvr7xjr83z"
+                        },
+                        "required": [
+                          "rationale"
+                        ],
+                        "properties": {
+                          "rationale": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "aomai2qftuwf2"
+                            }
+                          },
+                          "description": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "1lsv2ooxjvuww"
+                            }
+                          },
+                          "documents": {
+                            "type": "array",
+                            "x-stoplight": {
+                              "id": "xav1o1fu578ws"
+                            },
+                            "items": {
+                              "x-stoplight": {
+                                "id": "g84kk7me22bul"
+                              },
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "mhto4sig70457"
+                                  }
+                                },
+                                "title": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "ly8wc5msi2k8i"
+                                  }
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "e9mb1sqghjhlt"
+                                  }
+                                },
+                                "documentType": {
+                                  "type": "string",
+                                  "x-stoplight": {
+                                    "id": "eshd53urec7od"
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "title",
+                                "documentType"
+                              ]
+                            }
+                          }
+                        }
                       },
                       "period": {
                         "type": "object",
@@ -134,72 +201,6 @@
                             "title"
                           ]
                         }
-                      },
-                      "amendment": {
-                        "type": "object",
-                        "x-stoplight": {
-                          "id": "zmmlvr7xjr83z"
-                        },
-                        "properties": {
-                          "justification": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "aomai2qftuwf2"
-                            }
-                          },
-                          "description": {
-                            "type": "string",
-                            "x-stoplight": {
-                              "id": "1lsv2ooxjvuww"
-                            }
-                          },
-                          "documents": {
-                            "type": "array",
-                            "x-stoplight": {
-                              "id": "xav1o1fu578ws"
-                            },
-                            "items": {
-                              "x-stoplight": {
-                                "id": "g84kk7me22bul"
-                              },
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "string",
-                                  "x-stoplight": {
-                                    "id": "mhto4sig70457"
-                                  }
-                                },
-                                "title": {
-                                  "type": "string",
-                                  "x-stoplight": {
-                                    "id": "ly8wc5msi2k8i"
-                                  }
-                                },
-                                "description": {
-                                  "type": "string",
-                                  "x-stoplight": {
-                                    "id": "e9mb1sqghjhlt"
-                                  }
-                                },
-                                "documentType": {
-                                  "type": "string",
-                                  "x-stoplight": {
-                                    "id": "eshd53urec7od"
-                                  }
-                                }
-                              },
-                              "required": [
-                                "id",
-                                "title",
-                                "documentType"
-                              ]
-                            }
-                          }
-                        },
-                        "required": [
-                          "justification"
-                        ]
                       }
                     }
                   },
@@ -210,6 +211,72 @@
                       "properties": {
                         "id": {
                           "type": "string"
+                        },
+                        "value": {
+                          "type": "object",
+                          "required": [
+                            "amount",
+                            "amountNet",
+                            "valueAddedTaxIncluded"
+                          ],
+                          "properties": {
+                            "amount": {
+                              "type": "number"
+                            },
+                            "amountNet": {
+                              "type": "number"
+                            },
+                            "valueAddedTaxIncluded": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "quantity": {
+                                "type": "number"
+                              },
+                              "unit": {
+                                "type": "object",
+                                "required": [
+                                  "value"
+                                ],
+                                "properties": {
+                                  "value": {
+                                    "type": "object",
+                                    "required": [
+                                      "amount",
+                                      "amountNet",
+                                      "valueAddedTaxIncluded"
+                                    ],
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      },
+                                      "amountNet": {
+                                        "type": "number"
+                                      },
+                                      "valueAddedTaxIncluded": {
+                                        "type": "boolean"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "deliveryAddress": {
+                                "$ref": "../models/addressRequest.v1.json"
+                              }
+                            },
+                            "required": [
+                              "id"
+                            ]
+                          }
                         },
                         "documents": {
                           "type": "array",
@@ -255,96 +322,16 @@
                               "title"
                             ]
                           }
-                        },
-                        "value": {
-                          "type": "object",
-                          "required": [
-                            "amount",
-                            "currency",
-                            "amountNet",
-                            "valueAddedTaxIncluded"
-                          ],
-                          "properties": {
-                            "amount": {
-                              "type": "number"
-                            },
-                            "currency": {
-                              "type": "string"
-                            },
-                            "amountNet": {
-                              "type": "number"
-                            },
-                            "valueAddedTaxIncluded": {
-                              "type": "boolean"
-                            }
-                          }
-                        },
-                        "items": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "quantity": {
-                                "type": "number"
-                              },
-                              "unit": {
-                                "type": "object",
-                                "required": [
-                                  "value"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "object",
-                                    "required": [
-                                      "amount",
-                                      "amountNet",
-                                      "currency",
-                                      "valueAddedTaxIncluded"
-                                    ],
-                                    "properties": {
-                                      "amount": {
-                                        "type": "number"
-                                      },
-                                      "amountNet": {
-                                        "type": "number"
-                                      },
-                                      "currency": {
-                                        "type": "string"
-                                      },
-                                      "valueAddedTaxIncluded": {
-                                        "type": "boolean"
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "deliveryAddress": {
-                                "$ref": "../models/addressRequest.v1.json"
-                              }
-                            },
-                            "required": [
-                              "id",
-                              "quantity",
-                              "unit",
-                              "deliveryAddress"
-                            ]
-                          }
                         }
                       },
                       "required": [
-                        "id",
-                        "value",
-                        "items"
+                        "id"
                       ]
                     }
                   }
                 },
                 "required": [
-                  "contract",
-                  "awards"
+                  "contract"
                 ]
               }
             }
