@@ -1,0 +1,518 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "8xvg4mxs9xgdn"
+  },
+  "info": {
+    "title": "amendContract",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9151"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Amend Contract",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "x-stoplight": {
+                        "id": "zhyglo2w43qx9"
+                      },
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "x-stoplight": {
+                            "id": "gxv0qqu072cpv"
+                          },
+                          "required": [
+                            "contracts"
+                          ],
+                          "properties": {
+                            "contracts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "period": {
+                                    "type": "object",
+                                    "properties": {
+                                      "endDate": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                      }
+                                    },
+                                    "required": [
+                                      "endDate"
+                                    ]
+                                  },
+                                  "documents": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "documentType": {
+                                          "type": "string",
+                                          "enum": [
+                                            "contractNotice",
+                                            "completionCertificate",
+                                            "contractDraft",
+                                            "contractArrangements",
+                                            "contractSchedule",
+                                            "environmentalImpact",
+                                            "contractAnnexe",
+                                            "contractGuarantees",
+                                            "subContract",
+                                            "illustration",
+                                            "contractSummary",
+                                            "contractSigned"
+                                          ]
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "relatedLots": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "documentType",
+                                        "title"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id"
+                                ]
+                              }
+                            },
+                            "awards": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "object",
+                                    "properties": {
+                                      "amount": {
+                                        "type": "number"
+                                      },
+                                      "amountNet": {
+                                        "type": "number"
+                                      },
+                                      "valueAddedTaxIncluded": {
+                                        "type": "boolean"
+                                      },
+                                      "currency": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "yx9ecxo6fizsb"
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "amount",
+                                      "amountNet",
+                                      "valueAddedTaxIncluded",
+                                      "currency"
+                                    ]
+                                  },
+                                  "items": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "quantity": {
+                                          "type": "number"
+                                        },
+                                        "unit": {
+                                          "type": "object",
+                                          "properties": {
+                                            "value": {
+                                              "type": "object",
+                                              "required": [
+                                                "amount",
+                                                "amountNet",
+                                                "valueAddedTaxIncluded",
+                                                "currency"
+                                              ],
+                                              "properties": {
+                                                "amount": {
+                                                  "type": "number"
+                                                },
+                                                "amountNet": {
+                                                  "type": "number"
+                                                },
+                                                "valueAddedTaxIncluded": {
+                                                  "type": "boolean"
+                                                },
+                                                "currency": {
+                                                  "type": "string",
+                                                  "x-stoplight": {
+                                                    "id": "zf3yctc0b5zlz"
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "required": [
+                                            "value"
+                                          ]
+                                        },
+                                        "deliveryAddress": {
+                                          "$ref": "../models/address.v1.json"
+                                        }
+                                      },
+                                      "required": [
+                                        "id"
+                                      ]
+                                    }
+                                  },
+                                  "documents": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "documentType": {
+                                          "type": "string",
+                                          "enum": [
+                                            "awardNotice",
+                                            "evaluationReports",
+                                            "contractDraft",
+                                            "winningBid",
+                                            "complaints",
+                                            "bidders",
+                                            "conflictOfInterest",
+                                            "cancellationDetails",
+                                            "submissionDocuments",
+                                            "contractArrangements",
+                                            "contractSchedule",
+                                            "shortlistedFirms"
+                                          ]
+                                        },
+                                        "title": {
+                                          "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "relatedLots": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "documentType",
+                                        "title"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "id"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "contracts"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "contracts": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "period": {
+                                  "type": "object",
+                                  "properties": {
+                                    "endDate": {
+                                      "type": "string",
+                                      "format": "date-time"
+                                    }
+                                  },
+                                  "required": [
+                                    "endDate"
+                                  ]
+                                },
+                                "documents": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "documentType": {
+                                        "type": "string",
+                                        "enum": [
+                                          "contractNotice",
+                                          "completionCertificate",
+                                          "contractDraft",
+                                          "contractArrangements",
+                                          "contractSchedule",
+                                          "environmentalImpact",
+                                          "contractAnnexe",
+                                          "contractGuarantees",
+                                          "subContract",
+                                          "illustration",
+                                          "contractSummary",
+                                          "contractSigned"
+                                        ]
+                                      },
+                                      "title": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "relatedLots": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "documentType",
+                                      "title"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id"
+                              ]
+                            }
+                          },
+                          "awards": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "object",
+                                  "properties": {
+                                    "amount": {
+                                      "type": "number"
+                                    },
+                                    "amountNet": {
+                                      "type": "number"
+                                    },
+                                    "valueAddedTaxIncluded": {
+                                      "type": "boolean"
+                                    }
+                                  },
+                                  "required": [
+                                    "amount",
+                                    "amountNet",
+                                    "valueAddedTaxIncluded"
+                                  ]
+                                },
+                                "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "quantity": {
+                                        "type": "number"
+                                      },
+                                      "unit": {
+                                        "type": "object",
+                                        "properties": {
+                                          "value": {
+                                            "type": "object",
+                                            "required": [
+                                              "amount",
+                                              "amountNet",
+                                              "valueAddedTaxIncluded"
+                                            ],
+                                            "properties": {
+                                              "amount": {
+                                                "type": "number"
+                                              },
+                                              "amountNet": {
+                                                "type": "number"
+                                              },
+                                              "valueAddedTaxIncluded": {
+                                                "type": "boolean"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "value"
+                                        ]
+                                      },
+                                      "deliveryAddress": {
+                                        "$ref": "../models/addressRequest.v1.json"
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ]
+                                  }
+                                },
+                                "documents": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "documentType": {
+                                        "type": "string",
+                                        "enum": [
+                                          "awardNotice",
+                                          "evaluationReports",
+                                          "contractDraft",
+                                          "winningBid",
+                                          "complaints",
+                                          "bidders",
+                                          "conflictOfInterest",
+                                          "cancellationDetails",
+                                          "submissionDocuments",
+                                          "contractArrangements",
+                                          "contractSchedule",
+                                          "shortlistedFirms"
+                                        ]
+                                      },
+                                      "title": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "relatedLots": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "documentType",
+                                      "title"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "amendContract"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
