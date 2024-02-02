@@ -92,6 +92,37 @@
                             "type": "string",
                             "x-stoplight": {
                               "id": "aomai2qftuwf2"
+                            },
+                            "enum": [
+                              "volumeCuts",
+                              "itemPriceVariation",
+                              "qualityImprovement",
+                              "durationExtension",
+                              "priceReduction",
+                              "taxRate",
+                              "thirdParty",
+                              "multiple"
+                            ]
+                          },
+                          "rationaleDetails ": {
+                            "type": "array",
+                            "x-stoplight": {
+                              "id": "8wfs96dyruj9p"
+                            },
+                            "items": {
+                              "x-stoplight": {
+                                "id": "e3mcgr0zz711a"
+                              },
+                              "type": "string",
+                              "enum": [
+                              "volumeCuts",
+                              "itemPriceVariation",
+                              "qualityImprovement",
+                              "durationExtension",
+                              "priceReduction",
+                              "taxRate",
+                              "thirdParty"
+                              ]
                             }
                           },
                           "description": {
@@ -133,7 +164,17 @@
                                   "type": "string",
                                   "x-stoplight": {
                                     "id": "eshd53urec7od"
-                                  }
+                                  },
+                                  "enum": [
+                                    "contractArrangements",
+                                    "contractSchedule",
+                                    "environmentalImpact",
+                                    "contractAnnexe",
+                                    "contractGuarantees",
+                                    "subContract",
+                                    "contractSummary",
+                                    "contractSigned"
+                                  ]
                                 }
                               },
                               "required": [
@@ -147,15 +188,15 @@
                       },
                       "period": {
                         "type": "object",
-                        "required": [
-                          "endDate"
-                        ],
                         "properties": {
                           "endDate": {
                             "type": "string",
                             "format": "date-time"
                           }
-                        }
+                        },
+                        "required": [
+                          "endDate"
+                        ]
                       },
                       "documents": {
                         "type": "array",
@@ -214,11 +255,6 @@
                         },
                         "value": {
                           "type": "object",
-                          "required": [
-                            "amount",
-                            "amountNet",
-                            "valueAddedTaxIncluded"
-                          ],
                           "properties": {
                             "amount": {
                               "type": "number"
@@ -229,7 +265,12 @@
                             "valueAddedTaxIncluded": {
                               "type": "boolean"
                             }
-                          }
+                          },
+                          "required": [
+                            "amount",
+                            "amountNet",
+                            "valueAddedTaxIncluded"
+                          ]
                         },
                         "items": {
                           "type": "array",
@@ -244,9 +285,6 @@
                               },
                               "unit": {
                                 "type": "object",
-                                "required": [
-                                  "value"
-                                ],
                                 "properties": {
                                   "value": {
                                     "type": "object",
@@ -267,7 +305,10 @@
                                       }
                                     }
                                   }
-                                }
+                                },
+                                "required": [
+                                  "value"
+                                ]
                               },
                               "deliveryAddress": {
                                 "$ref": "../models/addressRequest.v1.json"
