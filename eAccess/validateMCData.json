@@ -43,7 +43,9 @@
                           "cpid",
                           "ocid",
                           "date",
-                          "tender"
+                          "tender",
+                          "pmd",
+                          "country"
                         ],
                         "properties": {
                           "cpid": {
@@ -145,60 +147,60 @@
                                       }
                                     },
                                     "awardCriteria": {
-                                  "type": "object",
-                                  "properties": {
-                                    "weightingDescription": {
-                                      "type": "string",
-                                      "enum": [
-                                        "ISZF",
-                                        "ARGITEK",
-                                        "KUIPER_2"
-                                      ]
-                                    },
-                                    "criteria": {
-                                      "type": "array",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "type": {
-                                            "type": "string",
-                                            "enum": [
-                                              "quality",
-                                              "cost",
-                                              "price"
-                                            ]
-                                          },
-                                          "numbers": {
-                                            "type": "array",
-                                            "items": {
-                                              "type": "object",
-                                              "properties": {
-                                                "number": {
-                                                  "type": "number"
-                                                },
-                                                "weight": {
-                                                  "type": "string"
-                                                }
-                                              },
-                                              "required": [
-                                                "number",
-                                                "weight"
-                                              ]
-                                            }
-                                          }
+                                      "type": "object",
+                                      "properties": {
+                                        "weightingDescription": {
+                                          "type": "string",
+                                          "enum": [
+                                            "ISZF",
+                                            "ARGITEK",
+                                            "KUIPER_2"
+                                          ]
                                         },
-                                        "required": [
-                                          "type",
-                                          "numbers"
-                                        ]
-                                      }
+                                        "criteria": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "type": {
+                                                "type": "string",
+                                                "enum": [
+                                                  "quality",
+                                                  "cost",
+                                                  "price"
+                                                ]
+                                              },
+                                              "numbers": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "number": {
+                                                      "type": "number"
+                                                    },
+                                                    "weight": {
+                                                      "type": "string"
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "number",
+                                                    "weight"
+                                                  ]
+                                                }
+                                              }
+                                            },
+                                            "required": [
+                                              "type",
+                                              "numbers"
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "weightingDescription",
+                                        "criteria"
+                                      ]
                                     }
-                                  },
-                                  "required": [
-                                    "weightingDescription",
-                                    "criteria"
-                                  ]
-                                }
                                   },
                                   "required": [
                                     "id",
@@ -414,6 +416,22 @@
                             "required": [
                               "details"
                             ]
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "u4k8yfo6xjcow"
+                            },
+                            "enum": [
+                              "MC",
+                              "TEST_MC"
+                            ]
+                          },
+                          "country": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "kz2orssq3j9xj"
+                            }
                           }
                         }
                       }
