@@ -1,0 +1,357 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "movd3geajepfr"
+  },
+  "info": {
+    "title": "cancelRequirements",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9031"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Cancel Requirements",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "cpid",
+                            "ocid",
+                            "tender"
+                          ],
+                          "properties": {
+                            "cpid": {
+                              "type": "string"
+                            },
+                            "ocid": {
+                              "type": "string"
+                            },
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "criteria"
+                              ],
+                              "properties": {
+                                "criteria": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "title": {
+                                        "type": "string"
+                                      },
+                                      "classification": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "scheme"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "source": {
+                                        "type": "string",
+                                        "enum": [
+                                          "procuringEntity",
+                                          "tenderer"
+                                        ]
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "relatesTo": {
+                                        "type": "string",
+                                        "enum": [
+                                          "lot",
+                                          "item",
+                                          "tender",
+                                          "tenderer"
+                                        ]
+                                      },
+                                      "relatedItem": {
+                                        "type": "string"
+                                      },
+                                      "requirementGroups": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "requirements": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string"
+                                                  },
+                                                  "title": {
+                                                    "type": "string"
+                                                  },
+                                                  "dataType": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "string",
+                                                      "number",
+                                                      "integer",
+                                                      "boolean"
+                                                    ]
+                                                  },
+                                                  "description": {
+                                                    "type": "string"
+                                                  },
+                                                  "period": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "startDate": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                      },
+                                                      "endDate": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "startDate",
+                                                      "endDate"
+                                                    ]
+                                                  },
+                                                  "expectedValue": {
+                                                    "type": [
+                                                      "string",
+                                                      "number",
+                                                      "integer",
+                                                      "boolean"
+                                                    ]
+                                                  },
+                                                  "minValue": {
+                                                    "type": [
+                                                      "number",
+                                                      "integer"
+                                                    ]
+                                                  },
+                                                  "maxValue": {
+                                                    "type": [
+                                                      "number",
+                                                      "integer"
+                                                    ]
+                                                  },
+                                                  "eligibleEvidences": {
+                                                    "type": "array",
+                                                    "items": {
+                                                      "$ref": "../models/eligibleEvidences.v1.json"
+                                                    }
+                                                  },
+                                                  "status": {
+                                                    "type": "string",
+                                                    "x-stoplight": {
+                                                      "id": "0fq9djrp6f2td"
+                                                    },
+                                                    "enum": [
+                                                      "cancelled",
+                                                      "active"
+                                                    ]
+                                                  },
+                                                  "datePublished": {
+                                                    "type": "string",
+                                                    "x-stoplight": {
+                                                      "id": "z98x4jk5q67xm"
+                                                    },
+                                                    "format": "date-time"
+                                                  },
+                                                  "updatedDate": {
+                                                    "type": "string",
+                                                    "x-stoplight": {
+                                                      "id": "puo44d6drry7x"
+                                                    },
+                                                    "format": "date-time"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "id",
+                                                  "title",
+                                                  "dataType",
+                                                  "status",
+                                                  "datePublished",
+                                                  "updatedDate"
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "requirements"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "title",
+                                      "classification",
+                                      "source",
+                                      "relatesTo",
+                                      "requirementGroups"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "date",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "criteria"
+                            ],
+                            "properties": {
+                              "criteria": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "requirementGroups": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "requirements": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id"
+                                              ]
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "requirements"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "requirementGroups"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "cancelRequirements"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
