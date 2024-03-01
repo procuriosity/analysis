@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "1adxo6glzo7gq"
+  },
+  "info": {
+    "title": "submitEvidence",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/add/evidence/{cpid}/{ocid}/{bidId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "cpid tender process "
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "ocid tender process "
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "bidId",
+          "in": "path",
+          "required": true,
+          "description": "bid identifier"
+        }
+      ],
+      "post": {
+        "summary": "Submit Evidence",
+        "operationId": "post-do-bid-cpid-ocid",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "transaction id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "data type in request body",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "required": true,
+            "description": "bid token"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "requirementResponseId",
+            "description": "requirement response identifier"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "x-stoplight": {
+                      "id": "5hxp5jzrca14z"
+                    },
+                    "properties": {
+                      "evidence": {
+                        "$ref": "../models/evidences.v1.json"
+                      }
+                    }
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
