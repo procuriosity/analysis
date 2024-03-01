@@ -4,7 +4,7 @@
     "id": "1adxo6glzo7gq"
   },
   "info": {
-    "title": "addEvidence",
+    "title": "submitEvidence",
     "version": "1.0"
   },
   "servers": [
@@ -13,7 +13,7 @@
     }
   ],
   "paths": {
-    "/add/evidence/{cpid}/{ocid}/{bidId}/{requirementResponseId}}": {
+    "/add/evidence/{cpid}/{ocid}/{bidId}": {
       "parameters": [
         {
           "schema": {
@@ -41,19 +41,10 @@
           "in": "path",
           "required": true,
           "description": "bid identifier"
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "requirementResponseId",
-          "in": "path",
-          "required": true,
-          "description": "requirement response identifier"
         }
       ],
       "post": {
-        "summary": "Add Evidence",
+        "summary": "Submit Evidence",
         "operationId": "post-do-bid-cpid-ocid",
         "responses": {
           "200": {
@@ -96,6 +87,14 @@
             "name": "X-TOKEN",
             "required": true,
             "description": "bid token"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "requirementResponseId",
+            "description": "requirement response identifier"
           }
         ],
         "requestBody": {
