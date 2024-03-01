@@ -1,8 +1,12 @@
 {
   "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "jcsngkxt19bdy"
+  },
   "info": {
-    "title": "checkBidState",
-    "version": "1.04"
+    "title": "validateEvidanceData",
+    "version": "1.0",
+    "description": ""
   },
   "servers": [
     {
@@ -12,7 +16,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Bid State",
+        "summary": "Validate Evidance Data",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -26,6 +30,7 @@
             }
           }
         },
+        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -42,10 +47,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "bids",
-                          "pmd",
-                          "country",
-                          "operationType"
+                          "bids"
                         ],
                         "properties": {
                           "cpid": {
@@ -67,50 +69,35 @@
                                   "properties": {
                                     "id": {
                                       "type": "string"
+                                    },
+                                    "requirementResponses": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "evidences": {
+                                            "type": "array",
+                                            "items": {
+                                              "$ref": "../models/evidences.v1.json"
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id"
+                                        ]
+                                      }
                                     }
                                   },
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "requirementResponses"
                                   ]
                                 }
                               }
                             }
-                          },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "OT",
-                              "SV",
-                              "MV",
-                              "GPA",
-                              "RT",
-                              "CF",
-                              "OF",
-                              "TEST_OT",
-                              "TEST_OT",
-                              "TEST_MV",
-                              "TEST_GPA",
-                              "TEST_RT",
-                              "TEST_CF",
-                              "TEST_OF",
-                              "RFQ",
-                              "TEST_RFQ",
-                              "MC",
-                              "TEST_MC",
-                              "DCO",
-                              "TEST_DCO"
-                            ]
-                          },
-                          "country": {
-                            "type": "string"
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "withdrawBid",
-                              "updateBidDocuments",
-                              "submitEvidenceForBid"
-                            ]
                           }
                         }
                       }
@@ -125,7 +112,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkBidState"
+                          "validateEvidanceData"
                         ]
                       }
                     }
