@@ -1,0 +1,161 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "r5mzppychmpwv"
+  },
+  "info": {
+    "title": "updateSubmissionDocuments",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/add/document/submission/{cpid}/{ocid}/{submissionId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "tender process cpid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "tender process ocid"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "submissionId",
+          "in": "path",
+          "required": true,
+          "description": "submission id"
+        }
+      ],
+      "post": {
+        "summary": "Update Submission Documents",
+        "operationId": "post-users-userId",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "description": "bearer {access_token}"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "transaction id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "submission token",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "data type in request body",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "submission": {
+                        "type": "object",
+                        "required": [
+                          "documents"
+                        ],
+                        "x-stoplight": {
+                          "id": "kba1cpbyq4qle"
+                        },
+                        "properties": {
+                          "documents": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "documentType": {
+                                  "type": "string",
+                                  "enum": [
+                                    "submissionDocuments",
+                                    "illustration",
+                                    "\"x_qualificationDocuments",
+                                    "x_eligibilityDocuments",
+                                    "x_technicalDocuments"
+                                  ]
+                                },
+                                "description": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "title",
+                                "documentType"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "submission"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": ""
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
