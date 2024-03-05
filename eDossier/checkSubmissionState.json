@@ -1,0 +1,177 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "fb14jvkwkrwc4"
+  },
+  "info": {
+    "title": "Check Submission State",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9251"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Check Submission State",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "checkSubmissionState"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "action"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "country",
+                          "pmd",
+                          "operationType",
+                          "submissions"
+                        ],
+                        "properties": {
+                          "country": {
+                            "type": "string"
+                          },
+                          "pmd": {
+                            "type": "string",
+                            "enum": [
+                              "GPA",
+                              "TEST_GPA",
+                              "RT",
+                              "TEST_RT",
+                              "OF",
+                              "TEST_OF",
+                              "CF",
+                              "TEST_CF"
+                            ]
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "enum": [
+                              "updateSubmissionDocuments"
+                            ]
+                          },
+                          "submissions": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "documents": {
+                                      "type": "array",
+                                      "x-stoplight": {
+                                        "id": "11ww32sjy62pr"
+                                      },
+                                      "items": {
+                                        "x-stoplight": {
+                                          "id": "cil61cd59i32a"
+                                        },
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                              "id": "mi9fypaldr512"
+                                            }
+                                          },
+                                          "title": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                              "id": "fjgtse5w3grph"
+                                            }
+                                          },
+                                          "documentType": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                              "id": "xnmkqmsrg9wsr"
+                                            },
+                                            "enum": [
+                                              "illustration",
+                                              "submissionDocuments",
+                                              "x_qualificationDocuments",
+                                              "x_eligibilityDocuments",
+                                              "x_technicalDocuments"                                              
+                                            ]
+                                          },
+                                          "description": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                              "id": "yvw0juz7lo9rh"
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "title",
+                                          "documentType"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "documents"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "description": ""
+      }
+    }
+  }
+}
