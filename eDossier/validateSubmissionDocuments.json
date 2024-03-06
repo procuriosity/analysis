@@ -1,0 +1,149 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "r29kr5mx1csv4"
+  },
+  "info": {
+    "title": "Validate Submission Documents",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9251"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Validate Submission Documents",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validateSubmissionDocuments"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "action"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "submissions"
+                        ],
+                        "properties": {
+                          "submissions": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "../models/documents_object.v1.json"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "documents"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "properties": {
+                          "submissions": {
+                            "type": "object",
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "documents": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "documentType": {
+                                            "type": "string",
+                                            "enum": [
+                                              "illustration",
+                                              "submissionDocuments",
+                                              "x_qualificationDocuments",
+                                              "x_eligibilityDocuments",
+                                              "x_technicalDocuments"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "description": ""
+      }
+    }
+  }
+}
