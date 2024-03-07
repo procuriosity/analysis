@@ -1,0 +1,296 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "82rruwnfrgiwa"
+  },
+  "info": {
+    "title": "createEvidence",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9251"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Create Evidence",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "submissions"
+                          ],
+                          "properties": {
+                            "submissions": {
+                              "type": "object",
+                              "required": [
+                                "details"
+                              ],
+                              "x-stoplight": {
+                                "id": "qcle51wfpkw3s"
+                              },
+                              "properties": {
+                                "details": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "format": "uuid"
+                                      },
+                                      "requirementResponses": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "value": {
+                                              "type": [
+                                                "string",
+                                                "number",
+                                                "integer",
+                                                "boolean"
+                                              ]
+                                            },
+                                            "requirement": {
+                                              "type": "object",
+                                              "required": [
+                                                "id"
+                                              ],
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "relatedCandidate": {
+                                              "type": "object",
+                                              "x-stoplight": {
+                                                "id": "x19re4uddgurd"
+                                              },
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "name": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "required": [
+                                                "id",
+                                                "name"
+                                              ]
+                                            },
+                                            "evidences": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "id": {
+                                                    "type": "string",
+                                                    "x-stoplight": {
+                                                      "id": "ggbt5yn0rm2fn"
+                                                    }
+                                                  },
+                                                  "title": {
+                                                    "type": "string",
+                                                    "x-stoplight": {
+                                                      "id": "45p9u7jk6q4yu"
+                                                    }
+                                                  },
+                                                  "description": {
+                                                    "type": "string",
+                                                    "x-stoplight": {
+                                                      "id": "y18627qwjh9hh"
+                                                    }
+                                                  },
+                                                  "date": {
+                                                    "type": "string",
+                                                    "x-stoplight": {
+                                                      "id": "49l21p47nc4m3"
+                                                    },
+                                                    "format": "date-time"
+                                                  },
+                                                  "relatedDocument": {
+                                                    "type": "object",
+                                                    "x-stoplight": {
+                                                      "id": "1zq6uku041aic"
+                                                    },
+                                                    "properties": {
+                                                      "id": {
+                                                        "type": "string",
+                                                        "x-stoplight": {
+                                                          "id": "x88esl5tlyngv"
+                                                        }
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "id"
+                                                    ]
+                                                  }
+                                                },
+                                                "required": [
+                                                  "id",
+                                                  "title",
+                                                  "date"
+                                                ]
+                                              }
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "value",
+                                            "requirement",
+                                            "evidences"
+                                          ]
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "requirementResponses"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "date",
+                          "submissions"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "submissions": {
+                            "type": "object",
+                            "required": [
+                              "details"
+                            ],
+                            "x-stoplight": {
+                              "id": "s6e24hn64a0tz"
+                            },
+                            "properties": {
+                              "details": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "format": "uuid"
+                                    },
+                                    "requirementResponses": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "evidences": {
+                                            "type": "array",
+                                            "items": {
+                                              "$ref": "../models/evidences.v1.json"
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id",
+                                          "evidences"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "requirementResponses"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "createEvidence"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
