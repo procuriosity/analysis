@@ -1,11 +1,12 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "fb14jvkwkrwc4"
+    "id": "d6rzuogn3zqba"
   },
   "info": {
-    "title": "Check Submission State",
-    "version": "1.01"
+    "title": "validateEvidenceData",
+    "version": "1.0",
+    "description": ""
   },
   "servers": [
     {
@@ -15,7 +16,7 @@
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Submission State",
+        "summary": "Validate Evidence Data",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -29,6 +30,7 @@
             }
           }
         },
+        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -40,57 +42,28 @@
                   {
                     "type": "object",
                     "properties": {
-                      "action": {
-                        "type": "string",
-                        "enum": [
-                          "checkSubmissionState"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "action"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
                       "params": {
                         "type": "object",
                         "required": [
-                          "country",
-                          "pmd",
-                          "operationType",
+                          "cpid",
+                          "ocid",
                           "submissions"
                         ],
                         "properties": {
-                          "country": {
-                            "type": "string"
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
                           },
-                          "pmd": {
-                            "type": "string",
-                            "enum": [
-                              "GPA",
-                              "TEST_GPA",
-                              "RT",
-                              "TEST_RT",
-                              "OF",
-                              "TEST_OF",
-                              "CF",
-                              "TEST_CF"
-                            ]
-                          },
-                          "operationType": {
-                            "type": "string",
-                            "enum": [
-                              "updateSubmissionDocuments",
-                              "submitEvidenceForSubmission"
-                            ]
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
                           },
                           "submissions": {
                             "type": "object",
                             "required": [
                               "details"
                             ],
+                            "x-stoplight": {
+                              "id": "d4mjh4fezcw9h"
+                            },
                             "properties": {
                               "details": {
                                 "type": "array",
@@ -99,10 +72,31 @@
                                   "properties": {
                                     "id": {
                                       "type": "string"
+                                    },
+                                    "requirementResponses": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "evidences": {
+                                            "type": "array",
+                                            "items": {
+                                              "$ref": "../models/evidences.v1.json"
+                                            }
+                                          }
+                                        },
+                                        "required": [
+                                          "id"
+                                        ]
+                                      }
                                     }
                                   },
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "requirementResponses"
                                   ]
                                 }
                               }
@@ -114,14 +108,27 @@
                     "required": [
                       "params"
                     ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "validateEvidenceData"
+                        ]
+                      }
+                    }
                   }
                 ]
               }
             }
           }
-        },
-        "description": ""
+        }
       }
     }
+  },
+  "components": {
+    "schemas": {}
   }
 }
