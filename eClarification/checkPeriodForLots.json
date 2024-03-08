@@ -1,0 +1,200 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "a7xwxzb6oxhzq"
+  },
+  "info": {
+    "title": "checkPeriodForLots",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9071"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Check Period For Lots",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../models/response_command.v1.json"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "date",
+                          "tender"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "tender": {
+                            "type": "object",
+                            "x-stoplight": {
+                              "id": "5ros151k04i0b"
+                            },
+                            "required": [
+                              "lots",
+                              "items",
+                              "criteria"
+                            ],
+                            "properties": {
+                              "lots": {
+                                "type": "array",
+                                "x-stoplight": {
+                                  "id": "qv4vr0vl6iua4"
+                                },
+                                "items": {
+                                  "x-stoplight": {
+                                    "id": "q1y69z9ji3w1v"
+                                  },
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "i24wyq48hfe57"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id"
+                                  ]
+                                }
+                              },
+                              "items": {
+                                "type": "array",
+                                "x-stoplight": {
+                                  "id": "rbcz2552mbzcl"
+                                },
+                                "items": {
+                                  "x-stoplight": {
+                                    "id": "rkhukfw92isjz"
+                                  },
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "fkxbybddgv8n1"
+                                      }
+                                    },
+                                    "relatedLot": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "559xvgb92hso9"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "relatedLot"
+                                  ]
+                                }
+                              },
+                              "criteria": {
+                                "type": "array",
+                                "x-stoplight": {
+                                  "id": "s4ol6rxxfkaf0"
+                                },
+                                "items": {
+                                  "x-stoplight": {
+                                    "id": "c34hv4sob0m9q"
+                                  },
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "xs2nv26fbu4tw"
+                                      }
+                                    },
+                                    "relatesTo": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "uchaa15whtygu"
+                                      },
+                                      "enum": [
+                                        "tenderer",
+                                        "tender",
+                                        "lot",
+                                        "item"
+                                      ]
+                                    },
+                                    "relatedItem": {
+                                      "type": "string",
+                                      "x-stoplight": {
+                                        "id": "qciu02vlndmio"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "relatesTo"
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "checkPeriodForLots"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
