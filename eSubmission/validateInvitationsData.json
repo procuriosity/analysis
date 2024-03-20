@@ -46,7 +46,8 @@
                           "cpid",
                           "ocid",
                           "date",
-                          "invitations"
+                          "invitations",
+                          "mdm"
                         ],
                         "properties": {
                           "cpid": {
@@ -80,188 +81,218 @@
                                   }
                                 },
                                 "tenderers": {
-                                      "type": "array",
-                                      "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "identifier": {
+                                        "$ref": "../models/identifier.v1.json"
+                                      },
+                                      "additionalIdentifiers": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "../models/identifier.v1.json"
+                                        }
+                                      },
+                                      "address": {
+                                        "$ref": "../models/addressRequest.v1.json"
+                                      },
+                                      "contactPoint": {
+                                        "$ref": "../models/contact_point.v1.json"
+                                      },
+                                      "persones": {
+                                        "type": "array",
+                                        "items": {
+                                          "$ref": "../models/person_bid.v1.json"
+                                        }
+                                      },
+                                      "details": {
                                         "type": "object",
+                                        "required": [
+                                          "scale"
+                                        ],
                                         "properties": {
-                                          "id": {
-                                            "type": "string"
+                                          "typeOfSupplier": {
+                                            "type": "string",
+                                            "enum": [
+                                              "company",
+                                              "individual"
+                                            ]
                                           },
-                                          "name": {
-                                            "type": "string"
-                                          },
-                                          "identifier": {
-                                            "$ref": "../models/identifier.v1.json"
-                                          },
-                                          "additionalIdentifiers": {
+                                          "mainEconomicActivities": {
                                             "type": "array",
                                             "items": {
-                                              "$ref": "../models/identifier.v1.json"
-                                            }
-                                          },
-                                          "address": {
-                                            "$ref": "../models/addressRequest.v1.json"
-                                          },
-                                          "contactPoint": {
-                                            "$ref": "../models/contact_point.v1.json"
-                                          },
-                                          "persones": {
-                                            "type": "array",
-                                            "items": {
-                                              "$ref": "../models/person_bid.v1.json"
-                                            }
-                                          },
-                                          "details": {
-                                            "type": "object",
-                                            "required": [
-                                              "scale"
-                                            ],
-                                            "properties": {
-                                              "typeOfSupplier": {
-                                                "type": "string",
-                                                "enum": [
-                                                  "company",
-                                                  "individual"
-                                                ]
-                                              },
-                                              "mainEconomicActivities": {
-                                                "type": "array",
-                                                "items": {
-                                                  "type": "object",
-                                                  "properties": {
-                                                    "id": {
-                                                      "type": "string"
-                                                    },
-                                                    "scheme": {
-                                                      "type": "string"
-                                                    },
-                                                    "description": {
-                                                      "type": "string"
-                                                    },
-                                                    "uri": {
-                                                      "type": "string"
-                                                    }
-                                                  },
-                                                  "required": [
-                                                    "id",
-                                                    "scheme",
-                                                    "description"
-                                                  ]
+                                              "type": "object",
+                                              "properties": {
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "scheme": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "uri": {
+                                                  "type": "string"
                                                 }
                                               },
-                                              "scale": {
-                                                "type": "string",
-                                                "enum": [
-                                                  "micro",
-                                                  "sme",
-                                                  "large"
-                                                ]
-                                              },
-                                              "permits": {
-                                                "type": "array",
-                                                "items": {
+                                              "required": [
+                                                "id",
+                                                "scheme",
+                                                "description"
+                                              ]
+                                            }
+                                          },
+                                          "scale": {
+                                            "type": "string",
+                                            "enum": [
+                                              "micro",
+                                              "sme",
+                                              "large"
+                                            ]
+                                          },
+                                          "permits": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "scheme": {
+                                                  "type": "string"
+                                                },
+                                                "id": {
+                                                  "type": "string"
+                                                },
+                                                "url": {
+                                                  "type": "string"
+                                                },
+                                                "permitDetails": {
                                                   "type": "object",
+                                                  "required": [
+                                                    "issuedBy",
+                                                    "issuedThought",
+                                                    "validityPeriod"
+                                                  ],
                                                   "properties": {
-                                                    "scheme": {
-                                                      "type": "string"
-                                                    },
-                                                    "id": {
-                                                      "type": "string"
-                                                    },
-                                                    "url": {
-                                                      "type": "string"
-                                                    },
-                                                    "permitDetails": {
+                                                    "issuedBy": {
                                                       "type": "object",
                                                       "required": [
-                                                        "issuedBy",
-                                                        "issuedThought",
-                                                        "validityPeriod"
+                                                        "id",
+                                                        "name"
                                                       ],
                                                       "properties": {
-                                                        "issuedBy": {
-                                                          "type": "object",
-                                                          "required": [
-                                                            "id",
-                                                            "name"
-                                                          ],
-                                                          "properties": {
-                                                            "id": {
-                                                              "type": "string"
-                                                            },
-                                                            "name": {
-                                                              "type": "string"
-                                                            }
-                                                          }
+                                                        "id": {
+                                                          "type": "string"
                                                         },
-                                                        "issuedThought": {
-                                                          "type": "object",
-                                                          "required": [
-                                                            "id",
-                                                            "name"
-                                                          ],
-                                                          "properties": {
-                                                            "id": {
-                                                              "type": "string"
-                                                            },
-                                                            "name": {
-                                                              "type": "string"
-                                                            }
-                                                          }
+                                                        "name": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    },
+                                                    "issuedThought": {
+                                                      "type": "object",
+                                                      "required": [
+                                                        "id",
+                                                        "name"
+                                                      ],
+                                                      "properties": {
+                                                        "id": {
+                                                          "type": "string"
                                                         },
-                                                        "validityPeriod": {
-                                                          "type": "object",
-                                                          "required": [
-                                                            "startDate"
-                                                          ],
-                                                          "properties": {
-                                                            "startDate": {
-                                                              "type": "string",
-                                                              "format": "date-time"
-                                                            },
-                                                            "endDate": {
-                                                              "type": "string",
-                                                              "format": "date-time"
-                                                            }
-                                                          }
+                                                        "name": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    },
+                                                    "validityPeriod": {
+                                                      "type": "object",
+                                                      "required": [
+                                                        "startDate"
+                                                      ],
+                                                      "properties": {
+                                                        "startDate": {
+                                                          "type": "string",
+                                                          "format": "date-time"
+                                                        },
+                                                        "endDate": {
+                                                          "type": "string",
+                                                          "format": "date-time"
                                                         }
                                                       }
                                                     }
-                                                  },
-                                                  "required": [
-                                                    "scheme",
-                                                    "id",
-                                                    "permitDetails"
-                                                  ]
+                                                  }
                                                 }
                                               },
-                                              "bankAccounts": {
-                                                "type": "array",
-                                                "items": {
-                                                  "$ref": "../models/bankAccount.v1.json"
-                                                }
-                                              },
-                                              "legalForm": {
-                                                "$ref": "../models/legalForm.v1.json"
-                                              }
+                                              "required": [
+                                                "scheme",
+                                                "id",
+                                                "permitDetails"
+                                              ]
                                             }
+                                          },
+                                          "bankAccounts": {
+                                            "type": "array",
+                                            "items": {
+                                              "$ref": "../models/bankAccount.v1.json"
+                                            }
+                                          },
+                                          "legalForm": {
+                                            "$ref": "../models/legalForm.v1.json"
                                           }
-                                        },
-                                        "required": [
-                                          "id",
-                                          "name",
-                                          "identifier",
-                                          "address",
-                                          "contactPoint",
-                                          "details"
-                                        ]
+                                        }
                                       }
-                                    }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "name",
+                                      "identifier",
+                                      "address",
+                                      "contactPoint",
+                                      "details"
+                                    ]
+                                  }
+                                }
                               },
                               "required": [
                                 "id",
                                 "tenderers"
                               ]
+                            }
+                          },
+                          "mdm": {
+                            "type": "object",
+                            "required": [
+                              "registrationSchemes"
+                            ],
+                            "properties": {
+                              "registrationSchemes": {
+                                "type": "array",
+                                "description": "схемы регистрации компаний для стран, где эти компании (tenderers) зарегистрированы",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "country": {
+                                      "type": "string"
+                                    },
+                                    "schemes": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "country",
+                                    "schemes"
+                                  ]
+                                }
+                              }
                             }
                           }
                         }
