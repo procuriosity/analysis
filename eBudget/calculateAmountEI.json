@@ -1,0 +1,388 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "calculateAmountEI",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9051"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Calculate Amount EI",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "cpid",
+                            "planning",
+                            "tender",
+                            "buyer"
+                          ],
+                          "properties": {
+                            "cpid": {
+                              "$ref": "../models/cpid.v1.json"
+                            },
+                            "planning": {
+                              "type": "object",
+                              "required": [
+                                "budget"
+                              ],
+                              "properties": {
+                                "budget": {
+                                  "type": "object",
+                                  "required": [
+                                    "id",
+                                    "period",
+                                    "amount"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "period": {
+                                      "type": "object",
+                                      "required": [
+                                        "startDate",
+                                        "endDate"
+                                      ],
+                                      "properties": {
+                                        "startDate": {
+                                          "type": "string"
+                                        },
+                                        "endDate": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "amount": {
+                                      "type": "object",
+                                      "required": [
+                                        "amount",
+                                        "currency"
+                                      ],
+                                      "properties": {
+                                        "amount": {
+                                          "type": "number"
+                                        },
+                                        "currency": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "rationale": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "tender": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "status",
+                                "title",
+                                "mainProcurementCategory",
+                                "classification"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "format": "uuid"
+                                },
+                                "status": {
+                                  "type": "string",
+                                  "enum": [
+                                    "planning"
+                                  ]
+                                },
+                                "title": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "mainProcurementCategory": {
+                                  "type": "string",
+                                  "enum": [
+                                    "goods",
+                                    "works",
+                                    "services"
+                                  ]
+                                },
+                                "classification": {
+                                  "type": "object",
+                                  "required": [
+                                    "id",
+                                    "scheme",
+                                    "description"
+                                  ],
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "scheme": {
+                                      "type": "string",
+                                      "enum": [
+                                        "CPV"
+                                      ]
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "items": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "classification": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "scheme",
+                                          "description"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "scheme": {
+                                            "type": "string",
+                                            "enum": [
+                                              "CPV"
+                                            ]
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "additionalClassifications": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "id": {
+                                              "type": "string"
+                                            },
+                                            "scheme": {
+                                              "type": "string",
+                                              "enum": [
+                                                "CPVS"
+                                              ]
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "id",
+                                            "scheme",
+                                            "description"
+                                          ]
+                                        }
+                                      },
+                                      "deliveryAddress": {
+                                        "$ref": "../models/address.v1.json"
+                                      },
+                                      "quantity": {
+                                        "type": "number"
+                                      },
+                                      "unit": {
+                                        "type": "object",
+                                        "required": [
+                                          "id",
+                                          "name"
+                                        ],
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "description",
+                                      "classification",
+                                      "quantity",
+                                      "unit"
+                                    ]
+                                  }
+                                }
+                              }
+                            },
+                            "buyer": {
+                              "type": "object",
+                              "required": [
+                                "id",
+                                "name",
+                                "identifier",
+                                "address",
+                                "contactPoint"
+                              ],
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "identifier": {
+                                  "$ref": "../models/identifier.v1.json"
+                                },
+                                "additionalIdentifiers": {
+                                  "type": "array",
+                                  "items": {
+                                    "$ref": "../models/identifier.v1.json"
+                                  }
+                                },
+                                "address": {
+                                  "$ref": "../models/address.v1.json"
+                                },
+                                "contactPoint": {
+                                  "$ref": "../models/contact_point.v1.json"
+                                },
+                                "details": {
+                                  "type": "object",
+                                  "properties": {
+                                    "typeOfBuyer": {
+                                      "type": "string",
+                                      "enum": [
+                                        "BODY_PUBLIC",
+                                        "EU_INSTITUTION",
+                                        "MINISTRY",
+                                        "NATIONAL_AGENCY",
+                                        "REGIONAL_AGENCY",
+                                        "REGIONAL_AUTHORITY"
+                                      ]
+                                    },
+                                    "mainGeneralActivity": {
+                                      "type": "string",
+                                      "enum": [
+                                        "DEFENCE",
+                                        "ECONOMIC_AND_FINANCIAL_AFFAIRS",
+                                        "EDUCATION",
+                                        "ENVIRONMENT",
+                                        "GENERAL_PUBLIC_SERVICES",
+                                        "HEALTH",
+                                        "HOUSING_AND_COMMUNITY_AMENITIES",
+                                        "PUBLIC_ORDER_AND_SAFETY",
+                                        "RECREATION_CULTURE_AND_RELIGION"
+                                      ]
+                                    },
+                                    "mainSectoralActivity": {
+                                      "type": "string",
+                                      "enum": [
+                                        "AIRPORT_RELATED_ACTIVITIES",
+                                        "ELECTRICITY",
+                                        "EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL",
+                                        "EXPLORATION_EXTRACTION_GAS_OIL",
+                                        "PORT_RELATED_ACTIVITIES",
+                                        "POSTAL_SERVICES",
+                                        "PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT",
+                                        "RAILWAY_SERVICES",
+                                        "URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES",
+                                        "WATER"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "result"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "calculateAmountEI"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "description": ""
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
