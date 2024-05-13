@@ -48,6 +48,8 @@
                           "date",
                           "pmd",
                           "country",
+                          "operationType",
+                          "mdm",
                           "tender"
                         ],
                         "properties": {
@@ -78,6 +80,53 @@
                             "type": "string",
                             "x-stoplight": {
                               "id": "kz2orssq3j9xj"
+                            }
+                          },
+                          "operationType": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "izpd41ssk9iqd"
+                            },
+                            "enum": [
+                              "createEde"
+                            ]
+                          },
+                          "mdm": {
+                            "type": "object",
+                            "required": [
+                              "criteria"
+                            ],
+                            "properties": {
+                              "criteria": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "classification": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "scheme"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "scheme": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "classification"
+                                  ]
+                                }
+                              }
                             }
                           },
                           "tender": {
