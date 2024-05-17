@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "fc79e353d6297"
+    "id": "ae9tr8bynwyvo"
   },
   "info": {
     "title": "TenderOpen",
@@ -11,7 +11,7 @@
   "paths": {
     "/model": {
       "options": {
-        "summary": "Tender Open",
+        "summary": "Tender Open_EDE",
         "operationId": "options-model",
         "requestBody": {
           "content": {
@@ -113,9 +113,6 @@
                                   "properties": {
                                     "ei": {
                                       "type": "string"
-                                    },
-                                    "fs": {
-                                      "type": "string"
                                     }
                                   }
                                 },
@@ -208,7 +205,6 @@
                         "type": "string",
                         "enum": [
                           "active",
-                          "pending",
                           "unsuccessful",
                           "cancelled",
                           "complete"
@@ -217,10 +213,7 @@
                       "statusDetails": {
                         "type": "string",
                         "enum": [
-                          "clarification",
                           "tendering",
-                          "externalPublication",
-                          "control",
                           "lackOfBids",
                           "awarding",
                           "fundsLimitation",
@@ -362,19 +355,6 @@
                           },
                           "currency": {
                             "type": "string"
-                          }
-                        }
-                      },
-                      "contractPeriod": {
-                        "type": "object",
-                        "properties": {
-                          "startDate": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "endDate": {
-                            "type": "string",
-                            "format": "date-time"
                           }
                         }
                       },
@@ -596,7 +576,6 @@
                             "statusDetails": {
                               "type": "string",
                               "enum": [
-                                "awarded",
                                 "fundsLimitation",
                                 "needCancellation",
                                 "terminalError",
@@ -604,8 +583,6 @@
                                 "rewarding",
                                 "preEvaluated",
                                 "reEvaluation",
-                                "contracted",
-                                "tendering",
                                 "contracted",
                                 "lackOfBids"
                               ]
@@ -917,7 +894,8 @@
                             "placeOfPerformance",
                             "hasOptions",
                             "hasRecurrence",
-                            "hasRenewal"
+                            "hasRenewal",
+                            "contractTerms"
                           ]
                         }
                       },
@@ -1564,9 +1542,7 @@
                         "relationship": {
                           "type": "string",
                           "enum": [
-                            "parent",
-                            "prior",
-                            "planning"
+                            "parent"
                           ]
                         },
                         "scheme": {
@@ -1587,208 +1563,6 @@
                         "uri"
                       ]
                     }
-                  },
-                  "invitations": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "date": {
-                          "type": "string",
-                          "format": "date-time"
-                        },
-                        "status": {
-                          "type": "string",
-                          "enum": [
-                            "active"
-                          ]
-                        },
-                        "tenderers": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              },
-                              "identifier": {
-                                "$ref": "../../models/identifier.v1.json"
-                              },
-                              "additionalIdentifiers": {
-                                "$ref": "../../models/identifier.v1.json"
-                              },
-                              "address": {
-                                "$ref": "../../models/address.v1.json"
-                              },
-                              "contactPoint": {
-                                "$ref": "../../models/contact_point.v1.json"
-                              },
-                              "persones": {
-                                "type": "array",
-                                "items": {
-                                  "$ref": "../../models/person_bid.v1.json"
-                                }
-                              },
-                              "details": {
-                                "type": "object",
-                                "required": [
-                                  "scale"
-                                ],
-                                "properties": {
-                                  "typeOfSupplier": {
-                                    "type": "string",
-                                    "enum": [
-                                      "company",
-                                      "individual"
-                                    ]
-                                  },
-                                  "mainEconomicActivities": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "scheme": {
-                                          "type": "string"
-                                        },
-                                        "description": {
-                                          "type": "string"
-                                        },
-                                        "uri": {
-                                          "type": "string"
-                                        }
-                                      },
-                                      "required": [
-                                        "id",
-                                        "scheme",
-                                        "description"
-                                      ]
-                                    }
-                                  },
-                                  "scale": {
-                                    "type": "string",
-                                    "enum": [
-                                      "micro",
-                                      "sme",
-                                      "large"
-                                    ]
-                                  },
-                                  "permits": {
-                                    "type": "array",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "id": {
-                                          "type": "string"
-                                        },
-                                        "scheme": {
-                                          "type": "string"
-                                        },
-                                        "url": {
-                                          "type": "string"
-                                        },
-                                        "permitDetails": {
-                                          "type": "object",
-                                          "required": [
-                                            "issuedBy",
-                                            "issuedThought",
-                                            "validityPeriod"
-                                          ],
-                                          "properties": {
-                                            "issuedBy": {
-                                              "type": "object",
-                                              "required": [
-                                                "id",
-                                                "name"
-                                              ],
-                                              "properties": {
-                                                "id": {
-                                                  "type": "string"
-                                                },
-                                                "name": {
-                                                  "type": "string"
-                                                }
-                                              }
-                                            },
-                                            "issuedThought": {
-                                              "type": "object",
-                                              "required": [
-                                                "id",
-                                                "name"
-                                              ],
-                                              "properties": {
-                                                "id": {
-                                                  "type": "string"
-                                                },
-                                                "name": {
-                                                  "type": "string"
-                                                }
-                                              }
-                                            },
-                                            "validityPeriod": {
-                                              "type": "object",
-                                              "required": [
-                                                "startDate"
-                                              ],
-                                              "properties": {
-                                                "startDate": {
-                                                  "type": "string",
-                                                  "format": "date-time"
-                                                },
-                                                "endDate": {
-                                                  "type": "string",
-                                                  "format": "date-time"
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "required": [
-                                        "id",
-                                        "scheme",
-                                        "permitDetails"
-                                      ]
-                                    }
-                                  },
-                                  "bankAccounts": {
-                                    "type": "array",
-                                    "items": {
-                                      "$ref": "../../models/bankAccountFull.v1.json"
-                                    }
-                                  },
-                                  "legalForm": {
-                                    "$ref": "../../models/legalForm.v1.json"
-                                  }
-                                }
-                              }
-                            },
-                            "required": [
-                              "id",
-                              "name",
-                              "identifier",
-                              "address",
-                              "contactPoint",
-                              "details"
-                            ]
-                          }
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "date",
-                        "status",
-                        "tenderers"
-                      ]
-                    }
                   }
                 },
                 "required": [
@@ -1806,7 +1580,7 @@
           },
           "description": ""
         },
-        "description": "Open tender (pmd = OT, SV, MV, EN, ENI, EDC, EIP, ECI, EDC) created from PN/PIN (v2)"
+        "description": "Open tender (pmd = EDE) created from ECD"
       },
       "components": {
         "schemas": {}
