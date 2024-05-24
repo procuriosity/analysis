@@ -1,0 +1,93 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "8qmerv016c5vy"
+  },
+  "info": {
+    "title": "closeAwardsForLot",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/complete/awards/{cpid}/{ocid}/{lotId}": {
+      "post": {
+        "summary": "Close Awards For Lot",
+        "operationId": "post-con",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-OPERATION-ID",
+            "description": "transaction id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "tender token",
+            "required": true
+          }
+        ],
+        "description": ""
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "cpid tender process "
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "ocid tender process "
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "lotId",
+          "in": "path",
+          "required": true,
+          "description": "lot id"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
