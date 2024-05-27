@@ -1,17 +1,17 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "0ae75431dfd8b"
+    "id": "02pvgdg6ds6mi"
   },
   "info": {
-    "title": "TenderSelective",
+    "title": "TenderOpen_ECD",
     "version": "1.0"
   },
   "servers": [],
   "paths": {
     "/model": {
       "options": {
-        "summary": "Tender Selective",
+        "summary": "Tender Open_ECD",
         "operationId": "options-model",
         "requestBody": {
           "content": {
@@ -176,7 +176,6 @@
                       "date",
                       "title",
                       "description",
-                      "otherCriteria",
                       "classification",
                       "legalBasis",
                       "mainProcurementCategory",
@@ -218,7 +217,8 @@
                       "statusDetails": {
                         "type": "string",
                         "enum": [
-                          "submission",
+                          "clarification",
+                          "tendering",
                           "externalPublication",
                           "control",
                           "lackOfBids",
@@ -226,9 +226,10 @@
                           "fundsLimitation",
                           "needCancellation",
                           "terminalError",
-                          "notMet",
                           "partiallyMet",
-                          "contracted"
+                          "notMet",
+                          "contracted",
+                          "approved"
                         ]
                       },
                       "date": {
@@ -240,49 +241,6 @@
                       },
                       "description": {
                         "type": "string"
-                      },
-                      "secondStage": {
-                        "type": "object",
-                        "properties": {
-                          "minimumCandidates": {
-                            "type": "number"
-                          },
-                          "maximumCandidates": {
-                            "type": "number"
-                          },
-                          "successiveReduction": {
-                            "type": "boolean"
-                          },
-                          "noNegotiationNecessary": {
-                            "type": "boolean"
-                          }
-                        }
-                      },
-                      "otherCriteria": {
-                        "type": "object",
-                        "required": [
-                          "reductionCriteria",
-                          "qualificationSystemMethods"
-                        ],
-                        "properties": {
-                          "reductionCriteria": {
-                            "type": "string",
-                            "enum": [
-                              "scoring",
-                              "none"
-                            ]
-                          },
-                          "qualificationSystemMethods": {
-                            "type": "array",
-                            "items": {
-                              "type": "string",
-                              "enum": [
-                                "automated",
-                                "manual"
-                              ]
-                            }
-                          }
-                        }
                       },
                       "classification": {
                         "type": "object",
@@ -343,9 +301,7 @@
                       "procurementMethod": {
                         "type": "string",
                         "enum": [
-                          "open",
-                          "selective",
-                          "limited"
+                          "open"
                         ]
                       },
                       "procurementMethodDetails": {
@@ -475,7 +431,6 @@
                                 "item",
                                 "tender",
                                 "tenderer",
-                                "qualification",
                                 "award"
                               ]
                             },
@@ -575,7 +530,7 @@
                                         "updatedDate": {
                                           "type": "string",
                                           "x-stoplight": {
-                                            "id": "ng6b5mcr3a7kf"
+                                            "id": "cw0dxcgl7fsg5"
                                           },
                                           "format": "date-time"
                                         }
@@ -647,9 +602,12 @@
                                 "terminalError",
                                 "notAwarded",
                                 "rewarding",
-                                "reEvaluation",
                                 "preEvaluated",
-                                "contracted"
+                                "reEvaluation",
+                                "contracted",
+                                "tendering",
+                                "contracted",
+                                "lackOfBids"
                               ]
                             },
                             "title": {
@@ -857,12 +815,6 @@
                               "properties": {
                                 "hasElectronicAuction": {
                                   "type": "boolean"
-                                },
-                                "hasFrameworkAgreement": {
-                                  "type": "boolean"
-                                },
-                                "frameworkAgreement": {
-                                  "$ref": "../../models/frameworkAgreement.json"
                                 }
                               }
                             },
@@ -1607,8 +1559,8 @@
                           "type": "string",
                           "enum": [
                             "parent",
-                            "planning",
-                            "prior"
+                            "prior",
+                            "planning"
                           ]
                         },
                         "scheme": {
@@ -1646,7 +1598,10 @@
           },
           "description": ""
         },
-        "description": "Selective tender (pmd = RT, GPA) created from PN/PIN (v2)"
+        "description": "Open tender (pmd = ECD) created from PN (v2)",
+        "tags": [
+          "ECD"
+        ]
       },
       "components": {
         "schemas": {}

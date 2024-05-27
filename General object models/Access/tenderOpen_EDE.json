@@ -1,17 +1,17 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "0ae75431dfd8b"
+    "id": "ae9tr8bynwyvo"
   },
   "info": {
-    "title": "TenderSelective",
+    "title": "TenderOpen_EDE",
     "version": "1.0"
   },
   "servers": [],
   "paths": {
     "/model": {
       "options": {
-        "summary": "Tender Selective",
+        "summary": "Tender Open_EDE",
         "operationId": "options-model",
         "requestBody": {
           "content": {
@@ -113,9 +113,6 @@
                                   "properties": {
                                     "ei": {
                                       "type": "string"
-                                    },
-                                    "fs": {
-                                      "type": "string"
                                     }
                                   }
                                 },
@@ -176,7 +173,6 @@
                       "date",
                       "title",
                       "description",
-                      "otherCriteria",
                       "classification",
                       "legalBasis",
                       "mainProcurementCategory",
@@ -209,7 +205,6 @@
                         "type": "string",
                         "enum": [
                           "active",
-                          "pending",
                           "unsuccessful",
                           "cancelled",
                           "complete"
@@ -218,17 +213,16 @@
                       "statusDetails": {
                         "type": "string",
                         "enum": [
-                          "submission",
-                          "externalPublication",
-                          "control",
+                          "tendering",
                           "lackOfBids",
                           "awarding",
                           "fundsLimitation",
                           "needCancellation",
                           "terminalError",
-                          "notMet",
                           "partiallyMet",
-                          "contracted"
+                          "notMet",
+                          "contracted",
+                          "approved"
                         ]
                       },
                       "date": {
@@ -240,49 +234,6 @@
                       },
                       "description": {
                         "type": "string"
-                      },
-                      "secondStage": {
-                        "type": "object",
-                        "properties": {
-                          "minimumCandidates": {
-                            "type": "number"
-                          },
-                          "maximumCandidates": {
-                            "type": "number"
-                          },
-                          "successiveReduction": {
-                            "type": "boolean"
-                          },
-                          "noNegotiationNecessary": {
-                            "type": "boolean"
-                          }
-                        }
-                      },
-                      "otherCriteria": {
-                        "type": "object",
-                        "required": [
-                          "reductionCriteria",
-                          "qualificationSystemMethods"
-                        ],
-                        "properties": {
-                          "reductionCriteria": {
-                            "type": "string",
-                            "enum": [
-                              "scoring",
-                              "none"
-                            ]
-                          },
-                          "qualificationSystemMethods": {
-                            "type": "array",
-                            "items": {
-                              "type": "string",
-                              "enum": [
-                                "automated",
-                                "manual"
-                              ]
-                            }
-                          }
-                        }
                       },
                       "classification": {
                         "type": "object",
@@ -343,9 +294,7 @@
                       "procurementMethod": {
                         "type": "string",
                         "enum": [
-                          "open",
-                          "selective",
-                          "limited"
+                          "open"
                         ]
                       },
                       "procurementMethodDetails": {
@@ -409,19 +358,6 @@
                           }
                         }
                       },
-                      "contractPeriod": {
-                        "type": "object",
-                        "properties": {
-                          "startDate": {
-                            "type": "string",
-                            "format": "date-time"
-                          },
-                          "endDate": {
-                            "type": "string",
-                            "format": "date-time"
-                          }
-                        }
-                      },
                       "procurementMethodModalities": {
                         "type": "array",
                         "items": {
@@ -475,7 +411,6 @@
                                 "item",
                                 "tender",
                                 "tenderer",
-                                "qualification",
                                 "award"
                               ]
                             },
@@ -575,7 +510,7 @@
                                         "updatedDate": {
                                           "type": "string",
                                           "x-stoplight": {
-                                            "id": "ng6b5mcr3a7kf"
+                                            "id": "cw0dxcgl7fsg5"
                                           },
                                           "format": "date-time"
                                         }
@@ -641,15 +576,15 @@
                             "statusDetails": {
                               "type": "string",
                               "enum": [
-                                "awarded",
                                 "fundsLimitation",
                                 "needCancellation",
                                 "terminalError",
                                 "notAwarded",
                                 "rewarding",
-                                "reEvaluation",
                                 "preEvaluated",
-                                "contracted"
+                                "reEvaluation",
+                                "contracted",
+                                "lackOfBids"
                               ]
                             },
                             "title": {
@@ -959,7 +894,8 @@
                             "placeOfPerformance",
                             "hasOptions",
                             "hasRecurrence",
-                            "hasRenewal"
+                            "hasRenewal",
+                            "contractTerms"
                           ]
                         }
                       },
@@ -1234,73 +1170,6 @@
                             "type": "boolean",
                             "default": false
                           }
-                        }
-                      },
-                      "milestones": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string"
-                            },
-                            "type": {
-                              "type": "string",
-                              "enum": [
-                                "control",
-                                "externalPublication"
-                              ]
-                            },
-                            "status": {
-                              "type": "string",
-                              "enum": [
-                                "scheduled",
-                                "met",
-                                "notMet"
-                              ]
-                            },
-                            "dateMet": {
-                              "type": "string",
-                              "format": "date-time"
-                            },
-                            "description": {
-                              "type": "string"
-                            },
-                            "documents": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": "string"
-                                  },
-                                  "documentType": {
-                                    "type": "string",
-                                    "enum": [
-                                      "x_approvalNotice"
-                                    ]
-                                  },
-                                  "title": {
-                                    "type": "string"
-                                  },
-                                  "description": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "id",
-                                  "documentType",
-                                  "title"
-                                ]
-                              }
-                            }
-                          },
-                          "required": [
-                            "id",
-                            "type",
-                            "status",
-                            "dateMet"
-                          ]
                         }
                       },
                       "procedure": {
@@ -1606,9 +1475,7 @@
                         "relationship": {
                           "type": "string",
                           "enum": [
-                            "parent",
-                            "planning",
-                            "prior"
+                            "parent"
                           ]
                         },
                         "scheme": {
@@ -1646,7 +1513,7 @@
           },
           "description": ""
         },
-        "description": "Selective tender (pmd = RT, GPA) created from PN/PIN (v2)"
+        "description": "Open tender (pmd = EDE) created from ECD"
       },
       "components": {
         "schemas": {}
