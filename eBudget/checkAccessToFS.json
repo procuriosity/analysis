@@ -1,0 +1,115 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Check Access To EI",
+    "version": "1.01",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9051",
+      "description": "Access"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Check Access to FS",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "token",
+                          "owner"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "token": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "owner": {
+                            "type": "string",
+                            "format": "uuid"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "checkAccessToFS"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "action"
+                    ]
+                  }
+                ]
+              },
+              "examples": {
+                "validExample": {
+                  "value": {
+                    "version": "2.0.0",
+                    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "action": "checkAccessToTender",
+                    "params": {
+                      "cpid": "ocds-b3wdp1-MD-1580458690892",
+                      "ocid": "ocds-b3wdp1-MD-1580458690892-EV-1580458791896",
+                      "token": "763fb54b-6cb9-468f-9ebd-8906b1ef737f",
+                      "owner": "35930560-4ee0-4969-b88c-545e2d5be9ca"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": ""
+      }
+    }
+  }
+}

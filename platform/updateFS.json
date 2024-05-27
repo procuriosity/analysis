@@ -1,0 +1,183 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "updateFS",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:8900/api/v1/"
+    }
+  ],
+  "paths": {
+    "/do/fs/{cpid}/{ocid}": {
+      "post": {
+        "summary": "Update Finance Source",
+        "operationId": "post-com",
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "bearer {access_token}",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "required": true,
+            "name": "X-OPERATION-ID",
+            "description": "transaction id"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "description": "data type in request body"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "X-TOKEN",
+            "description": "FS token",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "planning": {
+                        "type": "object",
+                        "properties": {
+                          "rationale": {
+                            "type": "string"
+                          },
+                          "budget": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "period": {
+                                "type": "object",
+                                "required": [
+                                  "startDate",
+                                  "endDate"
+                                ],
+                                "properties": {
+                                  "startDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "endDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                }
+                              },
+                              "amount": {
+                                "type": "object",
+                                "required": [
+                                  "amount"
+                                ],
+                                "properties": {
+                                  "amount": {
+                                    "type": "number"
+                                  }
+                                }
+                              },
+                              "isEuropeanUnionFunded": {
+                                "type": "boolean"
+                              },
+                              "europeanUnionFunding": {
+                                "type": "object",
+                                "properties": {
+                                  "projectName": {
+                                    "type": "string"
+                                  },
+                                  "projectIdentifier": {
+                                    "type": "string"
+                                  },
+                                  "uri": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "projectName",
+                                  "projectIdentifier"
+                                ]
+                              },
+                              "project": {
+                                "type": "string"
+                              },
+                              "projectId": {
+                                "type": "string"
+                              },
+                              "uri": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "planning"
+                    ]
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cpid",
+          "in": "path",
+          "required": true,
+          "description": "cpid EI/FS"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ocid",
+          "in": "path",
+          "required": true,
+          "description": "ocid FS"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

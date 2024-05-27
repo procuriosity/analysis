@@ -1,18 +1,18 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "checkAwardsForProtocol",
-    "version": "1.03"
+    "title": "checkEIState",
+    "version": "1.0"
   },
   "servers": [
     {
-      "url": "http://{host}:9081"
+      "url": "http://{host}:9051"
     }
   ],
   "paths": {
     "/command": {
       "post": {
-        "summary": "Check Awards For Protocol",
+        "summary": "Check FS State",
         "operationId": "post-command",
         "responses": {
           "200": {
@@ -42,7 +42,7 @@
                         "required": [
                           "cpid",
                           "ocid",
-                          "tender",
+                          "country",
                           "operationType"
                         ],
                         "properties": {
@@ -52,45 +52,13 @@
                           "ocid": {
                             "$ref": "../models/ocid.v1.json"
                           },
-                          "tender": {
-                            "type": "object",
-                            "required": [
-                              "lots"
-                            ],
-                            "properties": {
-                              "lots": {
-                                "type": "array",
-                                "items": {
-                                  "type": "object",
-                                  "properties": {
-                                    "id": {
-                                      "type": "string"
-                                    },
-                                    "techniques": {
-                                      "type": "object",
-                                      "properties": {
-                                        "hasFrameworkAgreement": {
-                                          "type": "boolean"
-                                        }
-                                      },
-                                      "required": [
-                                        "hasFrameworkAgreement"
-                                      ]
-                                    }
-                                  },
-                                  "required": [
-                                    "id"
-                                  ]
-                                }
-                              }
-                            }
+                          "country": {
+                            "type": "string"
                           },
                           "operationType": {
                             "type": "string",
                             "enum": [
-                              "protocol",
-                              "intermediateProtocol",
-                              "closeAwardsForLot"
+                              "updateFS"
                             ]
                           }
                         }
@@ -106,7 +74,7 @@
                       "action": {
                         "type": "string",
                         "enum": [
-                          "checkAwardsForProtocol"
+                          "checkFSState"
                         ]
                       }
                     }
@@ -115,7 +83,8 @@
               }
             }
           }
-        }
+        },
+        "description": ""
       }
     }
   },
