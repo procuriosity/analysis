@@ -822,18 +822,27 @@
                             "id": {
                               "type": "string"
                             },
-                            "relationship": {
-                              "type": "string",
-                              "enum": [
-                                "parent",
-                                "x_catalogue",
-                                "planning"
-                              ],
-                              "description": "связь с PN (через MS), связь с FA (PCR), связь с PN "
-                            },
                             "scheme": {
                               "type": "string",
                               "example": "ocid"
+                            },
+                            "relationship": {
+                              "type": "array",
+                              "x-stoplight": {
+                                "id": "sk1cuxfrgm6cm"
+                              },
+                              "description": "связь с PN (через MS), связь с FA (PCR), связь с PN ",
+                              "items": {
+                                "x-stoplight": {
+                                  "id": "rh1s3q43v3s3f"
+                                },
+                                "type": "string",
+                                "enum": [
+                                  "parent",
+                                  "x_catalogue",
+                                  "planning"
+                                ]
+                              }
                             },
                             "identifier": {
                               "type": "string",
@@ -846,8 +855,8 @@
                           },
                           "required": [
                             "id",
-                            "relationship",
                             "scheme",
+                            "relationship",
                             "identifier",
                             "uri"
                           ]
