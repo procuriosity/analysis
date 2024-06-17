@@ -120,10 +120,6 @@
                                     },
                                     "sourcePatry": {
                                       "type": "object",
-                                      "required": [
-                                        "id",
-                                        "name"
-                                      ],
                                       "properties": {
                                         "id": {
                                           "type": "string"
@@ -131,7 +127,11 @@
                                         "name": {
                                           "type": "string"
                                         }
-                                      }
+                                      },
+                                      "required": [
+                                        "id",
+                                        "name"
+                                      ]
                                     },
                                     "isEuropeanUnionFunded": {
                                       "type": "boolean"
@@ -632,18 +632,27 @@
                             "id": {
                               "type": "string"
                             },
-                            "relationship": {
-                              "type": "string",
-                              "enum": [
-                                "parent",
-                                "x_catalogue",
-                                "planning"
-                              ],
-                              "description": "связь с PN (через MS), связь с FA (PCR), связь с PN"
-                            },
                             "scheme": {
                               "type": "string",
                               "example": "ocid"
+                            },
+                            "relationship": {
+                              "type": "array",
+                              "x-stoplight": {
+                                "id": "87eeip3kuzik8"
+                              },
+                              "description": "связь с PN (через MS), связь с FA (PCR), связь с PN",
+                              "items": {
+                                "x-stoplight": {
+                                  "id": "7hhw0fms8f6hi"
+                                },
+                                "type": "string",
+                                "enum": [
+                                  "parent",
+                                  "x_catalogue",
+                                  "planning"
+                                ]
+                              }
                             },
                             "identifier": {
                               "type": "string",
@@ -656,8 +665,8 @@
                           },
                           "required": [
                             "id",
-                            "relationship",
                             "scheme",
+                            "relationship",
                             "identifier",
                             "uri"
                           ]
