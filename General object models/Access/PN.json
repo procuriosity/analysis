@@ -1444,20 +1444,28 @@
                           "type": "string",
                           "description": "идентификатор relatedProcess"
                         },
-                        "relationship": {
-                          "type": "string",
-                          "description": "тип связи",
-                          "enum": [
-                            "x_evaluation",
-                            "x_tendering",
-                            "x_negotiation",
-                            "parent",
-                            "x_purchasing"
-                          ]
-                        },
                         "scheme": {
                           "type": "string",
                           "description": "ocid"
+                        },
+                        "relationship": {
+                          "type": "array",
+                          "x-stoplight": {
+                            "id": "jmqpehx1a9y6v"
+                          },
+                          "items": {
+                            "x-stoplight": {
+                              "id": "1ve7s3900rlwi"
+                            },
+                            "type": "string",
+                            "enum": [
+                              "x_evaluation",
+                              "x_tendering",
+                              "x_negotiation",
+                              "parent",
+                              "x_purchasing"
+                            ]
+                          }
                         },
                         "identifier": {
                           "type": "string",
@@ -1470,8 +1478,8 @@
                       },
                       "required": [
                         "id",
-                        "relationship",
                         "scheme",
+                        "relationship",
                         "identifier",
                         "uri"
                       ]
