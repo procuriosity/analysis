@@ -1563,16 +1563,17 @@
                                       "type": "string"
                                     },
                                     "title": {
-                                      "type": "string",
-                                      "description": "is required for complete lot structure"
+                                      "type": "string"
                                     },
                                     "description": {
-                                      "type": "string",
-                                      "description": "is required for complete lot structure"
+                                      "type": "string"
                                     },
                                     "value": {
                                       "type": "object",
-                                      "description": "is required for complete lot structure",
+                                      "required": [
+                                        "amount",
+                                        "currency"
+                                      ],
                                       "properties": {
                                         "amount": {
                                           "type": "number"
@@ -1580,15 +1581,13 @@
                                         "currency": {
                                           "type": "string"
                                         }
-                                      },
-                                      "required": [
-                                        "amount",
-                                        "currency"
-                                      ]
+                                      }
                                     },
                                     "placeOfPerformance": {
                                       "type": "object",
-                                      "description": "is required for complete lot structure",
+                                      "required": [
+                                        "address"
+                                      ],
                                       "properties": {
                                         "address": {
                                           "$ref": "../models/addressRequest.v1.json"
@@ -1596,10 +1595,7 @@
                                         "description": {
                                           "type": "string"
                                         }
-                                      },
-                                      "required": [
-                                        "address"
-                                      ]
+                                      }
                                     },
                                     "hasOptions": {
                                       "type": "boolean"
@@ -1835,7 +1831,11 @@
                                     }
                                   },
                                   "required": [
-                                    "id"
+                                    "id",
+                                    "title",
+                                    "description",
+                                    "value",
+                                    "placeOfPerformance"
                                   ]
                                 }
                               },
@@ -2167,7 +2167,8 @@
                 ]
               }
             }
-          }
+          },
+          "description": ""
         },
         "tags": [
           "fromPN"
