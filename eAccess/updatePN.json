@@ -350,15 +350,15 @@
                                 },
                                 "tenderPeriod": {
                                   "type": "object",
-                                  "required": [
-                                    "startDate"
-                                  ],
                                   "properties": {
                                     "startDate": {
                                       "type": "string",
                                       "format": "date-time"
                                     }
-                                  }
+                                  },
+                                  "required": [
+                                    "startDate"
+                                  ]
                                 },
                                 "value": {
                                   "type": "object",
@@ -468,7 +468,7 @@
                                               "type": "object",
                                               "properties": {
                                                 "durationInDays": {
-                                                  "type": "number"
+                                                  "type": "integer"
                                                 },
                                                 "startDate": {
                                                   "type": "string",
@@ -520,16 +520,16 @@
                                             "type": "string"
                                           },
                                           "minimumRenewals": {
-                                            "type": "number"
+                                            "type": "integer"
                                           },
                                           "maximumRenewals": {
-                                            "type": "number"
+                                            "type": "integer"
                                           },
                                           "period": {
                                             "type": "object",
                                             "properties": {
                                               "durationInDays": {
-                                                "type": "number"
+                                                "type": "integer"
                                               },
                                               "startDate": {
                                                 "type": "string",
@@ -614,6 +614,89 @@
                                           "frameworkAgreement": {
                                             "$ref": "../models/frameworkAgreement.json"
                                           }
+                                        }
+                                      },
+                                      "electronicWorkflows": {
+                                        "type": "object",
+                                        "properties": {
+                                          "useOrdering": {
+                                            "type": "boolean"
+                                          },
+                                          "acceptInvoicing": {
+                                            "type": "boolean"
+                                          },
+                                          "usePayment": {
+                                            "type": "boolean"
+                                          }
+                                        }
+                                      },
+                                      "otherRequirements": {
+                                        "type": "object",
+                                        "properties": {
+                                          "reservedParticipation": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "string",
+                                              "enum": [
+                                                "shelteredWorkshop",
+                                                "publicServiceMissionOrganization"
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "subcontractingTerms": {
+                                        "type": "object",
+                                        "properties": {
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "minimumPercentage": {
+                                            "type": "number"
+                                          },
+                                          "maximumPercentage": {
+                                            "type": "number"
+                                          }
+                                        }
+                                      },
+                                      "submissionTerms": {
+                                        "type": "object",
+                                        "properties": {
+                                          "languages": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "electronicCataloguePolicy": {
+                                            "type": "string"
+                                          },
+                                          "variantPolicy": {
+                                            "type": "string"
+                                          },
+                                          "bidValidityPeriod": {
+                                            "type": "object",
+                                            "properties": {
+                                              "duration": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          },
+                                          "depositsGuarantees": {
+                                            "type": "string"
+                                          },
+                                          "subcontractingIndication": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "coveredBy": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string",
+                                          "enum": [
+                                            "GPA"
+                                          ]
                                         }
                                       }
                                     },
@@ -1476,13 +1559,13 @@
                               "EDC",
                               "EIP",
                               "ECI",
-                              "ECD", 
+                              "ECD",
                               "TEST_EN",
                               "TEST_ENI",
                               "TEST_EDC",
-                              "TEST_EIP", 
+                              "TEST_EIP",
                               "TEST_ECI",
-                              "TEST_ECD"                                                          
+                              "TEST_ECD"
                             ]
                           },
                           "country": {
@@ -1711,15 +1794,15 @@
                               },
                               "tenderPeriod": {
                                 "type": "object",
-                                "required": [
-                                  "startDate"
-                                ],
                                 "properties": {
                                   "startDate": {
                                     "type": "string",
                                     "format": "date-time"
                                   }
-                                }
+                                },
+                                "required": [
+                                  "startDate"
+                                ]
                               },
                               "procuringEntity": {
                                 "type": "object",
@@ -1935,7 +2018,7 @@
                                             "type": "object",
                                             "properties": {
                                               "durationInDays": {
-                                                "type": "number"
+                                                "type": "integer"
                                               },
                                               "startDate": {
                                                 "type": "string",
@@ -1987,16 +2070,16 @@
                                           "type": "string"
                                         },
                                         "minimumRenewals": {
-                                          "type": "number"
+                                          "type": "integer"
                                         },
                                         "maximumRenewals": {
-                                          "type": "number"
+                                          "type": "integer"
                                         },
                                         "period": {
                                           "type": "object",
                                           "properties": {
                                             "durationInDays": {
-                                              "type": "number"
+                                              "type": "integer"
                                             },
                                             "startDate": {
                                               "type": "string",
@@ -2081,6 +2164,89 @@
                                         "frameworkAgreement": {
                                           "$ref": "../models/frameworkAgreement.json"
                                         }
+                                      }
+                                    },
+                                    "electronicWorkflows": {
+                                      "type": "object",
+                                      "properties": {
+                                        "useOrdering": {
+                                          "type": "boolean"
+                                        },
+                                        "acceptInvoicing": {
+                                          "type": "boolean"
+                                        },
+                                        "usePayment": {
+                                          "type": "boolean"
+                                        }
+                                      }
+                                    },
+                                    "otherRequirements": {
+                                      "type": "object",
+                                      "properties": {
+                                        "reservedParticipation": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string",
+                                            "enum": [
+                                              "shelteredWorkshop",
+                                              "publicServiceMissionOrganization"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "subcontractingTerms": {
+                                      "type": "object",
+                                      "properties": {
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "minimumPercentage": {
+                                          "type": "number"
+                                        },
+                                        "maximumPercentage": {
+                                          "type": "number"
+                                        }
+                                      }
+                                    },
+                                    "submissionTerms": {
+                                      "type": "object",
+                                      "properties": {
+                                        "languages": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "electronicCataloguePolicy": {
+                                          "type": "string"
+                                        },
+                                        "variantPolicy": {
+                                          "type": "string"
+                                        },
+                                        "bidValidityPeriod": {
+                                          "type": "object",
+                                          "properties": {
+                                            "duration": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "depositsGuarantees": {
+                                          "type": "string"
+                                        },
+                                        "subcontractingIndication": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "coveredBy": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string",
+                                        "enum": [
+                                          "GPA"
+                                        ]
                                       }
                                     }
                                   },
