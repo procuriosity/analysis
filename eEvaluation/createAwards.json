@@ -496,7 +496,8 @@
                           "ocid",
                           "date",
                           "owner",
-                          "bids"
+                          "bids",
+                          "tender"
                         ],
                         "properties": {
                           "cpid": {
@@ -870,6 +871,44 @@
                             "required": [
                               "details"
                             ]
+                          },
+                          "tender": {
+                            "type": "object",
+                            "required": [
+                              "items"
+                            ],
+                            "properties": {
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "unit": {
+                                      "type": "object",
+                                      "required": [
+                                        "id",
+                                        "name"
+                                      ],
+                                      "properties": {
+                                        "id": {
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "unit"
+                                  ]
+                                }
+                              }
+                            }
                           }
                         }
                       }
