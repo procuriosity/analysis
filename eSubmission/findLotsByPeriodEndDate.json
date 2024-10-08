@@ -1,0 +1,144 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "8hkcjvz2o2dqf"
+  },
+  "info": {
+    "title": "findLotsByPeriodEndDate",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9061"
+    }
+  ],
+  "paths": {
+    "/command": {
+      "post": {
+        "summary": "Find Lots By Period End Date",
+        "operationId": "post-command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "../models/response_command.v1.json"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "object",
+                          "required": [
+                            "tender"
+                          ],
+                          "properties": {
+                            "tender": {
+                              "type": "object",
+                              "x-stoplight": {
+                                "id": "jvv76a0m05ocb"
+                              },
+                              "required": [
+                                "lots"
+                              ],
+                              "properties": {
+                                "lots": {
+                                  "type": "array",
+                                  "x-stoplight": {
+                                    "id": "whhcl46gv4akh"
+                                  },
+                                  "items": {
+                                    "x-stoplight": {
+                                      "id": "0otuwopc2r0o7"
+                                    },
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                          "id": "7cf2ja6mywb9f"
+                                        }
+                                      }
+                                    },
+                                    "required": [
+                                      "id"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "../models/request_command.v1.json"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "params": {
+                        "type": "object",
+                        "required": [
+                          "cpid",
+                          "ocid",
+                          "date"
+                        ],
+                        "properties": {
+                          "cpid": {
+                            "$ref": "../models/cpid.v1.json"
+                          },
+                          "ocid": {
+                            "$ref": "../models/ocid.v1.json"
+                          },
+                          "date": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "bfpaw6fyxbpcs"
+                            },
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "params"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "findLotsByPeriodEndDate"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
