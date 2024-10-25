@@ -1,0 +1,148 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "ilca985l96sez"
+  },
+  "info": {
+    "title": "Get Localities",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9161"
+    }
+  ],
+  "paths": {
+    "/addresses/countries/{countryId}/regions/{regionId}": {
+      "get": {
+        "summary": "Get Localities",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "x-stoplight": {
+                          "id": "bz7wrctkir8bn"
+                        },
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "1tzy234m0urzb"
+                            }
+                          },
+                          "scheme": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "rrkq5n2xgccxb"
+                            }
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "scheme"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "description"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-request",
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "lang",
+            "description": "language",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "scheme",
+            "description": "locality scheme"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "regionId",
+          "in": "path",
+          "required": true,
+          "description": "region code "
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "countryId",
+          "in": "path",
+          "required": true,
+          "description": "country code "
+        }
+      ]
+    }
+  }
+}

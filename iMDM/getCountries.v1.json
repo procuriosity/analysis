@@ -1,0 +1,127 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "2kk43ujmh0ke7"
+  },
+  "info": {
+    "title": "Get Сountries",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9161"
+    }
+  ],
+  "paths": {
+    "/addresses/countries": {
+      "get": {
+        "summary": "Get Countries",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "x-stoplight": {
+                          "id": "n5ax5us9ri013"
+                        },
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "0nktvmspg6wl2"
+                            }
+                          },
+                          "scheme": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "84394vixlyh0s"
+                            }
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "scheme"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "description"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-request",
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "RO"
+            },
+            "in": "query",
+            "name": "lang",
+            "description": "language",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "scheme",
+            "description": "country scheme"
+          }
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
