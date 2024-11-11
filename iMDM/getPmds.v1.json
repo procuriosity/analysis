@@ -1,0 +1,112 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "iybn5o6grprnc"
+  },
+  "info": {
+    "title": "getPmds",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://{host}:9161"
+    }
+  ],
+  "paths": {
+    "/pmds": {
+      "get": {
+        "summary": "Get Pmds",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "x-stoplight": {
+                          "id": "n5ax5us9ri013"
+                        },
+                        "type": "object",
+                        "properties": {
+                          "procurementMethodDetails": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "0nktvmspg6wl2"
+                            }
+                          }
+                        },
+                        "required": [
+                          "procurementMethodDetails"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "description"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-request",
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "RO"
+            },
+            "in": "query",
+            "name": "lang",
+            "description": "language",
+            "required": true
+          }
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
