@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://{host}:9161"
+      "url": "http://{host}:9099"
     }
   ],
   "paths": {
@@ -135,6 +135,77 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "x-stoplight": {
+                        "id": "bwyhd0su11urz"
+                      },
+                      "items": {
+                        "x-stoplight": {
+                          "id": "3ad7j1l0v9sub"
+                        },
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "vqotwy156e90w"
+                            }
+                          },
+                          "description": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "d4h4ngenuvbyg"
+                            }
+                          },
+                          "metadata": {
+                            "type": "object",
+                            "x-stoplight": {
+                              "id": "ko6ikppzftpwe"
+                            },
+                            "properties": {
+                              "lang": {
+                                "type": "string",
+                                "x-stoplight": {
+                                  "id": "u3xf4yw8rvy3j"
+                                }
+                              },
+                              "country": {
+                                "type": "string",
+                                "x-stoplight": {
+                                  "id": "y7nuzcjpo9yra"
+                                }
+                              },
+                              "pmd": {
+                                "type": "string",
+                                "x-stoplight": {
+                                  "id": "7rije7ltgjzrr"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "description"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ]
+                }
+              }
+            }
           }
         },
         "operationId": "get-request",
@@ -170,7 +241,10 @@
             "description": "procurementMethodDetails",
             "required": true
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {}
+        }
       },
       "parameters": []
     }
